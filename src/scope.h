@@ -22,5 +22,6 @@ struct _ScopeSearchData {
 void setup_search (UnitySimpleScope *scope,
                    ScopeSearchData *data) G_GNUC_INTERNAL;
 
-UnityAbstractScope *make_music_scope (GrlSource *source) G_GNUC_INTERNAL;
+UnityAbstractScope *music_scope_new (GrlSource *source) G_GNUC_INTERNAL;
+UnityAbstractScope *video_scope_new (GrlSource *source) G_GNUC_INTERNAL;
 

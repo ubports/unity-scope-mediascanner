@@ -18,8 +18,9 @@ unity_scope_module_load_scopes (GError **error)
     }
 
     GrlSource *source = grl_registry_lookup_source (registry, "grl-hollywood");
-    UnityAbstractScope *scope = make_music_scope (source);
+    UnityAbstractScope *music = music_scope_new (source);
+    UnityAbstractScope *video = video_scope_new (source);
 
-    return g_list_append(NULL, scope);
+    return g_list_append (g_list_append(NULL, music), video);
 }
 
