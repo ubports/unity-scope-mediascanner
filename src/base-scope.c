@@ -71,9 +71,32 @@ search_async (UnityScopeSearchBase *search, UnityScopeSearchBaseCallback cb, voi
         search_cb, data);
 }
 
+
+static void
+search_sync_finished (UnityScopeSearchBase *search, void *user_data)
+{
+    GMainLoop *ml = (GMainLoop *)user_data;
+
+    g_main_loop_quit (ml);
+}
+
+void
+search_sync (UnityScopeSearchBase *search, void *user_data)
+{
+    GMainLoop *ml = g_main_loop_new (NULL, FALSE);
+
+    unity_scope_search_base_run_async (search, search_sync_finished, ml);
+    g_main_loop_run (ml);
+    g_main_loop_unref (ml);
+}
+
 void
 setup_search (UnitySimpleScope *scope, ScopeSearchData *data)
 {
     unity_simple_scope_set_search_async_func (
         scope, search_async, data, (GDestroyNotify)NULL);
+    /* Satisfy the blocking API with a wrapper that calls the async
+     * version in a nested main loop */
+    unity_simple_scope_set_search_func (
+        scope, search_sync, NULL, (GDestroyNotify)NULL);
 }
