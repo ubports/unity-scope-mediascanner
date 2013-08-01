@@ -1,7 +1,7 @@
 #include <config.h>
 #include "scope.h"
 
-static void
+void
 video_add_result (UnityResultSet *result_set, GrlMedia *media)
 {
     UnityScopeResult result = { 0, };
@@ -24,6 +24,7 @@ video_add_result (UnityResultSet *result_set, GrlMedia *media)
     g_hash_table_insert (result.metadata, "duration", g_variant_new_int32 (duration));
 
     unity_result_set_add_result (result_set, &result);
+    g_hash_table_unref (result.metadata);
 }
 
 
