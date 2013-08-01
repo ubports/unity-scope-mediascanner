@@ -17,11 +17,14 @@ include(GNUInstallDirs)
 
 set(GETTEXT_PACKAGE unity-scope-hollywood)
 
-configure_file("${CMAKE_CURRENT_SOURCE_DIR}/config.h.in" "${CMAKE_CURRENT_BINARY_DIR}/config.h")
+configure_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/config.h.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/config.h"
+)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 add_subdirectory("src")
 
 enable_testing()
 add_subdirectory("tests")
-add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} -V)
+add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} -V --output-on-failure)
