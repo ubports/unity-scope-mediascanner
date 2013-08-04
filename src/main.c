@@ -13,8 +13,7 @@ unity_scope_module_load_scopes (GError **error)
     grl_init (NULL, NULL);
 
     GrlRegistry *registry = grl_registry_get_default ();
-    if (!grl_registry_load_plugin_directory (
-            registry, "/home/james/src/unity/prefix/lib/grilo-0.2", error)) {
+    if (!grl_registry_load_plugin_by_id (registry, "grl-hollywood", error)) {
         return NULL;
     }
 
