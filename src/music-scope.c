@@ -43,10 +43,52 @@ music_add_result (UnityResultSet *result_set, GrlMedia *media)
 }
 
 
-static UnityAbstractPreview *
+UnityAbstractPreview *
 music_preview (UnityResultPreviewer *previewer, void *user_data)
 {
-    return NULL;
+    const char *uri = previewer->result.uri;
+    const char *title = previewer->result.title;
+    const char *icon_hint = previewer->result.icon_hint;
+    const char *artist = "";
+    const char *album = "";
+    int duration = 0;
+    int track_number = 0;
+    GVariant *variant;
+
+    if (previewer->result.metadata != NULL) {
+        variant = g_hash_table_lookup (previewer->result.metadata, "artist");
+        if (variant) {
+            artist = g_variant_get_string (variant, NULL);
+        }
+        variant = g_hash_table_lookup (previewer->result.metadata, "album");
+        if (variant) {
+            album = g_variant_get_string (variant, NULL);
+        }
+        variant = g_hash_table_lookup (previewer->result.metadata, "duration");
+        if (variant) {
+            duration = g_variant_get_int32 (variant);
+        }
+        variant = g_hash_table_lookup (previewer->result.metadata, "track-number");
+        if (variant) {
+            track_number = g_variant_get_int32 (variant);
+        }
+    }
+
+    // XXX: icon hint?
+    UnityMusicPreview *preview = unity_music_preview_new (
+        title, artist, NULL);
+
+    UnityTrackMetadata *track = unity_track_metadata_new ();
+    unity_track_metadata_set_uri (track, uri);
+    unity_track_metadata_set_track_no (track, track_number);
+    unity_track_metadata_set_title (track, title);
+    unity_track_metadata_set_length (track, duration);
+    unity_music_preview_add_track (preview, track);
+
+    UnityPreviewAction *action = unity_preview_action_new ("show-in-folder", _("Show in Folder"), NULL);
+    unity_preview_add_action (UNITY_PREVIEW (preview), action);
+
+    return UNITY_ABSTRACT_PREVIEW (preview);
 }
 
 

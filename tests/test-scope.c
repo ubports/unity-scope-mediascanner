@@ -100,6 +100,45 @@ test_music_add_result ()
 }
 
 static void
+test_music_preview ()
+{
+    UnityScopeResult result = { 0, };
+
+    result.uri = "http://example.com/foo.ogg";
+    result.result_type = UNITY_RESULT_TYPE_PERSONAL;
+    result.mimetype = "audio/ogg";
+    result.title = "Title";
+    result.comment = "";
+    result.dnd_uri = result.uri;
+    result.metadata = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, (GDestroyNotify)g_variant_unref);
+
+    g_hash_table_insert (result.metadata, "duration", g_variant_new_int32 (180));
+    g_hash_table_insert (result.metadata, "artist", g_variant_new_string ("Artist"));
+    g_hash_table_insert (result.metadata, "album", g_variant_new_string ("Album"));
+    g_hash_table_insert (result.metadata, "track-number", g_variant_new_int32 (42));
+
+    UnitySimpleScope *scope = unity_simple_scope_new ();
+    UnitySearchMetadata *metadata= unity_search_metadata_new ();
+    UnityResultPreviewer *previewer = unity_abstract_scope_create_previewer (
+        UNITY_ABSTRACT_SCOPE (scope), &result, metadata);
+
+    UnityAbstractPreview *preview = music_preview (previewer, NULL);
+    g_assert (UNITY_IS_MUSIC_PREVIEW (preview));
+
+    g_object_unref (previewer);
+    g_object_unref (metadata);
+    g_object_unref (scope);
+    g_hash_table_unref (result.metadata);
+
+    g_assert_cmpstr (
+        unity_preview_get_title (UNITY_PREVIEW (preview)), ==, "Title");
+    g_assert_cmpstr (
+        unity_preview_get_subtitle (UNITY_PREVIEW (preview)), ==, "Artist");
+
+    g_object_unref (preview);
+}
+
+static void
 test_video_add_result ()
 {
     GrlMedia *media = grl_media_video_new ();
@@ -135,6 +174,7 @@ main (int argc, char **argv)
     grl_init (&argc, &argv);
 
     g_test_add_func ("/Music/AddResult", test_music_add_result);
+    g_test_add_func ("/Music/Preview", test_music_preview);
     g_test_add_func ("/Video/AddResult", test_video_add_result);
 
     g_test_run ();
