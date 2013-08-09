@@ -6,22 +6,32 @@ video_add_result (UnityResultSet *result_set, GrlMedia *media)
 {
     UnityScopeResult result = { 0, };
 
-    result.uri = grl_media_get_url (media);
+    result.uri = (char *)grl_media_get_url (media);
     // XXX: can we get thumbnails?
-    result.icon_hint = grl_media_get_thumbnail (media);
+    result.icon_hint = (char *)grl_media_get_thumbnail (media);
     if (result.icon_hint == NULL) {
-        result.icon_hint = "/usr/share/unity/icons/album_missing.png";
+        result.icon_hint = "video";
     }
     result.category = 0;
     result.result_type = UNITY_RESULT_TYPE_PERSONAL;
-    result.mimetype = grl_media_get_mime (media);
-    result.title = grl_media_get_title (media);
+    result.mimetype = (char *)grl_media_get_mime (media);
+    result.title = (char *)grl_media_get_title (media);
     result.comment = "";
     result.dnd_uri = result.uri;
     result.metadata = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, (GDestroyNotify)g_variant_unref);
 
-    gint duration = grl_media_get_duration (media);
+    int duration = grl_media_get_duration (media);
     g_hash_table_insert (result.metadata, "duration", g_variant_new_int32 (duration));
+
+    int width = grl_media_video_get_width (GRL_MEDIA_VIDEO (media));
+    if (width > 0) {
+        g_hash_table_insert (result.metadata, "width", g_variant_new_int32 (width));
+    }
+
+    int height = grl_media_video_get_height (GRL_MEDIA_VIDEO (media));
+    if (height > 0) {
+        g_hash_table_insert (result.metadata, "height", g_variant_new_int32 (height));
+    }
 
     unity_result_set_add_result (result_set, &result);
     g_hash_table_unref (result.metadata);
@@ -31,7 +41,51 @@ video_add_result (UnityResultSet *result_set, GrlMedia *media)
 static UnityAbstractPreview *
 video_preview (UnityResultPreviewer *previewer, void *user_data)
 {
-    return NULL;
+    const char *title = previewer->result.title;
+    const char *subtitle = "";
+    const char *comment = previewer->result.comment;
+    int duration = 0, width = 0, height = 0;
+
+    if (previewer->result.metadata != NULL) {
+        GVariant *variant;
+
+        variant = g_hash_table_lookup (previewer->result.metadata, "width");
+        if (variant) {
+            width = g_variant_get_int32 (variant);
+        }
+        variant = g_hash_table_lookup (previewer->result.metadata, "height");
+        if (variant) {
+            height = g_variant_get_int32 (variant);
+        }
+        variant = g_hash_table_lookup (previewer->result.metadata, "duration");
+        if (variant) {
+            duration = g_variant_get_int32 (variant);
+        }
+    }
+
+    UnityMoviePreview *preview = unity_movie_preview_new (
+        title, subtitle, comment, NULL);
+    unity_movie_preview_set_rating (preview, -1.0f, 0);
+    unity_preview_set_image_source_uri (
+        UNITY_PREVIEW (preview), previewer->result.icon_hint);
+
+    UnityPreviewAction *play_action = unity_preview_action_new (
+        "play", _("Play"), NULL);
+    unity_preview_add_action (UNITY_PREVIEW (preview), play_action);
+
+    if (width > 0 && height > 0) {
+        char *dimensions = g_strdup_printf ("%d*%d", width, height);
+        UnityInfoHint *hint = unity_info_hint_new (
+            "dimensions", _("Dimensions"), NULL, dimensions);
+        g_free (dimensions);
+        unity_preview_add_info (UNITY_PREVIEW (preview), hint);
+    }
+
+    if (duration > 0) {
+        /* add info hint */
+    }
+
+    return UNITY_ABSTRACT_PREVIEW (preview);
 }
 
 
@@ -49,6 +103,8 @@ video_scope_new (GrlSource *source)
     /* Set up schema */
     UnitySchema *schema = unity_schema_new ();
     unity_schema_add_field (schema, "duration", "i", UNITY_SCHEMA_FIELD_TYPE_REQUIRED);
+    unity_schema_add_field (schema, "width", "i", UNITY_SCHEMA_FIELD_TYPE_OPTIONAL);
+    unity_schema_add_field (schema, "height", "i", UNITY_SCHEMA_FIELD_TYPE_OPTIONAL);
     unity_simple_scope_set_schema (scope, schema);
 
     /* Set up categories */

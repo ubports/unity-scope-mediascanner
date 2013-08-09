@@ -6,16 +6,16 @@ music_add_result (UnityResultSet *result_set, GrlMedia *media)
 {
     UnityScopeResult result = { 0, };
 
-    result.uri = grl_media_get_url (media);
+    result.uri = (char *)grl_media_get_url (media);
     // XXX: can we get thumbnails?
-    result.icon_hint = grl_media_get_thumbnail (media);
+    result.icon_hint = (char *)grl_media_get_thumbnail (media);
     if (result.icon_hint == NULL) {
         result.icon_hint = "/usr/share/unity/icons/album_missing.png";
     }
     result.category = 0;
     result.result_type = UNITY_RESULT_TYPE_PERSONAL;
-    result.mimetype = grl_media_get_mime (media);
-    result.title = grl_media_get_title (media);
+    result.mimetype = (char *)grl_media_get_mime (media);
+    result.title = (char *)grl_media_get_title (media);
     result.comment = "";
     result.dnd_uri = result.uri;
     result.metadata = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, (GDestroyNotify)g_variant_unref);
@@ -48,22 +48,22 @@ music_preview (UnityResultPreviewer *previewer, void *user_data)
 {
     const char *uri = previewer->result.uri;
     const char *title = previewer->result.title;
-    const char *icon_hint = previewer->result.icon_hint;
     const char *artist = "";
-    const char *album = "";
+    //const char *album = "";
     int duration = 0;
     int track_number = 0;
-    GVariant *variant;
 
     if (previewer->result.metadata != NULL) {
+        GVariant *variant;
+
         variant = g_hash_table_lookup (previewer->result.metadata, "artist");
         if (variant) {
             artist = g_variant_get_string (variant, NULL);
         }
-        variant = g_hash_table_lookup (previewer->result.metadata, "album");
-        if (variant) {
-            album = g_variant_get_string (variant, NULL);
-        }
+        //variant = g_hash_table_lookup (previewer->result.metadata, "album");
+        //if (variant) {
+        //    album = g_variant_get_string (variant, NULL);
+        //}
         variant = g_hash_table_lookup (previewer->result.metadata, "duration");
         if (variant) {
             duration = g_variant_get_int32 (variant);
