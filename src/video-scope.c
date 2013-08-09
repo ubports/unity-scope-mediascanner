@@ -21,16 +21,19 @@ video_add_result (UnityResultSet *result_set, GrlMedia *media)
     result.metadata = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, (GDestroyNotify)g_variant_unref);
 
     int duration = grl_media_get_duration (media);
-    g_hash_table_insert (result.metadata, "duration", g_variant_new_int32 (duration));
+    GVariant *variant = g_variant_new_int32 (duration);
+    g_hash_table_insert (result.metadata, "duration", g_variant_ref_sink (variant));
 
     int width = grl_media_video_get_width (GRL_MEDIA_VIDEO (media));
     if (width > 0) {
-        g_hash_table_insert (result.metadata, "width", g_variant_new_int32 (width));
+        variant = g_variant_new_int32 (width);
+        g_hash_table_insert (result.metadata, "width", g_variant_ref_sink (variant));
     }
 
     int height = grl_media_video_get_height (GRL_MEDIA_VIDEO (media));
     if (height > 0) {
-        g_hash_table_insert (result.metadata, "height", g_variant_new_int32 (height));
+        variant = g_variant_new_int32 (height);
+        g_hash_table_insert (result.metadata, "height", g_variant_ref_sink (variant));
     }
 
     unity_result_set_add_result (result_set, &result);

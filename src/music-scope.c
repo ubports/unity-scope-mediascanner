@@ -21,21 +21,25 @@ music_add_result (UnityResultSet *result_set, GrlMedia *media)
     result.metadata = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, (GDestroyNotify)g_variant_unref);
 
     int duration = grl_media_get_duration (media);
-    g_hash_table_insert (result.metadata, "duration", g_variant_new_int32 (duration));
+    GVariant *variant = g_variant_new_int32 (duration);
+    g_hash_table_insert (result.metadata, "duration", g_variant_ref_sink (variant));
 
     const char *artist = grl_media_audio_get_artist (GRL_MEDIA_AUDIO (media));
     if (artist) {
-        g_hash_table_insert (result.metadata, "artist", g_variant_new_string (artist));
+        variant = g_variant_new_string (artist);
+        g_hash_table_insert (result.metadata, "artist", g_variant_ref_sink (variant));
     }
 
     const char *album = grl_media_audio_get_album (GRL_MEDIA_AUDIO (media));
     if (album) {
-        g_hash_table_insert (result.metadata, "album", g_variant_new_string (album));
+        variant = g_variant_new_string (album);
+        g_hash_table_insert (result.metadata, "album", g_variant_ref_sink (variant));
     }
 
     int track_number = grl_media_audio_get_track_number (GRL_MEDIA_AUDIO (media));
     if (track_number > 0) {
-        g_hash_table_insert (result.metadata, "track-number", g_variant_new_int32 (track_number));
+        variant = g_variant_new_int32 (track_number);
+        g_hash_table_insert (result.metadata, "track-number", g_variant_ref_sink (variant));
     }
 
     unity_result_set_add_result (result_set, &result);
