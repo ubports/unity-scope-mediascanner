@@ -135,6 +135,8 @@ video_scope_new (GrlSource *source)
         GRL_METADATA_KEY_THUMBNAIL,
         GRL_METADATA_KEY_TITLE,
         GRL_METADATA_KEY_DURATION,
+        GRL_METADATA_KEY_HEIGHT,
+        GRL_METADATA_KEY_WIDTH,
         GRL_METADATA_KEY_INVALID);
     search_data->add_result = video_add_result;
     setup_search (scope, search_data);
