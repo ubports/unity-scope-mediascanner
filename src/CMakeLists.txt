@@ -12,4 +12,4 @@ target_link_libraries(unity-scope-hollywood ${UNITY_LIBRARIES})
 
 install(
   TARGETS unity-scope-hollywood
-  LIBRARY DESTINATION "${CMAKE_INSTALL_LIB_DIR}/unity")
+  LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/unity")

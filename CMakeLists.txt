@@ -24,6 +24,7 @@ configure_file(
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 add_subdirectory("src")
+add_subdirectory("data")
 
 enable_testing()
 add_subdirectory("tests")
