@@ -62,6 +62,9 @@ search_async (UnityScopeSearchBase *search, UnityScopeSearchBaseCallback cb, voi
     grl_operation_options_set_flags (options, GRL_RESOLVE_IDLE_RELAY);
     grl_operation_options_set_type_filter (options, search_data->media_type);
 
+    if (search_data->apply_filters)
+        search_data->apply_filters (context->filter_state, options);
+
     SearchData *data = g_new0 (SearchData, 1);
     data->scope_data = search_data;
     data->search = search;

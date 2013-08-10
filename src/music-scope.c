@@ -1,6 +1,55 @@
 #include <config.h>
 #include "scope.h"
 
+static gboolean
+get_decade_filter (UnityFilterSet *filter_state, int *min_year, int *max_year)
+{
+    UnityFilter *filter = unity_filter_set_get_filter_by_id (
+        filter_state, "decade");
+
+    if (filter == NULL || !unity_filter_get_filtering (filter))
+        return FALSE;
+
+    UnityFilterOption *option = unity_multi_range_filter_get_first_active (
+        UNITY_MULTI_RANGE_FILTER (filter));
+    if (option == NULL)
+        return FALSE;
+    *min_year = g_strtod (unity_filter_option_get_id (option), 0);
+    g_object_unref (option);
+
+    option = unity_multi_range_filter_get_last_active (
+        UNITY_MULTI_RANGE_FILTER (filter));
+    if (option == NULL)
+        return FALSE;
+    *max_year = g_strtod (unity_filter_option_get_id (option), 0) + 9;
+    g_object_unref (option);
+
+    return TRUE;
+}
+
+void
+music_apply_filters (UnityFilterSet *filter_state, GrlOperationOptions *options)
+{
+    int min_year, max_year;
+    if (get_decade_filter (filter_state, &min_year, &max_year)) {
+        GValue min_val = G_VALUE_INIT;
+        GValue max_val = G_VALUE_INIT;
+        GDateTime *min_date = g_date_time_new_utc (min_year, 1, 1, 0, 0, 0);
+        GDateTime *max_date = g_date_time_new_utc (max_year, 12, 31, 23, 59, 59);
+
+        g_value_init (&min_val, G_TYPE_DATE_TIME);
+        g_value_take_boxed (&min_val, min_date);
+        g_value_init (&max_val, G_TYPE_DATE_TIME);
+        g_value_take_boxed (&max_val, max_date);
+
+        grl_operation_options_set_key_range_filter_value (
+            options, GRL_METADATA_KEY_CREATION_DATE,
+            &min_val, &max_val);
+        g_value_unset (&min_val);
+        g_value_unset (&max_val);
+    }
+}
+
 void
 music_add_result (UnityResultSet *result_set, GrlMedia *media)
 {
@@ -130,6 +179,26 @@ music_scope_new (GrlSource *source)
     g_object_unref (icon_dir);
     unity_simple_scope_set_category_set (scope, categories);
 
+    /* Set up filters */
+    UnityFilterSet *filters = unity_filter_set_new ();
+    UnityMultiRangeFilter *filter = unity_multi_range_filter_new ("decade", _("Decade"), NULL, FALSE);
+    unity_options_filter_add_option (
+        UNITY_OPTIONS_FILTER (filter), "0", _("Old"), NULL);
+    unity_options_filter_add_option (
+        UNITY_OPTIONS_FILTER (filter), "1960", _("60s"), NULL);
+    unity_options_filter_add_option (
+        UNITY_OPTIONS_FILTER (filter), "1970", _("70s"), NULL);
+    unity_options_filter_add_option (
+        UNITY_OPTIONS_FILTER (filter), "1980", _("80s"), NULL);
+    unity_options_filter_add_option (
+        UNITY_OPTIONS_FILTER (filter), "1990", _("90s"), NULL);
+    unity_options_filter_add_option (
+        UNITY_OPTIONS_FILTER (filter), "2000", _("00s"), NULL);
+    unity_options_filter_add_option (
+        UNITY_OPTIONS_FILTER (filter), "2010", _("10s"), NULL);
+    unity_filter_set_add (filters, UNITY_FILTER (filter));
+    unity_simple_scope_set_filter_set (scope, filters);
+
     /* Set up search */
     ScopeSearchData *search_data = g_new0(ScopeSearchData, 1);
     search_data->source = g_object_ref (source);
@@ -145,6 +214,7 @@ music_scope_new (GrlSource *source)
         GRL_METADATA_KEY_DURATION,
         GRL_METADATA_KEY_INVALID);
     search_data->add_result = music_add_result;
+    search_data->apply_filters = music_apply_filters;
     setup_search (scope, search_data);
     // XXX: handle cleanup of search_data
 
