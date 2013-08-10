@@ -33,3 +33,4 @@ void music_add_result (UnityResultSet *result_set, GrlMedia *media) G_GNUC_INTER
 void video_add_result (UnityResultSet *result_set, GrlMedia *media) G_GNUC_INTERNAL;
 
 UnityAbstractPreview *music_preview (UnityResultPreviewer *previewer, void *user_data) G_GNUC_INTERNAL;
+UnityAbstractPreview *video_preview (UnityResultPreviewer *previewer, void *user_data) G_GNUC_INTERNAL;

@@ -41,7 +41,7 @@ video_add_result (UnityResultSet *result_set, GrlMedia *media)
 }
 
 
-static UnityAbstractPreview *
+UnityAbstractPreview *
 video_preview (UnityResultPreviewer *previewer, void *user_data)
 {
     const char *title = previewer->result.title;

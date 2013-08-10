@@ -167,6 +167,44 @@ test_video_add_result ()
     g_object_unref (media);
 }
 
+static void
+test_video_preview ()
+{
+    UnityScopeResult result = { 0, };
+
+    result.uri = "http://example.com/foo.mp4";
+    result.result_type = UNITY_RESULT_TYPE_PERSONAL;
+    result.mimetype = "video/mp4";
+    result.title = "Title";
+    result.comment = "";
+    result.dnd_uri = result.uri;
+    result.metadata = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, (GDestroyNotify)g_variant_unref);
+
+    g_hash_table_insert (result.metadata, "duration", g_variant_new_int32 (180));
+    g_hash_table_insert (result.metadata, "height", g_variant_new_int32 (1920));
+    g_hash_table_insert (result.metadata, "width", g_variant_new_int32 (1080));
+
+    UnitySimpleScope *scope = unity_simple_scope_new ();
+    UnitySearchMetadata *metadata= unity_search_metadata_new ();
+    UnityResultPreviewer *previewer = unity_abstract_scope_create_previewer (
+        UNITY_ABSTRACT_SCOPE (scope), &result, metadata);
+
+    UnityAbstractPreview *preview = video_preview (previewer, NULL);
+    g_assert (UNITY_IS_MOVIE_PREVIEW (preview));
+
+    g_object_unref (previewer);
+    g_object_unref (metadata);
+    g_object_unref (scope);
+    g_hash_table_unref (result.metadata);
+
+    g_assert_cmpstr (
+        unity_preview_get_title (UNITY_PREVIEW (preview)), ==, "Title");
+    g_assert_cmpstr (
+        unity_preview_get_subtitle (UNITY_PREVIEW (preview)), ==, "");
+
+    g_object_unref (preview);
+}
+
 int
 main (int argc, char **argv)
 {
@@ -176,6 +214,7 @@ main (int argc, char **argv)
     g_test_add_func ("/Music/AddResult", test_music_add_result);
     g_test_add_func ("/Music/Preview", test_music_preview);
     g_test_add_func ("/Video/AddResult", test_video_add_result);
+    g_test_add_func ("/Video/Preview", test_video_preview);
 
     g_test_run ();
     return 0;
