@@ -100,6 +100,67 @@ test_music_add_result ()
 }
 
 static void
+test_music_apply_filters_none ()
+{
+    UnityFilterSet *filter_state = music_get_filters ();
+    GrlOperationOptions *options = grl_operation_options_new (NULL);
+
+    music_apply_filters (filter_state, options);
+
+    GValue *min_value = NULL, *max_value = NULL;
+    grl_operation_options_get_key_range_filter (
+        options, GRL_METADATA_KEY_CREATION_DATE, &min_value, &max_value);
+    g_assert (min_value == NULL);
+    g_assert (max_value == NULL);
+
+    g_object_unref (options);
+    g_object_unref (filter_state);
+}
+
+static void
+test_music_apply_filters_decade ()
+{
+    UnityFilterSet *filter_state = music_get_filters ();
+    GrlOperationOptions *options = grl_operation_options_new (NULL);
+
+    UnityFilter *filter = unity_filter_set_get_filter_by_id (filter_state, "decade");
+    g_assert (filter != NULL);
+    unity_filter_set_filtering (filter, TRUE);
+    UnityFilterOption *option = unity_options_filter_get_option (
+        UNITY_OPTIONS_FILTER (filter), "1980");
+    unity_filter_option_set_active (option, TRUE);
+    g_object_unref (option);
+
+    option = unity_options_filter_get_option (
+        UNITY_OPTIONS_FILTER (filter), "1990");
+    unity_filter_option_set_active (option, TRUE);
+    g_object_unref (option);
+
+    music_apply_filters (filter_state, options);
+
+    GValue *min_value = NULL, *max_value = NULL;
+    grl_operation_options_get_key_range_filter (
+        options, GRL_METADATA_KEY_CREATION_DATE, &min_value, &max_value);
+    g_assert (min_value != NULL);
+    g_assert (G_VALUE_HOLDS (min_value, G_TYPE_DATE_TIME));
+    g_assert (max_value != NULL);
+    g_assert (G_VALUE_HOLDS (max_value, G_TYPE_DATE_TIME));
+
+    GDateTime *min_date = g_value_get_boxed (min_value);
+    g_assert_cmpint (g_date_time_get_year (min_date), ==, 1980);
+    g_assert_cmpint (g_date_time_get_month (min_date), ==, 1);
+    g_assert_cmpint (g_date_time_get_day_of_month (min_date), ==, 1);
+
+    GDateTime *max_date = g_value_get_boxed (max_value);
+    g_assert_cmpint (g_date_time_get_year (max_date), ==, 1999);
+    g_assert_cmpint (g_date_time_get_month (max_date), ==, 12);
+    g_assert_cmpint (g_date_time_get_day_of_month (max_date), ==, 31);
+
+    g_object_unref (options);
+    g_object_unref (filter_state);
+}
+
+static void
 test_music_preview ()
 {
     UnityScopeResult result = { 0, };
@@ -212,6 +273,8 @@ main (int argc, char **argv)
     grl_init (&argc, &argv);
 
     g_test_add_func ("/Music/AddResult", test_music_add_result);
+    g_test_add_func ("/Music/ApplyFilters/None", test_music_apply_filters_none);
+    g_test_add_func ("/Music/ApplyFilters/Decade", test_music_apply_filters_decade);
     g_test_add_func ("/Music/Preview", test_music_preview);
     g_test_add_func ("/Video/AddResult", test_video_add_result);
     g_test_add_func ("/Video/Preview", test_video_preview);

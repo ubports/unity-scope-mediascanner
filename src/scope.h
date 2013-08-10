@@ -27,6 +27,7 @@ void setup_search (UnitySimpleScope *scope,
 UnityAbstractScope *music_scope_new (GrlSource *source) G_GNUC_INTERNAL;
 UnityAbstractScope *video_scope_new (GrlSource *source) G_GNUC_INTERNAL;
 
+UnityFilterSet *music_get_filters (void) G_GNUC_INTERNAL;
 void music_apply_filters (UnityFilterSet *filter_state, GrlOperationOptions *options) G_GNUC_INTERNAL;
 
 void music_add_result (UnityResultSet *result_set, GrlMedia *media) G_GNUC_INTERNAL;

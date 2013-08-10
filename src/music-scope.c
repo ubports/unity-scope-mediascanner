@@ -1,6 +1,30 @@
 #include <config.h>
 #include "scope.h"
 
+UnityFilterSet *
+music_get_filters (void)
+{
+    UnityFilterSet *filters = unity_filter_set_new ();
+    UnityMultiRangeFilter *filter = unity_multi_range_filter_new ("decade", _("Decade"), NULL, FALSE);
+    unity_options_filter_add_option (
+        UNITY_OPTIONS_FILTER (filter), "0", _("Old"), NULL);
+    unity_options_filter_add_option (
+        UNITY_OPTIONS_FILTER (filter), "1960", _("60s"), NULL);
+    unity_options_filter_add_option (
+        UNITY_OPTIONS_FILTER (filter), "1970", _("70s"), NULL);
+    unity_options_filter_add_option (
+        UNITY_OPTIONS_FILTER (filter), "1980", _("80s"), NULL);
+    unity_options_filter_add_option (
+        UNITY_OPTIONS_FILTER (filter), "1990", _("90s"), NULL);
+    unity_options_filter_add_option (
+        UNITY_OPTIONS_FILTER (filter), "2000", _("00s"), NULL);
+    unity_options_filter_add_option (
+        UNITY_OPTIONS_FILTER (filter), "2010", _("10s"), NULL);
+    unity_filter_set_add (filters, UNITY_FILTER (filter));
+
+    return filters;
+}
+
 static gboolean
 get_decade_filter (UnityFilterSet *filter_state, int *min_year, int *max_year)
 {
@@ -180,24 +204,7 @@ music_scope_new (GrlSource *source)
     unity_simple_scope_set_category_set (scope, categories);
 
     /* Set up filters */
-    UnityFilterSet *filters = unity_filter_set_new ();
-    UnityMultiRangeFilter *filter = unity_multi_range_filter_new ("decade", _("Decade"), NULL, FALSE);
-    unity_options_filter_add_option (
-        UNITY_OPTIONS_FILTER (filter), "0", _("Old"), NULL);
-    unity_options_filter_add_option (
-        UNITY_OPTIONS_FILTER (filter), "1960", _("60s"), NULL);
-    unity_options_filter_add_option (
-        UNITY_OPTIONS_FILTER (filter), "1970", _("70s"), NULL);
-    unity_options_filter_add_option (
-        UNITY_OPTIONS_FILTER (filter), "1980", _("80s"), NULL);
-    unity_options_filter_add_option (
-        UNITY_OPTIONS_FILTER (filter), "1990", _("90s"), NULL);
-    unity_options_filter_add_option (
-        UNITY_OPTIONS_FILTER (filter), "2000", _("00s"), NULL);
-    unity_options_filter_add_option (
-        UNITY_OPTIONS_FILTER (filter), "2010", _("10s"), NULL);
-    unity_filter_set_add (filters, UNITY_FILTER (filter));
-    unity_simple_scope_set_filter_set (scope, filters);
+    unity_simple_scope_set_filter_set (scope, music_get_filters ());
 
     /* Set up search */
     ScopeSearchData *search_data = g_new0(ScopeSearchData, 1);
