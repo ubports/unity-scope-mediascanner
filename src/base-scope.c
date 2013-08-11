@@ -32,12 +32,16 @@ search_cb (GrlSource *source, guint browse_id, GrlMedia *media,
         return;
     }
 
+    // XXX: The media scanner source seems to continue invoking the
+    // search callback after cancellation.
+#if 0
     /* Has this search been cancelled? */
     if (unity_cancellable_is_cancelled (context->cancellable)) {
         grl_operation_cancel (data->operation_id);
         complete_search (data);
         return;
     }
+#endif
 
     if (media) {
         data->scope_data->add_result  (context->result_set, media);
