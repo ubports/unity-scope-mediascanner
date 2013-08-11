@@ -162,8 +162,9 @@ music_preview (UnityResultPreviewer *previewer, void *user_data)
     unity_track_metadata_set_length (track, duration);
     unity_music_preview_add_track (preview, track);
 
-    UnityPreviewAction *action = unity_preview_action_new ("show-in-folder", _("Show in Folder"), NULL);
-    unity_preview_add_action (UNITY_PREVIEW (preview), action);
+    UnityPreviewAction *play_action = unity_preview_action_new (
+        "play", _("Play"), NULL);
+    unity_preview_add_action (UNITY_PREVIEW (preview), play_action);
 
     return UNITY_ABSTRACT_PREVIEW (preview);
 }
