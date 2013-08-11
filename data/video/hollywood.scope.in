@@ -1,6 +1,6 @@
 [Scope]
 DBusName=com.canonical.Unity.Scope.Hollywood
-DBusPath=/com/canonical/unity/scope/hollywood/music
+DBusPath=/com/canonical/unity/scope/hollywood/video
 Module=@CMAKE_INSTALL_FULL_LIBDIR@/unity/unity-scope-hollywood.so
 ModuleType=C
 Type=video
