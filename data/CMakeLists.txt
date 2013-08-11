@@ -8,27 +8,27 @@ configure_file(
 
 install(
   FILES "${CMAKE_CURRENT_BINARY_DIR}/unity-scope-hollywood.service"
-  DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/dbus-1/services/"
+  DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/dbus-1/services"
 )
 
 # Unity Scope files
 
 configure_file(
-  music-hollywood.scope.in
-  music-hollywood.scope
+  music/hollywood.scope.in
+  music/hollywood.scope
 )
 
 install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/music-hollywood.scope"
-  DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes/music/hollywood.scope"
+  FILES "${CMAKE_CURRENT_BINARY_DIR}/music/hollywood.scope"
+  DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes/music"
 )
 
 configure_file(
-  video-hollywood.scope.in
-  video-hollywood.scope
+  video/hollywood.scope.in
+  video/hollywood.scope
 )
 
 install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/video-hollywood.scope"
-  DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes/video/hollywood.scope"
+  FILES "${CMAKE_CURRENT_BINARY_DIR}/video/hollywood.scope"
+  DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes/video"
 )
