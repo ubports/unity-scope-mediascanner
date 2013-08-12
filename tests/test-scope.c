@@ -145,6 +145,34 @@ test_music_preview ()
 }
 
 static void
+test_music_search ()
+{
+    GrlMedia *media = grl_media_audio_new ();
+    grl_media_set_id (media, "test-id");
+    grl_media_set_url (media, "http://example.com/foo.ogg");
+    grl_media_set_mime (media, "audio/ogg");
+    grl_media_set_title (media, "Title");
+    grl_media_set_duration (media, 60);
+    grl_media_audio_set_artist (GRL_MEDIA_AUDIO (media), "Artist");
+    grl_media_audio_set_album (GRL_MEDIA_AUDIO (media), "Album");
+    grl_media_audio_set_track_number (GRL_MEDIA_AUDIO (media), 42);
+
+    GrlSource *source = test_source_new (media);
+
+    UnityAbstractScope *scope = music_scope_new (source);
+
+    TestResultSet *result_set = perform_search (scope, "query");
+
+    UnityScopeResult *result = &result_set->last_result;
+    g_assert_cmpstr (result->uri, ==, "http://example.com/foo.ogg");
+
+    g_object_unref (result_set);
+    g_object_unref (scope);
+    g_object_unref (source);
+    g_object_unref (media);
+}
+
+static void
 test_video_add_result ()
 {
     GrlMedia *media = grl_media_video_new ();
@@ -211,6 +239,31 @@ test_video_preview ()
     g_object_unref (preview);
 }
 
+static void
+test_video_search ()
+{
+    GrlMedia *media = grl_media_video_new ();
+    grl_media_set_id (media, "test-id");
+    grl_media_set_url (media, "http://example.com/foo.mp4");
+    grl_media_set_mime (media, "video/mp4");
+    grl_media_set_title (media, "Title");
+    grl_media_set_duration (media, 60);
+
+    GrlSource *source = test_source_new (media);
+
+    UnityAbstractScope *scope = video_scope_new (source);
+
+    TestResultSet *result_set = perform_search (scope, "query");
+
+    UnityScopeResult *result = &result_set->last_result;
+    g_assert_cmpstr (result->uri, ==, "http://example.com/foo.mp4");
+
+    g_object_unref (result_set);
+    g_object_unref (scope);
+    g_object_unref (source);
+    g_object_unref (media);
+}
+
 int
 main (int argc, char **argv)
 {
@@ -221,8 +274,10 @@ main (int argc, char **argv)
     g_test_add_func ("/Music/ApplyFilters/None", test_music_apply_filters_none);
     g_test_add_func ("/Music/ApplyFilters/Decade", test_music_apply_filters_decade);
     g_test_add_func ("/Music/Preview", test_music_preview);
+    g_test_add_func ("/Music/Search", test_music_search);
     g_test_add_func ("/Video/AddResult", test_video_add_result);
     g_test_add_func ("/Video/Preview", test_video_preview);
+    g_test_add_func ("/Video/Search", test_video_search);
 
     g_test_run ();
     return 0;
