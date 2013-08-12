@@ -1,0 +1,20 @@
+Source: unity-scope-hollywood
+Section: gnome
+Priority: optional
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Build-Depends:
+  debhelper (>= 9),
+  cmake (>= 2.8),
+  libunity-dev (>= 7.0.0),
+  libgrilo-0.2-dev
+Standards-Version: 3.9.4
+Homepage: https://launchpad.net/unity-scope-hollywood
+Vcs-Bzr: http://bazaar.launchpad.net/~unity-team/unity-scope-hollywood/trunk
+
+Package: unity-scope-hollywood
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, grilo-plugins-0.2-mediascanner
+Description: Media scanner scope for Unity
+  This package contains muisc and video scopes for Unity that can be
+  used to expose media found by the Ubuntu TV Media Scanner.
+
