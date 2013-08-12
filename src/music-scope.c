@@ -85,7 +85,7 @@ music_add_result (UnityResultSet *result_set, GrlMedia *media)
     if (result.icon_hint == NULL) {
         result.icon_hint = "/usr/share/unity/icons/album_missing.png";
     }
-    result.category = 0;
+    result.category = 1;
     result.result_type = UNITY_RESULT_TYPE_PERSONAL;
     result.mimetype = (char *)grl_media_get_mime (media);
     result.title = (char *)grl_media_get_title (media);
@@ -126,7 +126,7 @@ music_preview (UnityResultPreviewer *previewer, void *user_data)
     const char *uri = previewer->result.uri;
     const char *title = previewer->result.title;
     const char *artist = "";
-    //const char *album = "";
+    const char *album = "";
     int duration = 0;
     int track_number = 0;
 
@@ -137,10 +137,10 @@ music_preview (UnityResultPreviewer *previewer, void *user_data)
         if (variant) {
             artist = g_variant_get_string (variant, NULL);
         }
-        //variant = g_hash_table_lookup (previewer->result.metadata, "album");
-        //if (variant) {
-        //    album = g_variant_get_string (variant, NULL);
-        //}
+        variant = g_hash_table_lookup (previewer->result.metadata, "album");
+        if (variant) {
+            album = g_variant_get_string (variant, NULL);
+        }
         variant = g_hash_table_lookup (previewer->result.metadata, "duration");
         if (variant) {
             duration = g_variant_get_int32 (variant);
@@ -159,6 +159,8 @@ music_preview (UnityResultPreviewer *previewer, void *user_data)
     unity_track_metadata_set_uri (track, uri);
     unity_track_metadata_set_track_no (track, track_number);
     unity_track_metadata_set_title (track, title);
+    unity_track_metadata_set_artist (track, artist);
+    unity_track_metadata_set_album (track, album);
     unity_track_metadata_set_length (track, duration);
     unity_music_preview_add_track (preview, track);
 
@@ -195,11 +197,30 @@ music_scope_new (GrlSource *source)
 
     GFile *icon_file = g_file_get_child (icon_dir, "group-songs.svg");
     GIcon *icon = g_file_icon_new (icon_file);
+    g_object_unref (icon_file);
     unity_category_set_add (categories,
                             unity_category_new ("global", _("Music"),
                                                 icon, UNITY_CATEGORY_RENDERER_DEFAULT));
+    unity_category_set_add (categories,
+                            unity_category_new ("songs", _("Songs"),
+                                                icon, UNITY_CATEGORY_RENDERER_DEFAULT));
     g_object_unref (icon);
+
+    icon_file = g_file_get_child (icon_dir, "group-albums.svg");
+    icon = g_file_icon_new (icon_file);
     g_object_unref (icon_file);
+    unity_category_set_add (categories,
+                            unity_category_new ("albums", _("Albums"),
+                                                icon, UNITY_CATEGORY_RENDERER_DEFAULT));
+    g_object_unref (icon);
+
+    icon_file = g_file_get_child (icon_dir, "group-treat-yourself.svg");
+    icon = g_file_icon_new (icon_file);
+    g_object_unref (icon_file);
+    unity_category_set_add (categories,
+                            unity_category_new ("more", _("More suggestions"),
+                                                icon, UNITY_CATEGORY_RENDERER_DEFAULT));
+    g_object_unref (icon);
 
     g_object_unref (icon_dir);
     unity_simple_scope_set_category_set (scope, categories);
