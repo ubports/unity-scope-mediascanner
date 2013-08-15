@@ -1,7 +1,7 @@
 [Scope]
-DBusName=com.canonical.Unity.Scope.Hollywood
-DBusPath=/com/canonical/unity/scope/hollywood/video
-Module=@CMAKE_INSTALL_FULL_LIBDIR@/unity/unity-scope-hollywood.so
+DBusName=com.canonical.Unity.Scope.MediaScanner
+DBusPath=/com/canonical/unity/scope/mediascanner/video
+Module=@CMAKE_INSTALL_FULL_LIBDIR@/unity/unity-scope-mediascanner.so
 ModuleType=C
 Type=video
 RequiredMetadata=duration[i];

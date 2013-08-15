@@ -1,3 +1,0 @@
-[D-BUS Service]
-Name=com.canonical.Unity.Scope.Hollywood
-Exec=@CMAKE_INSTALL_FULL_BINDIR@/unity-scope-loader music/hollywood.scope video/hollywood.scope

@@ -1,7 +1,7 @@
 [Scope]
-DBusName=com.canonical.Unity.Scope.Hollywood
-DBusPath=/com/canonical/unity/scope/hollywood/music
-Module=@CMAKE_INSTALL_FULL_LIBDIR@/unity/unity-scope-hollywood.so
+DBusName=com.canonical.Unity.Scope.MediaScanner
+DBusPath=/com/canonical/unity/scope/mediascanner/music
+Module=@CMAKE_INSTALL_FULL_LIBDIR@/unity/unity-scope-mediascanner.so
 ModuleType=C
 Type=music
 RequiredMetadata=duration[i];

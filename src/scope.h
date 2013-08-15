@@ -2,9 +2,9 @@
 #include <grilo.h>
 #include <unity.h>
 
-#define DBUS_NAME "com.canonical.Unity.Scope.Hollywood"
-#define DBUS_MUSIC_PATH "/com/canonical/unity/scope/hollywood/music"
-#define DBUS_VIDEO_PATH "/com/canonical/unity/scope/hollywood/video"
+#define DBUS_NAME "com.canonical.Unity.Scope.MediaScanner"
+#define DBUS_MUSIC_PATH "/com/canonical/unity/scope/mediascanner/music"
+#define DBUS_VIDEO_PATH "/com/canonical/unity/scope/mediascanner/video"
 
 
 typedef struct _ScopeSearchData ScopeSearchData;

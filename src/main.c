@@ -13,11 +13,11 @@ unity_scope_module_load_scopes (GError **error)
     grl_init (NULL, NULL);
 
     GrlRegistry *registry = grl_registry_get_default ();
-    if (!grl_registry_load_plugin_by_id (registry, "grl-hollywood", error)) {
+    if (!grl_registry_load_plugin_by_id (registry, "grl-mediascanner", error)) {
         return NULL;
     }
 
-    GrlSource *source = grl_registry_lookup_source (registry, "grl-hollywood");
+    GrlSource *source = grl_registry_lookup_source (registry, "grl-mediascanner");
     UnityAbstractScope *music = music_scope_new (source);
     UnityAbstractScope *video = video_scope_new (source);
 

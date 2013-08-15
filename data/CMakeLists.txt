@@ -2,33 +2,33 @@
 # D-Bus service definition
 
 configure_file(
-  unity-scope-hollywood.service.in
-  unity-scope-hollywood.service
+  unity-scope-mediascanner.service.in
+  unity-scope-mediascanner.service
 )
 
 install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/unity-scope-hollywood.service"
+  FILES "${CMAKE_CURRENT_BINARY_DIR}/unity-scope-mediascanner.service"
   DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/dbus-1/services"
 )
 
 # Unity Scope files
 
 configure_file(
-  music/hollywood.scope.in
-  music/hollywood.scope
+  music/mediascanner.scope.in
+  music/mediascanner.scope
 )
 
 install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/music/hollywood.scope"
+  FILES "${CMAKE_CURRENT_BINARY_DIR}/music/mediascanner.scope"
   DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes/music"
 )
 
 configure_file(
-  video/hollywood.scope.in
-  video/hollywood.scope
+  video/mediascanner.scope.in
+  video/mediascanner.scope
 )
 
 install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/video/hollywood.scope"
+  FILES "${CMAKE_CURRENT_BINARY_DIR}/video/mediascanner.scope"
   DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes/video"
 )

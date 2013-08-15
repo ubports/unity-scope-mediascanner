@@ -5,11 +5,11 @@ set(SCOPE_SOURCES
   video-scope.c
 )
 
-add_library(unity-scope-hollywood MODULE ${SCOPE_SOURCES})
-set_target_properties(unity-scope-hollywood PROPERTIES PREFIX "")
+add_library(unity-scope-mediascanner MODULE ${SCOPE_SOURCES})
+set_target_properties(unity-scope-mediascanner PROPERTIES PREFIX "")
 
-target_link_libraries(unity-scope-hollywood ${UNITY_LIBRARIES})
+target_link_libraries(unity-scope-mediascanner ${UNITY_LIBRARIES})
 
 install(
-  TARGETS unity-scope-hollywood
+  TARGETS unity-scope-mediascanner
   LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/unity")
