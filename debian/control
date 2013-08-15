@@ -2,11 +2,10 @@ Source: unity-scope-mediascanner
 Section: gnome
 Priority: optional
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
-Build-Depends:
-  debhelper (>= 9),
-  cmake (>= 2.8),
-  libgrilo-0.2-dev,
-  libunity-dev (>= 7.0.9),
+Build-Depends: cmake (>= 2.8),
+               debhelper (>= 9),
+               libgrilo-0.2-dev,
+               libunity-dev (>= 7.0.9),
 Standards-Version: 3.9.4
 Homepage: https://launchpad.net/unity-scope-mediascanner
 # If you aren't a member of ~unity-team but need to upload packaging
@@ -19,7 +18,7 @@ Package: unity-scope-mediascanner
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
-         grilo-plugins-0.2-mediascanner
+         grilo-plugins-0.2-mediascanner,
 Description: Media scanner scope for Unity
   This package contains muisc and video scopes for Unity that can be
   used to expose media found by the Ubuntu Media Scanner.
