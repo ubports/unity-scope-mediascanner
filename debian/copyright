@@ -1,7 +1,7 @@
-Format: 
+Format: https://bugs.launchpad.net/ubuntu/+bug/1212993
 Upstream-Name: unity-scope-mediascanner
 Upstream-Contact: James Henstridge <james.henstridge@canonical.com>
-Source: https://launchpad.net/unity-scope-mediascanner/+download
+Source: https://launchpad.net/unity-scope-mediascanner
 
 File: *
 Copyright: 2013 Canonical Ltd

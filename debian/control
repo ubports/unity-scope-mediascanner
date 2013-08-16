@@ -20,6 +20,5 @@ Depends: ${misc:Depends},
          ${shlibs:Depends},
          grilo-plugins-0.2-mediascanner,
 Description: Media scanner scope for Unity
-  This package contains muisc and video scopes for Unity that can be
-  used to expose media found by the Ubuntu Media Scanner.
-
+ This package contains muisc and video scopes for Unity that can be
+ used to expose media found by the Ubuntu Media Scanner.
