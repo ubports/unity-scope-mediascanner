@@ -1,7 +1,7 @@
-Format: 
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: unity-scope-mediascanner
 Upstream-Contact: James Henstridge <james.henstridge@canonical.com>
-Source: https://launchpad.net/unity-scope-mediascanner/+download
+Source: https://launchpad.net/unity-scope-mediascanner
 
 File: *
 Copyright: 2013 Canonical Ltd

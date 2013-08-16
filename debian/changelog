@@ -1,5 +1,6 @@
 unity-scope-mediascanner (0.1-0ubuntu0) UNRELEASED; urgency=low
 
   * Initial release.
+  * Automatic snapshot from revision 28 (bootstrap)
 
  -- James Henstridge <james.henstridge@canonical.com>  Mon, 12 Aug 2013 16:05:28 +0800
