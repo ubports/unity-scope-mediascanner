@@ -4,8 +4,12 @@ Priority: optional
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 Build-Depends: cmake (>= 2.8),
                debhelper (>= 9),
+               grilo-plugins-0.2-mediascanner,
                libgrilo-0.2-dev,
                libunity-dev (>= 7.0.9),
+               mediascanner,
+               python3,
+               python3-dbusmock,
 Standards-Version: 3.9.4
 Homepage: https://launchpad.net/unity-scope-mediascanner
 # If you aren't a member of ~unity-team but need to upload packaging
