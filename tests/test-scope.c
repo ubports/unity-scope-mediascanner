@@ -25,6 +25,7 @@ test_music_add_result ()
     g_assert_cmpint (result->result_type, ==, UNITY_RESULT_TYPE_PERSONAL);
     g_assert_cmpstr (result->mimetype, ==, "audio/ogg");
     g_assert_cmpstr (result->title, ==, "Title");
+    g_assert_cmpstr (result->comment, ==, "Artist");
     g_assert_cmpstr (result->dnd_uri, ==, "http://example.com/foo.ogg");
 
     GVariant *variant;

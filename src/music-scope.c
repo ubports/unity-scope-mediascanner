@@ -119,6 +119,7 @@ music_add_result (UnityResultSet *result_set, GrlMedia *media)
     if (artist) {
         variant = g_variant_new_string (artist);
         g_hash_table_insert (result.metadata, "artist", g_variant_ref_sink (variant));
+        result.comment = (char *)artist;
     }
 
     const char *album = grl_media_audio_get_album (GRL_MEDIA_AUDIO (media));
