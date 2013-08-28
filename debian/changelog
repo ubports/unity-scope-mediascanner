@@ -1,6 +1,16 @@
-unity-scope-mediascanner (0.1-0ubuntu0) UNRELEASED; urgency=low
+unity-scope-mediascanner (0.1+13.10.20130828.2-0ubuntu1) saucy; urgency=low
 
+  [ James Henstridge ]
   * Initial release.
   * Automatic snapshot from revision 28 (bootstrap)
+  * Add some tests that run the media scanner scopes against the media
+    scanner directly.
+  * Include the artist name in the comment field of results from the
+    music scope.
+  * Temporarily disable test-with-mediascanner test until we work out
+    why it is hanging.
 
- -- James Henstridge <james.henstridge@canonical.com>  Mon, 12 Aug 2013 16:05:28 +0800
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 31
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 28 Aug 2013 16:50:25 +0000
