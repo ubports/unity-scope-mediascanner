@@ -170,9 +170,10 @@ music_preview (UnityResultPreviewer *previewer, void *user_data)
         }
     }
 
-    // XXX: icon hint?
     UnityMusicPreview *preview = unity_music_preview_new (
         title, artist, NULL);
+    unity_preview_set_image_source_uri (
+        UNITY_PREVIEW (preview), previewer->result.icon_hint);
 
     UnityTrackMetadata *track = unity_track_metadata_new ();
     unity_track_metadata_set_uri (track, uri);
