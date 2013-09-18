@@ -144,9 +144,6 @@ test_music_preview ()
         unity_preview_get_title (UNITY_PREVIEW (preview)), ==, "Title");
     g_assert_cmpstr (
         unity_preview_get_subtitle (UNITY_PREVIEW (preview)), ==, "Artist");
-    g_assert_cmpstr (
-        unity_preview_get_image_source_uri (UNITY_PREVIEW (preview)), ==,
-        "http://example.com/thumbnail.jpg");
 
     g_object_unref (preview);
 }
@@ -243,6 +240,9 @@ test_video_preview ()
         unity_preview_get_title (UNITY_PREVIEW (preview)), ==, "Title");
     g_assert_cmpstr (
         unity_preview_get_subtitle (UNITY_PREVIEW (preview)), ==, "");
+    g_assert_cmpstr (
+        unity_preview_get_image_source_uri (UNITY_PREVIEW (preview)), ==,
+        "http://example.com/foo.mp4");
 
     g_object_unref (preview);
 }
