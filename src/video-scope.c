@@ -88,7 +88,7 @@ video_preview (UnityResultPreviewer *previewer, void *user_data)
         title, subtitle, comment, NULL);
     unity_movie_preview_set_rating (preview, -1.0f, 0);
     unity_preview_set_image_source_uri (
-        UNITY_PREVIEW (preview), previewer->result.icon_hint);
+        UNITY_PREVIEW (preview), previewer->result.uri);
 
     UnityPreviewAction *play_action = unity_preview_action_new (
         "play", _("Play"), NULL);

@@ -13,6 +13,7 @@ test_music_add_result ()
     grl_media_set_url (media, "http://example.com/foo.ogg");
     grl_media_set_mime (media, "audio/ogg");
     grl_media_set_title (media, "Title");
+    grl_media_set_thumbnail (media, "http://example.com/thumbnail.jpg");
     grl_media_set_duration (media, 60);
     grl_media_audio_set_artist (GRL_MEDIA_AUDIO (media), "Artist");
     grl_media_audio_set_album (GRL_MEDIA_AUDIO (media), "Album");
@@ -22,6 +23,7 @@ test_music_add_result ()
 
     UnityScopeResult *result = &result_set->last_result;
     g_assert_cmpstr (result->uri, ==, "http://example.com/foo.ogg");
+    g_assert_cmpstr (result->icon_hint, ==, "http://example.com/thumbnail.jpg");
     g_assert_cmpint (result->result_type, ==, UNITY_RESULT_TYPE_PERSONAL);
     g_assert_cmpstr (result->mimetype, ==, "audio/ogg");
     g_assert_cmpstr (result->title, ==, "Title");
@@ -112,6 +114,7 @@ test_music_preview ()
     UnityScopeResult result = { 0, };
 
     result.uri = "http://example.com/foo.ogg";
+    result.icon_hint = "http://example.com/thumbnail.jpg";
     result.result_type = UNITY_RESULT_TYPE_PERSONAL;
     result.mimetype = "audio/ogg";
     result.title = "Title";
@@ -153,6 +156,7 @@ test_music_search ()
     grl_media_set_url (media, "http://example.com/foo.ogg");
     grl_media_set_mime (media, "audio/ogg");
     grl_media_set_title (media, "Title");
+    grl_media_set_thumbnail (media, "http://example.com/thumbnail.jpg");
     grl_media_set_duration (media, 60);
     grl_media_audio_set_artist (GRL_MEDIA_AUDIO (media), "Artist");
     grl_media_audio_set_album (GRL_MEDIA_AUDIO (media), "Album");
@@ -236,6 +240,9 @@ test_video_preview ()
         unity_preview_get_title (UNITY_PREVIEW (preview)), ==, "Title");
     g_assert_cmpstr (
         unity_preview_get_subtitle (UNITY_PREVIEW (preview)), ==, "");
+    g_assert_cmpstr (
+        unity_preview_get_image_source_uri (UNITY_PREVIEW (preview)), ==,
+        "http://example.com/foo.mp4");
 
     g_object_unref (preview);
 }

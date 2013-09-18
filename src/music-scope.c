@@ -170,9 +170,10 @@ music_preview (UnityResultPreviewer *previewer, void *user_data)
         }
     }
 
-    // XXX: icon hint?
+    GIcon *image = g_icon_new_for_string (previewer->result.icon_hint, NULL);
     UnityMusicPreview *preview = unity_music_preview_new (
-        title, artist, NULL);
+        title, artist, image);
+    g_object_unref (image);
 
     UnityTrackMetadata *track = unity_track_metadata_new ();
     unity_track_metadata_set_uri (track, uri);
