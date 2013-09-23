@@ -128,6 +128,11 @@ class ScopeTestCase(dbusmock.DBusTestCase):
         self.assertEqual(len(results), 1)
         self.assertEqual(results[0].title, 'TitleOne')
 
+        # Check that substring matches work.
+        results = self.perform_search(self.music_scope, 'artiston')
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0].title, 'TitleOne')
+
         results = self.perform_search(self.music_scope, 'unknown')
         self.assertEqual(len(results), 0)
 
