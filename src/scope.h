@@ -36,6 +36,10 @@ struct _ScopeSearchData {
 
     AddResultFunc add_result;
     ApplyFiltersFunc apply_filters;
+
+    /* Filled in by setup_search() */
+    UnitySimpleScope *scope;
+    guint content_changed_id;
 };
 
 

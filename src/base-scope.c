@@ -117,12 +117,65 @@ search_sync (UnityScopeSearchBase *search, void *user_data)
 }
 
 void
+content_changed (GrlSource *source, GPtrArray *changed_medias,
+                 GrlSourceChangeType change_type, gboolean location_unknown,
+                 void *user_data)
+{
+    ScopeSearchData *data = (ScopeSearchData *)user_data;
+    int i;
+    gboolean matched_type = FALSE;
+
+    g_warning("Content changed");
+
+    for (i = 0; i < changed_medias->len; i++) {
+        GrlMedia *media = g_ptr_array_index(changed_medias, i);
+
+        /* Does the changed media match the type filter for this scope? */
+        if (((data->media_type & GRL_TYPE_FILTER_AUDIO) != 0 &&
+             GRL_IS_MEDIA_AUDIO (media)) ||
+            ((data->media_type & GRL_TYPE_FILTER_VIDEO) != 0 &&
+             GRL_IS_MEDIA_VIDEO (media)) ||
+            ((data->media_type & GRL_TYPE_FILTER_IMAGE) != 0 &&
+             GRL_IS_MEDIA_IMAGE (media))) {
+            matched_type = TRUE;
+            break;
+        }
+    }
+
+    if (matched_type) {
+        g_warning("Change is relevant for scope");
+        unity_abstract_scope_results_invalidated (
+            UNITY_ABSTRACT_SCOPE (data->scope), UNITY_SEARCH_TYPE_DEFAULT);
+    }
+}
+
+void
 setup_search (UnitySimpleScope *scope, ScopeSearchData *data)
 {
+    data->scope = scope;
+    data->content_changed_id = 0;
+
     unity_simple_scope_set_search_async_func (
         scope, search_async, data, (GDestroyNotify)NULL);
     /* Satisfy the blocking API with a wrapper that calls the async
      * version in a nested main loop */
     unity_simple_scope_set_search_func (
         scope, search_sync, NULL, (GDestroyNotify)NULL);
+
+    if ((grl_source_supported_operations (data->source) &
+         GRL_OP_NOTIFY_CHANGE) != 0) {
+        data->content_changed_id = g_signal_connect (
+            data->source, "content-changed",
+            G_CALLBACK (content_changed), data);
+
+        GError *error = NULL;
+        if (!grl_source_notify_change_start (data->source, &error)) {
+            g_warning("Could not configure change notification: %s",
+                      error->message);
+            g_signal_handler_disconnect (
+                data->source, data->content_changed_id);
+            data->content_changed_id = 0;
+        }
+        g_clear_error (&error);
+    }
 }
