@@ -31,6 +31,13 @@ unity_scope_module_load_scopes (GError **error)
     grl_init (NULL, NULL);
 
     GrlRegistry *registry = grl_registry_get_default ();
+
+    GrlConfig *config = grl_config_new ("grl-mediascanner", "grl-mediascanner");
+    grl_config_set_string (config, "search-method", "substring");
+    if (!grl_registry_add_config (registry, config, error)) {
+        return NULL;
+    }
+
     if (!grl_registry_load_plugin_by_id (registry, "grl-mediascanner", error)) {
         return NULL;
     }
