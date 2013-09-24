@@ -178,7 +178,9 @@ test_music_search ()
 }
 
 static void
-handle_results_invalidated(UnityAbstractScope *scope, void *user_data)
+handle_results_invalidated(UnityAbstractScope *scope,
+                           UnitySearchType search_type,
+                           void *user_data)
 {
     int *counter = (int *)user_data;
 
@@ -199,6 +201,11 @@ test_music_invalidate_results ()
     g_signal_connect (
         scope, "results-invalidated-internal",
         G_CALLBACK (handle_results_invalidated), &invalidate_counter);
+
+    GPtrArray *changes = g_ptr_array_new ();
+    g_ptr_array_add (changes, media);
+    grl_source_notify_change_list (source, changes, GRL_CONTENT_ADDED, FALSE);
+    g_assert_cmpint (invalidate_counter, ==, 1);
 
     g_object_unref (scope);
     g_object_unref (source);
@@ -313,6 +320,11 @@ test_video_invalidate_results ()
     g_signal_connect (
         scope, "results-invalidated-internal",
         G_CALLBACK (handle_results_invalidated), &invalidate_counter);
+
+    GPtrArray *changes = g_ptr_array_new ();
+    g_ptr_array_add (changes, media);
+    grl_source_notify_change_list (source, changes, GRL_CONTENT_ADDED, FALSE);
+    g_assert_cmpint (invalidate_counter, ==, 1);
 
     g_object_unref (scope);
     g_object_unref (source);

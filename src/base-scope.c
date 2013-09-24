@@ -125,8 +125,6 @@ content_changed (GrlSource *source, GPtrArray *changed_medias,
     int i;
     gboolean matched_type = FALSE;
 
-    g_warning("Content changed");
-
     for (i = 0; i < changed_medias->len; i++) {
         GrlMedia *media = g_ptr_array_index(changed_medias, i);
 
@@ -143,7 +141,6 @@ content_changed (GrlSource *source, GPtrArray *changed_medias,
     }
 
     if (matched_type) {
-        g_warning("Change is relevant for scope");
         unity_abstract_scope_results_invalidated (
             UNITY_ABSTRACT_SCOPE (data->scope), UNITY_SEARCH_TYPE_DEFAULT);
     }
