@@ -178,6 +178,40 @@ test_music_search ()
 }
 
 static void
+handle_results_invalidated(UnityAbstractScope *scope,
+                           UnitySearchType search_type,
+                           void *user_data)
+{
+    int *counter = (int *)user_data;
+
+    *counter += 1;
+}
+
+static void
+test_music_invalidate_results ()
+{
+    GrlMedia *media = grl_media_audio_new ();
+    grl_media_set_id (media, "test-id");
+    grl_media_set_url (media, "http://example.com/foo.ogg");
+    grl_media_set_mime (media, "audio/ogg");
+
+    GrlSource *source = test_source_new (media);
+    UnityAbstractScope *scope = music_scope_new (source);
+    int invalidate_counter = 0;
+    g_signal_connect (
+        scope, "results-invalidated-internal",
+        G_CALLBACK (handle_results_invalidated), &invalidate_counter);
+
+    GPtrArray *changes = g_ptr_array_new ();
+    g_ptr_array_add (changes, media);
+    grl_source_notify_change_list (source, changes, GRL_CONTENT_ADDED, FALSE);
+    g_assert_cmpint (invalidate_counter, ==, 1);
+
+    g_object_unref (scope);
+    g_object_unref (source);
+}
+
+static void
 test_video_add_result ()
 {
     GrlMedia *media = grl_media_video_new ();
@@ -272,6 +306,30 @@ test_video_search ()
     g_object_unref (media);
 }
 
+static void
+test_video_invalidate_results ()
+{
+    GrlMedia *media = grl_media_video_new ();
+    grl_media_set_id (media, "test-id");
+    grl_media_set_url (media, "http://example.com/foo.mp4");
+    grl_media_set_mime (media, "video/mp4");
+
+    GrlSource *source = test_source_new (media);
+    UnityAbstractScope *scope = video_scope_new (source);
+    int invalidate_counter = 0;
+    g_signal_connect (
+        scope, "results-invalidated-internal",
+        G_CALLBACK (handle_results_invalidated), &invalidate_counter);
+
+    GPtrArray *changes = g_ptr_array_new ();
+    g_ptr_array_add (changes, media);
+    grl_source_notify_change_list (source, changes, GRL_CONTENT_ADDED, FALSE);
+    g_assert_cmpint (invalidate_counter, ==, 1);
+
+    g_object_unref (scope);
+    g_object_unref (source);
+}
+
 int
 main (int argc, char **argv)
 {
@@ -283,9 +341,11 @@ main (int argc, char **argv)
     g_test_add_func ("/Music/ApplyFilters/Decade", test_music_apply_filters_decade);
     g_test_add_func ("/Music/Preview", test_music_preview);
     g_test_add_func ("/Music/Search", test_music_search);
+    g_test_add_func ("/Music/InvalidateResults", test_music_invalidate_results);
     g_test_add_func ("/Video/AddResult", test_video_add_result);
     g_test_add_func ("/Video/Preview", test_video_preview);
     g_test_add_func ("/Video/Search", test_video_search);
+    g_test_add_func ("/Video/InvalidateResults", test_video_invalidate_results);
 
     g_test_run ();
     return 0;

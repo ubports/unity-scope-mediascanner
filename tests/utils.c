@@ -96,7 +96,7 @@ test_source_finalize (GObject *object)
 static GrlSupportedOps
 test_source_supported_operations (GrlSource *source)
 {
-    return GRL_OP_SEARCH;
+    return GRL_OP_SEARCH | GRL_OP_NOTIFY_CHANGE;
 }
 
 static const GList *
@@ -136,6 +136,18 @@ test_source_search (GrlSource *source, GrlSourceSearchSpec *ss)
                   ss->user_data, NULL);
 }
 
+static gboolean
+test_source_notify_change_start (GrlSource *source, GError **error)
+{
+    return TRUE;
+}
+
+static gboolean
+test_source_notify_change_stop (GrlSource *source, GError **error)
+{
+    return TRUE;
+}
+
 static void
 test_source_class_init (TestSourceClass *class)
 {
@@ -145,6 +157,8 @@ test_source_class_init (TestSourceClass *class)
     GRL_SOURCE_CLASS (class)->supported_keys = test_source_supported_keys;
     GRL_SOURCE_CLASS (class)->get_caps = test_source_get_caps;
     GRL_SOURCE_CLASS (class)->search = test_source_search;
+    GRL_SOURCE_CLASS (class)->notify_change_start = test_source_notify_change_start;
+    GRL_SOURCE_CLASS (class)->notify_change_stop = test_source_notify_change_stop;
 }
 
 static void
