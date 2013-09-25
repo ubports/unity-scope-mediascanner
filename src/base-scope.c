@@ -19,7 +19,7 @@
 #include <config.h>
 #include "scope.h"
 
-#define MAX_RESULTS 20
+#define MAX_RESULTS 100
 
 typedef struct {
     ScopeSearchData *scope_data;
