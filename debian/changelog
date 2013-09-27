@@ -1,3 +1,18 @@
+unity-scope-mediascanner (0.1+13.10.20130927.1-0ubuntu1) saucy; urgency=low
+
+  [ James Henstridge ]
+  * Use the substring search method when performing searches. (LP:
+    #1227130)
+  * Use Grilo's change notification feature to issue the
+    results_invalidated signal on the scope.
+  * Increase the maximum result count for the scope from 20 to 100 (the
+    same used by the desktop scope).
+
+  [ Ubuntu daily release ]
+  * Automatic snapshot from revision 40
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 27 Sep 2013 11:08:20 +0000
+
 unity-scope-mediascanner (0.1+13.10.20130920-0ubuntu1) saucy; urgency=low
 
   [ James Henstridge ]
