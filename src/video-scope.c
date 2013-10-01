@@ -25,10 +25,9 @@ video_add_result (UnityResultSet *result_set, GrlMedia *media)
     UnityScopeResult result = { 0, };
 
     result.uri = (char *)grl_media_get_url (media);
-    // XXX: can we get thumbnails?
     result.icon_hint = (char *)grl_media_get_thumbnail (media);
     if (result.icon_hint == NULL) {
-        result.icon_hint = "video";
+        result.icon_hint = "";
     }
     result.category = 0;
     result.result_type = UNITY_RESULT_TYPE_PERSONAL;

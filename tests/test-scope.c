@@ -227,6 +227,7 @@ test_video_add_result ()
 
     UnityScopeResult *result = &result_set->last_result;
     g_assert_cmpstr (result->uri, ==, "http://example.com/foo.mp4");
+    g_assert_cmpstr (result->icon_hint, ==, "");
     g_assert_cmpint (result->result_type, ==, UNITY_RESULT_TYPE_PERSONAL);
     g_assert_cmpstr (result->mimetype, ==, "video/mp4");
     g_assert_cmpstr (result->title, ==, "Title");
