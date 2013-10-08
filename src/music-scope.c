@@ -101,7 +101,7 @@ music_add_result (UnityResultSet *result_set, GrlMedia *media)
     // XXX: can we get thumbnails?
     result.icon_hint = (char *)grl_media_get_thumbnail (media);
     if (result.icon_hint == NULL) {
-        result.icon_hint = "/usr/share/unity/icons/album_missing.png";
+        result.icon_hint = "";
     }
     result.category = 1;
     result.result_type = UNITY_RESULT_TYPE_PERSONAL;
