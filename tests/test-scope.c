@@ -205,7 +205,7 @@ test_music_invalidate_results ()
     GPtrArray *changes = g_ptr_array_new ();
     g_ptr_array_add (changes, media);
     grl_source_notify_change_list (source, changes, GRL_CONTENT_ADDED, FALSE);
-    g_assert_cmpint (invalidate_counter, ==, 1);
+    g_assert_cmpint (invalidate_counter, ==, 2);
 
     g_object_unref (scope);
     g_object_unref (source);
@@ -325,7 +325,7 @@ test_video_invalidate_results ()
     GPtrArray *changes = g_ptr_array_new ();
     g_ptr_array_add (changes, media);
     grl_source_notify_change_list (source, changes, GRL_CONTENT_ADDED, FALSE);
-    g_assert_cmpint (invalidate_counter, ==, 1);
+    g_assert_cmpint (invalidate_counter, ==, 2);
 
     g_object_unref (scope);
     g_object_unref (source);

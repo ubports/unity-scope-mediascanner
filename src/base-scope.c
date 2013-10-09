@@ -143,6 +143,9 @@ content_changed (GrlSource *source, GPtrArray *changed_medias,
     if (matched_type) {
         unity_abstract_scope_results_invalidated (
             UNITY_ABSTRACT_SCOPE (data->scope), UNITY_SEARCH_TYPE_DEFAULT);
+        /* local content is displayed in home as well, invalidate that too */
+        unity_abstract_scope_results_invalidated (
+            UNITY_ABSTRACT_SCOPE (data->scope), UNITY_SEARCH_TYPE_GLOBAL);
     }
 }
 
