@@ -18,6 +18,7 @@
  */
 #include <config.h>
 #include "scope.h"
+#include <mediascanner/MediaFile.hh>
 
 UnityFilterSet *
 music_get_filters (void)
@@ -43,6 +44,7 @@ music_get_filters (void)
     return filters;
 }
 
+#if 0
 static gboolean
 get_decade_filter (UnityFilterSet *filter_state, int *min_year, int *max_year)
 {
@@ -91,47 +93,46 @@ music_apply_filters (UnityFilterSet *filter_state, GrlOperationOptions *options)
         g_value_unset (&max_val);
     }
 }
+#endif
 
 void
-music_add_result (UnityResultSet *result_set, GrlMedia *media)
+music_add_result (UnityResultSet *result_set, const MediaFile &media)
 {
     UnityScopeResult result = { 0, };
 
-    result.uri = (char *)grl_media_get_url (media);
+    const std::string uri = media.getUri();
+    result.uri = const_cast<char*>(uri.c_str());
     // XXX: can we get thumbnails?
-    result.icon_hint = (char *)grl_media_get_thumbnail (media);
-    if (result.icon_hint == NULL) {
-        result.icon_hint = "";
-    }
+    result.icon_hint = const_cast<char*>("");
     result.category = 1;
     result.result_type = UNITY_RESULT_TYPE_PERSONAL;
-    result.mimetype = (char *)grl_media_get_mime (media);
-    result.title = (char *)grl_media_get_title (media);
-    result.comment = "";
+    // FIXME: get mime type
+    result.mimetype = const_cast<char*>("audio/mp3");
+    result.title = const_cast<char*>(media.getTitle().c_str());
+    result.comment = const_cast<char*>("");
     result.dnd_uri = result.uri;
     result.metadata = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, (GDestroyNotify)g_variant_unref);
 
-    int duration = grl_media_get_duration (media);
-    GVariant *variant = g_variant_new_int32 (duration);
-    g_hash_table_insert (result.metadata, "duration", g_variant_ref_sink (variant));
+    GVariant *variant = g_variant_new_int32 (media.getDuration());
+    g_hash_table_insert (result.metadata, const_cast<char*>("duration"), g_variant_ref_sink (variant));
 
-    const char *artist = grl_media_audio_get_artist (GRL_MEDIA_AUDIO (media));
-    if (artist) {
-        variant = g_variant_new_string (artist);
-        g_hash_table_insert (result.metadata, "artist", g_variant_ref_sink (variant));
-        result.comment = (char *)artist;
+    const std::string artist = media.getAuthor();
+    if (!artist.empty()) {
+        variant = g_variant_new_string (artist.c_str());
+        g_hash_table_insert (result.metadata, const_cast<char*>("artist"), g_variant_ref_sink (variant));
+        result.comment = const_cast<char*>(artist.c_str());
     }
 
-    const char *album = grl_media_audio_get_album (GRL_MEDIA_AUDIO (media));
-    if (album) {
-        variant = g_variant_new_string (album);
-        g_hash_table_insert (result.metadata, "album", g_variant_ref_sink (variant));
+    const std::string album = media.getAlbum();
+    if (!album.empty()) {
+        variant = g_variant_new_string (album.c_str());
+        g_hash_table_insert (result.metadata, const_cast<char*>("album"), g_variant_ref_sink (variant));
     }
 
-    int track_number = grl_media_audio_get_track_number (GRL_MEDIA_AUDIO (media));
+    int track_number = media.getTrackNumber();
     if (track_number > 0) {
         variant = g_variant_new_int32 (track_number);
-        g_hash_table_insert (result.metadata, "track-number", g_variant_ref_sink (variant));
+        g_hash_table_insert (result.metadata, const_cast<char*>("track-number"), g_variant_ref_sink (variant));
     }
 
     unity_result_set_add_result (result_set, &result);
@@ -152,19 +153,19 @@ music_preview (UnityResultPreviewer *previewer, void *user_data)
     if (previewer->result.metadata != NULL) {
         GVariant *variant;
 
-        variant = g_hash_table_lookup (previewer->result.metadata, "artist");
+        variant = static_cast<GVariant*>(g_hash_table_lookup (previewer->result.metadata, const_cast<char *>("artist")));
         if (variant) {
             artist = g_variant_get_string (variant, NULL);
         }
-        variant = g_hash_table_lookup (previewer->result.metadata, "album");
+        variant = static_cast<GVariant*>(g_hash_table_lookup (previewer->result.metadata, const_cast<char*>("album")));
         if (variant) {
             album = g_variant_get_string (variant, NULL);
         }
-        variant = g_hash_table_lookup (previewer->result.metadata, "duration");
+        variant = static_cast<GVariant*>(g_hash_table_lookup (previewer->result.metadata, const_cast<char*>("duration")));
         if (variant) {
             duration = g_variant_get_int32 (variant);
         }
-        variant = g_hash_table_lookup (previewer->result.metadata, "track-number");
+        variant = static_cast<GVariant*>(g_hash_table_lookup (previewer->result.metadata, const_cast<char*>("track-number")));
         if (variant) {
             track_number = g_variant_get_int32 (variant);
         }
@@ -193,11 +194,8 @@ music_preview (UnityResultPreviewer *previewer, void *user_data)
 
 
 UnityAbstractScope *
-music_scope_new (GrlSource *source)
+music_scope_new (std::shared_ptr<MediaStore> store)
 {
-    g_return_val_if_fail (GRL_IS_SOURCE (source), NULL);
-    g_return_val_if_fail ((grl_source_supported_operations (source) & GRL_OP_SEARCH) != 0, NULL);
-
     UnitySimpleScope *scope = unity_simple_scope_new ();
 
     unity_simple_scope_set_group_name (scope, DBUS_NAME);
@@ -250,20 +248,10 @@ music_scope_new (GrlSource *source)
 
     /* Set up search */
     ScopeSearchData *search_data = g_new0(ScopeSearchData, 1);
-    search_data->source = g_object_ref (source);
-    search_data->media_type = GRL_TYPE_FILTER_AUDIO;
-    search_data->metadata_keys = grl_metadata_key_list_new (
-        GRL_METADATA_KEY_URL,
-        GRL_METADATA_KEY_MIME,
-        GRL_METADATA_KEY_THUMBNAIL,
-        GRL_METADATA_KEY_TITLE,
-        GRL_METADATA_KEY_ALBUM,
-        GRL_METADATA_KEY_ARTIST,
-        GRL_METADATA_KEY_TRACK_NUMBER,
-        GRL_METADATA_KEY_DURATION,
-        GRL_METADATA_KEY_INVALID);
+    search_data->store = store;
+    search_data->media_type = AudioMedia;
     search_data->add_result = music_add_result;
-    search_data->apply_filters = music_apply_filters;
+    //search_data->apply_filters = music_apply_filters;
     setup_search (scope, search_data);
     // XXX: handle cleanup of search_data
 

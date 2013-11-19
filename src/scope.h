@@ -16,9 +16,10 @@
  * Authored by James Henstridge <james.henstridge@canonical.com>
  *
  */
+#include <memory>
 #include <glib/gi18n-lib.h>
-#include <grilo.h>
 #include <unity.h>
+#include <mediascanner/MediaStore.hh>
 
 #define DBUS_NAME "com.canonical.Unity.Scope.MediaScanner"
 #define DBUS_MUSIC_PATH "/com/canonical/unity/scope/mediascanner/music"
@@ -26,16 +27,16 @@
 
 
 typedef struct _ScopeSearchData ScopeSearchData;
-typedef void (* AddResultFunc) (UnityResultSet *result_set, GrlMedia *media);
-typedef void (* ApplyFiltersFunc) (UnityFilterSet *filter_state, GrlOperationOptions *options);
+typedef void (* AddResultFunc) (UnityResultSet *result_set, const MediaFile &media);
+//typedef void (* ApplyFiltersFunc) (UnityFilterSet *filter_state, GrlOperationOptions *options);
 
 struct _ScopeSearchData {
-    GrlSource *source;
-    GrlTypeFilter media_type;
+    std::shared_ptr<MediaStore> store;
+    MediaType media_type;
     GList *metadata_keys;
 
     AddResultFunc add_result;
-    ApplyFiltersFunc apply_filters;
+    //ApplyFiltersFunc apply_filters;
 
     /* Filled in by setup_search() */
     UnitySimpleScope *scope;
@@ -46,14 +47,14 @@ struct _ScopeSearchData {
 void setup_search (UnitySimpleScope *scope,
                    ScopeSearchData *data) G_GNUC_INTERNAL;
 
-UnityAbstractScope *music_scope_new (GrlSource *source) G_GNUC_INTERNAL;
-UnityAbstractScope *video_scope_new (GrlSource *source) G_GNUC_INTERNAL;
+UnityAbstractScope *music_scope_new (std::shared_ptr<MediaStore> store) G_GNUC_INTERNAL;
+UnityAbstractScope *video_scope_new (std::shared_ptr<MediaStore> store) G_GNUC_INTERNAL;
 
-UnityFilterSet *music_get_filters (void) G_GNUC_INTERNAL;
-void music_apply_filters (UnityFilterSet *filter_state, GrlOperationOptions *options) G_GNUC_INTERNAL;
+//UnityFilterSet *music_get_filters (void) G_GNUC_INTERNAL;
+//void music_apply_filters (UnityFilterSet *filter_state, GrlOperationOptions *options) G_GNUC_INTERNAL;
 
-void music_add_result (UnityResultSet *result_set, GrlMedia *media) G_GNUC_INTERNAL;
-void video_add_result (UnityResultSet *result_set, GrlMedia *media) G_GNUC_INTERNAL;
+void music_add_result (UnityResultSet *result_set, MediaFile &media) G_GNUC_INTERNAL;
+void video_add_result (UnityResultSet *result_set, MediaFile &media) G_GNUC_INTERNAL;
 
 UnityAbstractPreview *music_preview (UnityResultPreviewer *previewer, void *user_data) G_GNUC_INTERNAL;
 UnityAbstractPreview *video_preview (UnityResultPreviewer *previewer, void *user_data) G_GNUC_INTERNAL;

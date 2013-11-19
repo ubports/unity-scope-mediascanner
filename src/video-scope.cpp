@@ -18,39 +18,39 @@
  */
 #include <config.h>
 #include "scope.h"
+#include <mediascanner/MediaFile.hh>
 
 void
-video_add_result (UnityResultSet *result_set, GrlMedia *media)
+video_add_result (UnityResultSet *result_set, const MediaFile &media)
 {
     UnityScopeResult result = { 0, };
 
-    result.uri = (char *)grl_media_get_url (media);
-    result.icon_hint = (char *)grl_media_get_thumbnail (media);
-    if (result.icon_hint == NULL) {
-        result.icon_hint = "";
-    }
+    const std::string uri = media.getUri();
+    result.uri = const_cast<char*>(uri.c_str());
+    result.icon_hint = const_cast<char*>("");
     result.category = 0;
     result.result_type = UNITY_RESULT_TYPE_PERSONAL;
-    result.mimetype = (char *)grl_media_get_mime (media);
-    result.title = (char *)grl_media_get_title (media);
-    result.comment = "";
+    // FIXME: get mime type
+    result.mimetype = const_cast<char*>("video/mpeg");
+    result.title = const_cast<char*>(media.getTitle().c_str());
+    result.comment = const_cast<char*>("");
     result.dnd_uri = result.uri;
     result.metadata = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, (GDestroyNotify)g_variant_unref);
 
-    int duration = grl_media_get_duration (media);
+    int duration = media.getDuration();
     GVariant *variant = g_variant_new_int32 (duration);
-    g_hash_table_insert (result.metadata, "duration", g_variant_ref_sink (variant));
+    g_hash_table_insert (result.metadata, const_cast<char*>("duration"), g_variant_ref_sink (variant));
 
-    int width = grl_media_video_get_width (GRL_MEDIA_VIDEO (media));
+    int width = 0; //grl_media_video_get_width (GRL_MEDIA_VIDEO (media));
     if (width > 0) {
         variant = g_variant_new_int32 (width);
-        g_hash_table_insert (result.metadata, "width", g_variant_ref_sink (variant));
+        g_hash_table_insert (result.metadata, const_cast<char*>("width"), g_variant_ref_sink (variant));
     }
 
-    int height = grl_media_video_get_height (GRL_MEDIA_VIDEO (media));
+    int height = 0; //grl_media_video_get_height (GRL_MEDIA_VIDEO (media));
     if (height > 0) {
         variant = g_variant_new_int32 (height);
-        g_hash_table_insert (result.metadata, "height", g_variant_ref_sink (variant));
+        g_hash_table_insert (result.metadata, const_cast<char*>("height"), g_variant_ref_sink (variant));
     }
 
     unity_result_set_add_result (result_set, &result);
@@ -69,15 +69,15 @@ video_preview (UnityResultPreviewer *previewer, void *user_data)
     if (previewer->result.metadata != NULL) {
         GVariant *variant;
 
-        variant = g_hash_table_lookup (previewer->result.metadata, "width");
+        variant = static_cast<GVariant*>(g_hash_table_lookup (previewer->result.metadata, const_cast<char*>("width")));
         if (variant) {
             width = g_variant_get_int32 (variant);
         }
-        variant = g_hash_table_lookup (previewer->result.metadata, "height");
+        variant = static_cast<GVariant*>(g_hash_table_lookup (previewer->result.metadata, const_cast<char*>("height")));
         if (variant) {
             height = g_variant_get_int32 (variant);
         }
-        variant = g_hash_table_lookup (previewer->result.metadata, "duration");
+        variant = static_cast<GVariant*>(g_hash_table_lookup (previewer->result.metadata, const_cast<char*>("duration")));
         if (variant) {
             duration = g_variant_get_int32 (variant);
         }
@@ -110,11 +110,8 @@ video_preview (UnityResultPreviewer *previewer, void *user_data)
 
 
 UnityAbstractScope *
-video_scope_new (GrlSource *source)
+video_scope_new (std::shared_ptr<MediaStore> store)
 {
-    g_return_val_if_fail (GRL_IS_SOURCE (source), NULL);
-    g_return_val_if_fail ((grl_source_supported_operations (source) & GRL_OP_SEARCH) != 0, NULL);
-
     UnitySimpleScope *scope = unity_simple_scope_new ();
 
     unity_simple_scope_set_group_name (scope, DBUS_NAME);
@@ -144,17 +141,8 @@ video_scope_new (GrlSource *source)
 
     /* Set up search */
     ScopeSearchData *search_data = g_new0(ScopeSearchData, 1);
-    search_data->source = g_object_ref (source);
-    search_data->media_type = GRL_TYPE_FILTER_VIDEO;
-    search_data->metadata_keys = grl_metadata_key_list_new (
-        GRL_METADATA_KEY_URL,
-        GRL_METADATA_KEY_MIME,
-        GRL_METADATA_KEY_THUMBNAIL,
-        GRL_METADATA_KEY_TITLE,
-        GRL_METADATA_KEY_DURATION,
-        GRL_METADATA_KEY_HEIGHT,
-        GRL_METADATA_KEY_WIDTH,
-        GRL_METADATA_KEY_INVALID);
+    search_data->store = store;
+    search_data->media_type = VideoMedia;
     search_data->add_result = video_add_result;
     setup_search (scope, search_data);
     // XXX: handle cleanup of search_data

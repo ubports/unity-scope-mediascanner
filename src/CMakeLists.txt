@@ -1,8 +1,8 @@
 set(SCOPE_SOURCES
-  main.c
-  base-scope.c
-  music-scope.c
-  video-scope.c
+  main.cpp
+  base-scope.cpp
+  music-scope.cpp
+  video-scope.cpp
 )
 
 add_library(unity-scope-mediascanner MODULE ${SCOPE_SOURCES})

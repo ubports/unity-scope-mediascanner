@@ -18,6 +18,7 @@
  */
 #include <config.h>
 #include "scope.h"
+#include <mediascanner/MediaFile.hh>
 
 #define MAX_RESULTS 100
 
@@ -29,6 +30,7 @@ typedef struct {
     guint operation_id;
 } SearchData;
 
+#if 0
 static void
 complete_search (SearchData *data)
 {
@@ -105,17 +107,24 @@ search_sync_finished (UnityScopeSearchBase *search, void *user_data)
 
     g_main_loop_quit (ml);
 }
+#endif
 
 void
 search_sync (UnityScopeSearchBase *search, void *user_data)
 {
-    GMainLoop *ml = g_main_loop_new (NULL, FALSE);
+    UnitySearchContext *context = search->search_context;
+    ScopeSearchData *search_data = (ScopeSearchData *)user_data;
+    MediaStore *store = search_data->store.get();
 
-    unity_scope_search_base_run_async (search, search_sync_finished, ml);
-    g_main_loop_run (ml);
-    g_main_loop_unref (ml);
+    // FIXME: handle filters
+    // FIXME: enforce result limits
+    for (const auto &media : store->query(context->search_query,
+                                          search_data->media_type)) {
+        search_data->add_result (context->result_set, media);
+    }
 }
 
+#if 0
 void
 content_changed (GrlSource *source, GPtrArray *changed_medias,
                  GrlSourceChangeType change_type, gboolean location_unknown,
@@ -148,6 +157,7 @@ content_changed (GrlSource *source, GPtrArray *changed_medias,
             UNITY_ABSTRACT_SCOPE (data->scope), UNITY_SEARCH_TYPE_GLOBAL);
     }
 }
+#endif
 
 void
 setup_search (UnitySimpleScope *scope, ScopeSearchData *data)
@@ -155,13 +165,10 @@ setup_search (UnitySimpleScope *scope, ScopeSearchData *data)
     data->scope = scope;
     data->content_changed_id = 0;
 
-    unity_simple_scope_set_search_async_func (
-        scope, search_async, data, (GDestroyNotify)NULL);
-    /* Satisfy the blocking API with a wrapper that calls the async
-     * version in a nested main loop */
     unity_simple_scope_set_search_func (
-        scope, search_sync, NULL, (GDestroyNotify)NULL);
+        scope, search_sync, data, (GDestroyNotify)NULL);
 
+#if 0
     if ((grl_source_supported_operations (data->source) &
          GRL_OP_NOTIFY_CHANGE) != 0) {
         data->content_changed_id = g_signal_connect (
@@ -178,4 +185,5 @@ setup_search (UnitySimpleScope *scope, ScopeSearchData *data)
         }
         g_clear_error (&error);
     }
+#endif
 }

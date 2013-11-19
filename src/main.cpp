@@ -19,33 +19,18 @@
 #include <config.h>
 #include "scope.h"
 
-int
+extern "C" int
 unity_scope_module_get_version ()
 {
     return UNITY_SCOPE_API_VERSION;
 }
 
-GList *
+extern "C" GList *
 unity_scope_module_load_scopes (GError **error)
 {
-    grl_init (NULL, NULL);
-
-    GrlRegistry *registry = grl_registry_get_default ();
-
-    GrlConfig *config = grl_config_new ("grl-mediascanner", "grl-mediascanner");
-    grl_config_set_string (config, "search-method", "substring");
-    if (!grl_registry_add_config (registry, config, error)) {
-        return NULL;
-    }
-
-    if (!grl_registry_load_plugin_by_id (registry, "grl-mediascanner", error)) {
-        return NULL;
-    }
-
-    GrlSource *source = grl_registry_lookup_source (registry, "grl-mediascanner");
-    UnityAbstractScope *music = music_scope_new (source);
-    UnityAbstractScope *video = video_scope_new (source);
+    std::shared_ptr<MediaStore> store(new MediaStore("/home/james/.cache/mediascanner-test/mediastore.db", MS_READ_ONLY));
+    UnityAbstractScope *music = music_scope_new (store);
+    UnityAbstractScope *video = video_scope_new (store);
 
     return g_list_append (g_list_append(NULL, music), video);
 }
-

@@ -2,9 +2,9 @@ add_executable(
   test-scope
   test-scope.c
   utils.c
-  ../src/base-scope.c
-  ../src/music-scope.c
-  ../src/video-scope.c
+  ../src/base-scope.cpp
+  ../src/music-scope.cpp
+  ../src/video-scope.cpp
 )
 target_link_libraries(test-scope ${UNITY_LIBRARIES})
 
