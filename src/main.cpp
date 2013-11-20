@@ -28,7 +28,7 @@ unity_scope_module_get_version ()
 extern "C" GList *
 unity_scope_module_load_scopes (GError **error)
 {
-    std::shared_ptr<MediaStore> store(new MediaStore("/home/james/.cache/mediascanner-test/mediastore.db", MS_READ_ONLY));
+    auto store = std::make_shared<MediaStore>("/home/james/.cache/mediascanner-test/mediastore.db", MS_READ_ONLY);
     UnityAbstractScope *music = music_scope_new (store);
     UnityAbstractScope *video = video_scope_new (store);
 

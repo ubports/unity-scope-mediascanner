@@ -1,7 +1,7 @@
 add_executable(
   test-scope
-  test-scope.c
-  utils.c
+  test-scope.cpp
+  utils.cpp
   ../src/base-scope.cpp
   ../src/music-scope.cpp
   ../src/video-scope.cpp

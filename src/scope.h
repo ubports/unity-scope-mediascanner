@@ -53,8 +53,8 @@ UnityAbstractScope *video_scope_new (std::shared_ptr<MediaStore> store) G_GNUC_I
 //UnityFilterSet *music_get_filters (void) G_GNUC_INTERNAL;
 //void music_apply_filters (UnityFilterSet *filter_state, GrlOperationOptions *options) G_GNUC_INTERNAL;
 
-void music_add_result (UnityResultSet *result_set, MediaFile &media) G_GNUC_INTERNAL;
-void video_add_result (UnityResultSet *result_set, MediaFile &media) G_GNUC_INTERNAL;
+void music_add_result (UnityResultSet *result_set, const MediaFile &media) G_GNUC_INTERNAL;
+void video_add_result (UnityResultSet *result_set, const MediaFile &media) G_GNUC_INTERNAL;
 
 UnityAbstractPreview *music_preview (UnityResultPreviewer *previewer, void *user_data) G_GNUC_INTERNAL;
 UnityAbstractPreview *video_preview (UnityResultPreviewer *previewer, void *user_data) G_GNUC_INTERNAL;

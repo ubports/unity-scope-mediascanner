@@ -31,7 +31,7 @@ video_add_result (UnityResultSet *result_set, const MediaFile &media)
     result.category = 0;
     result.result_type = UNITY_RESULT_TYPE_PERSONAL;
     // FIXME: get mime type
-    result.mimetype = const_cast<char*>("video/mpeg");
+    result.mimetype = const_cast<char*>("video/mp4");
     result.title = const_cast<char*>(media.getTitle().c_str());
     result.comment = const_cast<char*>("");
     result.dnd_uri = result.uri;
