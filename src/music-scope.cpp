@@ -17,129 +17,86 @@
  *
  */
 #include <config.h>
-#include "scope.h"
+#include <memory>
+
 #include <mediascanner/MediaFile.hh>
+#include <mediascanner/MediaStore.hh>
+#include <scopes/Category.h>
+#include <scopes/Reply.h>
+#include <scopes/ResultItem.h>
+#include <scopes/ScopeBase.h>
+#include <scopes/Variant.h>
 
-UnityFilterSet *
-music_get_filters (void)
+using namespace unity::api::scopes;
+
+class MusicScope : public ScopeBase
 {
-    UnityFilterSet *filters = unity_filter_set_new ();
-    UnityMultiRangeFilter *filter = unity_multi_range_filter_new ("decade", _("Decade"), NULL, FALSE);
-    unity_options_filter_add_option (
-        UNITY_OPTIONS_FILTER (filter), "0", _("Old"), NULL);
-    unity_options_filter_add_option (
-        UNITY_OPTIONS_FILTER (filter), "1960", _("60s"), NULL);
-    unity_options_filter_add_option (
-        UNITY_OPTIONS_FILTER (filter), "1970", _("70s"), NULL);
-    unity_options_filter_add_option (
-        UNITY_OPTIONS_FILTER (filter), "1980", _("80s"), NULL);
-    unity_options_filter_add_option (
-        UNITY_OPTIONS_FILTER (filter), "1990", _("90s"), NULL);
-    unity_options_filter_add_option (
-        UNITY_OPTIONS_FILTER (filter), "2000", _("00s"), NULL);
-    unity_options_filter_add_option (
-        UNITY_OPTIONS_FILTER (filter), "2010", _("10s"), NULL);
-    unity_filter_set_add (filters, UNITY_FILTER (filter));
+    friend class MusicQuery;
+public:
+    virtual int start(std::string const&, RegistryProxy const&) override {
+        store.reset(new MediaStore("", MS_READ_ONLY));
+        return VERSION;
+    }
 
-    return filters;
+    virtual void stop() override {
+        store.reset();
+    }
+
+    virtual QueryBase::UPtr create_query(std::string const &q,
+                                         VariantMap const& hints) override;
+
+private:
+    std::unique_ptr<MediaStore> store;
+};
+
+class MusicQuery : public QueryBase
+{
+public:
+    MusicQuery(MusicScope &scope, std::string const& q)
+        : scope(scope), q(q) {
+    }
+
+    virtual void cancelled() override {
+    }
+
+    virtual void run(ReplyProxy const&reply) override {
+        auto cat = reply->register_category("songs", "Songs", "");
+        for (const auto &media : scope.store->query(q, AudioMedia)) {
+            ResultItem res(cat);
+            res.set_uri(media.getUri());
+            res.set_dnd_uri(media.getUri());
+            res.set_title(media.getTitle());
+
+            res.add_metadata("duration", Variant(media.getDuration()));
+            res.add_metadata("album", Variant(media.getAlbum()));
+            res.add_metadata("artist", Variant(media.getAuthor()));
+            res.add_metadata("track-number", Variant(media.getTrackNumber()));
+
+            reply->push(res);
+        }
+    }
+
+private:
+    const MusicScope &scope;
+    const std::string q;
+};
+
+QueryBase::UPtr MusicScope::create_query(std::string const &q,
+                                                 VariantMap const& hints) {
+    QueryBase::UPtr query(new MusicQuery(*this, q));
+    return query;
+}
+
+
+extern "C" ScopeBase * UNITY_API_SCOPE_CREATE_FUNCTION() {
+    return new MusicScope;
+}
+
+extern "C" void UNITY_API_SCOPE_DESTROY_FUNCTION(ScopeBase *scope) {
+    delete scope;
 }
 
 #if 0
-static gboolean
-get_decade_filter (UnityFilterSet *filter_state, int *min_year, int *max_year)
-{
-    UnityFilter *filter = unity_filter_set_get_filter_by_id (
-        filter_state, "decade");
-
-    if (filter == NULL || !unity_filter_get_filtering (filter))
-        return FALSE;
-
-    UnityFilterOption *option = unity_multi_range_filter_get_first_active (
-        UNITY_MULTI_RANGE_FILTER (filter));
-    if (option == NULL)
-        return FALSE;
-    *min_year = g_strtod (unity_filter_option_get_id (option), 0);
-    g_object_unref (option);
-
-    option = unity_multi_range_filter_get_last_active (
-        UNITY_MULTI_RANGE_FILTER (filter));
-    if (option == NULL)
-        return FALSE;
-    *max_year = g_strtod (unity_filter_option_get_id (option), 0) + 9;
-    g_object_unref (option);
-
-    return TRUE;
-}
-
-void
-music_apply_filters (UnityFilterSet *filter_state, GrlOperationOptions *options)
-{
-    int min_year, max_year;
-    if (get_decade_filter (filter_state, &min_year, &max_year)) {
-        GValue min_val = G_VALUE_INIT;
-        GValue max_val = G_VALUE_INIT;
-        GDateTime *min_date = g_date_time_new_utc (min_year, 1, 1, 0, 0, 0);
-        GDateTime *max_date = g_date_time_new_utc (max_year, 12, 31, 23, 59, 59);
-
-        g_value_init (&min_val, G_TYPE_DATE_TIME);
-        g_value_take_boxed (&min_val, min_date);
-        g_value_init (&max_val, G_TYPE_DATE_TIME);
-        g_value_take_boxed (&max_val, max_date);
-
-        grl_operation_options_set_key_range_filter_value (
-            options, GRL_METADATA_KEY_CREATION_DATE,
-            &min_val, &max_val);
-        g_value_unset (&min_val);
-        g_value_unset (&max_val);
-    }
-}
-#endif
-
-void
-music_add_result (UnityResultSet *result_set, const MediaFile &media)
-{
-    UnityScopeResult result = { 0, };
-
-    const std::string uri = media.getUri();
-    result.uri = const_cast<char*>(uri.c_str());
-    // XXX: can we get thumbnails?
-    result.icon_hint = const_cast<char*>("");
-    result.category = 1;
-    result.result_type = UNITY_RESULT_TYPE_PERSONAL;
-    // FIXME: get mime type
-    result.mimetype = const_cast<char*>("audio/mp3");
-    result.title = const_cast<char*>(media.getTitle().c_str());
-    result.comment = const_cast<char*>("");
-    result.dnd_uri = result.uri;
-    result.metadata = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, (GDestroyNotify)g_variant_unref);
-
-    GVariant *variant = g_variant_new_int32 (media.getDuration());
-    g_hash_table_insert (result.metadata, const_cast<char*>("duration"), g_variant_ref_sink (variant));
-
-    const std::string artist = media.getAuthor();
-    if (!artist.empty()) {
-        variant = g_variant_new_string (artist.c_str());
-        g_hash_table_insert (result.metadata, const_cast<char*>("artist"), g_variant_ref_sink (variant));
-        result.comment = const_cast<char*>(artist.c_str());
-    }
-
-    const std::string album = media.getAlbum();
-    if (!album.empty()) {
-        variant = g_variant_new_string (album.c_str());
-        g_hash_table_insert (result.metadata, const_cast<char*>("album"), g_variant_ref_sink (variant));
-    }
-
-    int track_number = media.getTrackNumber();
-    if (track_number > 0) {
-        variant = g_variant_new_int32 (track_number);
-        g_hash_table_insert (result.metadata, const_cast<char*>("track-number"), g_variant_ref_sink (variant));
-    }
-
-    unity_result_set_add_result (result_set, &result);
-    g_hash_table_unref (result.metadata);
-}
-
-
 UnityAbstractPreview *
 music_preview (UnityResultPreviewer *previewer, void *user_data)
 {
@@ -260,3 +217,5 @@ music_scope_new (std::shared_ptr<MediaStore> store)
 
     return UNITY_ABSTRACT_SCOPE (scope);
 }
+
+#endif

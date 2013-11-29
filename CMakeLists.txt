@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 2.8.9)
 find_package(PkgConfig REQUIRED)
 
 pkg_check_modules(UNITY REQUIRED
-  "unity >= 7.0.9"
+  "libunity-scopes >= 0.1"
   mediascanner-2.0
 )
 include_directories(${UNITY_INCLUDE_DIRS})
