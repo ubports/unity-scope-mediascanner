@@ -17,76 +17,53 @@
  *
  */
 #include <config.h>
-#include <memory>
 
 #include <mediascanner/MediaFile.hh>
-#include <mediascanner/MediaStore.hh>
 #include <scopes/Category.h>
-#include <scopes/Reply.h>
 #include <scopes/ResultItem.h>
-#include <scopes/ScopeBase.h>
-#include <scopes/Variant.h>
+
+#include "music-scope.h"
 
 using namespace unity::api::scopes;
 
-class MusicScope : public ScopeBase
-{
-    friend class MusicQuery;
-public:
-    virtual int start(std::string const&, RegistryProxy const&) override {
-        store.reset(new MediaStore("", MS_READ_ONLY));
-        return VERSION;
-    }
+int MusicScope::start(std::string const&, RegistryProxy const&) {
+    store.reset(new MediaStore("", MS_READ_ONLY));
+    return VERSION;
+}
 
-    virtual void stop() override {
-        store.reset();
-    }
-
-    virtual QueryBase::UPtr create_query(std::string const &q,
-                                         VariantMap const& hints) override;
-
-private:
-    std::unique_ptr<MediaStore> store;
-};
-
-class MusicQuery : public QueryBase
-{
-public:
-    MusicQuery(MusicScope &scope, std::string const& q)
-        : scope(scope), q(q) {
-    }
-
-    virtual void cancelled() override {
-    }
-
-    virtual void run(ReplyProxy const&reply) override {
-        auto cat = reply->register_category("songs", "Songs", "");
-        for (const auto &media : scope.store->query(q, AudioMedia)) {
-            ResultItem res(cat);
-            res.set_uri(media.getUri());
-            res.set_dnd_uri(media.getUri());
-            res.set_title(media.getTitle());
-
-            res.add_metadata("duration", Variant(media.getDuration()));
-            res.add_metadata("album", Variant(media.getAlbum()));
-            res.add_metadata("artist", Variant(media.getAuthor()));
-            res.add_metadata("track-number", Variant(media.getTrackNumber()));
-
-            reply->push(res);
-        }
-    }
-
-private:
-    const MusicScope &scope;
-    const std::string q;
-};
+void MusicScope::stop() {
+    store.reset();
+}
 
 QueryBase::UPtr MusicScope::create_query(std::string const &q,
-                                                 VariantMap const& hints) {
+                                         VariantMap const& hints) {
     QueryBase::UPtr query(new MusicQuery(*this, q));
     return query;
 }
 
+MusicQuery::MusicQuery(MusicScope &scope, std::string const& query)
+    : scope(scope), query(query) {
+}
+
+void MusicQuery::cancelled() {
+}
+
+void MusicQuery::run(ReplyProxy const&reply) {
+    auto cat = reply->register_category("songs", "Songs", "");
+    for (const auto &media : scope.store->query(query, AudioMedia)) {
+        ResultItem res(cat);
+        res.set_uri(media.getUri());
+        res.set_dnd_uri(media.getUri());
+        res.set_title(media.getTitle());
+
+        res.add_metadata("duration", Variant(media.getDuration()));
+        res.add_metadata("album", Variant(media.getAlbum()));
+        res.add_metadata("artist", Variant(media.getAuthor()));
+        res.add_metadata("track-number", Variant(media.getTrackNumber()));
+
+        reply->push(res);
+    }
+}
 
 extern "C" ScopeBase * UNITY_API_SCOPE_CREATE_FUNCTION() {
     return new MusicScope;

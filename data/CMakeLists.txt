@@ -1,16 +1,4 @@
 
-# D-Bus service definition
-
-configure_file(
-  unity-scope-mediascanner.service.in
-  unity-scope-mediascanner.service
-)
-
-install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/unity-scope-mediascanner.service"
-  DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/dbus-1/services"
-)
-
 # Unity Scope files
 configure_file(
   mediascanner-music.ini.in
@@ -28,6 +16,6 @@ configure_file(
 )
 
 install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/mediascanner-video.scope"
+  FILES "${CMAKE_CURRENT_BINARY_DIR}/mediascanner-video.ini"
   DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes/mediascanner-video"
 )
