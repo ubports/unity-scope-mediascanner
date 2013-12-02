@@ -4,11 +4,9 @@ Priority: optional
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 Build-Depends: cmake (>= 2.8),
                debhelper (>= 9),
-               grilo-plugins-0.2,
-               grilo-plugins-0.2-mediascanner,
-               libgrilo-0.2-dev,
-               libunity-dev (>= 7.0.9),
                mediascanner,
+               libmediascanner-dev (>= 0.99),
+               libunity-scopes-dev,
                python3,
                python3-dbusmock,
 Standards-Version: 3.9.4
@@ -23,7 +21,6 @@ Package: unity-scope-mediascanner
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
-         grilo-plugins-0.2-mediascanner,
          mediascanner,
 Description: Media scanner scope for Unity
  This package contains muisc and video scopes for Unity that can be
