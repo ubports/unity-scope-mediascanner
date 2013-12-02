@@ -49,7 +49,7 @@ void MusicQuery::cancelled() {
 }
 
 void MusicQuery::run(ReplyProxy const&reply) {
-    auto cat = reply->register_category("songs", "Songs", "");
+    auto cat = reply->register_category("songs", "Songs", "/usr/share/icons/unity-icon-theme/places/svg/group-songs.svg");
     for (const auto &media : scope.store->query(query, AudioMedia)) {
         ResultItem res(cat);
         res.set_uri(media.getUri());

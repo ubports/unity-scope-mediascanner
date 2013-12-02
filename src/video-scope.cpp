@@ -17,47 +17,63 @@
  *
  */
 #include <config.h>
-#include "scope.h"
+
 #include <mediascanner/MediaFile.hh>
+#include <scopes/Category.h>
+#include <scopes/ResultItem.h>
 
-void
-video_add_result (UnityResultSet *result_set, const MediaFile &media)
-{
-    UnityScopeResult result = { 0, };
+#include "video-scope.h"
 
-    const std::string uri = media.getUri();
-    result.uri = const_cast<char*>(uri.c_str());
-    result.icon_hint = const_cast<char*>("");
-    result.category = 0;
-    result.result_type = UNITY_RESULT_TYPE_PERSONAL;
-    // FIXME: get mime type
-    result.mimetype = const_cast<char*>("video/mp4");
-    result.title = const_cast<char*>(media.getTitle().c_str());
-    result.comment = const_cast<char*>("");
-    result.dnd_uri = result.uri;
-    result.metadata = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, (GDestroyNotify)g_variant_unref);
+using namespace unity::api::scopes;
 
-    int duration = media.getDuration();
-    GVariant *variant = g_variant_new_int32 (duration);
-    g_hash_table_insert (result.metadata, const_cast<char*>("duration"), g_variant_ref_sink (variant));
-
-    int width = 0; //grl_media_video_get_width (GRL_MEDIA_VIDEO (media));
-    if (width > 0) {
-        variant = g_variant_new_int32 (width);
-        g_hash_table_insert (result.metadata, const_cast<char*>("width"), g_variant_ref_sink (variant));
-    }
-
-    int height = 0; //grl_media_video_get_height (GRL_MEDIA_VIDEO (media));
-    if (height > 0) {
-        variant = g_variant_new_int32 (height);
-        g_hash_table_insert (result.metadata, const_cast<char*>("height"), g_variant_ref_sink (variant));
-    }
-
-    unity_result_set_add_result (result_set, &result);
-    g_hash_table_unref (result.metadata);
+int VideoScope::start(std::string const&, RegistryProxy const&) {
+    store.reset(new MediaStore("", MS_READ_ONLY));
+    return VERSION;
 }
 
+void VideoScope::stop() {
+    store.reset();
+}
 
+QueryBase::UPtr VideoScope::create_query(std::string const &q,
+                                         VariantMap const& hints) {
+    QueryBase::UPtr query(new VideoQuery(*this, q));
+    return query;
+}
+
+VideoQuery::VideoQuery(VideoScope &scope, std::string const& query)
+    : scope(scope), query(query) {
+}
+
+void VideoQuery::cancelled() {
+}
+
+void VideoQuery::run(ReplyProxy const&reply) {
+
+    auto cat = reply->register_category("local", "My Videos", "/usr/share/icons/unity-icon-theme/places/svg/group-videos.svg");
+    for (const auto &media : scope.store->query(query, VideoMedia)) {
+        ResultItem res(cat);
+        res.set_uri(media.getUri());
+        res.set_dnd_uri(media.getUri());
+        res.set_title(media.getTitle());
+
+        res.add_metadata("duration", Variant(media.getDuration()));
+        // res.add_metadata("width", Variant(media.getWidth()));
+        // res.add_metadata("height", Variant(media.getHeight()));
+
+        reply->push(res);
+    }
+}
+
+extern "C" ScopeBase * UNITY_API_SCOPE_CREATE_FUNCTION() {
+    return new VideoScope;
+}
+
+extern "C" void UNITY_API_SCOPE_DESTROY_FUNCTION(ScopeBase *scope) {
+    delete scope;
+}
+
+#if 0
 UnityAbstractPreview *
 video_preview (UnityResultPreviewer *previewer, void *user_data)
 {
@@ -107,48 +123,4 @@ video_preview (UnityResultPreviewer *previewer, void *user_data)
 
     return UNITY_ABSTRACT_PREVIEW (preview);
 }
-
-
-UnityAbstractScope *
-video_scope_new (std::shared_ptr<MediaStore> store)
-{
-    UnitySimpleScope *scope = unity_simple_scope_new ();
-
-    unity_simple_scope_set_group_name (scope, DBUS_NAME);
-    unity_simple_scope_set_unique_name (scope, DBUS_VIDEO_PATH);
-
-    /* Set up schema */
-    UnitySchema *schema = unity_schema_new ();
-    unity_schema_add_field (schema, "duration", "i", UNITY_SCHEMA_FIELD_TYPE_REQUIRED);
-    unity_schema_add_field (schema, "width", "i", UNITY_SCHEMA_FIELD_TYPE_OPTIONAL);
-    unity_schema_add_field (schema, "height", "i", UNITY_SCHEMA_FIELD_TYPE_OPTIONAL);
-    unity_simple_scope_set_schema (scope, schema);
-
-    /* Set up categories */
-    UnityCategorySet *categories = unity_category_set_new ();
-    GFile *icon_dir = g_file_new_for_path ("/usr/share/icons/unity-icon-theme/places/svg");
-
-    GFile *icon_file = g_file_get_child (icon_dir, "group-videos.svg");
-    GIcon *icon = g_file_icon_new (icon_file);
-    unity_category_set_add (categories,
-                            unity_category_new ("local", _("My Videos"),
-                                                icon, UNITY_CATEGORY_RENDERER_DEFAULT));
-    g_object_unref (icon);
-    g_object_unref (icon_file);
-
-    g_object_unref (icon_dir);
-    unity_simple_scope_set_category_set (scope, categories);
-
-    /* Set up search */
-    ScopeSearchData *search_data = g_new0(ScopeSearchData, 1);
-    search_data->store = store;
-    search_data->media_type = VideoMedia;
-    search_data->add_result = video_add_result;
-    setup_search (scope, search_data);
-    // XXX: handle cleanup of search_data
-
-    unity_simple_scope_set_preview_func (
-        scope, video_preview, NULL, (GDestroyNotify)NULL);
-
-    return UNITY_ABSTRACT_SCOPE (scope);
-}
+#endif

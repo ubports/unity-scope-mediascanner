@@ -5,16 +5,20 @@ set(SCOPE_SOURCES
   video-scope.cpp
 )
 
-#add_library(unity-scope-mediascanner MODULE ${SCOPE_SOURCES})
-#set_target_properties(unity-scope-mediascanner PROPERTIES PREFIX "")
-
-#target_link_libraries(unity-scope-mediascanner ${UNITY_LIBRARIES})
-
 add_library(mediascanner-music MODULE music-scope.cpp)
-set_target_properties(mediascanner-music PROPERTIES PREFIX "")
+#set_target_properties(mediascanner-music PROPERTIES PREFIX "")
 target_link_libraries(mediascanner-music ${UNITY_LIBRARIES})
+
+add_library(mediascanner-video MODULE video-scope.cpp)
+#set_target_properties(mediascanner-video PROPERTIES PREFIX "")
+target_link_libraries(mediascanner-video ${UNITY_LIBRARIES})
+
 
 
 install(
   TARGETS mediascanner-music
   LIBRARY DESTINATION "${CMAKE_INSTALL_DATADIR}/unity/scopes/mediascanner-music")
+
+install(
+  TARGETS mediascanner-video
+  LIBRARY DESTINATION "${CMAKE_INSTALL_DATADIR}/unity/scopes/mediascanner-video")
