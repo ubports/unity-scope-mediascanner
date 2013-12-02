@@ -12,23 +12,22 @@ install(
 )
 
 # Unity Scope files
-
 configure_file(
-  music/mediascanner.scope.in
-  music/mediascanner.scope
+  mediascanner-music.ini.in
+  mediascanner-music.ini
 )
 
 install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/music/mediascanner.scope"
-  DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes/music"
+  FILES "${CMAKE_CURRENT_BINARY_DIR}/mediascanner-music.ini"
+  DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes/mediascanner-music"
 )
 
 configure_file(
-  video/mediascanner.scope.in
-  video/mediascanner.scope
+  mediascanner-video.ini.in
+  mediascanner-video.ini
 )
 
 install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/video/mediascanner.scope"
-  DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes/video"
+  FILES "${CMAKE_CURRENT_BINARY_DIR}/mediascanner-video.scope"
+  DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes/mediascanner-video"
 )
