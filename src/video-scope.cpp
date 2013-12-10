@@ -20,7 +20,7 @@
 
 #include <mediascanner/MediaFile.hh>
 #include <scopes/Category.h>
-#include <scopes/ResultItem.h>
+#include <scopes/CategorisedResult.h>
 
 #include "video-scope.h"
 
@@ -52,7 +52,7 @@ void VideoQuery::run(ReplyProxy const&reply) {
 
     auto cat = reply->register_category("local", "My Videos", "/usr/share/icons/unity-icon-theme/places/svg/group-videos.svg");
     for (const auto &media : scope.store->query(query, VideoMedia)) {
-        ResultItem res(cat);
+        CategorisedResult res(cat);
         res.set_uri(media.getUri());
         res.set_dnd_uri(media.getUri());
         res.set_title(media.getTitle());
