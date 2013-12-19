@@ -1,3 +1,9 @@
+unity-scope-mediascanner (0.2-0ubuntu1) UNRELEASED; urgency=medium
+
+  * Port scope to new media scanner and scopes APIs.
+
+ -- James Henstridge <james.henstridge@canonical.com>  Thu, 19 Dec 2013 14:38:42 +0800
+
 unity-scope-mediascanner (0.1+13.10.20131011-0ubuntu1) saucy; urgency=low
 
   [ Michal Hruby ]
