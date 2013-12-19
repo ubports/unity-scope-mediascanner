@@ -56,10 +56,10 @@ void MusicQuery::run(ReplyProxy const&reply) {
         res.set_dnd_uri(media.getUri());
         res.set_title(media.getTitle());
 
-        res.add_metadata("duration", Variant(media.getDuration()));
-        res.add_metadata("album", Variant(media.getAlbum()));
-        res.add_metadata("artist", Variant(media.getAuthor()));
-        res.add_metadata("track-number", Variant(media.getTrackNumber()));
+        res["duration"] = media.getDuration();
+        res["album"] = media.getAlbum();
+        res["artist"] = media.getAuthor();
+        res["track-number"] = media.getTrackNumber();
 
         reply->push(res);
     }

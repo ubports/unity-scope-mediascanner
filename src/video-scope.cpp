@@ -57,9 +57,9 @@ void VideoQuery::run(ReplyProxy const&reply) {
         res.set_dnd_uri(media.getUri());
         res.set_title(media.getTitle());
 
-        res.add_metadata("duration", Variant(media.getDuration()));
-        // res.add_metadata("width", Variant(media.getWidth()));
-        // res.add_metadata("height", Variant(media.getHeight()));
+        res["duration"] =media.getDuration();
+        // res["width"] = media.getWidth();
+        // res["height"] = media.getHeight();
 
         reply->push(res);
     }
