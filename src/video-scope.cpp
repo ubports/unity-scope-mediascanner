@@ -27,7 +27,7 @@
 using namespace unity::api::scopes;
 
 int VideoScope::start(std::string const&, RegistryProxy const&) {
-    store.reset(new MediaStore("", MS_READ_ONLY));
+    store.reset(new MediaStore(MS_READ_ONLY));
     return VERSION;
 }
 
