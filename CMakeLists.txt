@@ -2,6 +2,7 @@ project(unity-scope-hollywood C CXX)
 cmake_minimum_required(VERSION 2.8.9)
 
 find_package(PkgConfig REQUIRED)
+find_package(Threads REQUIRED)
 
 pkg_check_modules(UNITY REQUIRED
   "libunity-scopes >= 0.1"
@@ -31,6 +32,5 @@ add_subdirectory("src")
 add_subdirectory("data")
 
 enable_testing()
-# FIXME: port tests over to new scopes API.
-#add_subdirectory("tests")
+add_subdirectory("tests")
 add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} -V --output-on-failure)
