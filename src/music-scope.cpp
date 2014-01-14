@@ -19,12 +19,12 @@
 #include <config.h>
 
 #include <mediascanner/MediaFile.hh>
-#include <scopes/Category.h>
-#include <scopes/CategorisedResult.h>
+#include <unity/scopes/Category.h>
+#include <unity/scopes/CategorisedResult.h>
 
 #include "music-scope.h"
 
-using namespace unity::api::scopes;
+using namespace unity::scopes;
 
 int MusicScope::start(std::string const&, RegistryProxy const&) {
     store.reset(new MediaStore(MS_READ_ONLY));

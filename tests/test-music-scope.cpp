@@ -9,7 +9,7 @@
 
 #include "../src/music-scope.h"
 
-using namespace unity::api::scopes;
+using namespace unity::scopes;
 
 class MusicScopeTest : public ::testing::Test
 {
@@ -42,13 +42,15 @@ TEST_F(MusicScopeTest, Construct) {
 
 TEST_F(MusicScopeTest, StartStop) {
     MusicScope scope;
-    ASSERT_EQ(UNITY_SCOPES_VERSION_MAJOR, scope.start("mediascanner-music", nullptr));
+    auto expected = ScopeBase::VERSION;
+    ASSERT_EQ(expected, scope.start("mediascanner-music", nullptr));
     scope.stop();
 }
 
 TEST_F(MusicScopeTest, CreateQuery) {
     MusicScope scope;
-    ASSERT_EQ(UNITY_SCOPES_VERSION_MAJOR, scope.start("mediascanner-music", nullptr));
+    auto expected = ScopeBase::VERSION;
+    ASSERT_EQ(expected, scope.start("mediascanner-music", nullptr));
     VariantMap hints;
     auto query = scope.create_query("query", hints);
     ASSERT_NE(nullptr, dynamic_cast<MusicQuery*>(query.get()));
