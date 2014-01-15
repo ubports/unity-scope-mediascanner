@@ -15,7 +15,7 @@ add_executable(test-music-scope
   test-music-scope.cpp
   ../src/music-scope.cpp
 )
-target_link_libraries(test-music-scope ${UNITY_LIBRARIES} gtest)
+target_link_libraries(test-music-scope ${UNITY_LDFLAGS} gtest)
 add_test(test-music-scope test-music-scope)
 
 #add_executable(
