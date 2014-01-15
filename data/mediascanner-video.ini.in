@@ -1,0 +1,12 @@
+[ScopeConfig]
+DisplayName=Videos (Media Scanner)
+Description=This is an Ubuntu search plugin that enables local videos to be searched and displayed in the Dash underneath the Video header. If you do not wish to search this content source, you can disable this search plugin.
+Art=
+Icon=/usr/share/unity/icons/lens-nav-video.svg
+SearchHint=
+HotKey=
+
+#Module=@CMAKE_INSTALL_FULL_LIBDIR@/unity/unity-scope-mediascanner.so
+
+[Desktop Entry]
+X-Ubuntu-Gettext-Domain=unity-scope-hollywood
