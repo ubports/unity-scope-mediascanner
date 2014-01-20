@@ -34,4 +34,16 @@ private:
     const std::string query;
 };
 
+class MusicPreview : public unity::scopes::PreviewQuery
+{
+public:
+    MusicPreview(MusicScope &scope, unity::scopes::Result const& result);
+    virtual void cancelled() override;
+    virtual void run(unity::scopes::PreviewReplyProxy const& reply) override;
+
+private:
+    const MusicScope &scope;
+    const unity::scopes::Result result;
+};
+
 #endif

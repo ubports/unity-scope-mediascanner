@@ -34,4 +34,16 @@ private:
     const std::string query;
 };
 
+class VideoPreview : public unity::scopes::PreviewQuery
+{
+public:
+    VideoPreview(VideoScope &scope, unity::scopes::Result const& result);
+    virtual void cancelled() override;
+    virtual void run(unity::scopes::PreviewReplyProxy const& reply) override;
+
+private:
+    const VideoScope &scope;
+    const unity::scopes::Result result;
+};
+
 #endif

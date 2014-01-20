@@ -43,7 +43,8 @@ QueryBase::UPtr MusicScope::create_query(std::string const &q,
 
 QueryBase::UPtr MusicScope::preview(Result const& result,
                                     VariantMap const& hints) {
-    return nullptr;
+    QueryBase::UPtr previewer(new MusicPreview(*this, result));
+    return previewer;
 }
 
 MusicQuery::MusicQuery(MusicScope &scope, std::string const& query)
@@ -68,6 +69,17 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
 
         reply->push(res);
     }
+}
+
+MusicPreview::MusicPreview(MusicScope &scope, Result const& result)
+    : scope(scope), result(result) {
+}
+
+void MusicPreview::cancelled() {
+}
+
+void MusicPreview::run(PreviewReplyProxy const& reply)
+{
 }
 
 extern "C" ScopeBase * UNITY_API_SCOPE_CREATE_FUNCTION() {

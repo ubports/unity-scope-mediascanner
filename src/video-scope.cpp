@@ -43,7 +43,8 @@ QueryBase::UPtr VideoScope::create_query(std::string const &q,
 
 QueryBase::UPtr VideoScope::preview(Result const& result,
                                     VariantMap const& hints) {
-    return nullptr;
+    QueryBase::UPtr previewer(new VideoPreview(*this, result));
+    return previewer;
 }
 
 VideoQuery::VideoQuery(VideoScope &scope, std::string const& query)
@@ -68,6 +69,17 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
 
         reply->push(res);
     }
+}
+
+VideoPreview::VideoPreview(VideoScope &scope, Result const& result)
+    : scope(scope), result(result) {
+}
+
+void VideoPreview::cancelled() {
+}
+
+void VideoPreview::run(PreviewReplyProxy const& reply)
+{
 }
 
 extern "C" ScopeBase * UNITY_API_SCOPE_CREATE_FUNCTION() {
