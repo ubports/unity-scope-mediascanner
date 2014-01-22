@@ -4,7 +4,7 @@
 #include <memory>
 
 #include <mediascanner/MediaStore.hh>
-#include <unity/scopes/Reply.h>
+#include <unity/scopes/SearchReply.h>
 #include <unity/scopes/ScopeBase.h>
 #include <unity/scopes/Variant.h>
 
@@ -16,21 +16,34 @@ public:
     virtual void stop() override;
     virtual unity::scopes::QueryBase::UPtr create_query(std::string const &q,
                                          unity::scopes::VariantMap const& hints) override;
+    virtual unity::scopes::QueryBase::UPtr preview(unity::scopes::Result const& result, unity::scopes::VariantMap const& hints) override;
 
 private:
     std::unique_ptr<MediaStore> store;
 };
 
-class MusicQuery : public unity::scopes::QueryBase
+class MusicQuery : public unity::scopes::SearchQuery
 {
 public:
     MusicQuery(MusicScope &scope, std::string const& query);
     virtual void cancelled() override;
-    virtual void run(unity::scopes::ReplyProxy const&reply) override;
+    virtual void run(unity::scopes::SearchReplyProxy const&reply) override;
 
 private:
     const MusicScope &scope;
     const std::string query;
+};
+
+class MusicPreview : public unity::scopes::PreviewQuery
+{
+public:
+    MusicPreview(MusicScope &scope, unity::scopes::Result const& result);
+    virtual void cancelled() override;
+    virtual void run(unity::scopes::PreviewReplyProxy const& reply) override;
+
+private:
+    const MusicScope &scope;
+    const unity::scopes::Result result;
 };
 
 #endif

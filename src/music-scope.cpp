@@ -41,6 +41,12 @@ QueryBase::UPtr MusicScope::create_query(std::string const &q,
     return query;
 }
 
+QueryBase::UPtr MusicScope::preview(Result const& result,
+                                    VariantMap const& hints) {
+    QueryBase::UPtr previewer(new MusicPreview(*this, result));
+    return previewer;
+}
+
 MusicQuery::MusicQuery(MusicScope &scope, std::string const& query)
     : scope(scope), query(query) {
 }
@@ -48,7 +54,7 @@ MusicQuery::MusicQuery(MusicScope &scope, std::string const& query)
 void MusicQuery::cancelled() {
 }
 
-void MusicQuery::run(ReplyProxy const&reply) {
+void MusicQuery::run(SearchReplyProxy const&reply) {
     auto cat = reply->register_category("songs", "Songs", "/usr/share/icons/unity-icon-theme/places/svg/group-songs.svg");
     for (const auto &media : scope.store->query(query, AudioMedia)) {
         CategorisedResult res(cat);
@@ -63,6 +69,17 @@ void MusicQuery::run(ReplyProxy const&reply) {
 
         reply->push(res);
     }
+}
+
+MusicPreview::MusicPreview(MusicScope &scope, Result const& result)
+    : scope(scope), result(result) {
+}
+
+void MusicPreview::cancelled() {
+}
+
+void MusicPreview::run(PreviewReplyProxy const& reply)
+{
 }
 
 extern "C" ScopeBase * UNITY_API_SCOPE_CREATE_FUNCTION() {

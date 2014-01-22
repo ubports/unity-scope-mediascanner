@@ -41,6 +41,12 @@ QueryBase::UPtr VideoScope::create_query(std::string const &q,
     return query;
 }
 
+QueryBase::UPtr VideoScope::preview(Result const& result,
+                                    VariantMap const& hints) {
+    QueryBase::UPtr previewer(new VideoPreview(*this, result));
+    return previewer;
+}
+
 VideoQuery::VideoQuery(VideoScope &scope, std::string const& query)
     : scope(scope), query(query) {
 }
@@ -48,7 +54,7 @@ VideoQuery::VideoQuery(VideoScope &scope, std::string const& query)
 void VideoQuery::cancelled() {
 }
 
-void VideoQuery::run(ReplyProxy const&reply) {
+void VideoQuery::run(SearchReplyProxy const&reply) {
 
     auto cat = reply->register_category("local", "My Videos", "/usr/share/icons/unity-icon-theme/places/svg/group-videos.svg");
     for (const auto &media : scope.store->query(query, VideoMedia)) {
@@ -63,6 +69,17 @@ void VideoQuery::run(ReplyProxy const&reply) {
 
         reply->push(res);
     }
+}
+
+VideoPreview::VideoPreview(VideoScope &scope, Result const& result)
+    : scope(scope), result(result) {
+}
+
+void VideoPreview::cancelled() {
+}
+
+void VideoPreview::run(PreviewReplyProxy const& reply)
+{
 }
 
 extern "C" ScopeBase * UNITY_API_SCOPE_CREATE_FUNCTION() {
