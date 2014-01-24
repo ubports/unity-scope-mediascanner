@@ -82,11 +82,11 @@ void VideoPreview::run(PreviewReplyProxy const& reply)
 {
 }
 
-extern "C" ScopeBase * UNITY_API_SCOPE_CREATE_FUNCTION() {
+extern "C" ScopeBase * UNITY_SCOPE_CREATE_FUNCTION() {
     return new VideoScope;
 }
 
-extern "C" void UNITY_API_SCOPE_DESTROY_FUNCTION(ScopeBase *scope) {
+extern "C" void UNITY_SCOPE_DESTROY_FUNCTION(ScopeBase *scope) {
     delete scope;
 }
 
