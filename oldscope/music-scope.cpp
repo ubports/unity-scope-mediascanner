@@ -106,8 +106,7 @@ music_add_result (UnityResultSet *result_set, const MediaFile &media)
     result.icon_hint = const_cast<char*>("");
     result.category = 1;
     result.result_type = UNITY_RESULT_TYPE_PERSONAL;
-    // FIXME: get mime type
-    result.mimetype = const_cast<char*>("audio/mp3");
+    result.mimetype = const_cast<char*>(media.getContentType().c_str());
     result.title = const_cast<char*>(media.getTitle().c_str());
     result.comment = const_cast<char*>("");
     result.dnd_uri = result.uri;

@@ -1,7 +1,7 @@
 #include <config.h>
 #include <glib.h>
 #include <mediascanner/MediaFile.hh>
-#include "../src/scope.h"
+#include "../oldscope/scope.h"
 #include "utils.h"
 
 static void
@@ -9,13 +9,7 @@ test_music_add_result ()
 {
     TestResultSet *result_set = test_result_set_new ();
 
-    MediaFile media("/path/foo.ogg");
-    media.setType(AudioMedia);
-    media.setTitle("Title");
-    media.setDuration(60);
-    media.setAuthor("Artist");
-    media.setAlbum("Album");
-    media.setTrackNumber(42);
+    MediaFile media("/path/foo.ogg", "audio/ogg", "etag", "Title", "2014-01-01", "Artist", "Album", "Artist", 42, 60, AudioMedia);
 
     music_add_result (UNITY_RESULT_SET (result_set), media);
 
@@ -23,7 +17,7 @@ test_music_add_result ()
     g_assert_cmpstr (result->uri, ==, "file:///path/foo.ogg");
     g_assert_cmpstr (result->icon_hint, ==, "");
     g_assert_cmpint (result->result_type, ==, UNITY_RESULT_TYPE_PERSONAL);
-    g_assert_cmpstr (result->mimetype, ==, "audio/mp3");
+    g_assert_cmpstr (result->mimetype, ==, "audio/ogg");
     g_assert_cmpstr (result->title, ==, "Title");
     g_assert_cmpstr (result->comment, ==, "Artist");
     g_assert_cmpstr (result->dnd_uri, ==, "file:///path/foo.ogg");
@@ -150,13 +144,7 @@ test_music_preview ()
 static void
 test_music_search ()
 {
-    MediaFile media("/path/foo.ogg");
-    media.setType(AudioMedia);
-    media.setTitle("Title");
-    media.setAuthor("Artist");
-    media.setAlbum("Album");
-    media.setTrackNumber(42);
-    media.setDuration(60);
+    MediaFile media("/path/foo.ogg", "audio/ogg", "etag", "Title", "2014-01-01", "Artist", "Album", "Artist", 42, 60, AudioMedia);
 
     auto store = std::make_shared<MediaStore>(":memory:", MS_READ_WRITE);
     store->insert(media);
@@ -213,10 +201,7 @@ test_video_add_result ()
 {
     TestResultSet *result_set = test_result_set_new ();
 
-    MediaFile media("/path/foo.mp4");
-    media.setType(VideoMedia);
-    media.setTitle("Title");
-    media.setDuration(60);
+    MediaFile media("/path/foo.mp4", "video/mp4", "etag", "Title", "2014-01-01", "", "", "", 0, 60, VideoMedia);
 
     video_add_result (UNITY_RESULT_SET (result_set), media);
 
@@ -279,10 +264,7 @@ test_video_preview ()
 static void
 test_video_search ()
 {
-    MediaFile media("/path/foo.mp4");
-    media.setType(VideoMedia);
-    media.setTitle("Title");
-    media.setDuration(60);
+    MediaFile media("/path/foo.mp4", "video/mp4", "etag", "Title", "2014-01-01", "", "", "", 0, 60, VideoMedia);
 
     auto store = std::make_shared<MediaStore>(":memory:", MS_READ_WRITE);
     store->insert(media);
