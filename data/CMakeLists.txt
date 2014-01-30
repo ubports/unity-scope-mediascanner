@@ -21,6 +21,16 @@ install(
 )
 
 
+configure_file(
+  musicaggregator.ini.in
+  musicaggregator.ini
+)
+
+install(
+  FILES "${CMAKE_CURRENT_BINARY_DIR}/musicaggregator.ini"
+  DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes/musicaggregator"
+)
+
 # D-Bus service definition for old scope
 
 configure_file(

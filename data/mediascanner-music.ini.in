@@ -3,7 +3,7 @@ DisplayName=Music (Media Scanner)
 Description=This is an Ubuntu search plugin that enables information from local music to be searched and displayed in the Dash underneath the Music header. If you do not wish to search this content source, you can disable this search plugin.
 Art=
 Icon=/usr/share/unity/icons/lens-nav-music.svg
-SearchHint=Search music collection
+SearchHint=Search local music collection
 HotKey=
 
 #Module=@CMAKE_INSTALL_FULL_LIBDIR@/unity/unity-scope-mediascanner.so
