@@ -31,7 +31,8 @@ const char *ONLINESCOPE = "online-music";
 int MusicAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
     CategoryRenderer basic;
     local_scope = registry->get_metadata(LOCALSCOPE).proxy();
-    online_scope = registry->get_metadata(ONLINESCOPE).proxy();
+    // Disable online scopes until the smart scope server proxy is working.
+    //online_scope = registry->get_metadata(ONLINESCOPE).proxy();
     return VERSION;
 }
 
