@@ -6,6 +6,7 @@ Build-Depends: cmake (>= 2.8),
                debhelper (>= 9),
                mediascanner2.0,
                libmediascanner-2.0-dev (>= 0.99),
+               libunity-dev (>= 7.0.9),
                libunity-scopes-dev (>= 0.2.0),
                libglib2.0-dev,
                libgtest-dev,
@@ -22,6 +23,15 @@ Vcs-Bzr: bzr+ssh://bazaar.launchpad.net/~unity-team/unity-scope-mediascanner/tru
 Vcs-Browser: http://bazaar.launchpad.net/~unity-team/unity-scope-mediascanner/trunk/files
 
 Package: unity-scope-mediascanner
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         mediascanner2.0,
+Description: Media scanner scope for Unity 7
+ This package contains muisc and video scopes for Unity that can be
+ used to expose media found by the Ubuntu Media Scanner.
+
+Package: unity-scope-mediascanner2
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
