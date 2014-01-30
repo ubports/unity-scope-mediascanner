@@ -119,7 +119,8 @@ search_sync (UnityScopeSearchBase *search, void *user_data)
     // FIXME: handle filters
     // FIXME: enforce result limits
     for (const auto &media : store->query(context->search_query,
-                                          search_data->media_type)) {
+                                          search_data->media_type,
+                                          MAX_RESULTS)) {
         search_data->add_result (context->result_set, media);
     }
 }

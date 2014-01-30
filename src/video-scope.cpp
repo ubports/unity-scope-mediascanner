@@ -24,6 +24,8 @@
 
 #include "video-scope.h"
 
+#define MAX_RESULTS 100
+
 using namespace unity::scopes;
 
 int VideoScope::start(std::string const&, RegistryProxy const&) {
@@ -57,7 +59,7 @@ void VideoQuery::cancelled() {
 void VideoQuery::run(SearchReplyProxy const&reply) {
 
     auto cat = reply->register_category("local", "My Videos", "/usr/share/icons/unity-icon-theme/places/svg/group-videos.svg");
-    for (const auto &media : scope.store->query(query, VideoMedia)) {
+    for (const auto &media : scope.store->query(query, VideoMedia, MAX_RESULTS)) {
         CategorisedResult res(cat);
         res.set_uri(media.getUri());
         res.set_dnd_uri(media.getUri());

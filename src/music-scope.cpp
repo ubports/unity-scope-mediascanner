@@ -24,6 +24,8 @@
 
 #include "music-scope.h"
 
+#define MAX_RESULTS 100
+
 using namespace unity::scopes;
 
 int MusicScope::start(std::string const&, RegistryProxy const&) {
@@ -56,7 +58,7 @@ void MusicQuery::cancelled() {
 
 void MusicQuery::run(SearchReplyProxy const&reply) {
     auto cat = reply->register_category("songs", "Songs", "/usr/share/icons/unity-icon-theme/places/svg/group-songs.svg");
-    for (const auto &media : scope.store->query(query, AudioMedia)) {
+    for (const auto &media : scope.store->query(query, AudioMedia, MAX_RESULTS)) {
         CategorisedResult res(cat);
         res.set_uri(media.getUri());
         res.set_dnd_uri(media.getUri());
