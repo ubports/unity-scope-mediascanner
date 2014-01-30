@@ -30,5 +30,4 @@ install(
   LIBRARY DESTINATION "${CMAKE_INSTALL_DATADIR}/unity/scopes/mediascanner-video")
 
 install(TARGETS musicaggregator
-LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/unity/scopes/musicaggregator
-)
+  LIBRARY DESTINATION "${CMAKE_INSTALL_DATADIR}/unity/scopes/musicaggregator")
