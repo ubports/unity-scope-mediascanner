@@ -8,7 +8,11 @@ pkg_check_modules(UNITY REQUIRED
   "libunity-scopes >= 0.1"
   mediascanner-2.0
 )
-include_directories(${UNITY_INCLUDE_DIRS})
+
+pkg_check_modules(OLDUNITY REQUIRED
+  "unity >= 7.0.9"
+  mediascanner-2.0
+)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wmissing-prototypes -pedantic -std=c99")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wmissing-declarations -pedantic -std=c++11")
@@ -29,6 +33,7 @@ configure_file(
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 add_subdirectory("src")
+add_subdirectory("oldscope")
 add_subdirectory("data")
 
 enable_testing()

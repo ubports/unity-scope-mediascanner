@@ -11,6 +11,8 @@ ${GTEST_SRC_DIR}/gtest-all.cc
 set_target_properties(gtest PROPERTIES INCLUDE_DIRECTORIES ${GTEST_INCLUDE_DIR})
 target_link_libraries(gtest ${CMAKE_THREAD_LIBS_INIT})
 
+include_directories(${UNITY_INCLUDE_DIRS})
+
 add_executable(test-music-scope
   test-music-scope.cpp
   ../src/music-scope.cpp
