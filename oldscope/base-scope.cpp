@@ -22,6 +22,8 @@
 
 #define MAX_RESULTS 100
 
+using namespace mediascanner;
+
 typedef struct {
     ScopeSearchData *scope_data;
     UnityScopeSearchBase *search;
@@ -109,7 +111,7 @@ search_sync_finished (UnityScopeSearchBase *search, void *user_data)
 }
 #endif
 
-void
+static void
 search_sync (UnityScopeSearchBase *search, void *user_data)
 {
     UnitySearchContext *context = search->search_context;

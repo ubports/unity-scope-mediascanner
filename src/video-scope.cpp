@@ -26,6 +26,7 @@
 
 #define MAX_RESULTS 100
 
+using namespace mediascanner;
 using namespace unity::scopes;
 
 int VideoScope::start(std::string const&, RegistryProxy const&) {

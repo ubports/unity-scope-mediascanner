@@ -4,6 +4,8 @@
 #include "../oldscope/scope.h"
 #include "utils.h"
 
+using namespace mediascanner;
+
 static void
 test_music_add_result ()
 {
