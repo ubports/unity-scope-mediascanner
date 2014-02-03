@@ -26,13 +26,13 @@
 using namespace unity::scopes;
 
 const char *LOCALSCOPE = "mediascanner-music";
-const char *ONLINESCOPE = "online-music";
+const char *ONLINESCOPE = "scope-onlinemusic";
 
 int MusicAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
     CategoryRenderer basic;
     local_scope = registry->get_metadata(LOCALSCOPE).proxy();
     // Disable online scopes until the smart scope server proxy is working.
-    //online_scope = registry->get_metadata(ONLINESCOPE).proxy();
+    online_scope = registry->get_metadata(ONLINESCOPE).proxy();
     return VERSION;
 }
 
