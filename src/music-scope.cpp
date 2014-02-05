@@ -65,6 +65,7 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
         res.set_dnd_uri(media.getUri());
         res.set_title(media.getTitle());
 
+        res["mimetype"] = media.getContentType();
         res["duration"] = media.getDuration();
         res["album"] = media.getAlbum();
         res["artist"] = media.getAuthor();
