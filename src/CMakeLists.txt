@@ -15,7 +15,11 @@ add_library(mediascanner-video MODULE video-scope.cpp)
 #set_target_properties(mediascanner-video PROPERTIES PREFIX "")
 target_link_libraries(mediascanner-video ${UNITY_LDFLAGS})
 
-
+add_library(musicaggregator SHARED
+musicaggregatorscope.cpp
+musicaggregatorquery.cpp
+categoryadder.cpp)
+target_link_libraries(musicaggregator ${UNITY_SCOPES_LDFLAGS})
 
 install(
   TARGETS mediascanner-music
@@ -24,3 +28,6 @@ install(
 install(
   TARGETS mediascanner-video
   LIBRARY DESTINATION "${CMAKE_INSTALL_DATADIR}/unity/scopes/mediascanner-video")
+
+install(TARGETS musicaggregator
+  LIBRARY DESTINATION "${CMAKE_INSTALL_DATADIR}/unity/scopes/musicaggregator")
