@@ -1,8 +1,24 @@
-unity-scope-mediascanner (0.2-0ubuntu1) UNRELEASED; urgency=medium
+unity-scope-mediascanner (0.2+14.04.20140205-0ubuntu1) trusty; urgency=medium
 
+  [ James Henstridge ]
   * Port scope to new media scanner and scopes APIs.
+  * Make the media scanner scope compile with the new unity-scopes-api
+    changes. The preview implementations are currently empty, since the
+    exact details of what should be sent are still in flux.
+  * Fix up the scope plugin entry points for the music and video scopes.
+  * Build scopes for both libunity7 and libunity-api.
+  * Limit the number of results we produce, as with the original
+    mediascanner, and add tests to show we produce results in response
+    to empty surfacing queries.
 
- -- James Henstridge <james.henstridge@canonical.com>  Thu, 19 Dec 2013 14:38:42 +0800
+  [ Michal Hruby ]
+  * Fix up invalidation.
+
+  [ Jussi Pakkanen ]
+  * Add music aggregator scope.
+  * Add mime type to music results.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 05 Feb 2014 18:10:27 +0000
 
 unity-scope-mediascanner (0.1+13.10.20131011-0ubuntu1) saucy; urgency=low
 
