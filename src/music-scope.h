@@ -19,7 +19,7 @@ public:
     virtual unity::scopes::QueryBase::UPtr preview(unity::scopes::Result const& result, unity::scopes::VariantMap const& hints) override;
 
 private:
-    std::unique_ptr<MediaStore> store;
+    std::unique_ptr<mediascanner::MediaStore> store;
 };
 
 class MusicQuery : public unity::scopes::SearchQuery

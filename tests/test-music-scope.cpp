@@ -9,6 +9,7 @@
 
 #include "../src/music-scope.h"
 
+using namespace mediascanner;
 using namespace unity::scopes;
 
 class MusicScopeTest : public ::testing::Test

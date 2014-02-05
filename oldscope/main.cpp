@@ -19,6 +19,8 @@
 #include <config.h>
 #include "scope.h"
 
+using namespace mediascanner;
+
 extern "C" int
 unity_scope_module_get_version ()
 {

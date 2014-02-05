@@ -20,6 +20,8 @@
 #include "scope.h"
 #include <mediascanner/MediaFile.hh>
 
+using namespace mediascanner;
+
 UnityFilterSet *
 music_get_filters (void)
 {
