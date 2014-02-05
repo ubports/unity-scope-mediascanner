@@ -20,6 +20,8 @@
 #include "scope.h"
 #include <mediascanner/MediaFile.hh>
 
+using namespace mediascanner;
+
 void
 video_add_result (UnityResultSet *result_set, const MediaFile &media)
 {

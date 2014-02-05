@@ -4,6 +4,8 @@
 #include "../oldscope/scope.h"
 #include "utils.h"
 
+using namespace mediascanner;
+
 static void
 test_music_add_result ()
 {
@@ -160,6 +162,25 @@ test_music_search ()
     g_object_unref (scope);
 }
 
+static void
+test_music_surfacing ()
+{
+    MediaFile media("/path/foo.ogg", "audio/ogg", "etag", "Title", "2014-01-01", "Artist", "Album", "Artist", 42, 60, AudioMedia);
+
+    auto store = std::make_shared<MediaStore>(":memory:", MS_READ_WRITE);
+    store->insert(media);
+
+    UnityAbstractScope *scope = music_scope_new (store);
+
+    // If the index is non-empty, we should get results for an empty query
+    TestResultSet *result_set = perform_search (scope, "");
+    UnityScopeResult *result = &result_set->last_result;
+    g_assert_cmpstr (result->uri, ==, "file:///path/foo.ogg");
+
+    g_object_unref (result_set);
+    g_object_unref (scope);
+}
+
 #if 0
 static void
 handle_results_invalidated(UnityAbstractScope *scope,
@@ -280,6 +301,25 @@ test_video_search ()
     g_object_unref (scope);
 }
 
+static void
+test_video_surfacing ()
+{
+    MediaFile media("/path/foo.mp4", "video/mp4", "etag", "Title", "2014-01-01", "", "", "", 0, 60, VideoMedia);
+
+    auto store = std::make_shared<MediaStore>(":memory:", MS_READ_WRITE);
+    store->insert(media);
+
+    UnityAbstractScope *scope = video_scope_new (store);
+
+    // If the index is non-empty, we should get results for an empty query
+    TestResultSet *result_set = perform_search (scope, "");
+    UnityScopeResult *result = &result_set->last_result;
+    g_assert_cmpstr (result->uri, ==, "file:///path/foo.mp4");
+
+    g_object_unref (result_set);
+    g_object_unref (scope);
+}
+
 #if 0
 static void
 test_video_invalidate_results ()
@@ -316,10 +356,12 @@ main (int argc, char **argv)
     //g_test_add_func ("/Music/ApplyFilters/Decade", test_music_apply_filters_decade);
     g_test_add_func ("/Music/Preview", test_music_preview);
     g_test_add_func ("/Music/Search", test_music_search);
+    g_test_add_func ("/Music/Surfacing", test_music_surfacing);
     //g_test_add_func ("/Music/InvalidateResults", test_music_invalidate_results);
     g_test_add_func ("/Video/AddResult", test_video_add_result);
     g_test_add_func ("/Video/Preview", test_video_preview);
     g_test_add_func ("/Video/Search", test_video_search);
+    g_test_add_func ("/Video/Surfacing", test_video_surfacing);
     //g_test_add_func ("/Video/InvalidateResults", test_video_invalidate_results);
 
     g_test_run ();
