@@ -26,6 +26,21 @@
 
 #define MAX_RESULTS 100
 
+static const char SONGS_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-size": "medium"
+  },
+  "components": {
+    "title": "title",
+    "art":  "art",
+    "subtitle": "artist"
+  }
+}
+)";
+
 using namespace mediascanner;
 using namespace unity::scopes;
 
@@ -58,7 +73,7 @@ void MusicQuery::cancelled() {
 }
 
 void MusicQuery::run(SearchReplyProxy const&reply) {
-    auto cat = reply->register_category("songs", "Songs", "/usr/share/icons/unity-icon-theme/places/svg/group-songs.svg");
+    auto cat = reply->register_category("songs", "Songs", "/usr/share/icons/unity-icon-theme/places/svg/group-songs.svg", CategoryRenderer(SONGS_CATEGORY_DEFINITION));
     for (const auto &media : scope.store->query(query, AudioMedia, MAX_RESULTS)) {
         CategorisedResult res(cat);
         res.set_uri(media.getUri());
