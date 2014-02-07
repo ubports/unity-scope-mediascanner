@@ -21,6 +21,9 @@
 #include <mediascanner/MediaFile.hh>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/CategorisedResult.h>
+#include <unity/scopes/ColumnLayout.h>
+#include <unity/scopes/PreviewReply.h>
+#include <unity/scopes/PreviewWidget.h>
 
 #include "video-scope.h"
 
@@ -83,6 +86,24 @@ void VideoPreview::cancelled() {
 
 void VideoPreview::run(PreviewReplyProxy const& reply)
 {
+    ColumnLayout layout1col(1), layout2col(2), layout3col(3);
+    layout1col.add_column({"header", "video"});
+
+    layout2col.add_column({"header", "video"});
+    layout2col.add_column({});
+
+    layout3col.add_column({"header", "video"});
+    layout3col.add_column({});
+    layout3col.add_column({});
+    reply->register_layout({layout1col, layout2col, layout3col});
+
+    PreviewWidget header("header", "header");
+    header.add_attribute("title", Variant(result.title()));
+
+    PreviewWidget video("video", "video");
+    video.add_attribute("source", Variant(result.uri()));
+
+    reply->push({header, video});
 }
 
 extern "C" ScopeBase * UNITY_SCOPE_CREATE_FUNCTION() {
