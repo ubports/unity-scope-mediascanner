@@ -21,6 +21,10 @@
 #include <mediascanner/MediaFile.hh>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/CategorisedResult.h>
+#include <unity/scopes/ColumnLayout.h>
+#include <unity/scopes/PreviewReply.h>
+#include <unity/scopes/PreviewWidget.h>
+#include <unity/scopes/VariantBuilder.h>
 
 #include "music-scope.h"
 
@@ -99,6 +103,35 @@ void MusicPreview::cancelled() {
 
 void MusicPreview::run(PreviewReplyProxy const& reply)
 {
+    ColumnLayout layout1col(1), layout2col(2), layout3col(3);
+    layout1col.add_column({"header", "art", "tracks"});
+
+    layout2col.add_column({"header", "art"});
+    layout2col.add_column({"tracks"});
+
+    layout3col.add_column({"header", "art"});
+    layout3col.add_column({"tracks"});
+    layout3col.add_column({});
+    reply->register_layout({layout1col, layout2col, layout3col});
+
+    PreviewWidget header("header", "header");
+    header.add_attribute("title", Variant(result.title()));
+    header.add_attribute("subtitle", result["artist"]);
+
+    PreviewWidget artwork("art", "image");
+    // XXX: album art?
+    artwork.add_attribute("source", Variant(""));
+
+    PreviewWidget tracks("tracks", "audio");
+    VariantBuilder builder;
+    builder.add_tuple({
+            {"title", Variant(result.title())},
+            {"source", Variant(result.uri())},
+            {"length", result["duration"]}
+        });
+    tracks.add_attribute("tracks", builder.end());
+
+    reply->push({header, artwork, tracks});
 }
 
 extern "C" ScopeBase * UNITY_SCOPE_CREATE_FUNCTION() {
