@@ -115,8 +115,8 @@ void MusicPreview::run(PreviewReplyProxy const& reply)
     reply->register_layout({layout1col, layout2col, layout3col});
 
     PreviewWidget header("header", "header");
-    header.add_attribute("title", Variant(result.title()));
-    header.add_attribute("subtitle", result["artist"]);
+    header.add_component("title", "title");
+    header.add_component("subtitle", "artist");
 
     PreviewWidget artwork("art", "image");
     // XXX: album art?

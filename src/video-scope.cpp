@@ -99,10 +99,10 @@ void VideoPreview::run(PreviewReplyProxy const& reply)
     reply->register_layout({layout1col, layout2col, layout3col});
 
     PreviewWidget header("header", "header");
-    header.add_attribute("title", Variant(result.title()));
+    header.add_component("title", "title");
 
     PreviewWidget video("video", "video");
-    video.add_attribute("source", Variant(result.uri()));
+    video.add_component("source", "uri");
 
     PreviewWidget actions("actions", "actions");
     {
