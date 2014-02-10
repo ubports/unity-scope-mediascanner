@@ -17,18 +17,18 @@
  *
  */
 
-#include "categoryadder.h"
+#include "resultforwarder.h"
 #include <unity/scopes/SearchReply.h>
 
 using namespace unity::scopes;
 
-void CategoryAdder::push(Category::SCPtr /*category*/) {
+void ResultForwarder::push(Category::SCPtr category) {
+    upstream->register_category(category);
 }
 
-void CategoryAdder::push(CategorisedResult result) {
-    result.set_category(category);
+void ResultForwarder::push(CategorisedResult result) {
     upstream->push(result);
 }
 
-void CategoryAdder::finished(ListenerBase::Reason /*reason*/, std::string const& /*error_message*/) {
+void ResultForwarder::finished(ListenerBase::Reason /*reason*/, std::string const& /*error_message*/) {
 }
