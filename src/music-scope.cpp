@@ -34,7 +34,8 @@ static const char SONGS_CATEGORY_DEFINITION[] = R"(
 {
   "schema-version": 1,
   "template": {
-    "category-layout": "grid",
+    "category-layout": "carousel",
+    "overlay": true,
     "card-size": "medium"
   },
   "components": {
