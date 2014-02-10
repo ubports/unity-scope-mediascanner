@@ -30,6 +30,8 @@
 
 #define MAX_RESULTS 100
 
+static const char MISSING_ALBUM_ART[] = "/usr/share/unity/icons/album_missing.png";
+static const char SONGS_CATEGORY_ICON[] = "/usr/share/icons/unity-icon-theme/places/svg/group-songs.svg";
 static const char SONGS_CATEGORY_DEFINITION[] = R"(
 {
   "schema-version": 1,
@@ -78,7 +80,7 @@ void MusicQuery::cancelled() {
 }
 
 void MusicQuery::run(SearchReplyProxy const&reply) {
-    auto cat = reply->register_category("songs", "Songs", "/usr/share/icons/unity-icon-theme/places/svg/group-songs.svg", CategoryRenderer(SONGS_CATEGORY_DEFINITION));
+    auto cat = reply->register_category("songs", "Songs", SONGS_CATEGORY_ICON, CategoryRenderer(SONGS_CATEGORY_DEFINITION));
     for (const auto &media : scope.store->query(query, AudioMedia, MAX_RESULTS)) {
         CategorisedResult res(cat);
         res.set_uri(media.getUri());
@@ -102,6 +104,28 @@ MusicPreview::MusicPreview(MusicScope &scope, Result const& result)
 void MusicPreview::cancelled() {
 }
 
+static std::string uriencode(const std::string &src) {
+    const char DEC2HEX[16+1] = "0123456789ABCDEF";
+    std::string result = "";
+    for (const char ch : src) {
+        if (isalnum(ch)) {
+            result += ch;
+        } else {
+            result += '%';
+            result += DEC2HEX[(unsigned char)ch >> 4];
+            result += DEC2HEX[(unsigned char)ch & 0x0F];
+        }
+    }
+    return result;
+}
+
+static std::string make_art_uri(const std::string &artist, const std::string &album) {
+    std::string result = "image://albumart/";
+    result += "artist=" + uriencode(artist);
+    result += "&album=" + uriencode(album);
+    return result;
+}
+
 void MusicPreview::run(PreviewReplyProxy const& reply)
 {
     ColumnLayout layout1col(1), layout2col(2), layout3col(3);
@@ -120,8 +144,15 @@ void MusicPreview::run(PreviewReplyProxy const& reply)
     header.add_component("subtitle", "artist");
 
     PreviewWidget artwork("art", "image");
-    // XXX: album art?
-    artwork.add_attribute("source", Variant(""));
+    std::string artist = result["artist"].get_string();
+    std::string album = result["album"].get_string();
+    std::string art;
+    if (artist.empty() || album.empty()) {
+        art = MISSING_ALBUM_ART;
+    } else {
+        art = make_art_uri(artist, album);
+    }
+    artwork.add_attribute("source", Variant(art));
 
     PreviewWidget tracks("tracks", "audio");
     {
