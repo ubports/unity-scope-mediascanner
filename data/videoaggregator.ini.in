@@ -1,0 +1,11 @@
+[ScopeConfig]
+DisplayName=Vide aggregator
+Description=This is an Ubuntu search plugin merges all video sources into one.
+Art=
+Icon=/usr/share/unity/icons/lens-nav-video.svg
+SearchHint=Search vide
+HotKey=
+
+[Desktop Entry]
+X-Ubuntu-Gettext-Domain=unity-scope-videoaggregator
+

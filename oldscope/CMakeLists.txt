@@ -10,7 +10,7 @@ include_directories(${OLDUNITY_INCLUDE_DIRS})
 add_library(unity-scope-mediascanner MODULE ${OLDSCOPE_SOURCES})
 set_target_properties(unity-scope-mediascanner PROPERTIES PREFIX "")
 
-target_link_libraries(unity-scope-mediascanner ${OLDUNITY_LIBRARIES})
+target_link_libraries(unity-scope-mediascanner ${OLDUNITY_LDFLAGS})
 
 install(
   TARGETS unity-scope-mediascanner
