@@ -61,19 +61,19 @@ void VideoScope::stop() {
     store.reset();
 }
 
-QueryBase::UPtr VideoScope::create_query(std::string const &q,
-                                         VariantMap const& hints) {
+QueryBase::UPtr VideoScope::create_query(Query const &q,
+                                         SearchMetadata const& hints) {
     QueryBase::UPtr query(new VideoQuery(*this, q));
     return query;
 }
 
 QueryBase::UPtr VideoScope::preview(Result const& result,
-                                    VariantMap const& hints) {
+                                    ActionMetadata const& hints) {
     QueryBase::UPtr previewer(new VideoPreview(*this, result));
     return previewer;
 }
 
-VideoQuery::VideoQuery(VideoScope &scope, std::string const& query)
+VideoQuery::VideoQuery(VideoScope &scope, Query const& query)
     : scope(scope), query(query) {
 }
 
@@ -83,7 +83,7 @@ void VideoQuery::cancelled() {
 void VideoQuery::run(SearchReplyProxy const&reply) {
 
     auto cat = reply->register_category("local", "My Videos", LOCAL_CATEGORY_ICON, CategoryRenderer(LOCAL_CATEGORY_DEFINITION));
-    for (const auto &media : scope.store->query(query, VideoMedia, MAX_RESULTS)) {
+    for (const auto &media : scope.store->query(query.query_string(), VideoMedia, MAX_RESULTS)) {
         CategorisedResult res(cat);
         res.set_uri(media.getUri());
         res.set_dnd_uri(media.getUri());

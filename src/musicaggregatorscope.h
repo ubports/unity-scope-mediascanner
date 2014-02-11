@@ -32,11 +32,11 @@ public:
 
     virtual void stop() override;
 
-    unity::scopes::QueryBase::UPtr preview(const unity::scopes::Result&,
-            const unity::scopes::VariantMap&) override;
+    virtual unity::scopes::QueryBase::UPtr preview(const unity::scopes::Result&,
+            const unity::scopes::ActionMetadata&) override;
 
-        virtual unity::scopes::QueryBase::UPtr create_query(std::string const& q,
-            unity::scopes::VariantMap const&) override;
+    virtual unity::scopes::QueryBase::UPtr create_query(unity::scopes::Query const& q,
+            unity::scopes::SearchMetadata const&) override;
 
 private:
     std::string query;

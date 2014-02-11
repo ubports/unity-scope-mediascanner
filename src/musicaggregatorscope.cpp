@@ -39,13 +39,13 @@ int MusicAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy
 void MusicAggregatorScope::stop() {
 }
 
-unity::scopes::QueryBase::UPtr MusicAggregatorScope::create_query(std::string const& q,
-        unity::scopes::VariantMap const&) {
-    unity::scopes::QueryBase::UPtr query(new MusicAggregatorQuery(q, local_scope, online_scope));
+QueryBase::UPtr MusicAggregatorScope::create_query(Query const& q,
+                                                   SearchMetadata const&) {
+    QueryBase::UPtr query(new MusicAggregatorQuery(q, local_scope, online_scope));
     return query;
 }
 
-QueryBase::UPtr MusicAggregatorScope::preview(Result const& /*result*/, VariantMap const& /*hints*/) {
+QueryBase::UPtr MusicAggregatorScope::preview(Result const& /*result*/, ActionMetadata const& /*hints*/) {
     return nullptr;
 }
 

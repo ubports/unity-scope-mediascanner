@@ -5,7 +5,7 @@ find_package(PkgConfig REQUIRED)
 find_package(Threads REQUIRED)
 
 pkg_check_modules(UNITY REQUIRED
-  "libunity-scopes >= 0.1"
+  "libunity-scopes >= 0.3.1"
   mediascanner-2.0
 )
 
