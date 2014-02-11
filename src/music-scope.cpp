@@ -60,19 +60,19 @@ void MusicScope::stop() {
     store.reset();
 }
 
-QueryBase::UPtr MusicScope::create_query(std::string const &q,
-                                         VariantMap const& hints) {
+QueryBase::UPtr MusicScope::create_query(Query const &q,
+                                         SearchMetadata const& hints) {
     QueryBase::UPtr query(new MusicQuery(*this, q));
     return query;
 }
 
 QueryBase::UPtr MusicScope::preview(Result const& result,
-                                    VariantMap const& hints) {
+                                    ActionMetadata const& hints) {
     QueryBase::UPtr previewer(new MusicPreview(*this, result));
     return previewer;
 }
 
-MusicQuery::MusicQuery(MusicScope &scope, std::string const& query)
+MusicQuery::MusicQuery(MusicScope &scope, Query const& query)
     : scope(scope), query(query) {
 }
 
@@ -81,7 +81,7 @@ void MusicQuery::cancelled() {
 
 void MusicQuery::run(SearchReplyProxy const&reply) {
     auto cat = reply->register_category("songs", "Songs", SONGS_CATEGORY_ICON, CategoryRenderer(SONGS_CATEGORY_DEFINITION));
-    for (const auto &media : scope.store->query(query, AudioMedia, MAX_RESULTS)) {
+    for (const auto &media : scope.store->query(query.query_string(), AudioMedia, MAX_RESULTS)) {
         CategorisedResult res(cat);
         res.set_uri(media.getUri());
         res.set_dnd_uri(media.getUri());

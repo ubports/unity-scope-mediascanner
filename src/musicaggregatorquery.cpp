@@ -30,7 +30,7 @@
 
 using namespace unity::scopes;
 
-MusicAggregatorQuery::MusicAggregatorQuery(std::string const& query, ScopeProxy local_scope, ScopeProxy online_scope) :
+MusicAggregatorQuery::MusicAggregatorQuery(Query const& query, ScopeProxy local_scope, ScopeProxy online_scope) :
 query(query), local_scope(local_scope), online_scope(online_scope) {
 }
 
@@ -42,7 +42,7 @@ void MusicAggregatorQuery::cancelled() {
 
 void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_reply) {
     SearchListener::SPtr local_reply(new ResultForwarder(parent_reply));
-    create_subquery(local_scope, query, VariantMap(), local_reply);
+    create_subquery(local_scope, query.query_string(), local_reply);
     SearchListener::SPtr online_reply(new ResultForwarder(parent_reply));
-    create_subquery(online_scope, query, VariantMap(), online_reply);
+    create_subquery(online_scope, query.query_string(), online_reply);
 }

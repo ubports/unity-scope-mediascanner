@@ -27,7 +27,7 @@
 class MusicAggregatorQuery : public unity::scopes::SearchQuery
 {
 public:
-    MusicAggregatorQuery(std::string const& query,
+    MusicAggregatorQuery(unity::scopes::Query const& query,
             unity::scopes::ScopeProxy local_scope,
             unity::scopes::ScopeProxy online_scope);
     ~MusicAggregatorQuery();
@@ -36,7 +36,7 @@ public:
     virtual void run(unity::scopes::SearchReplyProxy const& reply) override;
 
 private:
-    std::string query;
+    unity::scopes::Query query;
     unity::scopes::ScopeProxy local_scope;
     unity::scopes::ScopeProxy online_scope;
 };
