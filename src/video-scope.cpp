@@ -88,12 +88,12 @@ void VideoPreview::cancelled() {
 void VideoPreview::run(PreviewReplyProxy const& reply)
 {
     ColumnLayout layout1col(1), layout2col(2), layout3col(3);
-    layout1col.add_column({"header", "video", "actions"});
+    layout1col.add_column({"video", "header", "actions"});
 
-    layout2col.add_column({"header", "video"});
+    layout2col.add_column({"video", "header"});
     layout2col.add_column({"actions"});
 
-    layout3col.add_column({"header", "video"});
+    layout3col.add_column({"video", "header"});
     layout3col.add_column({"actions"});
     layout3col.add_column({});
     reply->register_layout({layout1col, layout2col, layout3col});

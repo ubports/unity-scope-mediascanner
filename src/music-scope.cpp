@@ -129,13 +129,13 @@ static std::string make_art_uri(const std::string &artist, const std::string &al
 void MusicPreview::run(PreviewReplyProxy const& reply)
 {
     ColumnLayout layout1col(1), layout2col(2), layout3col(3);
-    layout1col.add_column({"header", "art", "tracks", "actions"});
+    layout1col.add_column({"art", "header", "actions", "tracks"});
 
-    layout2col.add_column({"header", "art"});
-    layout2col.add_column({"tracks", "actions"});
+    layout2col.add_column({"art"});
+    layout2col.add_column({"header", "actions", "tracks"});
 
-    layout3col.add_column({"header", "art"});
-    layout3col.add_column({"tracks", "actions"});
+    layout3col.add_column({"art"});
+    layout3col.add_column({"header", "actions", "tracks"});
     layout3col.add_column({});
     reply->register_layout({layout1col, layout2col, layout3col});
 
@@ -170,7 +170,7 @@ void MusicPreview::run(PreviewReplyProxy const& reply)
         VariantBuilder builder;
         builder.add_tuple({
                 {"id", Variant("play")},
-                {"label", Variant("Play")}
+                {"label", Variant("Play in music app")}
             });
         actions.add_attribute("actions", builder.end());
     }
