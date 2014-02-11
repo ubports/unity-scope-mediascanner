@@ -1,3 +1,12 @@
+unity-scope-mediascanner (0.2+14.04.20140211.3-0ubuntu1) trusty; urgency=low
+
+  [ James Henstridge ]
+  * Add previews to the new-style scopes, and update the category
+    renderer for the music scope.
+  * Port to unity-scopes-api 0.3.1
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 11 Feb 2014 17:59:47 +0000
+
 unity-scope-mediascanner (0.2+14.04.20140205-0ubuntu1) trusty; urgency=medium
 
   [ James Henstridge ]
