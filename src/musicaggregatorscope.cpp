@@ -22,6 +22,7 @@
 #include <unity/scopes/Registry.h>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/CategoryRenderer.h>
+#include <iostream>
 
 using namespace unity::scopes;
 
@@ -31,8 +32,13 @@ const char *ONLINESCOPE = "scope-onlinemusic";
 int MusicAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
     CategoryRenderer basic;
     local_scope = registry->get_metadata(LOCALSCOPE).proxy();
-    // Disable online scopes until the smart scope server proxy is working.
-    online_scope = registry->get_metadata(ONLINESCOPE).proxy();
+    try
+    {
+        online_scope = registry->get_metadata(ONLINESCOPE).proxy();
+    } catch(std::exception &e)
+    {
+        std::cerr << "Could not instantiate online music scope: " << e.what() << std::endl;
+    }
     return VERSION;
 }
 

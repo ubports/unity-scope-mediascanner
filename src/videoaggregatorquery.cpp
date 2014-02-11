@@ -43,6 +43,9 @@ void VideoAggregatorQuery::cancelled() {
 void VideoAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_reply) {
     SearchListener::SPtr local_reply(new ResultForwarder(parent_reply));
     create_subquery(local_scope, query.query_string(), local_reply);
-    SearchListener::SPtr online_reply(new ResultForwarder(parent_reply));
-    create_subquery(online_scope, query.query_string(), online_reply);
+    if(online_scope)
+    {
+        SearchListener::SPtr online_reply(new ResultForwarder(parent_reply));
+        create_subquery(online_scope, query.query_string(), online_reply);
+    }
 }
