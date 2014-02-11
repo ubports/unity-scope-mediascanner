@@ -18,7 +18,7 @@
  */
 
 #include "musicaggregatorquery.h"
-#include "categoryadder.h"
+#include "resultforwarder.h"
 #include <unity/scopes/Annotation.h>
 #include <unity/scopes/CategorisedResult.h>
 #include <unity/scopes/CategoryRenderer.h>
@@ -41,11 +41,8 @@ void MusicAggregatorQuery::cancelled() {
 }
 
 void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_reply) {
-    CategoryRenderer r;
-    auto catloc = parent_reply->register_category("localmusic", "Local music", "icon", r);
-    auto catonl = parent_reply->register_category("onlinemusic", "Online music", "icon", r);
-    SearchListener::SPtr local_reply(new CategoryAdder(catloc, parent_reply));
+    SearchListener::SPtr local_reply(new ResultForwarder(parent_reply));
     create_subquery(local_scope, query, VariantMap(), local_reply);
-    SearchListener::SPtr online_reply(new CategoryAdder(catonl, parent_reply));
+    SearchListener::SPtr online_reply(new ResultForwarder(parent_reply));
     create_subquery(online_scope, query, VariantMap(), online_reply);
 }

@@ -21,6 +21,10 @@
 #include <mediascanner/MediaFile.hh>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/CategorisedResult.h>
+#include <unity/scopes/ColumnLayout.h>
+#include <unity/scopes/PreviewReply.h>
+#include <unity/scopes/PreviewWidget.h>
+#include <unity/scopes/VariantBuilder.h>
 
 #include "video-scope.h"
 
@@ -28,6 +32,25 @@
 
 using namespace mediascanner;
 using namespace unity::scopes;
+
+static const char LOCAL_CATEGORY_ICON[] = "/usr/share/icons/unity-icon-theme/places/svg/group-videos.svg";
+static const char LOCAL_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "carousel",
+    "overlay": true,
+    "card-size": "medium"
+  },
+  "components": {
+    "title": "title",
+    "art":  {
+      "field": "art",
+      "aspect-ratio": 1.5
+    }
+  }
+}
+)";
 
 int VideoScope::start(std::string const&, RegistryProxy const&) {
     store.reset(new MediaStore(MS_READ_ONLY));
@@ -59,7 +82,7 @@ void VideoQuery::cancelled() {
 
 void VideoQuery::run(SearchReplyProxy const&reply) {
 
-    auto cat = reply->register_category("local", "My Videos", "/usr/share/icons/unity-icon-theme/places/svg/group-videos.svg");
+    auto cat = reply->register_category("local", "My Videos", LOCAL_CATEGORY_ICON, CategoryRenderer(LOCAL_CATEGORY_DEFINITION));
     for (const auto &media : scope.store->query(query, VideoMedia, MAX_RESULTS)) {
         CategorisedResult res(cat);
         res.set_uri(media.getUri());
@@ -83,6 +106,34 @@ void VideoPreview::cancelled() {
 
 void VideoPreview::run(PreviewReplyProxy const& reply)
 {
+    ColumnLayout layout1col(1), layout2col(2), layout3col(3);
+    layout1col.add_column({"video", "header", "actions"});
+
+    layout2col.add_column({"video", "header"});
+    layout2col.add_column({"actions"});
+
+    layout3col.add_column({"video", "header"});
+    layout3col.add_column({"actions"});
+    layout3col.add_column({});
+    reply->register_layout({layout1col, layout2col, layout3col});
+
+    PreviewWidget header("header", "header");
+    header.add_component("title", "title");
+
+    PreviewWidget video("video", "video");
+    video.add_component("source", "uri");
+
+    PreviewWidget actions("actions", "actions");
+    {
+        VariantBuilder builder;
+        builder.add_tuple({
+                {"id", Variant("play")},
+                {"label", Variant("Play")}
+            });
+        actions.add_attribute("actions", builder.end());
+    }
+
+    reply->push({header, video, actions});
 }
 
 extern "C" ScopeBase * UNITY_SCOPE_CREATE_FUNCTION() {
@@ -92,55 +143,3 @@ extern "C" ScopeBase * UNITY_SCOPE_CREATE_FUNCTION() {
 extern "C" void UNITY_SCOPE_DESTROY_FUNCTION(ScopeBase *scope) {
     delete scope;
 }
-
-#if 0
-UnityAbstractPreview *
-video_preview (UnityResultPreviewer *previewer, void *user_data)
-{
-    const char *title = previewer->result.title;
-    const char *subtitle = "";
-    const char *comment = previewer->result.comment;
-    int duration = 0, width = 0, height = 0;
-
-    if (previewer->result.metadata != NULL) {
-        GVariant *variant;
-
-        variant = static_cast<GVariant*>(g_hash_table_lookup (previewer->result.metadata, const_cast<char*>("width")));
-        if (variant) {
-            width = g_variant_get_int32 (variant);
-        }
-        variant = static_cast<GVariant*>(g_hash_table_lookup (previewer->result.metadata, const_cast<char*>("height")));
-        if (variant) {
-            height = g_variant_get_int32 (variant);
-        }
-        variant = static_cast<GVariant*>(g_hash_table_lookup (previewer->result.metadata, const_cast<char*>("duration")));
-        if (variant) {
-            duration = g_variant_get_int32 (variant);
-        }
-    }
-
-    UnityMoviePreview *preview = unity_movie_preview_new (
-        title, subtitle, comment, NULL);
-    unity_movie_preview_set_rating (preview, -1.0f, 0);
-    unity_preview_set_image_source_uri (
-        UNITY_PREVIEW (preview), previewer->result.uri);
-
-    UnityPreviewAction *play_action = unity_preview_action_new (
-        "play", _("Play"), NULL);
-    unity_preview_add_action (UNITY_PREVIEW (preview), play_action);
-
-    if (width > 0 && height > 0) {
-        char *dimensions = g_strdup_printf ("%d*%d", width, height);
-        UnityInfoHint *hint = unity_info_hint_new (
-            "dimensions", _("Dimensions"), NULL, dimensions);
-        g_free (dimensions);
-        unity_preview_add_info (UNITY_PREVIEW (preview), hint);
-    }
-
-    if (duration > 0) {
-        /* add info hint */
-    }
-
-    return UNITY_ABSTRACT_PREVIEW (preview);
-}
-#endif

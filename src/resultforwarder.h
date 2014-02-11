@@ -17,24 +17,22 @@
  *
  */
 
-#ifndef CATEGORYADDER_H_
-#define CATEGORYADDER_H_
+#ifndef RESULTFORWARDER_H_
+#define RESULTFORWARDER_H_
 
 #include<unity/scopes/SearchListener.h>
 #include<unity/scopes/ReplyProxyFwd.h>
 #include<unity/scopes/ListenerBase.h>
 #include<unity/scopes/CategorisedResult.h>
 
-class CategoryAdder : public unity::scopes::SearchListener {
+class ResultForwarder : public unity::scopes::SearchListener {
 
 public:
 
-    CategoryAdder(unity::scopes::Category::SCPtr category,
-            unity::scopes::SearchReplyProxy const& upstream) :
-        category(category),
+    ResultForwarder(unity::scopes::SearchReplyProxy const& upstream) :
         upstream(upstream) {
     }
-    virtual ~CategoryAdder() {}
+    virtual ~ResultForwarder() {}
 
     virtual void push(unity::scopes::Category::SCPtr category) override;
     virtual void push(unity::scopes::CategorisedResult result) override;
@@ -43,7 +41,6 @@ public:
             std::string const& error_message) override;
 
 private:
-    unity::scopes::Category::SCPtr category;
     unity::scopes::SearchReplyProxy upstream;
 };
 

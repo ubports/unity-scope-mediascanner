@@ -18,7 +18,7 @@ target_link_libraries(mediascanner-video ${UNITY_LDFLAGS})
 add_library(musicaggregator SHARED
 musicaggregatorscope.cpp
 musicaggregatorquery.cpp
-categoryadder.cpp)
+resultforwarder.cpp)
 target_link_libraries(musicaggregator ${UNITY_SCOPES_LDFLAGS})
 
 install(

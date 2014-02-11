@@ -1,5 +1,5 @@
 [ScopeConfig]
-DisplayName=Music aggregator
+DisplayName=Music
 Description=This is an Ubuntu search plugin merges all music sources into one.
 Art=
 Icon=/usr/share/unity/icons/lens-nav-music.svg
