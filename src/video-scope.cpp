@@ -33,6 +33,25 @@
 using namespace mediascanner;
 using namespace unity::scopes;
 
+static const char LOCAL_CATEGORY_ICON[] = "/usr/share/icons/unity-icon-theme/places/svg/group-videos.svg";
+static const char LOCAL_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "carousel",
+    "overlay": true,
+    "card-size": "medium"
+  },
+  "components": {
+    "title": "title",
+    "art":  {
+      "field": "art",
+      "aspect-ratio": 1.5
+    }
+  }
+}
+)";
+
 int VideoScope::start(std::string const&, RegistryProxy const&) {
     store.reset(new MediaStore(MS_READ_ONLY));
     return VERSION;
@@ -63,7 +82,7 @@ void VideoQuery::cancelled() {
 
 void VideoQuery::run(SearchReplyProxy const&reply) {
 
-    auto cat = reply->register_category("local", "My Videos", "/usr/share/icons/unity-icon-theme/places/svg/group-videos.svg");
+    auto cat = reply->register_category("local", "My Videos", LOCAL_CATEGORY_ICON, CategoryRenderer(LOCAL_CATEGORY_DEFINITION));
     for (const auto &media : scope.store->query(query, VideoMedia, MAX_RESULTS)) {
         CategorisedResult res(cat);
         res.set_uri(media.getUri());
