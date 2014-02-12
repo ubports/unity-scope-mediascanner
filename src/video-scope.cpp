@@ -52,6 +52,22 @@ static const char LOCAL_CATEGORY_DEFINITION[] = R"(
 }
 )";
 
+// Category renderer to use when presenting search results
+// FIXME: This should use list category-layout (LP #1279279)
+static const char SEARCH_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-size": "small"
+  },
+  "components": {
+    "title": "title",
+    "art":  "art"
+  }
+}
+)";
+
 int VideoScope::start(std::string const&, RegistryProxy const&) {
     store.reset(new MediaStore(MS_READ_ONLY));
     return VERSION;
@@ -81,8 +97,8 @@ void VideoQuery::cancelled() {
 }
 
 void VideoQuery::run(SearchReplyProxy const&reply) {
-
-    auto cat = reply->register_category("local", "My Videos", LOCAL_CATEGORY_ICON, CategoryRenderer(LOCAL_CATEGORY_DEFINITION));
+    CategoryRenderer renderer(query.query_string() == "" ? LOCAL_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
+    auto cat = reply->register_category("local", "My Videos", LOCAL_CATEGORY_ICON, renderer);
     for (const auto &media : scope.store->query(query.query_string(), VideoMedia, MAX_RESULTS)) {
         CategorisedResult res(cat);
         res.set_uri(media.getUri());
@@ -133,7 +149,7 @@ void VideoPreview::run(PreviewReplyProxy const& reply)
         actions.add_attribute("actions", builder.end());
     }
 
-    reply->push({header, video, actions});
+    reply->push({video, header, actions});
 }
 
 extern "C" ScopeBase * UNITY_SCOPE_CREATE_FUNCTION() {

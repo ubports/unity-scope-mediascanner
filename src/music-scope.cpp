@@ -48,6 +48,23 @@ static const char SONGS_CATEGORY_DEFINITION[] = R"(
 }
 )";
 
+// Category renderer to use when presenting search results
+// FIXME: This should use list category-layout (LP #1279279)
+static const char SEARCH_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-size": "small"
+  },
+  "components": {
+    "title": "title",
+    "art":  "art",
+    "subtitle": "artist"
+  }
+}
+)";
+
 using namespace mediascanner;
 using namespace unity::scopes;
 
@@ -80,7 +97,8 @@ void MusicQuery::cancelled() {
 }
 
 void MusicQuery::run(SearchReplyProxy const&reply) {
-    auto cat = reply->register_category("songs", "Songs", SONGS_CATEGORY_ICON, CategoryRenderer(SONGS_CATEGORY_DEFINITION));
+    CategoryRenderer renderer(query.query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
+    auto cat = reply->register_category("songs", "Songs", SONGS_CATEGORY_ICON, renderer);
     for (const auto &media : scope.store->query(query.query_string(), AudioMedia, MAX_RESULTS)) {
         CategorisedResult res(cat);
         res.set_uri(media.getUri());
@@ -175,7 +193,7 @@ void MusicPreview::run(PreviewReplyProxy const& reply)
         actions.add_attribute("actions", builder.end());
     }
 
-    reply->push({header, artwork, tracks, actions});
+    reply->push({artwork, header, actions, tracks});
 }
 
 extern "C" ScopeBase * UNITY_SCOPE_CREATE_FUNCTION() {
