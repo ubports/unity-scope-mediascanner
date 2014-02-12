@@ -21,6 +21,12 @@ musicaggregatorquery.cpp
 resultforwarder.cpp)
 target_link_libraries(musicaggregator ${UNITY_SCOPES_LDFLAGS})
 
+add_library(videoaggregator SHARED
+videoaggregatorscope.cpp
+videoaggregatorquery.cpp
+resultforwarder.cpp)
+target_link_libraries(videoaggregator ${UNITY_SCOPES_LDFLAGS})
+
 install(
   TARGETS mediascanner-music
   LIBRARY DESTINATION "${CMAKE_INSTALL_DATADIR}/unity/scopes/mediascanner-music")
@@ -31,3 +37,7 @@ install(
 
 install(TARGETS musicaggregator
   LIBRARY DESTINATION "${CMAKE_INSTALL_DATADIR}/unity/scopes/musicaggregator")
+
+  install(TARGETS videoaggregator
+  LIBRARY DESTINATION "${CMAKE_INSTALL_DATADIR}/unity/scopes/videoaggregator")
+  

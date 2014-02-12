@@ -17,8 +17,8 @@
  *
  */
 
-#include "musicaggregatorscope.h"
-#include "musicaggregatorquery.h"
+#include "videoaggregatorscope.h"
+#include "videoaggregatorquery.h"
 #include <unity/scopes/Registry.h>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/CategoryRenderer.h>
@@ -26,32 +26,31 @@
 
 using namespace unity::scopes;
 
-const char *LOCALSCOPE = "mediascanner-music";
-const char *ONLINESCOPE = "scope-onlinemusic";
+const char *LOCALSCOPE = "mediascanner-video";
+const char *ONLINESCOPE = "scope-onlinevideo";
 
-int MusicAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
+int VideoAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
     CategoryRenderer basic;
     local_scope = registry->get_metadata(LOCALSCOPE).proxy();
-    try
-    {
+    try {
         online_scope = registry->get_metadata(ONLINESCOPE).proxy();
-    } catch(std::exception &e)
+    } catch(const std::exception &e)
     {
-        std::cerr << "Could not instantiate online music scope: " << e.what() << std::endl;
+        std::cerr << "Could not instantiate online scope:" << e.what() << std::endl;
     }
     return VERSION;
 }
 
-void MusicAggregatorScope::stop() {
+void VideoAggregatorScope::stop() {
 }
 
-QueryBase::UPtr MusicAggregatorScope::create_query(Query const& q,
+QueryBase::UPtr VideoAggregatorScope::create_query(Query const& q,
                                                    SearchMetadata const&) {
-    QueryBase::UPtr query(new MusicAggregatorQuery(q, local_scope, online_scope));
+    QueryBase::UPtr query(new VideoAggregatorQuery(q, local_scope, online_scope));
     return query;
 }
 
-QueryBase::UPtr MusicAggregatorScope::preview(Result const& /*result*/, ActionMetadata const& /*hints*/) {
+QueryBase::UPtr VideoAggregatorScope::preview(Result const& /*result*/, ActionMetadata const& /*hints*/) {
     return nullptr;
 }
 
@@ -65,7 +64,7 @@ extern "C"
     // cppcheck-suppress unusedFunction
     UNITY_SCOPE_CREATE_FUNCTION()
     {
-        return new MusicAggregatorScope();
+        return new VideoAggregatorScope();
     }
 
     EXPORT

@@ -28,7 +28,7 @@ add_executable(
   ../oldscope/music-scope.cpp
   ../oldscope/video-scope.cpp
 )
-target_link_libraries(test-old-scope ${OLDUNITY_LIBRARIES})
+target_link_libraries(test-old-scope ${OLDUNITY_LDFLAGS})
 
 add_test(test-old-scope test-old-scope)
 
