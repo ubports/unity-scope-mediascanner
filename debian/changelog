@@ -1,3 +1,15 @@
+unity-scope-mediascanner (0.2+14.04.20140213-0ubuntu1) trusty; urgency=low
+
+  [ James Henstridge ]
+  * Use a different category renderer when providing search results
+    compared to the surfacing layout, and use less technical display
+    names for the scopes.
+
+  [ Jussi Pakkanen ]
+  * Video aggregator scope.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 13 Feb 2014 16:35:27 +0000
+
 unity-scope-mediascanner (0.2+14.04.20140211.3-0ubuntu1) trusty; urgency=low
 
   [ James Henstridge ]
