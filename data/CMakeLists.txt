@@ -31,6 +31,15 @@ install(
   DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes/musicaggregator"
 )
 
+configure_file(
+  videoaggregator.ini.in
+  videoaggregator.ini
+)
+
+install(
+  FILES "${CMAKE_CURRENT_BINARY_DIR}/videoaggregator.ini"
+  DESTINATION "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes/videoaggregator"
+)
 # D-Bus service definition for old scope
 
 configure_file(

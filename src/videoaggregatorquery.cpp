@@ -17,7 +17,7 @@
  *
  */
 
-#include "musicaggregatorquery.h"
+#include "videoaggregatorquery.h"
 #include "resultforwarder.h"
 #include <unity/scopes/Annotation.h>
 #include <unity/scopes/CategorisedResult.h>
@@ -30,17 +30,17 @@
 
 using namespace unity::scopes;
 
-MusicAggregatorQuery::MusicAggregatorQuery(Query const& query, ScopeProxy local_scope, ScopeProxy online_scope) :
+VideoAggregatorQuery::VideoAggregatorQuery(Query const& query, ScopeProxy local_scope, ScopeProxy online_scope) :
 query(query), local_scope(local_scope), online_scope(online_scope) {
 }
 
-MusicAggregatorQuery::~MusicAggregatorQuery() {
+VideoAggregatorQuery::~VideoAggregatorQuery() {
 }
 
-void MusicAggregatorQuery::cancelled() {
+void VideoAggregatorQuery::cancelled() {
 }
 
-void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_reply) {
+void VideoAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_reply) {
     SearchListener::SPtr local_reply(new ResultForwarder(parent_reply));
     create_subquery(local_scope, query.query_string(), local_reply);
     if(online_scope)
