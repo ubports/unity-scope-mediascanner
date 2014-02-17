@@ -19,6 +19,7 @@
 #include <config.h>
 
 #include <mediascanner/MediaFile.hh>
+#include <mediascanner/Album.hh>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/CategorisedResult.h>
 #include <unity/scopes/ColumnLayout.h>
@@ -97,6 +98,11 @@ void MusicQuery::cancelled() {
 }
 
 void MusicQuery::run(SearchReplyProxy const&reply) {
+    query_songs(reply);
+    query_albums(reply);
+}
+
+void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply) const {
     CategoryRenderer renderer(query.query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
     auto cat = reply->register_category("songs", "Songs", SONGS_CATEGORY_ICON, renderer);
     for (const auto &media : scope.store->query(query.query_string(), AudioMedia, MAX_RESULTS)) {
@@ -113,6 +119,19 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
 
         reply->push(res);
     }
+
+}
+
+void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply) const {
+    CategoryRenderer renderer(query.query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
+    auto cat = reply->register_category("albums", "Albums", SONGS_CATEGORY_ICON, renderer);
+    for (const auto &album : scope.store->queryAlbums(query.query_string(), MAX_RESULTS)) {
+        CategorisedResult res(cat);
+        res.set_title(album.getTitle());
+        res["artist"] = album.getTitle();
+        reply->push(res);
+    }
+
 }
 
 MusicPreview::MusicPreview(MusicScope &scope, Result const& result)
