@@ -27,7 +27,7 @@
 using namespace unity::scopes;
 
 const char *LOCALSCOPE = "mediascanner-music";
-const char *ONLINESCOPE = "scope-onlinemusic";
+const char *ONLINESCOPE = "com.canonical.scopes.onlinemusic";
 
 int MusicAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
     CategoryRenderer basic;
