@@ -1,3 +1,10 @@
+unity-scope-mediascanner (0.2+14.04.20140217-0ubuntu1) trusty; urgency=low
+
+  [ Pawel Stolowski ]
+  * Fix ids of onlinemusic and remotevideo scopes.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 17 Feb 2014 12:48:53 +0000
+
 unity-scope-mediascanner (0.2+14.04.20140213-0ubuntu1) trusty; urgency=low
 
   [ James Henstridge ]
