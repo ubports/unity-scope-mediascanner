@@ -165,6 +165,17 @@ static std::string make_art_uri(const std::string &artist, const std::string &al
 
 void MusicPreview::run(PreviewReplyProxy const& reply)
 {
+    if(result.contains("uri"))
+    {
+        song_preview(reply);
+    }
+    else
+    {
+        album_preview(reply);
+    }
+}
+
+void MusicPreview::song_preview(unity::scopes::PreviewReplyProxy const &reply) const {
     ColumnLayout layout1col(1), layout2col(2), layout3col(3);
     layout1col.add_column({"art", "header", "actions", "tracks"});
 
@@ -213,6 +224,13 @@ void MusicPreview::run(PreviewReplyProxy const& reply)
     }
 
     reply->push({artwork, header, actions, tracks});
+}
+
+void MusicPreview::album_preview(unity::scopes::PreviewReplyProxy const &reply) const {
+    PreviewWidget header("header", "header");
+    header.add_component("title", "title");
+    header.add_component("artist", "artist");
+    reply->push({header});
 }
 
 extern "C" ScopeBase * UNITY_SCOPE_CREATE_FUNCTION() {

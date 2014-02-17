@@ -44,6 +44,8 @@ public:
     virtual void run(unity::scopes::PreviewReplyProxy const& reply) override;
 
 private:
+    void song_preview(unity::scopes::PreviewReplyProxy const &reply) const;
+    void album_preview(unity::scopes::PreviewReplyProxy const &reply) const;
     const MusicScope &scope;
     const unity::scopes::Result result;
 };
