@@ -229,7 +229,7 @@ void MusicPreview::song_preview(unity::scopes::PreviewReplyProxy const &reply) c
 void MusicPreview::album_preview(unity::scopes::PreviewReplyProxy const &reply) const {
     PreviewWidget header("header", "header");
     header.add_component("title", "title");
-    header.add_component("artist", "artist");
+    header.add_component("subtitle", "artist");
     reply->push({header});
 }
 
