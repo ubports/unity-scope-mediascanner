@@ -230,7 +230,19 @@ void MusicPreview::album_preview(unity::scopes::PreviewReplyProxy const &reply) 
     PreviewWidget header("header", "header");
     header.add_component("title", "title");
     header.add_component("subtitle", "artist");
-    reply->push({header});
+
+    PreviewWidget artwork("art", "image");
+    std::string artist = result["artist"].get_string();
+    std::string album = result["title"].get_string();
+    std::string art;
+    if (artist.empty() || album.empty()) {
+        art = MISSING_ALBUM_ART;
+    } else {
+        art = make_art_uri(artist, album);
+    }
+    artwork.add_attribute("source", Variant(art));
+
+    reply->push({artwork, header});
 }
 
 extern "C" ScopeBase * UNITY_SCOPE_CREATE_FUNCTION() {
