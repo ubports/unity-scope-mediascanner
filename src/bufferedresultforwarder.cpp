@@ -18,6 +18,7 @@
  */
 
 #include "bufferedresultforwarder.h"
+#include <iostream>
 
 BufferedResultForwarder::BufferedResultForwarder(unity::scopes::SearchReplyProxy const& upstream)
     : ResultForwarder(upstream),
@@ -29,18 +30,22 @@ void BufferedResultForwarder::push(unity::scopes::CategorisedResult result)
 {
     if (buffer_)
     {
+        std::cout << "to buffer: " << result.uri() << std::endl;
         result_buffer_.push_back(std::move(result));
     }
     else
     {
+        std::cout << "direct push: " << result.uri() << std::endl;
         ResultForwarder::push(std::move(result));
     }
 }
 
 void BufferedResultForwarder::flush()
 {
+    std::cout << "flushing" << std::endl;
     for (auto const& r: result_buffer_)
     {
+        std::cout << "\tpush " << r.uri() << std::endl;
         ResultForwarder::push(r);
     }
     result_buffer_.clear();
@@ -48,6 +53,7 @@ void BufferedResultForwarder::flush()
 
 void BufferedResultForwarder::on_forwarder_ready(ResultForwarder*)
 {
+    std::cout << "on_forwarder_ready" << std::endl;
     buffer_ = false;
     flush();
 }
