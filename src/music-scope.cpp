@@ -113,7 +113,8 @@ void MusicQuery::cancelled() {
 
 void MusicQuery::run(SearchReplyProxy const&reply) {
     query_songs(reply);
-    query_albums(reply);
+    // Temporarily disabled.
+    // query_albums(reply);
 }
 
 void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply) const {
@@ -156,6 +157,8 @@ void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply) const
     auto cat = reply->register_category("albums", "Albums", SONGS_CATEGORY_ICON, renderer);
     for (const auto &album : scope.store->queryAlbums(query.query_string(), MAX_RESULTS)) {
         CategorisedResult res(cat);
+        // FIXME: current dash does not show image unless uri starts with file://
+        // This is being fixed.
         res.set_uri("album://" + uriencode(album.getArtist()) + "/" +
                 uriencode(album.getTitle()));
         res.set_title(album.getTitle());
