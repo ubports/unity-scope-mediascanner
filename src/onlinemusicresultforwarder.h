@@ -17,34 +17,23 @@
  *
  */
 
-#ifndef BUFFEREDRESULTFORWARDER_H_
-#define BUFFEREDRESULTFORWARDER_H_
+#ifndef ONLINEMUSICRESULTFORWARDER_H 
+#define ONLINEMUSICRESULTFORWARDER_H
 
-#include "resultforwarder.h"
-#include <list>
-#include <unity/scopes/CategorisedResult.h>
+#include "bufferedresultforwarder.h"
 
 /*
    ResultForwarder that buffers results up until it gets
    notified via on_forwarder_ready() by another ResultForwarder.
 */
-class BufferedResultForwarder : public ResultForwarder {
+class OnlineMusicResultForwarder: public BufferedResultForwarder {
 
 public:
-
-    BufferedResultForwarder(unity::scopes::SearchReplyProxy const& upstream);
-    virtual ~BufferedResultForwarder() {}
-
+    OnlineMusicResultForwarder(unity::scopes::SearchReplyProxy const& upstream);
     virtual void push(unity::scopes::CategorisedResult result) override;
     virtual void push(unity::scopes::Category::SCPtr category) override;
-    void flush();
 
-protected:
-    void on_forwarder_ready(ResultForwarder*) override;
-
-private:
-    bool buffer_;
-    std::list<unity::scopes::CategorisedResult> result_buffer_;
+    static const std::string songs_category_id;
 };
 
 #endif

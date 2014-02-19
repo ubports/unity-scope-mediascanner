@@ -19,6 +19,7 @@ add_library(musicaggregator SHARED
 musicaggregatorscope.cpp
 musicaggregatorquery.cpp
 resultforwarder.cpp
+onlinemusicresultforwarder.cpp
 bufferedresultforwarder.cpp
 )
 target_link_libraries(musicaggregator ${UNITY_SCOPES_LDFLAGS})

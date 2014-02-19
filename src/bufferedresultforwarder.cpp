@@ -36,6 +36,11 @@ void BufferedResultForwarder::push(unity::scopes::CategorisedResult result)
         ResultForwarder::push(std::move(result));
     }
 }
+    
+void BufferedResultForwarder::push(unity::scopes::Category::SCPtr category)
+{
+    ResultForwarder::push(category);
+}
 
 void BufferedResultForwarder::flush()
 {
