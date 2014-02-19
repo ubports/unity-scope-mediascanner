@@ -160,6 +160,7 @@ void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply) const
                 uriencode(album.getTitle()));
         res.set_title(album.getTitle());
         res["artist"] = album.getArtist();
+        res["album"] = album.getTitle();
         res["isalbum"] = true;
         reply->push(res);
     }
