@@ -48,6 +48,21 @@ static const char SONGS_CATEGORY_DEFINITION[] = R"(
   }
 }
 )";
+static const char ALBUMS_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "overlay": true,
+    "card-size": "medium"
+  },
+  "components": {
+    "title": "title",
+    "art":  "art",
+    "subtitle": "artist"
+  }
+}
+)";
 
 // Category renderer to use when presenting search results
 // FIXME: This should use list category-layout (LP #1279279)
@@ -123,7 +138,7 @@ void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply) const 
 }
 
 void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply) const {
-    CategoryRenderer renderer(query.query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
+    CategoryRenderer renderer(query.query_string() == "" ? ALBUMS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
     auto cat = reply->register_category("albums", "Albums", SONGS_CATEGORY_ICON, renderer);
     for (const auto &album : scope.store->queryAlbums(query.query_string(), MAX_RESULTS)) {
         CategorisedResult res(cat);
