@@ -36,7 +36,6 @@ public:
     virtual ~BufferedResultForwarder() {}
 
     virtual void push(unity::scopes::CategorisedResult result) override;
-    virtual void push(unity::scopes::Category::SCPtr category) override;
     void flush();
 
 protected:

@@ -40,7 +40,6 @@ void OnlineMusicResultForwarder::push(unity::scopes::Category::SCPtr category)
     if (category->id() == songs_category_id)
     {
         // replace category to have different title
-        auto cat = upstream->register_category(category->id(), "Grooveshark", category->icon(), category->renderer_template());
-        BufferedResultForwarder::push(cat);
+        upstream->register_category(category->id(), "Grooveshark", category->icon(), category->renderer_template());
     }
 }
