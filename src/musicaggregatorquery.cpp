@@ -19,7 +19,7 @@
 
 #include "musicaggregatorquery.h"
 #include "resultforwarder.h"
-#include "bufferedresultforwarder.h"
+#include "onlinemusicresultforwarder.h"
 #include <unity/scopes/Annotation.h>
 #include <unity/scopes/CategorisedResult.h>
 #include <unity/scopes/CategoryRenderer.h>
@@ -46,7 +46,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     std::shared_ptr<ResultForwarder> online_reply;
     if(online_scope)
     {
-        online_reply.reset(new BufferedResultForwarder(parent_reply));
+        online_reply.reset(new OnlineMusicResultForwarder(parent_reply));
         local_reply->add_observer(online_reply);
         create_subquery(online_scope, query.query_string(), online_reply);
     }
