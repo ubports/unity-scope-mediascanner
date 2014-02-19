@@ -258,7 +258,6 @@ void MusicPreview::album_preview(unity::scopes::PreviewReplyProxy const &reply) 
     }
     artwork.add_attribute("source", Variant(art));
     PreviewWidget tracks("tracks", "audio");
-    tracks.add_attribute("tracks", result["trackinfo"]);
     VariantBuilder builder;
     Album album(album_name, artist);
     for(const auto &track : scope.store->getAlbumSongs(album)) {
