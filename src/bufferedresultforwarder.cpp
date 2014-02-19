@@ -25,7 +25,7 @@ BufferedResultForwarder::BufferedResultForwarder(unity::scopes::SearchReplyProxy
       buffer_(true)
 {
 }
-    
+
 void BufferedResultForwarder::push(unity::scopes::CategorisedResult result)
 {
     if (buffer_)
