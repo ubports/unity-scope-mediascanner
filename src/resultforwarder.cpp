@@ -29,6 +29,7 @@ void ResultForwarder::push(Category::SCPtr category) {
 }
 
 void ResultForwarder::push(CategorisedResult result) {
+    std::cout << "ResultForwarder::push: " << result.uri() << std::endl;
     upstream->push(result);
     if (!ready_)
     {
