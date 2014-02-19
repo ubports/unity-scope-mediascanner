@@ -143,15 +143,6 @@ void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply) const
         CategorisedResult res(cat);
         res.set_title(album.getTitle());
         res["artist"] = album.getArtist();
-        VariantBuilder builder;
-        for(const auto &track : scope.store->getAlbumSongs(album)) {
-            builder.add_tuple({
-            {"title", Variant(track.getTitle())},
-            {"source", Variant(track.getUri())},
-            {"length", Variant(track.getDuration())}
-            });
-        }
-        res["tracks"] = builder.end();
         reply->push(res);
     }
 
@@ -256,16 +247,33 @@ void MusicPreview::album_preview(unity::scopes::PreviewReplyProxy const &reply) 
 
     PreviewWidget artwork("art", "image");
     std::string artist = result["artist"].get_string();
-    std::string album = result["title"].get_string();
+    std::string album_name = result["title"].get_string();
     std::string art;
-    if (artist.empty() || album.empty()) {
+    if (artist.empty() || album_name.empty()) {
         art = MISSING_ALBUM_ART;
     } else {
-        art = make_art_uri(artist, album);
+        art = make_art_uri(artist, album_name);
     }
     artwork.add_attribute("source", Variant(art));
     PreviewWidget tracks("tracks", "audio");
     tracks.add_attribute("tracks", result["trackinfo"]);
+    try
+    {
+        MediaStore store(MS_READ_ONLY);
+        VariantBuilder builder;
+        Album album(album_name, artist);
+        for(const auto &track : store.getAlbumSongs(album)) {
+            builder.add_tuple({
+                {"title", Variant(track.getTitle())},
+                {"source", Variant(track.getUri())},
+                {"length", Variant(track.getDuration())}
+            });
+        }
+        tracks.add_attribute("tracks", builder.end());
+    }catch(const std::exception &e)
+    {
+        fprintf(stderr, "Error obtaining track info: %s\n", e.what());
+    }
 
     reply->push({artwork, header, tracks});
 }
