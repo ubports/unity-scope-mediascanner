@@ -24,24 +24,33 @@
 #include<unity/scopes/ReplyProxyFwd.h>
 #include<unity/scopes/ListenerBase.h>
 #include<unity/scopes/CategorisedResult.h>
+#include<list>
 
 class ResultForwarder : public unity::scopes::SearchListener {
 
 public:
 
     ResultForwarder(unity::scopes::SearchReplyProxy const& upstream) :
-        upstream(upstream) {
+        upstream(upstream),
+        ready_(false) {
     }
     virtual ~ResultForwarder() {}
 
     virtual void push(unity::scopes::Category::SCPtr category) override;
     virtual void push(unity::scopes::CategorisedResult result) override;
+    void add_observer(std::shared_ptr<ResultForwarder> result_forwarder);
 
     virtual void finished(unity::scopes::ListenerBase::Reason reason,
             std::string const& error_message) override;
 
-private:
+protected:
+    virtual void on_forwarder_ready(ResultForwarder*);
     unity::scopes::SearchReplyProxy upstream;
+    void notify_observers();
+
+private:
+    std::list<std::weak_ptr<ResultForwarder>> observers_;
+    bool ready_;
 };
 
 

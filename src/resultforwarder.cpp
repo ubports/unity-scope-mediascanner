@@ -28,7 +28,42 @@ void ResultForwarder::push(Category::SCPtr category) {
 
 void ResultForwarder::push(CategorisedResult result) {
     upstream->push(result);
+    if (!ready_)
+    {
+        ready_ = true;
+        notify_observers();
+    }
 }
 
 void ResultForwarder::finished(ListenerBase::Reason /*reason*/, std::string const& /*error_message*/) {
+    if (!ready_)
+    {
+        ready_ = true;
+        notify_observers();
+    }
+}
+
+void ResultForwarder::notify_observers()
+{
+    for (auto o: observers_)
+    {
+        std::shared_ptr<ResultForwarder> observer(o.lock());
+        if (observer)
+        {
+            observer->on_forwarder_ready(this);
+        }
+    }
+}
+
+void ResultForwarder::add_observer(std::shared_ptr<ResultForwarder> result_forwarder)
+{
+    if (result_forwarder.get() != this)
+    {
+        observers_.push_back(result_forwarder);
+    }
+}
+
+void ResultForwarder::on_forwarder_ready(ResultForwarder*)
+{
+    // base impl does nothing
 }
