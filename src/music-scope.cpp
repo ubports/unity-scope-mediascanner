@@ -159,6 +159,7 @@ void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply) const
         res.set_uri("album://" + uriencode(album.getArtist()) + "/" +
                 uriencode(album.getTitle()));
         res.set_title(album.getTitle());
+        res["mimetype"] = "audio/xhack";
         res["artist"] = album.getArtist();
         res["album"] = album.getTitle();
         res["isalbum"] = true;
