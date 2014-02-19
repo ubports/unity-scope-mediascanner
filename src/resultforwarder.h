@@ -49,7 +49,7 @@ protected:
     void notify_observers();
 
 private:
-    std::list<std::weak_ptr<ResultForwarder>> observers_;
+    std::list<std::shared_ptr<ResultForwarder>> observers_;
     bool ready_;
 };
 

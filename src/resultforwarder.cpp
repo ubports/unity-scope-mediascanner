@@ -47,11 +47,7 @@ void ResultForwarder::notify_observers()
 {
     for (auto o: observers_)
     {
-        std::shared_ptr<ResultForwarder> observer(o.lock());
-        if (observer)
-        {
-            observer->on_forwarder_ready(this);
-        }
+        o->on_forwarder_ready(this);
     }
 }
 
