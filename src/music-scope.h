@@ -11,6 +11,8 @@
 class MusicScope : public unity::scopes::ScopeBase
 {
     friend class MusicQuery;
+    friend class MusicPreview;
+
 public:
     virtual int start(std::string const&, unity::scopes::RegistryProxy const&) override;
     virtual void stop() override;

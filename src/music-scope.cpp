@@ -257,24 +257,16 @@ void MusicPreview::album_preview(unity::scopes::PreviewReplyProxy const &reply) 
     artwork.add_attribute("source", Variant(art));
     PreviewWidget tracks("tracks", "audio");
     tracks.add_attribute("tracks", result["trackinfo"]);
-    try
-    {
-        MediaStore store(MS_READ_ONLY);
-        VariantBuilder builder;
-        Album album(album_name, artist);
-        for(const auto &track : store.getAlbumSongs(album)) {
-            builder.add_tuple({
-                {"title", Variant(track.getTitle())},
-                {"source", Variant(track.getUri())},
-                {"length", Variant(track.getDuration())}
-            });
-        }
-        tracks.add_attribute("tracks", builder.end());
-    }catch(const std::exception &e)
-    {
-        fprintf(stderr, "Error obtaining track info: %s\n", e.what());
+    VariantBuilder builder;
+    Album album(album_name, artist);
+    for(const auto &track : scope.store->getAlbumSongs(album)) {
+        builder.add_tuple({
+            {"title", Variant(track.getTitle())},
+            {"source", Variant(track.getUri())},
+            {"length", Variant(track.getDuration())}
+        });
     }
-
+    tracks.add_attribute("tracks", builder.end());
     reply->push({artwork, header, tracks});
 }
 
