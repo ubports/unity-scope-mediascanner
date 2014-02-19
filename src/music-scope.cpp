@@ -129,6 +129,15 @@ void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply) const
         CategorisedResult res(cat);
         res.set_title(album.getTitle());
         res["artist"] = album.getTitle();
+        VariantBuilder builder;
+        for(const auto &track : scope.store->getAlbumSongs(album)) {
+            builder.add_tuple({
+            {"title", Variant(track.getTitle())},
+            {"source", Variant(track.getUri())},
+            {"length", Variant(track.getDuration())}
+            });
+        }
+        res["tracks"] = builder.end();
         reply->push(res);
     }
 
@@ -241,8 +250,10 @@ void MusicPreview::album_preview(unity::scopes::PreviewReplyProxy const &reply) 
         art = make_art_uri(artist, album);
     }
     artwork.add_attribute("source", Variant(art));
+    PreviewWidget tracks("tracks", "audio");
+    tracks.add_attribute("tracks", result["trackinfo"]);
 
-    reply->push({artwork, header});
+    reply->push({artwork, header, tracks});
 }
 
 extern "C" ScopeBase * UNITY_SCOPE_CREATE_FUNCTION() {
