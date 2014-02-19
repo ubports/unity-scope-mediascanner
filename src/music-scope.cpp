@@ -136,25 +136,6 @@ void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply) const 
 
 }
 
-void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply) const {
-    CategoryRenderer renderer(query.query_string() == "" ? ALBUMS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
-    auto cat = reply->register_category("albums", "Albums", SONGS_CATEGORY_ICON, renderer);
-    for (const auto &album : scope.store->queryAlbums(query.query_string(), MAX_RESULTS)) {
-        CategorisedResult res(cat);
-        res.set_title(album.getTitle());
-        res["artist"] = album.getArtist();
-        reply->push(res);
-    }
-
-}
-
-MusicPreview::MusicPreview(MusicScope &scope, Result const& result)
-    : scope(scope), result(result) {
-}
-
-void MusicPreview::cancelled() {
-}
-
 static std::string uriencode(const std::string &src) {
     const char DEC2HEX[16+1] = "0123456789ABCDEF";
     std::string result = "";
@@ -170,6 +151,27 @@ static std::string uriencode(const std::string &src) {
     return result;
 }
 
+void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply) const {
+    CategoryRenderer renderer(query.query_string() == "" ? ALBUMS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
+    auto cat = reply->register_category("albums", "Albums", SONGS_CATEGORY_ICON, renderer);
+    for (const auto &album : scope.store->queryAlbums(query.query_string(), MAX_RESULTS)) {
+        CategorisedResult res(cat);
+        res.set_uri("album://" + uriencode(album.getArtist()) + "/" +
+                uriencode(album.getTitle()));
+        res.set_title(album.getTitle());
+        res["artist"] = album.getArtist();
+        res["isalbum"] = true;
+        reply->push(res);
+    }
+}
+
+MusicPreview::MusicPreview(MusicScope &scope, Result const& result)
+    : scope(scope), result(result) {
+}
+
+void MusicPreview::cancelled() {
+}
+
 static std::string make_art_uri(const std::string &artist, const std::string &album) {
     std::string result = "image://albumart/";
     result += "artist=" + uriencode(artist);
@@ -179,13 +181,13 @@ static std::string make_art_uri(const std::string &artist, const std::string &al
 
 void MusicPreview::run(PreviewReplyProxy const& reply)
 {
-    if(result.contains("uri"))
+    if(result.contains("isalbum"))
     {
-        song_preview(reply);
+        album_preview(reply);
     }
     else
     {
-        album_preview(reply);
+        song_preview(reply);
     }
 }
 
