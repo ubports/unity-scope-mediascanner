@@ -23,7 +23,7 @@
 const std::string OnlineMusicResultForwarder::songs_category_id;
 
 OnlineMusicResultForwarder::OnlineMusicResultForwarder(unity::scopes::SearchReplyProxy const& upstream)
-    : OnlineMusicResultForwarder(upstream)
+    : BufferedResultForwarder(upstream)
 {
 }
 
