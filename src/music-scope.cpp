@@ -143,7 +143,7 @@ void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply) const
     for (const auto &album : scope.store->queryAlbums(query.query_string(), MAX_RESULTS)) {
         CategorisedResult res(cat);
         res.set_title(album.getTitle());
-        res["artist"] = album.getTitle();
+        res["artist"] = album.getArtist();
         VariantBuilder builder;
         for(const auto &track : scope.store->getAlbumSongs(album)) {
             builder.add_tuple({
