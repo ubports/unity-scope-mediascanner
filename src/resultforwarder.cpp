@@ -19,17 +19,14 @@
 
 #include "resultforwarder.h"
 #include <unity/scopes/SearchReply.h>
-#include <iostream>
 
 using namespace unity::scopes;
 
 void ResultForwarder::push(Category::SCPtr category) {
-    std::cout << "registering cat: " << category->id() << std::endl;
     upstream->register_category(category);
 }
 
 void ResultForwarder::push(CategorisedResult result) {
-    std::cout << "ResultForwarder::push: " << result.uri() << std::endl;
     upstream->push(result);
     if (!ready_)
     {
