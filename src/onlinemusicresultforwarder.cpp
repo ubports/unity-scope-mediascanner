@@ -20,7 +20,7 @@
 #include "onlinemusicresultforwarder.h"
 #include <unity/scopes/SearchReply.h>
 
-const std::string OnlineMusicResultForwarder::songs_category_id;
+const std::string OnlineMusicResultForwarder::songs_category_id = "cat_0";
 
 OnlineMusicResultForwarder::OnlineMusicResultForwarder(unity::scopes::SearchReplyProxy const& upstream)
     : BufferedResultForwarder(upstream)
