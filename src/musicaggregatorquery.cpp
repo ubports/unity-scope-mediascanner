@@ -43,9 +43,10 @@ void MusicAggregatorQuery::cancelled() {
 
 void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_reply) {
     std::shared_ptr<ResultForwarder> local_reply(new ResultForwarder(parent_reply));
+    std::shared_ptr<ResultForwarder> online_reply;
     if(online_scope)
     {
-        std::shared_ptr<ResultForwarder> online_reply(new BufferedResultForwarder(parent_reply));
+        online_reply.reset(new BufferedResultForwarder(parent_reply));
         local_reply->add_observer(online_reply);
         create_subquery(online_scope, query.query_string(), online_reply);
     }
