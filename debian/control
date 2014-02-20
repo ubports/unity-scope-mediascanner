@@ -5,7 +5,7 @@ Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 Build-Depends: cmake (>= 2.8),
                debhelper (>= 9),
                mediascanner2.0,
-               libmediascanner-2.0-dev (>= 0.99),
+               libmediascanner-2.0-dev (>= 0.99+14.04.20140219),
                libunity-dev (>= 7.0.9),
                libunity-scopes-dev (>= 0.3.1),
                libglib2.0-dev,
