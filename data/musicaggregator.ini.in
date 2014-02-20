@@ -1,8 +1,8 @@
 [ScopeConfig]
 DisplayName=Music
 Description=This is an Ubuntu search plugin merges all music sources into one.
-Art=
-Icon=/usr/share/unity/icons/lens-nav-music.svg
+Art=@SCOPES_DIR@/musicaggregator/musicaggregator-screenshot.jpg
+Icon=@SCOPES_DIR@/mediascanner-music/music.png
 SearchHint=Search music
 HotKey=
 
