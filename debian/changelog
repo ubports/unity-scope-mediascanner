@@ -1,3 +1,10 @@
+unity-scope-mediascanner (0.2+14.04.20140220-0ubuntu1) trusty; urgency=low
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * Bump the mediascanner build-dep
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 20 Feb 2014 10:05:38 +0000
+
 unity-scope-mediascanner (0.2+14.04.20140217-0ubuntu1) trusty; urgency=low
 
   [ Pawel Stolowski ]
