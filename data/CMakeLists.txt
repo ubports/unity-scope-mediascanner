@@ -9,7 +9,7 @@ configure_file(
 )
 
 install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/mediascanner-music.ini" music.png
+  FILES "${CMAKE_CURRENT_BINARY_DIR}/mediascanner-music.ini" music.png mediascanner-music-screenshot.jpg
   DESTINATION "${SCOPES_DIR}/mediascanner-music"
 )
 
@@ -19,7 +19,7 @@ configure_file(
 )
 
 install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/mediascanner-video.ini" video.png
+  FILES "${CMAKE_CURRENT_BINARY_DIR}/mediascanner-video.ini" video.png mediascanner-video-screenshot.jpg
   DESTINATION "${SCOPES_DIR}/mediascanner-video"
 )
 
@@ -30,7 +30,7 @@ configure_file(
 )
 
 install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/musicaggregator.ini"
+  FILES "${CMAKE_CURRENT_BINARY_DIR}/musicaggregator.ini" musicaggregator-screenshot.jpg
   DESTINATION "${SCOPES_DIR}/musicaggregator"
 )
 
@@ -40,7 +40,7 @@ configure_file(
 )
 
 install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/videoaggregator.ini"
+  FILES "${CMAKE_CURRENT_BINARY_DIR}/videoaggregator.ini" videoaggregator-screenshot.jpg
   DESTINATION "${SCOPES_DIR}/videoaggregator"
 )
 # D-Bus service definition for old scope
