@@ -70,7 +70,7 @@ static const char SEARCH_CATEGORY_DEFINITION[] = R"(
   "schema-version": 1,
   "template": {
     "category-layout": "grid",
-    "card-size": "medium"
+    "card-size": "small"
   },
   "components": {
     "title": "title",
