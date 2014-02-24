@@ -38,6 +38,7 @@ static const char SONGS_CATEGORY_DEFINITION[] = R"(
   "schema-version": 1,
   "template": {
     "category-layout": "carousel",
+    "overlay": true,
     "card-size": "medium"
   },
   "components": {
@@ -52,7 +53,6 @@ static const char ALBUMS_CATEGORY_DEFINITION[] = R"(
   "schema-version": 1,
   "template": {
     "category-layout": "grid",
-    "overlay": true,
     "card-size": "medium"
   },
   "components": {
