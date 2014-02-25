@@ -109,7 +109,10 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
         // res["width"] = media.getWidth();
         // res["height"] = media.getHeight();
 
-        reply->push(res);
+        if(!reply->push(res))
+        {
+            return;
+        }
     }
 }
 
@@ -149,7 +152,10 @@ void VideoPreview::run(PreviewReplyProxy const& reply)
         actions.add_attribute("actions", builder.end());
     }
 
-    reply->push({video, header, actions});
+    if(!reply->push({video, header, actions}))
+    {
+        return;
+    }
 }
 
 extern "C" ScopeBase * UNITY_SCOPE_CREATE_FUNCTION() {

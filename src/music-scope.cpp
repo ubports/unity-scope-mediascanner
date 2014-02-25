@@ -111,7 +111,10 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
         res["artist"] = media.getAuthor();
         res["track-number"] = media.getTrackNumber();
 
-        reply->push(res);
+        if(!reply->push(res))
+        {
+            return;
+        }
     }
 }
 
@@ -193,7 +196,10 @@ void MusicPreview::run(PreviewReplyProxy const& reply)
         actions.add_attribute("actions", builder.end());
     }
 
-    reply->push({artwork, header, actions, tracks});
+    if(!reply->push({artwork, header, actions, tracks}))
+    {
+        return;
+    }
 }
 
 extern "C" ScopeBase * UNITY_SCOPE_CREATE_FUNCTION() {
