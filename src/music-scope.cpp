@@ -196,10 +196,7 @@ void MusicPreview::run(PreviewReplyProxy const& reply)
         actions.add_attribute("actions", builder.end());
     }
 
-    if(!reply->push({artwork, header, actions, tracks}))
-    {
-        return;
-    }
+    reply->push({artwork, header, actions, tracks});
 }
 
 extern "C" ScopeBase * UNITY_SCOPE_CREATE_FUNCTION() {

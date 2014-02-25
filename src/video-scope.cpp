@@ -152,10 +152,7 @@ void VideoPreview::run(PreviewReplyProxy const& reply)
         actions.add_attribute("actions", builder.end());
     }
 
-    if(!reply->push({video, header, actions}))
-    {
-        return;
-    }
+    reply->push({video, header, actions});
 }
 
 extern "C" ScopeBase * UNITY_SCOPE_CREATE_FUNCTION() {
