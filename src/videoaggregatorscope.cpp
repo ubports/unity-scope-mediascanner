@@ -44,13 +44,13 @@ int VideoAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy
 void VideoAggregatorScope::stop() {
 }
 
-QueryBase::UPtr VideoAggregatorScope::create_query(Query const& q,
+SearchQueryBase::UPtr VideoAggregatorScope::search(CannedQuery const& q,
                                                    SearchMetadata const&) {
-    QueryBase::UPtr query(new VideoAggregatorQuery(q, local_scope, online_scope));
+    SearchQueryBase::UPtr query(new VideoAggregatorQuery(q, local_scope, online_scope));
     return query;
 }
 
-QueryBase::UPtr VideoAggregatorScope::preview(Result const& /*result*/, ActionMetadata const& /*hints*/) {
+PreviewQueryBase::UPtr VideoAggregatorScope::preview(Result const& /*result*/, ActionMetadata const& /*hints*/) {
     return nullptr;
 }
 

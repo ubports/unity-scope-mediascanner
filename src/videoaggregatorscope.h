@@ -21,7 +21,6 @@
 #define VIDEOAGGREGATORSCOPE_H
 
 #include <unity/scopes/ScopeBase.h>
-#include <unity/scopes/QueryBase.h>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/ReplyProxyFwd.h>
 
@@ -32,10 +31,10 @@ public:
 
     virtual void stop() override;
 
-    virtual unity::scopes::QueryBase::UPtr preview(const unity::scopes::Result&,
+    virtual unity::scopes::PreviewQueryBase::UPtr preview(const unity::scopes::Result&,
             const unity::scopes::ActionMetadata&) override;
 
-    virtual unity::scopes::QueryBase::UPtr create_query(unity::scopes::Query const& q,
+    virtual unity::scopes::SearchQueryBase::UPtr search(unity::scopes::CannedQuery const& q,
             unity::scopes::SearchMetadata const&) override;
 
 private:

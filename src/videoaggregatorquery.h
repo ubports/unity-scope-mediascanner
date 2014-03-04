@@ -20,14 +20,14 @@
 #ifndef VIDEOAGGREGATORQUERY_H_
 #define VIDEOAGGREGATORQUERY_H_
 
-#include <unity/scopes/SearchQuery.h>
+#include <unity/scopes/SearchQueryBase.h>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/ReplyProxyFwd.h>
 
-class VideoAggregatorQuery : public unity::scopes::SearchQuery
+class VideoAggregatorQuery : public unity::scopes::SearchQueryBase
 {
 public:
-    VideoAggregatorQuery(unity::scopes::Query const& query,
+    VideoAggregatorQuery(unity::scopes::CannedQuery const& query,
             unity::scopes::ScopeProxy local_scope,
             unity::scopes::ScopeProxy online_scope);
     ~VideoAggregatorQuery();
@@ -36,7 +36,7 @@ public:
     virtual void run(unity::scopes::SearchReplyProxy const& reply) override;
 
 private:
-    unity::scopes::Query query;
+    unity::scopes::CannedQuery query;
     unity::scopes::ScopeProxy local_scope;
     unity::scopes::ScopeProxy online_scope;
 };

@@ -14,27 +14,28 @@ class MusicScope : public unity::scopes::ScopeBase
 public:
     virtual int start(std::string const&, unity::scopes::RegistryProxy const&) override;
     virtual void stop() override;
-    virtual unity::scopes::QueryBase::UPtr create_query(unity::scopes::Query const &q,
+    virtual unity::scopes::SearchQueryBase::UPtr search(unity::scopes::CannedQuery const &q,
                                          unity::scopes::SearchMetadata const& hints) override;
-    virtual unity::scopes::QueryBase::UPtr preview(unity::scopes::Result const& result, unity::scopes::ActionMetadata const& hints) override;
+    virtual unity::scopes::PreviewQueryBase::UPtr preview(unity::scopes::Result const& result,
+                                         unity::scopes::ActionMetadata const& hints) override;
 
 private:
     std::unique_ptr<mediascanner::MediaStore> store;
 };
 
-class MusicQuery : public unity::scopes::SearchQuery
+class MusicQuery : public unity::scopes::SearchQueryBase
 {
 public:
-    MusicQuery(MusicScope &scope, unity::scopes::Query const& query);
+    MusicQuery(MusicScope &scope, unity::scopes::CannedQuery const& query);
     virtual void cancelled() override;
     virtual void run(unity::scopes::SearchReplyProxy const&reply) override;
 
 private:
     const MusicScope &scope;
-    const unity::scopes::Query query;
+    const unity::scopes::CannedQuery query;
 };
 
-class MusicPreview : public unity::scopes::PreviewQuery
+class MusicPreview : public unity::scopes::PreviewQueryBase
 {
 public:
     MusicPreview(MusicScope &scope, unity::scopes::Result const& result);

@@ -20,13 +20,13 @@
 #ifndef RESULTFORWARDER_H_
 #define RESULTFORWARDER_H_
 
-#include<unity/scopes/SearchListener.h>
+#include<unity/scopes/SearchListenerBase.h>
 #include<unity/scopes/ReplyProxyFwd.h>
 #include<unity/scopes/ListenerBase.h>
 #include<unity/scopes/CategorisedResult.h>
 #include<list>
 
-class ResultForwarder : public unity::scopes::SearchListener {
+class ResultForwarder : public unity::scopes::SearchListenerBase {
 
 public:
 

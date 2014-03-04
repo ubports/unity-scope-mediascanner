@@ -52,9 +52,9 @@ TEST_F(MusicScopeTest, CreateQuery) {
     MusicScope scope;
     auto expected = ScopeBase::VERSION;
     ASSERT_EQ(expected, scope.start("mediascanner-music", nullptr));
-    Query q("mediascanner-music", "query", "");
+    CannedQuery q("mediascanner-music", "query", "");
     SearchMetadata hints("en_AU", "phone");
-    auto query = scope.create_query(q, hints);
+    auto query = scope.search(q, hints);
     ASSERT_NE(nullptr, dynamic_cast<MusicQuery*>(query.get()));
     scope.stop();
 }

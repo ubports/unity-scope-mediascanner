@@ -1,3 +1,9 @@
+unity-scope-mediascanner (0.2+14.04.20140220.1-0ubuntu2) UNRELEASED; urgency=low
+
+  * Updated for unity-scopes-api 0.4.0
+
+ -- Pawel Stolowski <pawel.stolowski@ubuntu.com>  Tue, 04 Mar 2014 10:56:21 +0100
+
 unity-scope-mediascanner (0.2+14.04.20140220.1-0ubuntu1) trusty; urgency=low
 
   [ Michal Hruby ]
