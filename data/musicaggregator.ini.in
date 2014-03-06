@@ -2,8 +2,8 @@
 DisplayName=Music
 Description=This is an Ubuntu search plugin merges all music sources into one.
 Author=Canonical Ltd.
-Art=@SCOPES_DIR@/musicaggregator/musicaggregator-screenshot.jpg
-Icon=@SCOPES_DIR@/mediascanner-music/music.png
+Art=@SCOPES_DATADIR@/musicaggregator/musicaggregator-screenshot.jpg
+Icon=@SCOPES_DATADIR@/mediascanner-music/music.png
 SearchHint=Search music
 HotKey=
 
