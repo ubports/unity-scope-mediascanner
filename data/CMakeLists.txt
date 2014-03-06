@@ -1,6 +1,6 @@
 
 # Unity Scope files
-set(SCOPES_DIR "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes")
+set(SCOPES_DIR "${CMAKE_INSTALL_FULL_LIBDIR}/unity-scopes")
 set(OLD_SCOPES_DIR "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes")
 
 configure_file(
