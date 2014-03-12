@@ -21,7 +21,7 @@
 #define RESULTFORWARDER_H_
 
 #include<unity/scopes/SearchListenerBase.h>
-#include<unity/scopes/ReplyProxyFwd.h>
+#include<unity/scopes/SearchReplyProxyFwd.h>
 #include<unity/scopes/ListenerBase.h>
 #include<unity/scopes/CategorisedResult.h>
 #include<list>
