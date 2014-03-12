@@ -27,7 +27,7 @@
 using namespace unity::scopes;
 
 const char *LOCALSCOPE = "mediascanner-video";
-const char *ONLINESCOPE = "scope-onlinevideo";
+const char *ONLINESCOPE = "com.canonical.scopes.remotevideos";
 
 int VideoAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
     CategoryRenderer basic;

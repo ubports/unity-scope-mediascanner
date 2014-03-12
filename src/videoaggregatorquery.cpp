@@ -19,6 +19,7 @@
 
 #include "videoaggregatorquery.h"
 #include "resultforwarder.h"
+#include "bufferedresultforwarder.h"
 #include <unity/scopes/Annotation.h>
 #include <unity/scopes/CategorisedResult.h>
 #include <unity/scopes/CategoryRenderer.h>
@@ -41,11 +42,13 @@ void VideoAggregatorQuery::cancelled() {
 }
 
 void VideoAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_reply) {
-    SearchListener::SPtr local_reply(new ResultForwarder(parent_reply));
-    create_subquery(local_scope, query.query_string(), local_reply);
+    std::shared_ptr<ResultForwarder> local_reply(new ResultForwarder(parent_reply));
+    std::shared_ptr<ResultForwarder> online_reply;
     if(online_scope)
     {
-        SearchListener::SPtr online_reply(new ResultForwarder(parent_reply));
+        online_reply.reset(new BufferedResultForwarder(parent_reply));
+        local_reply->add_observer(online_reply);
         create_subquery(online_scope, query.query_string(), online_reply);
     }
+    create_subquery(local_scope, query.query_string(), local_reply);
 }
