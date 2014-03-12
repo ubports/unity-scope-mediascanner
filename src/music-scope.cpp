@@ -111,7 +111,10 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
         res["artist"] = media.getAuthor();
         res["track-number"] = media.getTrackNumber();
 
-        reply->push(res);
+        if(!reply->push(res))
+        {
+            return;
+        }
     }
 }
 

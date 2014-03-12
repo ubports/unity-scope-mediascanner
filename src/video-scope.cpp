@@ -109,7 +109,10 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
         // res["width"] = media.getWidth();
         // res["height"] = media.getHeight();
 
-        reply->push(res);
+        if(!reply->push(res))
+        {
+            return;
+        }
     }
 }
 
