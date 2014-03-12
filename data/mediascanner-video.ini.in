@@ -1,6 +1,7 @@
 [ScopeConfig]
 DisplayName=Local Videos
 Description=This is an Ubuntu search plugin that enables local videos to be searched and displayed in the Dash underneath the Video header. If you do not wish to search this content source, you can disable this search plugin.
+Author=Canonical Ltd.
 Art=@SCOPES_DIR@/mediascanner-video/mediascanner-video-screenshot.jpg
 Icon=@SCOPES_DIR@/mediascanner-video/video.png
 SearchHint=
