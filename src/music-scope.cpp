@@ -113,8 +113,7 @@ void MusicQuery::cancelled() {
 
 void MusicQuery::run(SearchReplyProxy const&reply) {
     query_songs(reply);
-    // Temporarily disabled.
-    // query_albums(reply);
+    query_albums(reply);
 }
 
 void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply) const {
