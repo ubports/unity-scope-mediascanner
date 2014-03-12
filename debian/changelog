@@ -1,8 +1,15 @@
-unity-scope-mediascanner (0.2+14.04.20140220.1-0ubuntu2) UNRELEASED; urgency=low
+unity-scope-mediascanner (0.2+14.04.20140312.2-0ubuntu1) trusty; urgency=low
 
+  [ Pawel Stolowski ]
   * Updated for unity-scopes-api 0.4.0
 
- -- Pawel Stolowski <pawel.stolowski@ubuntu.com>  Tue, 04 Mar 2014 10:56:21 +0100
+  [ Jussi Pakkanen ]
+  * Stop sending replies if query has been cancelled.
+
+  [ Marcus Tomlinson ]
+  * Added "Author" field to scope configs.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 12 Mar 2014 17:11:38 +0000
 
 unity-scope-mediascanner (0.2+14.04.20140220.1-0ubuntu1) trusty; urgency=low
 
