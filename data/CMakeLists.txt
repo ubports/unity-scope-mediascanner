@@ -1,6 +1,7 @@
 
 # Unity Scope files
-set(SCOPES_DIR "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes")
+set(SCOPES_DATADIR "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes")
+set(SCOPES_LIBDIR "${CMAKE_INSTALL_FULL_LIBDIR}/unity-scopes")
 set(OLD_SCOPES_DIR "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes")
 
 configure_file(
@@ -9,9 +10,15 @@ configure_file(
 )
 
 install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/mediascanner-music.ini" music.png mediascanner-music-screenshot.jpg
-  DESTINATION "${SCOPES_DIR}/mediascanner-music"
+  FILES "${CMAKE_CURRENT_BINARY_DIR}/mediascanner-music.ini"
+  DESTINATION "${SCOPES_LIBDIR}/mediascanner-music"
 )
+
+install(
+  FILES music.png mediascanner-music-screenshot.jpg
+  DESTINATION "${SCOPES_DATADIR}/mediascanner-music"
+)
+
 
 configure_file(
   mediascanner-video.ini.in
@@ -19,8 +26,13 @@ configure_file(
 )
 
 install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/mediascanner-video.ini" video.png mediascanner-video-screenshot.jpg
-  DESTINATION "${SCOPES_DIR}/mediascanner-video"
+  FILES video.png mediascanner-video-screenshot.jpg
+  DESTINATION "${SCOPES_DATADIR}/mediascanner-video"
+)
+
+install(
+  FILES "${CMAKE_CURRENT_BINARY_DIR}/mediascanner-video.ini"
+  DESTINATION "${SCOPES_LIBDIR}/mediascanner-video"
 )
 
 
@@ -30,9 +42,15 @@ configure_file(
 )
 
 install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/musicaggregator.ini" musicaggregator-screenshot.jpg
-  DESTINATION "${SCOPES_DIR}/musicaggregator"
+  FILES "${CMAKE_CURRENT_BINARY_DIR}/musicaggregator.ini"
+  DESTINATION "${SCOPES_LIBDIR}/musicaggregator"
 )
+
+install(
+  FILES musicaggregator-screenshot.jpg
+  DESTINATION "${SCOPES_DATADIR}/musicaggregator"
+)
+
 
 configure_file(
   videoaggregator.ini.in
@@ -40,9 +58,15 @@ configure_file(
 )
 
 install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/videoaggregator.ini" videoaggregator-screenshot.jpg
-  DESTINATION "${SCOPES_DIR}/videoaggregator"
+  FILES "${CMAKE_CURRENT_BINARY_DIR}/videoaggregator.ini"
+  DESTINATION "${SCOPES_LIBDIR}/videoaggregator"
 )
+
+install(
+  FILES videoaggregator-screenshot.jpg
+  DESTINATION "${SCOPES_DATADIR}/videoaggregator"
+)
+
 # D-Bus service definition for old scope
 
 configure_file(

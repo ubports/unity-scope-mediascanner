@@ -20,14 +20,14 @@
 #ifndef MUSICAGGREGATORQUERY_H_
 #define MUSICAGGREGATORQUERY_H_
 
-#include <unity/scopes/SearchQuery.h>
+#include <unity/scopes/SearchQueryBase.h>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/ReplyProxyFwd.h>
 
-class MusicAggregatorQuery : public unity::scopes::SearchQuery
+class MusicAggregatorQuery : public unity::scopes::SearchQueryBase
 {
 public:
-    MusicAggregatorQuery(unity::scopes::Query const& query,
+    MusicAggregatorQuery(unity::scopes::CannedQuery const& query,
             unity::scopes::ScopeProxy local_scope,
             unity::scopes::ScopeProxy online_scope);
     ~MusicAggregatorQuery();
@@ -36,7 +36,7 @@ public:
     virtual void run(unity::scopes::SearchReplyProxy const& reply) override;
 
 private:
-    unity::scopes::Query query;
+    unity::scopes::CannedQuery query;
     unity::scopes::ScopeProxy local_scope;
     unity::scopes::ScopeProxy online_scope;
 };
