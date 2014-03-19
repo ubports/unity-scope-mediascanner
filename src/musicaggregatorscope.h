@@ -42,6 +42,7 @@ private:
     std::string query;
     unity::scopes::ScopeProxy local_scope;
     unity::scopes::ScopeProxy online_scope;
+    unity::scopes::RegistryProxy registry;
 };
 
 #endif
