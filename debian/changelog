@@ -1,3 +1,13 @@
+unity-scope-mediascanner (0.2+14.04.20140319.1-0ubuntu1) trusty; urgency=low
+
+  [ Pawel Stolowski ]
+  * Try to get proxy for online scope on search() if not set yet (e.g.
+    not available on startup), to work around the problem with no remote
+    scopes on first run (till network gets configured and phone is
+    rebooted).
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 19 Mar 2014 16:49:45 +0000
+
 unity-scope-mediascanner (0.2+14.04.20140312.2-0ubuntu1) trusty; urgency=low
 
   [ Pawel Stolowski ]
