@@ -77,19 +77,19 @@ void VideoScope::stop() {
     store.reset();
 }
 
-QueryBase::UPtr VideoScope::create_query(Query const &q,
+SearchQueryBase::UPtr VideoScope::search(CannedQuery const &q,
                                          SearchMetadata const& hints) {
-    QueryBase::UPtr query(new VideoQuery(*this, q));
+    SearchQueryBase::UPtr query(new VideoQuery(*this, q));
     return query;
 }
 
-QueryBase::UPtr VideoScope::preview(Result const& result,
+PreviewQueryBase::UPtr VideoScope::preview(Result const& result,
                                     ActionMetadata const& hints) {
-    QueryBase::UPtr previewer(new VideoPreview(*this, result));
+    PreviewQueryBase::UPtr previewer(new VideoPreview(*this, result));
     return previewer;
 }
 
-VideoQuery::VideoQuery(VideoScope &scope, Query const& query)
+VideoQuery::VideoQuery(VideoScope &scope, CannedQuery const& query)
     : scope(scope), query(query) {
 }
 
@@ -109,7 +109,10 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
         // res["width"] = media.getWidth();
         // res["height"] = media.getHeight();
 
-        reply->push(res);
+        if(!reply->push(res))
+        {
+            return;
+        }
     }
 }
 
@@ -134,10 +137,10 @@ void VideoPreview::run(PreviewReplyProxy const& reply)
     reply->register_layout({layout1col, layout2col, layout3col});
 
     PreviewWidget header("header", "header");
-    header.add_component("title", "title");
+    header.add_attribute_mapping("title", "title");
 
     PreviewWidget video("video", "video");
-    video.add_component("source", "uri");
+    video.add_attribute_mapping("source", "uri");
 
     PreviewWidget actions("actions", "actions");
     {
@@ -146,7 +149,7 @@ void VideoPreview::run(PreviewReplyProxy const& reply)
                 {"id", Variant("play")},
                 {"label", Variant("Play")}
             });
-        actions.add_attribute("actions", builder.end());
+        actions.add_attribute_value("actions", builder.end());
     }
 
     reply->push({video, header, actions});

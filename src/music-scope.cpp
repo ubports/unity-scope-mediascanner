@@ -92,19 +92,19 @@ void MusicScope::stop() {
     store.reset();
 }
 
-QueryBase::UPtr MusicScope::create_query(Query const &q,
+SearchQueryBase::UPtr MusicScope::search(CannedQuery const &q,
                                          SearchMetadata const& hints) {
-    QueryBase::UPtr query(new MusicQuery(*this, q));
+    SearchQueryBase::UPtr query(new MusicQuery(*this, q));
     return query;
 }
 
-QueryBase::UPtr MusicScope::preview(Result const& result,
+PreviewQueryBase::UPtr MusicScope::preview(Result const& result,
                                     ActionMetadata const& hints) {
-    QueryBase::UPtr previewer(new MusicPreview(*this, result));
+    PreviewQueryBase::UPtr previewer(new MusicPreview(*this, result));
     return previewer;
 }
 
-MusicQuery::MusicQuery(MusicScope &scope, Query const& query)
+MusicQuery::MusicQuery(MusicScope &scope, CannedQuery const& query)
     : scope(scope), query(query) {
 }
 
@@ -131,7 +131,10 @@ void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply) const 
         res["artist"] = media.getAuthor();
         res["track-number"] = media.getTrackNumber();
 
-        reply->push(res);
+        if(!reply->push(res))
+        {
+            return;
+        }
     }
 
 }
@@ -208,8 +211,8 @@ void MusicPreview::song_preview(unity::scopes::PreviewReplyProxy const &reply) c
     reply->register_layout({layout1col, layout2col, layout3col});
 
     PreviewWidget header("header", "header");
-    header.add_component("title", "title");
-    header.add_component("subtitle", "artist");
+    header.add_attribute_mapping("title", "title");
+    header.add_attribute_mapping("subtitle", "artist");
 
     PreviewWidget artwork("art", "image");
     std::string artist = result["artist"].get_string();
@@ -220,7 +223,7 @@ void MusicPreview::song_preview(unity::scopes::PreviewReplyProxy const &reply) c
     } else {
         art = make_art_uri(artist, album);
     }
-    artwork.add_attribute("source", Variant(art));
+    artwork.add_attribute_value("source", Variant(art));
 
     PreviewWidget tracks("tracks", "audio");
     {
@@ -230,7 +233,7 @@ void MusicPreview::song_preview(unity::scopes::PreviewReplyProxy const &reply) c
                 {"source", Variant(result.uri())},
                 {"length", result["duration"]}
             });
-        tracks.add_attribute("tracks", builder.end());
+        tracks.add_attribute_value("tracks", builder.end());
     }
 
     PreviewWidget actions("actions", "actions");
@@ -240,7 +243,7 @@ void MusicPreview::song_preview(unity::scopes::PreviewReplyProxy const &reply) c
                 {"id", Variant("play")},
                 {"label", Variant("Play in music app")}
             });
-        actions.add_attribute("actions", builder.end());
+        actions.add_attribute_value("actions", builder.end());
     }
 
     reply->push({artwork, header, actions, tracks});
@@ -248,8 +251,8 @@ void MusicPreview::song_preview(unity::scopes::PreviewReplyProxy const &reply) c
 
 void MusicPreview::album_preview(unity::scopes::PreviewReplyProxy const &reply) const {
     PreviewWidget header("header", "header");
-    header.add_component("title", "title");
-    header.add_component("subtitle", "artist");
+    header.add_attribute_mapping("title", "title");
+    header.add_attribute_mapping("subtitle", "artist");
 
     PreviewWidget artwork("art", "image");
     std::string artist = result["artist"].get_string();
@@ -260,18 +263,18 @@ void MusicPreview::album_preview(unity::scopes::PreviewReplyProxy const &reply) 
     } else {
         art = make_art_uri(artist, album_name);
     }
-    artwork.add_attribute("source", Variant(art));
+    artwork.add_attribute_value("source", Variant(art));
     PreviewWidget tracks("tracks", "audio");
     VariantBuilder builder;
     Album album(album_name, artist);
     for(const auto &track : scope.store->getAlbumSongs(album)) {
-        builder.add_tuple({
-            {"title", Variant(track.getTitle())},
-            {"source", Variant(track.getUri())},
-            {"length", Variant(track.getDuration())}
-        });
+        std::vector<std::pair<std::string, Variant>> tmp;
+        tmp.emplace_back("title", Variant(track.getTitle()));
+        tmp.emplace_back("source", Variant(track.getUri()));
+        tmp.emplace_back("length", Variant(track.getDuration()));
+        builder.add_tuple(tmp);
     }
-    tracks.add_attribute("tracks", builder.end());
+    tracks.add_attribute_value("tracks", builder.end());
     reply->push({artwork, header, tracks});
 }
 

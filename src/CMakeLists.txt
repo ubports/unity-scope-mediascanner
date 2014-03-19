@@ -33,15 +33,15 @@ target_link_libraries(videoaggregator ${UNITY_SCOPES_LDFLAGS})
 
 install(
   TARGETS mediascanner-music
-  LIBRARY DESTINATION "${CMAKE_INSTALL_DATADIR}/unity/scopes/mediascanner-music")
+  LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/unity-scopes/mediascanner-music")
 
 install(
   TARGETS mediascanner-video
-  LIBRARY DESTINATION "${CMAKE_INSTALL_DATADIR}/unity/scopes/mediascanner-video")
+  LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/unity-scopes/mediascanner-video")
 
 install(TARGETS musicaggregator
-  LIBRARY DESTINATION "${CMAKE_INSTALL_DATADIR}/unity/scopes/musicaggregator")
+  LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/unity-scopes/musicaggregator")
 
   install(TARGETS videoaggregator
-  LIBRARY DESTINATION "${CMAKE_INSTALL_DATADIR}/unity/scopes/videoaggregator")
+  LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/unity-scopes/videoaggregator")
   

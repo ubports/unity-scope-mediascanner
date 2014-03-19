@@ -1,8 +1,9 @@
 [ScopeConfig]
 DisplayName=Video
 Description=This is an Ubuntu search plugin merges all video sources into one.
-Art=@SCOPES_DIR@/videoaggregator/videoaggregator-screenshot.jpg
-Icon=@SCOPES_DIR@/mediascanner-video/video.png
+Author=Canonical Ltd.
+Art=@SCOPES_DATADIR@/videoaggregator/videoaggregator-screenshot.jpg
+Icon=@SCOPES_DATADIR@/mediascanner-video/video.png
 SearchHint=Search video
 HotKey=
 
