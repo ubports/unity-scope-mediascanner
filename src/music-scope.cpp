@@ -158,7 +158,7 @@ void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply) const
     auto cat = reply->register_category("albums", "Albums", SONGS_CATEGORY_ICON, renderer);
     for (const auto &album : scope.store->queryAlbums(query.query_string(), MAX_RESULTS)) {
         CategorisedResult res(cat);
-        res.set_uri("album://" + uriencode(album.getArtist()) + "/" +
+        res.set_uri("album:///" + uriencode(album.getArtist()) + "/" +
                 uriencode(album.getTitle()));
         res.set_title(album.getTitle());
         res["artist"] = album.getArtist();
