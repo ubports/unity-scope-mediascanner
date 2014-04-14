@@ -125,7 +125,6 @@ void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply) const 
         res.set_dnd_uri(media.getUri());
         res.set_title(media.getTitle());
 
-        res["mimetype"] = media.getContentType();
         res["duration"] = media.getDuration();
         res["album"] = media.getAlbum();
         res["artist"] = media.getAuthor();
@@ -159,12 +158,9 @@ void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply) const
     auto cat = reply->register_category("albums", "Albums", SONGS_CATEGORY_ICON, renderer);
     for (const auto &album : scope.store->queryAlbums(query.query_string(), MAX_RESULTS)) {
         CategorisedResult res(cat);
-        // FIXME: current dash does not show image unless uri starts with file://
-        // This is being fixed.
         res.set_uri("album://" + uriencode(album.getArtist()) + "/" +
                 uriencode(album.getTitle()));
         res.set_title(album.getTitle());
-        res["mimetype"] = "audio/xhack";
         res["artist"] = album.getArtist();
         res["album"] = album.getTitle();
         res["isalbum"] = true;
@@ -250,9 +246,13 @@ void MusicPreview::song_preview(unity::scopes::PreviewReplyProxy const &reply) c
 }
 
 void MusicPreview::album_preview(unity::scopes::PreviewReplyProxy const &reply) const {
-    PreviewWidget header("header", "header");
-    header.add_attribute_mapping("title", "title");
-    header.add_attribute_mapping("subtitle", "artist");
+    ColumnLayout layout1col(1), layout2col(2);
+    layout1col.add_column({"art", "header", "actions", "tracks"});
+
+    layout2col.add_column({"art"});
+    layout2col.add_column({"header", "actions", "tracks"});
+
+    reply->register_layout({layout1col, layout2col});
 
     PreviewWidget artwork("art", "image");
     std::string artist = result["artist"].get_string();
@@ -264,6 +264,21 @@ void MusicPreview::album_preview(unity::scopes::PreviewReplyProxy const &reply) 
         art = make_art_uri(artist, album_name);
     }
     artwork.add_attribute_value("source", Variant(art));
+
+    PreviewWidget header("header", "header");
+    header.add_attribute_mapping("title", "title");
+    header.add_attribute_mapping("subtitle", "artist");
+
+    PreviewWidget actions("actions", "actions");
+    {
+        VariantBuilder builder;
+        builder.add_tuple({
+                {"uri", Variant(result.uri())},
+                {"label", Variant("Play in music app")}
+            });
+        actions.add_attribute_value("actions", builder.end());
+    }
+
     PreviewWidget tracks("tracks", "audio");
     VariantBuilder builder;
     Album album(album_name, artist);
@@ -275,7 +290,7 @@ void MusicPreview::album_preview(unity::scopes::PreviewReplyProxy const &reply) 
         builder.add_tuple(tmp);
     }
     tracks.add_attribute_value("tracks", builder.end());
-    reply->push({artwork, header, tracks});
+    reply->push({artwork, header, actions, tracks});
 }
 
 extern "C" ScopeBase * UNITY_SCOPE_CREATE_FUNCTION() {
