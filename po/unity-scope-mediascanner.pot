@@ -1,0 +1,88 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Canonical Ltd.
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: unity-scope-mediascanner\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-04-25 18:28+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/music-scope.cpp:122
+msgid "Songs"
+msgstr ""
+
+#: ../src/music-scope.cpp:159
+msgid "Albums"
+msgstr ""
+
+#: ../src/music-scope.cpp:241 ../src/music-scope.cpp:278
+msgid "Play in music app"
+msgstr ""
+
+#: ../src/video-scope.cpp:102
+msgid "My Videos"
+msgstr ""
+
+#: ../src/video-scope.cpp:151
+msgid "Play"
+msgstr ""
+
+#: /home/miso/projects/unity-scope-mediascanner/build/po/tmp/mediascanner-music.ini.in.in.h:1
+msgid "Local Music"
+msgstr ""
+
+#: /home/miso/projects/unity-scope-mediascanner/build/po/tmp/mediascanner-music.ini.in.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that enables information from local music to "
+"be searched and displayed in the Dash underneath the Music header. If you do "
+"not wish to search this content source, you can disable this search plugin."
+msgstr ""
+
+#: /home/miso/projects/unity-scope-mediascanner/build/po/tmp/mediascanner-music.ini.in.in.h:3
+msgid "Search local music collection"
+msgstr ""
+
+#: /home/miso/projects/unity-scope-mediascanner/build/po/tmp/mediascanner-video.ini.in.in.h:1
+msgid "Local Videos"
+msgstr ""
+
+#: /home/miso/projects/unity-scope-mediascanner/build/po/tmp/mediascanner-video.ini.in.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that enables local videos to be searched and "
+"displayed in the Dash underneath the Video header. If you do not wish to "
+"search this content source, you can disable this search plugin."
+msgstr ""
+
+#: /home/miso/projects/unity-scope-mediascanner/build/po/tmp/musicaggregator.ini.in.in.h:1
+msgid "Music"
+msgstr ""
+
+#: /home/miso/projects/unity-scope-mediascanner/build/po/tmp/musicaggregator.ini.in.in.h:2
+msgid "This is an Ubuntu search plugin merges all music sources into one."
+msgstr ""
+
+#: /home/miso/projects/unity-scope-mediascanner/build/po/tmp/musicaggregator.ini.in.in.h:3
+msgid "Search music"
+msgstr ""
+
+#: /home/miso/projects/unity-scope-mediascanner/build/po/tmp/videoaggregator.ini.in.in.h:1
+msgid "Video"
+msgstr ""
+
+#: /home/miso/projects/unity-scope-mediascanner/build/po/tmp/videoaggregator.ini.in.in.h:2
+msgid "This is an Ubuntu search plugin merges all video sources into one."
+msgstr ""
+
+#: /home/miso/projects/unity-scope-mediascanner/build/po/tmp/videoaggregator.ini.in.in.h:3
+msgid "Search video"
+msgstr ""
