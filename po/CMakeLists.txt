@@ -3,13 +3,6 @@ file(GLOB CPPFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
 file(GLOB INIFILES RELATIVE "${CMAKE_CURRENT_BINARY_DIR}"
                    "${CMAKE_SOURCE_DIR}/data/*.ini.in.in")
 
-#set(EXTRACT_CMD true)
-#foreach(inifile ${INIFILES})
-#    set(EXTRACT_CMD "${INTLTOOL_EXTRACT_BIN} --type=gettext/ini --local ${inifile} && ${EXTRACT_CMD}")
-#endforeach()
-
-#add_custom_target(pot-ini COMMAND ${EXTRACT_CMD})
-
 foreach(inifile ${INIFILES})
     get_filename_component(fname ${inifile} NAME)
     list(APPEND GENERATED_HEADERS "${CMAKE_CURRENT_BINARY_DIR}/tmp/${fname}.h")
