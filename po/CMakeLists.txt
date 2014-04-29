@@ -9,6 +9,7 @@ foreach(inifile ${INIFILES})
     list(APPEND GENERATED_HEADERS ${iniheaderfile})
     add_custom_command(OUTPUT ${iniheaderfile}
         COMMAND ${INTLTOOL_EXTRACT_BIN} --type=gettext/ini --local ${inifile}
+        DEPENDS ${inifile}
         WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
     )
 endforeach()
