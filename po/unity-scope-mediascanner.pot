@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-25 18:28+0100\n"
+"POT-Creation-Date: 2014-04-29 17:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,52 +37,50 @@ msgstr ""
 msgid "Play"
 msgstr ""
 
-#: /home/miso/projects/unity-scope-mediascanner/build/po/tmp/mediascanner-music.ini.in.in.h:1
+#: tmp/mediascanner-music.ini.in.in.h:1
 msgid "Local Music"
 msgstr ""
 
-#: /home/miso/projects/unity-scope-mediascanner/build/po/tmp/mediascanner-music.ini.in.in.h:2
+#: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
-"This is an Ubuntu search plugin that enables information from local music to "
-"be searched and displayed in the Dash underneath the Music header. If you do "
-"not wish to search this content source, you can disable this search plugin."
+"This is an Ubuntu search plugin that scans the device for music and allows "
+"it to be searched and displayed in the Dash."
 msgstr ""
 
-#: /home/miso/projects/unity-scope-mediascanner/build/po/tmp/mediascanner-music.ini.in.in.h:3
+#: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
 msgstr ""
 
-#: /home/miso/projects/unity-scope-mediascanner/build/po/tmp/mediascanner-video.ini.in.in.h:1
+#: tmp/mediascanner-video.ini.in.in.h:1
 msgid "Local Videos"
 msgstr ""
 
-#: /home/miso/projects/unity-scope-mediascanner/build/po/tmp/mediascanner-video.ini.in.in.h:2
+#: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
-"This is an Ubuntu search plugin that enables local videos to be searched and "
-"displayed in the Dash underneath the Video header. If you do not wish to "
-"search this content source, you can disable this search plugin."
+"This is an Ubuntu search plugin that scans the device for videos and allows "
+"them to be searched and displayed in the Dash."
 msgstr ""
 
-#: /home/miso/projects/unity-scope-mediascanner/build/po/tmp/musicaggregator.ini.in.in.h:1
+#: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
 msgstr ""
 
-#: /home/miso/projects/unity-scope-mediascanner/build/po/tmp/musicaggregator.ini.in.in.h:2
+#: tmp/musicaggregator.ini.in.in.h:2
 msgid "This is an Ubuntu search plugin merges all music sources into one."
 msgstr ""
 
-#: /home/miso/projects/unity-scope-mediascanner/build/po/tmp/musicaggregator.ini.in.in.h:3
+#: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
 msgstr ""
 
-#: /home/miso/projects/unity-scope-mediascanner/build/po/tmp/videoaggregator.ini.in.in.h:1
+#: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
 msgstr ""
 
-#: /home/miso/projects/unity-scope-mediascanner/build/po/tmp/videoaggregator.ini.in.in.h:2
+#: tmp/videoaggregator.ini.in.in.h:2
 msgid "This is an Ubuntu search plugin merges all video sources into one."
 msgstr ""
 
-#: /home/miso/projects/unity-scope-mediascanner/build/po/tmp/videoaggregator.ini.in.in.h:3
+#: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
 msgstr ""
