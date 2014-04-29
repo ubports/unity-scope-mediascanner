@@ -19,6 +19,7 @@
 #include <config.h>
 
 #include <mediascanner/MediaFile.hh>
+#include <mediascanner/Album.hh>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/CategorisedResult.h>
 #include <unity/scopes/ColumnLayout.h>
@@ -38,6 +39,20 @@ static const char SONGS_CATEGORY_DEFINITION[] = R"(
   "template": {
     "category-layout": "carousel",
     "overlay": true,
+    "card-size": "medium"
+  },
+  "components": {
+    "title": "title",
+    "art":  "art",
+    "subtitle": "artist"
+  }
+}
+)";
+static const char ALBUMS_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
     "card-size": "medium"
   },
   "components": {
@@ -97,6 +112,11 @@ void MusicQuery::cancelled() {
 }
 
 void MusicQuery::run(SearchReplyProxy const&reply) {
+    query_songs(reply);
+    query_albums(reply);
+}
+
+void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply) const {
     CategoryRenderer renderer(query.query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
     auto cat = reply->register_category("songs", "Songs", SONGS_CATEGORY_ICON, renderer);
     for (const auto &media : scope.store->query(query.query_string(), AudioMedia, MAX_RESULTS)) {
@@ -105,7 +125,6 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
         res.set_dnd_uri(media.getUri());
         res.set_title(media.getTitle());
 
-        res["mimetype"] = media.getContentType();
         res["duration"] = media.getDuration();
         res["album"] = media.getAlbum();
         res["artist"] = media.getAuthor();
@@ -116,13 +135,7 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
             return;
         }
     }
-}
 
-MusicPreview::MusicPreview(MusicScope &scope, Result const& result)
-    : scope(scope), result(result) {
-}
-
-void MusicPreview::cancelled() {
 }
 
 static std::string uriencode(const std::string &src) {
@@ -140,6 +153,28 @@ static std::string uriencode(const std::string &src) {
     return result;
 }
 
+void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply) const {
+    CategoryRenderer renderer(query.query_string() == "" ? ALBUMS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
+    auto cat = reply->register_category("albums", "Albums", SONGS_CATEGORY_ICON, renderer);
+    for (const auto &album : scope.store->queryAlbums(query.query_string(), MAX_RESULTS)) {
+        CategorisedResult res(cat);
+        res.set_uri("album:///" + uriencode(album.getArtist()) + "/" +
+                uriencode(album.getTitle()));
+        res.set_title(album.getTitle());
+        res["artist"] = album.getArtist();
+        res["album"] = album.getTitle();
+        res["isalbum"] = true;
+        reply->push(res);
+    }
+}
+
+MusicPreview::MusicPreview(MusicScope &scope, Result const& result)
+    : scope(scope), result(result) {
+}
+
+void MusicPreview::cancelled() {
+}
+
 static std::string make_art_uri(const std::string &artist, const std::string &album) {
     std::string result = "image://albumart/";
     result += "artist=" + uriencode(artist);
@@ -149,6 +184,17 @@ static std::string make_art_uri(const std::string &artist, const std::string &al
 
 void MusicPreview::run(PreviewReplyProxy const& reply)
 {
+    if(result.contains("isalbum"))
+    {
+        album_preview(reply);
+    }
+    else
+    {
+        song_preview(reply);
+    }
+}
+
+void MusicPreview::song_preview(unity::scopes::PreviewReplyProxy const &reply) const {
     ColumnLayout layout1col(1), layout2col(2), layout3col(3);
     layout1col.add_column({"art", "header", "actions", "tracks"});
 
@@ -196,6 +242,54 @@ void MusicPreview::run(PreviewReplyProxy const& reply)
         actions.add_attribute_value("actions", builder.end());
     }
 
+    reply->push({artwork, header, actions, tracks});
+}
+
+void MusicPreview::album_preview(unity::scopes::PreviewReplyProxy const &reply) const {
+    ColumnLayout layout1col(1), layout2col(2);
+    layout1col.add_column({"art", "header", "actions", "tracks"});
+
+    layout2col.add_column({"art"});
+    layout2col.add_column({"header", "actions", "tracks"});
+
+    reply->register_layout({layout1col, layout2col});
+
+    PreviewWidget artwork("art", "image");
+    std::string artist = result["artist"].get_string();
+    std::string album_name = result["title"].get_string();
+    std::string art;
+    if (artist.empty() || album_name.empty()) {
+        art = MISSING_ALBUM_ART;
+    } else {
+        art = make_art_uri(artist, album_name);
+    }
+    artwork.add_attribute_value("source", Variant(art));
+
+    PreviewWidget header("header", "header");
+    header.add_attribute_mapping("title", "title");
+    header.add_attribute_mapping("subtitle", "artist");
+
+    PreviewWidget actions("actions", "actions");
+    {
+        VariantBuilder builder;
+        builder.add_tuple({
+                {"uri", Variant(result.uri())},
+                {"label", Variant("Play in music app")}
+            });
+        actions.add_attribute_value("actions", builder.end());
+    }
+
+    PreviewWidget tracks("tracks", "audio");
+    VariantBuilder builder;
+    Album album(album_name, artist);
+    for(const auto &track : scope.store->getAlbumSongs(album)) {
+        std::vector<std::pair<std::string, Variant>> tmp;
+        tmp.emplace_back("title", Variant(track.getTitle()));
+        tmp.emplace_back("source", Variant(track.getUri()));
+        tmp.emplace_back("length", Variant(track.getDuration()));
+        builder.add_tuple(tmp);
+    }
+    tracks.add_attribute_value("tracks", builder.end());
     reply->push({artwork, header, actions, tracks});
 }
 

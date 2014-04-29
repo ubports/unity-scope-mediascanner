@@ -11,6 +11,8 @@
 class MusicScope : public unity::scopes::ScopeBase
 {
     friend class MusicQuery;
+    friend class MusicPreview;
+
 public:
     virtual int start(std::string const&, unity::scopes::RegistryProxy const&) override;
     virtual void stop() override;
@@ -33,6 +35,9 @@ public:
 private:
     const MusicScope &scope;
     const unity::scopes::CannedQuery query;
+
+    void query_songs(unity::scopes::SearchReplyProxy const&reply) const;
+    void query_albums(unity::scopes::SearchReplyProxy const&reply) const;
 };
 
 class MusicPreview : public unity::scopes::PreviewQueryBase
@@ -43,6 +48,8 @@ public:
     virtual void run(unity::scopes::PreviewReplyProxy const& reply) override;
 
 private:
+    void song_preview(unity::scopes::PreviewReplyProxy const &reply) const;
+    void album_preview(unity::scopes::PreviewReplyProxy const &reply) const;
     const MusicScope &scope;
     const unity::scopes::Result result;
 };
