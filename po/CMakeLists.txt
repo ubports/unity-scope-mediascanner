@@ -1,30 +1,32 @@
 file(GLOB CPPFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
                    "${CMAKE_SOURCE_DIR}/src/*.cpp")
-file(GLOB INIFILES RELATIVE "${CMAKE_CURRENT_BINARY_DIR}"
+file(GLOB INIFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
                    "${CMAKE_SOURCE_DIR}/data/*.ini.in.in")
 
 foreach(inifile ${INIFILES})
     get_filename_component(fname ${inifile} NAME)
-    list(APPEND GENERATED_HEADERS "${CMAKE_CURRENT_BINARY_DIR}/tmp/${fname}.h")
+    set(iniheaderfile "${CMAKE_CURRENT_SOURCE_DIR}/tmp/${fname}.h")
+    list(APPEND GENERATED_HEADERS ${iniheaderfile})
+    add_custom_command(OUTPUT ${iniheaderfile}
+        COMMAND ${INTLTOOL_EXTRACT_BIN} --type=gettext/ini --local ${inifile}
+        WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+    )
 endforeach()
 
-add_custom_command(OUTPUT ${GENERATED_HEADERS})
-foreach(inifile ${INIFILES})
-    add_custom_command(OUTPUT ${GENERATED_HEADERS} COMMAND ${INTLTOOL_EXTRACT_BIN} --type=gettext/ini --local ${inifile} APPEND)
-endforeach()
+add_custom_target(pot-ini
+    DEPENDS ${GENERATED_HEADERS}
+)
 
-add_custom_target(pot-cpp
+add_custom_target(pot
     COMMAND ${XGETTEXT_BIN} -o ${GETTEXT_PACKAGE}.pot
                             --copyright=\"Canonical Ltd.\"
                             --package-name ${GETTEXT_PACKAGE}
                             --c++ --add-comments=TRANSLATORS
                             --keyword=_ --keyword=N_ --from-code=UTF-8
-                            ${CPPFILES} "${CMAKE_CURRENT_BINARY_DIR}/tmp/*.h"
+                            ${CPPFILES} "tmp/*.h"
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-    DEPENDS ${GENERATED_HEADERS}
+    DEPENDS pot-ini
 )
-
-add_custom_target(pot DEPENDS pot-cpp)
 
 file(GLOB pofiles *.po)
 foreach(f ${pofiles})
