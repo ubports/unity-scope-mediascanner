@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-29 17:12+0100\n"
+"POT-Creation-Date: 2014-04-29 17:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,7 +66,7 @@ msgid "Music"
 msgstr ""
 
 #: tmp/musicaggregator.ini.in.in.h:2
-msgid "This is an Ubuntu search plugin merges all music sources into one."
+msgid "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr ""
 
 #: tmp/musicaggregator.ini.in.in.h:3
@@ -78,7 +78,7 @@ msgid "Video"
 msgstr ""
 
 #: tmp/videoaggregator.ini.in.in.h:2
-msgid "This is an Ubuntu search plugin merges all video sources into one."
+msgid "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr ""
 
 #: tmp/videoaggregator.ini.in.in.h:3
