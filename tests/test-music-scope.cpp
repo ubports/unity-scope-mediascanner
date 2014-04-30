@@ -105,10 +105,8 @@ TEST_F(MusicScopeTest, QueryResult) {
         "albums", "Albums", "icon", CategoryRenderer());
     unity::scopes::testing::MockSearchReply reply;
     EXPECT_CALL(reply, register_category("songs", _, _, _))
-        .Times(1)
         .WillOnce(Return(songs_category));
     EXPECT_CALL(reply, register_category("albums", _, _, _))
-        .Times(1)
         .WillOnce(Return(albums_category));
     EXPECT_CALL(reply, push(AllOf(
             ResultProp("uri", Variant("file:///path/foo7.ogg")),
@@ -118,7 +116,6 @@ TEST_F(MusicScopeTest, QueryResult) {
             ResultProp("album", Variant("April Uprising")),
             ResultProp("artist", Variant("The John Butler Trio")),
             ResultProp("track-number", Variant(2)))))
-        .Times(1)
         .WillOnce(Return(true));
 
     EXPECT_CALL(reply, push(AllOf(
@@ -127,7 +124,6 @@ TEST_F(MusicScopeTest, QueryResult) {
             ResultProp("album", Variant("April Uprising")),
             ResultProp("artist", Variant("The John Butler Trio")),
             ResultProp("isalbum", Variant(true)))))
-        .Times(1)
         .WillOnce(Return(true));
 
     SearchReplyProxy proxy{&reply, [](unity::scopes::SearchReply*){}};
@@ -148,22 +144,17 @@ TEST_F(MusicScopeTest, ShortQuery) {
         "albums", "Albums", "icon", CategoryRenderer());
     unity::scopes::testing::MockSearchReply reply;
     EXPECT_CALL(reply, register_category("songs", _, _, _))
-        .Times(1)
         .WillOnce(Return(songs_category));
     EXPECT_CALL(reply, register_category("albums", _, _, _))
-        .Times(1)
         .WillOnce(Return(albums_category));
     EXPECT_CALL(reply, push(ResultProp("title", Variant("One Way Road"))))
-        .Times(1)
         .WillOnce(Return(true));
     EXPECT_CALL(reply, push(ResultProp("title", Variant("Revolution"))))
-        .Times(1)
         .WillOnce(Return(true));
 
     EXPECT_CALL(reply, push(AllOf(
             ResultProp("title", Variant("April Uprising")),
             ResultProp("isalbum", Variant(true)))))
-        .Times(1)
         .WillOnce(Return(true));
 
     SearchReplyProxy proxy{&reply, [](unity::scopes::SearchReply*){}};
@@ -183,54 +174,40 @@ TEST_F(MusicScopeTest, SurfacingQuery) {
         "albums", "Albums", "icon", CategoryRenderer());
     unity::scopes::testing::MockSearchReply reply;
     EXPECT_CALL(reply, register_category("songs", _, _, _))
-        .Times(1)
         .WillOnce(Return(songs_category));
     EXPECT_CALL(reply, register_category("albums", _, _, _))
-        .Times(1)
         .WillOnce(Return(albums_category));
     EXPECT_CALL(reply, push(ResultProp("title", Variant("Straight Through The Sun"))))
-        .Times(1)
         .WillOnce(Return(true));
     EXPECT_CALL(reply, push(ResultProp("title", Variant("It's Beautiful"))))
-        .Times(1)
         .WillOnce(Return(true));
     EXPECT_CALL(reply, push(ResultProp("title", Variant("Buy Me a Pony"))))
-        .Times(1)
         .WillOnce(Return(true));
     EXPECT_CALL(reply, push(ResultProp("title", Variant("Peaches & Cream"))))
-        .Times(1)
         .WillOnce(Return(true));
     EXPECT_CALL(reply, push(ResultProp("title", Variant("Zebra"))))
-        .Times(1)
         .WillOnce(Return(true));
     EXPECT_CALL(reply, push(ResultProp("title", Variant("Revolution"))))
-        .Times(1)
         .WillOnce(Return(true));
     EXPECT_CALL(reply, push(ResultProp("title", Variant("One Way Road"))))
-        .Times(1)
         .WillOnce(Return(true));
 
     EXPECT_CALL(reply, push(AllOf(
             ResultProp("title", Variant("Spiderbait")),
             ResultProp("isalbum", Variant(true)))))
-        .Times(1)
         .WillOnce(Return(true));
     EXPECT_CALL(reply, push(AllOf(
             ResultProp("title", Variant("Ivy and the Big Apples")),
             ResultProp("isalbum", Variant(true)))))
-        .Times(1)
         .WillOnce(Return(true));
     EXPECT_CALL(reply, push(AllOf(
             ResultProp("title", Variant("Sunrise Over Sea")),
             ResultProp("isalbum", Variant(true)))))
-        .Times(1)
         .WillOnce(Return(true));
     EXPECT_CALL(reply, push(AllOf(
             ResultProp("title", Variant("April Uprising")),
             ResultProp("isalbum", Variant(true)))))
-        .Times(1)
         .WillOnce(Return(true));
-
 
     SearchReplyProxy proxy{&reply, [](unity::scopes::SearchReply*){}};
     query->run(proxy);
