@@ -18,6 +18,13 @@ add_executable(test-music-scope
 target_link_libraries(test-music-scope ${UNITY_LDFLAGS} ${gtest_libs})
 add_test(test-music-scope test-music-scope)
 
+add_executable(test-video-scope
+  test-video-scope.cpp
+  ../src/video-scope.cpp
+)
+target_link_libraries(test-video-scope ${UNITY_LDFLAGS} ${gtest_libs})
+add_test(test-video-scope test-video-scope)
+
 add_executable(
   test-old-scope
   test-old-scope.cpp
