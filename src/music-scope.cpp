@@ -28,6 +28,7 @@
 #include <unity/scopes/VariantBuilder.h>
 
 #include "music-scope.h"
+#include "i18n.h"
 
 #define MAX_RESULTS 100
 
@@ -84,6 +85,7 @@ using namespace mediascanner;
 using namespace unity::scopes;
 
 int MusicScope::start(std::string const&, RegistryProxy const&) {
+    setlocale(LC_ALL, "");
     store.reset(new MediaStore(MS_READ_ONLY));
     return VERSION;
 }
@@ -118,7 +120,7 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
 
 void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply) const {
     CategoryRenderer renderer(query.query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
-    auto cat = reply->register_category("songs", "Songs", SONGS_CATEGORY_ICON, renderer);
+    auto cat = reply->register_category("songs", _("Songs"), SONGS_CATEGORY_ICON, renderer);
     for (const auto &media : scope.store->query(query.query_string(), AudioMedia, MAX_RESULTS)) {
         CategorisedResult res(cat);
         res.set_uri(media.getUri());
@@ -155,7 +157,7 @@ static std::string uriencode(const std::string &src) {
 
 void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply) const {
     CategoryRenderer renderer(query.query_string() == "" ? ALBUMS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
-    auto cat = reply->register_category("albums", "Albums", SONGS_CATEGORY_ICON, renderer);
+    auto cat = reply->register_category("albums", _("Albums"), SONGS_CATEGORY_ICON, renderer);
     for (const auto &album : scope.store->queryAlbums(query.query_string(), MAX_RESULTS)) {
         CategorisedResult res(cat);
         res.set_uri("album:///" + uriencode(album.getArtist()) + "/" +
@@ -237,7 +239,7 @@ void MusicPreview::song_preview(unity::scopes::PreviewReplyProxy const &reply) c
         VariantBuilder builder;
         builder.add_tuple({
                 {"id", Variant("play")},
-                {"label", Variant("Play in music app")}
+                {"label", Variant(_("Play in music app"))}
             });
         actions.add_attribute_value("actions", builder.end());
     }
@@ -274,7 +276,7 @@ void MusicPreview::album_preview(unity::scopes::PreviewReplyProxy const &reply) 
         VariantBuilder builder;
         builder.add_tuple({
                 {"uri", Variant(result.uri())},
-                {"label", Variant("Play in music app")}
+                {"label", Variant(_("Play in music app"))}
             });
         actions.add_attribute_value("actions", builder.end());
     }

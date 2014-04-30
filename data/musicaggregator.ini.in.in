@@ -1,10 +1,10 @@
 [ScopeConfig]
-DisplayName=Music
-Description=This is an Ubuntu search plugin merges all music sources into one.
+_DisplayName=Music
+_Description=This is an Ubuntu search plugin that merges all music sources into one.
 Author=Canonical Ltd.
 Art=@SCOPES_DATADIR@/musicaggregator/musicaggregator-screenshot.jpg
 Icon=@SCOPES_DATADIR@/mediascanner-music/music.png
-SearchHint=Search music
+_SearchHint=Search music
 HotKey=
 
 [Desktop Entry]

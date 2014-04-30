@@ -1,0 +1,11 @@
+[ScopeConfig]
+_DisplayName=Local Videos
+_Description=This is an Ubuntu search plugin that scans the device for videos and allows them to be searched and displayed in the Dash.
+Author=Canonical Ltd.
+Art=@SCOPES_DATADIR@/mediascanner-video/mediascanner-video-screenshot.jpg
+Icon=@SCOPES_DATADIR@/mediascanner-video/video.png
+_SearchHint=
+HotKey=
+
+[Desktop Entry]
+X-Ubuntu-Gettext-Domain=unity-scope-hollywood

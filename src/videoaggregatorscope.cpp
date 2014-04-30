@@ -30,6 +30,7 @@ const char *LOCALSCOPE = "mediascanner-video";
 const char *ONLINESCOPE = "com.canonical.scopes.remotevideos";
 
 int VideoAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
+    setlocale(LC_ALL, "");
     this->registry = registry;
     CategoryRenderer basic;
     local_scope = registry->get_metadata(LOCALSCOPE).proxy();
