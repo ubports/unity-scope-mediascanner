@@ -35,8 +35,6 @@ foreach(f ${pofiles})
   set(languages "${pofile};${languages}")
 endforeach()
 
-MESSAGE("${languages}")
-
 foreach(i ${languages})
   add_custom_command(OUTPUT ${i}.mo
   COMMAND ${MSGFMT_BIN} ${CMAKE_CURRENT_SOURCE_DIR}/${i}.po -o ${CMAKE_CURRENT_BINARY_DIR}/${i}.mo
