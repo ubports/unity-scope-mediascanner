@@ -1,15 +1,10 @@
-if (NOT DEFINED GTEST_ROOT)
-    set(GTEST_ROOT /usr/src/gtest)
+if (NOT DEFINED GMOCK_ROOT)
+    set(GMOCK_ROOT /usr/src/gmock)
 endif()
+add_subdirectory(${GMOCK_ROOT} gmock)
+include_directories(${GMOCK_ROOT}/gtest/include)
 
-set(GTEST_SRC_DIR "${GTEST_ROOT}/src")
-set(GTEST_INCLUDE_DIR ${GTEST_ROOT})
-
-add_library(gtest STATIC
-${GTEST_SRC_DIR}/gtest-all.cc
-)
-set_target_properties(gtest PROPERTIES INCLUDE_DIRECTORIES ${GTEST_INCLUDE_DIR})
-target_link_libraries(gtest ${CMAKE_THREAD_LIBS_INIT})
+set(gtest_libs gtest gmock gmock_main)
 
 include_directories(${UNITY_INCLUDE_DIRS} ${OLDUNITY_INCLUDE_DIRS})
 
@@ -17,7 +12,7 @@ add_executable(test-music-scope
   test-music-scope.cpp
   ../src/music-scope.cpp
 )
-target_link_libraries(test-music-scope ${UNITY_LDFLAGS} gtest)
+target_link_libraries(test-music-scope ${UNITY_LDFLAGS} ${gtest_libs})
 add_test(test-music-scope test-music-scope)
 
 add_executable(
