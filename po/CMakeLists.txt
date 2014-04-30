@@ -29,6 +29,9 @@ add_custom_target(pot
     DEPENDS pot-ini
 )
 
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/locale)
+install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/locale DESTINATION share)
+
 file(GLOB pofiles *.po)
 foreach(f ${pofiles})
   get_filename_component(pofile ${f} NAME_WE)
