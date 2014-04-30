@@ -9,7 +9,9 @@
 #include <mediascanner/MediaFile.hh>
 #include <mediascanner/MediaStore.hh>
 #include <unity/scopes/testing/Category.h>
+#include <unity/scopes/testing/MockPreviewReply.h>
 #include <unity/scopes/testing/MockSearchReply.h>
+#include <unity/scopes/testing/Result.h>
 #include <unity/scopes/testing/TypedScopeFixture.h>
 
 #include "../src/music-scope.h"
@@ -126,7 +128,7 @@ TEST_F(MusicScopeTest, QueryResult) {
             ResultProp("isalbum", Variant(true)))))
         .WillOnce(Return(true));
 
-    SearchReplyProxy proxy{&reply, [](unity::scopes::SearchReply*){}};
+    SearchReplyProxy proxy(&reply, [](SearchReply*){});
     query->run(proxy);
 }
 
@@ -157,7 +159,7 @@ TEST_F(MusicScopeTest, ShortQuery) {
             ResultProp("isalbum", Variant(true)))))
         .WillOnce(Return(true));
 
-    SearchReplyProxy proxy{&reply, [](unity::scopes::SearchReply*){}};
+    SearchReplyProxy proxy(&reply, [](SearchReply*){});
     query->run(proxy);
 }
 
@@ -209,8 +211,28 @@ TEST_F(MusicScopeTest, SurfacingQuery) {
             ResultProp("isalbum", Variant(true)))))
         .WillOnce(Return(true));
 
-    SearchReplyProxy proxy{&reply, [](unity::scopes::SearchReply*){}};
+    SearchReplyProxy proxy(&reply, [](SearchReply*){});
     query->run(proxy);
+}
+
+TEST_F(MusicScopeTest, PreviewSong) {
+    unity::scopes::testing::Result result;
+    result.set_uri("file:///xyz");
+    result.set_title("Song title");
+    result["artist"] = "Artist name";
+    result["album"] = "Album name";
+    result["duration"] = 42;
+    result["track-number"] = 5;
+
+    ActionMetadata hints("en_AU", "phone");
+    auto previewer = scope->preview(result, hints);
+
+    // MockPreviewReply is currently broken and can't be instantiated.
+#if 0
+    unity::scopes::testing::MockPreviewReply reply;
+    PreviewReplyProxy proxy(&reply, [](PreviewReply*){});
+    previewer->run(proxy);
+#endif
 }
 
 int main(int argc, char **argv) {
