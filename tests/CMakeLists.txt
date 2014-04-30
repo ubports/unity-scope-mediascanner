@@ -5,6 +5,9 @@ add_subdirectory(${GMOCK_ROOT} gmock)
 include_directories(${GMOCK_ROOT}/gtest/include)
 
 set(gtest_libs gtest gmock gmock_main)
+foreach(target ${gtest_libs})
+  set_property(TARGET ${target} APPEND_STRING PROPERTY COMPILE_FLAGS " -Wno-missing-field-initializers -Wno-missing-declarations")
+endforeach()
 
 include_directories(${UNITY_INCLUDE_DIRS} ${OLDUNITY_INCLUDE_DIRS})
 

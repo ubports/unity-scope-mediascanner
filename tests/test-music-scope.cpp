@@ -1,5 +1,6 @@
 #include <cerrno>
 #include <cstring>
+#include <iostream>
 #include <memory>
 #include <string>
 
@@ -76,8 +77,18 @@ protected:
     std::unique_ptr<MediaStore> store;
 };
 
+// To make errors more readable
+std::ostream& operator <<(std::ostream& os, const Variant& v) {
+    os << "Variant(" << v.serialize_json() << ")";
+    return os;
+}
+
 MATCHER_P2(ResultProp, prop, value, "") {
-    *result_listener << "result[" << prop << "] is " << value.serialize_json();
+    if (arg.contains(prop)) {
+        *result_listener << "result[" << prop << "] is " << arg[prop].serialize_json();
+    } else {
+        *result_listener << "result[" << prop << "] is not set";
+    }
     return arg.contains(prop) && arg[prop] == value;
 }
 
@@ -90,19 +101,32 @@ TEST_F(MusicScopeTest, QueryResult) {
 
     Category::SCPtr songs_category = std::make_shared<unity::scopes::testing::Category>(
         "songs", "Songs", "icon", CategoryRenderer());
+    Category::SCPtr albums_category = std::make_shared<unity::scopes::testing::Category>(
+        "albums", "Albums", "icon", CategoryRenderer());
     unity::scopes::testing::MockSearchReply reply;
     EXPECT_CALL(reply, register_category("songs", _, _, _))
         .Times(1)
         .WillOnce(Return(songs_category));
+    EXPECT_CALL(reply, register_category("albums", _, _, _))
+        .Times(1)
+        .WillOnce(Return(albums_category));
     EXPECT_CALL(reply, push(AllOf(
             ResultProp("uri", Variant("file:///path/foo7.ogg")),
             ResultProp("dnd_uri", Variant("file:///path/foo7.ogg")),
             ResultProp("title", Variant("One Way Road")),
-            ResultProp("mimetype", Variant("audio/ogg")),
             ResultProp("duration", Variant(185)),
             ResultProp("album", Variant("April Uprising")),
             ResultProp("artist", Variant("The John Butler Trio")),
             ResultProp("track-number", Variant(2)))))
+        .Times(1)
+        .WillOnce(Return(true));
+
+    EXPECT_CALL(reply, push(AllOf(
+            ResultProp("uri", Variant("album:///The%20John%20Butler%20Trio/April%20Uprising")),
+            ResultProp("title", Variant("April Uprising")),
+            ResultProp("album", Variant("April Uprising")),
+            ResultProp("artist", Variant("The John Butler Trio")),
+            ResultProp("isalbum", Variant(true)))))
         .Times(1)
         .WillOnce(Return(true));
 
@@ -120,14 +144,25 @@ TEST_F(MusicScopeTest, ShortQuery) {
 
     Category::SCPtr songs_category = std::make_shared<unity::scopes::testing::Category>(
         "songs", "Songs", "icon", CategoryRenderer());
+    Category::SCPtr albums_category = std::make_shared<unity::scopes::testing::Category>(
+        "albums", "Albums", "icon", CategoryRenderer());
     unity::scopes::testing::MockSearchReply reply;
     EXPECT_CALL(reply, register_category("songs", _, _, _))
         .Times(1)
         .WillOnce(Return(songs_category));
+    EXPECT_CALL(reply, register_category("albums", _, _, _))
+        .Times(1)
+        .WillOnce(Return(albums_category));
     EXPECT_CALL(reply, push(ResultProp("title", Variant("One Way Road"))))
         .Times(1)
         .WillOnce(Return(true));
     EXPECT_CALL(reply, push(ResultProp("title", Variant("Revolution"))))
+        .Times(1)
+        .WillOnce(Return(true));
+
+    EXPECT_CALL(reply, push(AllOf(
+            ResultProp("title", Variant("April Uprising")),
+            ResultProp("isalbum", Variant(true)))))
         .Times(1)
         .WillOnce(Return(true));
 
@@ -144,10 +179,15 @@ TEST_F(MusicScopeTest, SurfacingQuery) {
 
     Category::SCPtr songs_category = std::make_shared<unity::scopes::testing::Category>(
         "songs", "Songs", "icon", CategoryRenderer());
+    Category::SCPtr albums_category = std::make_shared<unity::scopes::testing::Category>(
+        "albums", "Albums", "icon", CategoryRenderer());
     unity::scopes::testing::MockSearchReply reply;
     EXPECT_CALL(reply, register_category("songs", _, _, _))
         .Times(1)
         .WillOnce(Return(songs_category));
+    EXPECT_CALL(reply, register_category("albums", _, _, _))
+        .Times(1)
+        .WillOnce(Return(albums_category));
     EXPECT_CALL(reply, push(ResultProp("title", Variant("Straight Through The Sun"))))
         .Times(1)
         .WillOnce(Return(true));
@@ -169,6 +209,28 @@ TEST_F(MusicScopeTest, SurfacingQuery) {
     EXPECT_CALL(reply, push(ResultProp("title", Variant("One Way Road"))))
         .Times(1)
         .WillOnce(Return(true));
+
+    EXPECT_CALL(reply, push(AllOf(
+            ResultProp("title", Variant("Spiderbait")),
+            ResultProp("isalbum", Variant(true)))))
+        .Times(1)
+        .WillOnce(Return(true));
+    EXPECT_CALL(reply, push(AllOf(
+            ResultProp("title", Variant("Ivy and the Big Apples")),
+            ResultProp("isalbum", Variant(true)))))
+        .Times(1)
+        .WillOnce(Return(true));
+    EXPECT_CALL(reply, push(AllOf(
+            ResultProp("title", Variant("Sunrise Over Sea")),
+            ResultProp("isalbum", Variant(true)))))
+        .Times(1)
+        .WillOnce(Return(true));
+    EXPECT_CALL(reply, push(AllOf(
+            ResultProp("title", Variant("April Uprising")),
+            ResultProp("isalbum", Variant(true)))))
+        .Times(1)
+        .WillOnce(Return(true));
+
 
     SearchReplyProxy proxy{&reply, [](unity::scopes::SearchReply*){}};
     query->run(proxy);
