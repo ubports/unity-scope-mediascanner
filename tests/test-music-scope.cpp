@@ -1,6 +1,5 @@
 #include <cerrno>
 #include <cstring>
-#include <iostream>
 #include <memory>
 #include <string>
 
@@ -79,19 +78,13 @@ protected:
     std::unique_ptr<MediaStore> store;
 };
 
-// To make errors more readable
-std::ostream& operator <<(std::ostream& os, const Variant& v) {
-    os << "Variant(" << v.serialize_json() << ")";
-    return os;
-}
-
 MATCHER_P2(ResultProp, prop, value, "") {
     if (arg.contains(prop)) {
         *result_listener << "result[" << prop << "] is " << arg[prop].serialize_json();
     } else {
         *result_listener << "result[" << prop << "] is not set";
     }
-    return arg.contains(prop) && arg[prop] == value;
+    return arg.contains(prop) && arg[prop] == unity::scopes::Variant(value);
 }
 
 TEST_F(MusicScopeTest, QueryResult) {
@@ -111,21 +104,21 @@ TEST_F(MusicScopeTest, QueryResult) {
     EXPECT_CALL(reply, register_category("albums", _, _, _))
         .WillOnce(Return(albums_category));
     EXPECT_CALL(reply, push(AllOf(
-            ResultProp("uri", Variant("file:///path/foo7.ogg")),
-            ResultProp("dnd_uri", Variant("file:///path/foo7.ogg")),
-            ResultProp("title", Variant("One Way Road")),
-            ResultProp("duration", Variant(185)),
-            ResultProp("album", Variant("April Uprising")),
-            ResultProp("artist", Variant("The John Butler Trio")),
-            ResultProp("track-number", Variant(2)))))
+            ResultProp("uri", "file:///path/foo7.ogg"),
+            ResultProp("dnd_uri", "file:///path/foo7.ogg"),
+            ResultProp("title", "One Way Road"),
+            ResultProp("duration", 185),
+            ResultProp("album", "April Uprising"),
+            ResultProp("artist", "The John Butler Trio"),
+            ResultProp("track-number", 2))))
         .WillOnce(Return(true));
 
     EXPECT_CALL(reply, push(AllOf(
-            ResultProp("uri", Variant("album:///The%20John%20Butler%20Trio/April%20Uprising")),
-            ResultProp("title", Variant("April Uprising")),
-            ResultProp("album", Variant("April Uprising")),
-            ResultProp("artist", Variant("The John Butler Trio")),
-            ResultProp("isalbum", Variant(true)))))
+            ResultProp("uri", "album:///The%20John%20Butler%20Trio/April%20Uprising"),
+            ResultProp("title", "April Uprising"),
+            ResultProp("album", "April Uprising"),
+            ResultProp("artist", "The John Butler Trio"),
+            ResultProp("isalbum", true))))
         .WillOnce(Return(true));
 
     SearchReplyProxy proxy(&reply, [](SearchReply*){});
@@ -149,14 +142,14 @@ TEST_F(MusicScopeTest, ShortQuery) {
         .WillOnce(Return(songs_category));
     EXPECT_CALL(reply, register_category("albums", _, _, _))
         .WillOnce(Return(albums_category));
-    EXPECT_CALL(reply, push(ResultProp("title", Variant("One Way Road"))))
+    EXPECT_CALL(reply, push(ResultProp("title", "One Way Road")))
         .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(ResultProp("title", Variant("Revolution"))))
+    EXPECT_CALL(reply, push(ResultProp("title", "Revolution")))
         .WillOnce(Return(true));
 
     EXPECT_CALL(reply, push(AllOf(
-            ResultProp("title", Variant("April Uprising")),
-            ResultProp("isalbum", Variant(true)))))
+            ResultProp("title", "April Uprising"),
+            ResultProp("isalbum", true))))
         .WillOnce(Return(true));
 
     SearchReplyProxy proxy(&reply, [](SearchReply*){});
@@ -179,36 +172,36 @@ TEST_F(MusicScopeTest, SurfacingQuery) {
         .WillOnce(Return(songs_category));
     EXPECT_CALL(reply, register_category("albums", _, _, _))
         .WillOnce(Return(albums_category));
-    EXPECT_CALL(reply, push(ResultProp("title", Variant("Straight Through The Sun"))))
+    EXPECT_CALL(reply, push(ResultProp("title", "Straight Through The Sun")))
         .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(ResultProp("title", Variant("It's Beautiful"))))
+    EXPECT_CALL(reply, push(ResultProp("title", "It's Beautiful")))
         .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(ResultProp("title", Variant("Buy Me a Pony"))))
+    EXPECT_CALL(reply, push(ResultProp("title", "Buy Me a Pony")))
         .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(ResultProp("title", Variant("Peaches & Cream"))))
+    EXPECT_CALL(reply, push(ResultProp("title", "Peaches & Cream")))
         .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(ResultProp("title", Variant("Zebra"))))
+    EXPECT_CALL(reply, push(ResultProp("title", "Zebra")))
         .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(ResultProp("title", Variant("Revolution"))))
+    EXPECT_CALL(reply, push(ResultProp("title", "Revolution")))
         .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(ResultProp("title", Variant("One Way Road"))))
+    EXPECT_CALL(reply, push(ResultProp("title", "One Way Road")))
         .WillOnce(Return(true));
 
     EXPECT_CALL(reply, push(AllOf(
-            ResultProp("title", Variant("Spiderbait")),
-            ResultProp("isalbum", Variant(true)))))
+            ResultProp("title", "Spiderbait"),
+            ResultProp("isalbum", true))))
         .WillOnce(Return(true));
     EXPECT_CALL(reply, push(AllOf(
-            ResultProp("title", Variant("Ivy and the Big Apples")),
-            ResultProp("isalbum", Variant(true)))))
+            ResultProp("title", "Ivy and the Big Apples"),
+            ResultProp("isalbum", true))))
         .WillOnce(Return(true));
     EXPECT_CALL(reply, push(AllOf(
-            ResultProp("title", Variant("Sunrise Over Sea")),
-            ResultProp("isalbum", Variant(true)))))
+            ResultProp("title", "Sunrise Over Sea"),
+            ResultProp("isalbum", true))))
         .WillOnce(Return(true));
     EXPECT_CALL(reply, push(AllOf(
-            ResultProp("title", Variant("April Uprising")),
-            ResultProp("isalbum", Variant(true)))))
+            ResultProp("title", "April Uprising"),
+            ResultProp("isalbum", true))))
         .WillOnce(Return(true));
 
     SearchReplyProxy proxy(&reply, [](SearchReply*){});

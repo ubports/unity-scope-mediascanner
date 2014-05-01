@@ -1,6 +1,5 @@
 #include <cerrno>
 #include <cstring>
-#include <iostream>
 #include <memory>
 #include <string>
 
@@ -67,19 +66,13 @@ protected:
     std::unique_ptr<MediaStore> store;
 };
 
-// To make errors more readable
-std::ostream& operator <<(std::ostream& os, const Variant& v) {
-    os << "Variant(" << v.serialize_json() << ")";
-    return os;
-}
-
 MATCHER_P2(ResultProp, prop, value, "") {
     if (arg.contains(prop)) {
         *result_listener << "result[" << prop << "] is " << arg[prop].serialize_json();
     } else {
         *result_listener << "result[" << prop << "] is not set";
     }
-    return arg.contains(prop) && arg[prop] == value;
+    return arg.contains(prop) && arg[prop] == unity::scopes::Variant(value);
 }
 
 TEST_F(VideoScopeTest, QueryResult) {
@@ -95,10 +88,10 @@ TEST_F(VideoScopeTest, QueryResult) {
     EXPECT_CALL(reply, register_category("local", _, _, _))
         .WillOnce(Return(category));
     EXPECT_CALL(reply, push(AllOf(
-            ResultProp("uri", Variant("file:///path/bigbuckbunny.ogv")),
-            ResultProp("dnd_uri", Variant("file:///path/bigbuckbunny.ogv")),
-            ResultProp("title", Variant("Big Buck Bunny")),
-            ResultProp("duration", Variant(596)))))
+            ResultProp("uri", "file:///path/bigbuckbunny.ogv"),
+            ResultProp("dnd_uri", "file:///path/bigbuckbunny.ogv"),
+            ResultProp("title", "Big Buck Bunny"),
+            ResultProp("duration", 596))))
         .WillOnce(Return(true));
 
     SearchReplyProxy proxy(&reply, [](SearchReply*){});
@@ -118,9 +111,9 @@ TEST_F(VideoScopeTest, ShortQuery) {
     unity::scopes::testing::MockSearchReply reply;
     EXPECT_CALL(reply, register_category("local", _, _, _))
         .WillOnce(Return(category));
-    EXPECT_CALL(reply, push(ResultProp("title", Variant("Sintel"))))
+    EXPECT_CALL(reply, push(ResultProp("title", "Sintel")))
         .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(ResultProp("title", Variant("Tears of Steel"))))
+    EXPECT_CALL(reply, push(ResultProp("title", "Tears of Steel")))
         .WillOnce(Return(true));
 
     SearchReplyProxy proxy(&reply, [](SearchReply*){});
