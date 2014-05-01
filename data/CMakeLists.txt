@@ -4,25 +4,21 @@ set(SCOPES_DATADIR "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes")
 set(SCOPES_LIBDIR "${CMAKE_INSTALL_FULL_LIBDIR}/unity-scopes")
 set(OLD_SCOPES_DIR "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes")
 
-configure_file(
-  mediascanner-music.ini.in
-  mediascanner-music.ini
-)
+set(SCOPE_CONFIG_FILES mediascanner-music.ini mediascanner-video.ini musicaggregator.ini videoaggregator.ini)
 
-install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/mediascanner-music.ini"
-  DESTINATION "${SCOPES_LIBDIR}/mediascanner-music"
-)
+foreach(configfile ${SCOPE_CONFIG_FILES})
+    configure_file(${configfile}.in.in ${configfile}.in)
+    get_filename_component(basename ${configfile} NAME_WE)
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${configfile}"
+            DESTINATION "${SCOPES_LIBDIR}/${basename}")
+    add_custom_command(OUTPUT ${configfile} COMMAND ${INTLTOOL_MERGE_BIN} -d ${CMAKE_CURRENT_SOURCE_DIR}/../po ${configfile}.in ${configfile})
+endforeach()
+
+add_custom_target(ini-i18n ALL DEPENDS ${SCOPE_CONFIG_FILES})
 
 install(
   FILES music.png mediascanner-music-screenshot.jpg
   DESTINATION "${SCOPES_DATADIR}/mediascanner-music"
-)
-
-
-configure_file(
-  mediascanner-video.ini.in
-  mediascanner-video.ini
 )
 
 install(
@@ -31,35 +27,8 @@ install(
 )
 
 install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/mediascanner-video.ini"
-  DESTINATION "${SCOPES_LIBDIR}/mediascanner-video"
-)
-
-
-configure_file(
-  musicaggregator.ini.in
-  musicaggregator.ini
-)
-
-install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/musicaggregator.ini"
-  DESTINATION "${SCOPES_LIBDIR}/musicaggregator"
-)
-
-install(
   FILES musicaggregator-screenshot.jpg
   DESTINATION "${SCOPES_DATADIR}/musicaggregator"
-)
-
-
-configure_file(
-  videoaggregator.ini.in
-  videoaggregator.ini
-)
-
-install(
-  FILES "${CMAKE_CURRENT_BINARY_DIR}/videoaggregator.ini"
-  DESTINATION "${SCOPES_LIBDIR}/videoaggregator"
 )
 
 install(

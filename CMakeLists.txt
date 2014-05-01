@@ -14,6 +14,11 @@ pkg_check_modules(OLDUNITY REQUIRED
   mediascanner-2.0
 )
 
+find_program(XGETTEXT_BIN xgettext)
+find_program(MSGFMT_BIN msgfmt)
+find_program(INTLTOOL_EXTRACT_BIN intltool-extract)
+find_program(INTLTOOL_MERGE_BIN intltool-merge)
+
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wmissing-prototypes -pedantic -std=c99")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wmissing-declarations -pedantic -std=c++11")
 
@@ -32,6 +37,7 @@ configure_file(
 )
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
+add_subdirectory("po")
 add_subdirectory("src")
 add_subdirectory("oldscope")
 add_subdirectory("data")

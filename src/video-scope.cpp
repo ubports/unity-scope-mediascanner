@@ -27,6 +27,7 @@
 #include <unity/scopes/VariantBuilder.h>
 
 #include "video-scope.h"
+#include "i18n.h"
 
 #define MAX_RESULTS 100
 
@@ -69,6 +70,7 @@ static const char SEARCH_CATEGORY_DEFINITION[] = R"(
 )";
 
 int VideoScope::start(std::string const&, RegistryProxy const&) {
+    setlocale(LC_ALL, "");
     store.reset(new MediaStore(MS_READ_ONLY));
     return VERSION;
 }
@@ -98,7 +100,7 @@ void VideoQuery::cancelled() {
 
 void VideoQuery::run(SearchReplyProxy const&reply) {
     CategoryRenderer renderer(query.query_string() == "" ? LOCAL_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
-    auto cat = reply->register_category("local", "My Videos", LOCAL_CATEGORY_ICON, renderer);
+    auto cat = reply->register_category("local", _("My Videos"), LOCAL_CATEGORY_ICON, renderer);
     for (const auto &media : scope.store->query(query.query_string(), VideoMedia, MAX_RESULTS)) {
         CategorisedResult res(cat);
         res.set_uri(media.getUri());
@@ -147,7 +149,7 @@ void VideoPreview::run(PreviewReplyProxy const& reply)
         VariantBuilder builder;
         builder.add_tuple({
                 {"id", Variant("play")},
-                {"label", Variant("Play")}
+                {"label", Variant(_("Play"))}
             });
         actions.add_attribute_value("actions", builder.end());
     }

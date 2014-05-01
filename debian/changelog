@@ -1,3 +1,10 @@
+unity-scope-mediascanner (0.2+14.10.20140430-0ubuntu1) utopic; urgency=low
+
+  [ Michal Hruby ]
+  * Add i18n support.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 30 Apr 2014 10:00:06 +0000
+
 unity-scope-mediascanner (0.2+14.10.20140429-0ubuntu1) utopic; urgency=low
 
   [ Michal Hruby ]

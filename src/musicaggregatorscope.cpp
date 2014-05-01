@@ -30,6 +30,7 @@ const char *LOCALSCOPE = "mediascanner-music";
 const char *ONLINESCOPE = "com.canonical.scopes.grooveshark";
 
 int MusicAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
+    setlocale(LC_ALL, "");
     this->registry = registry;
     CategoryRenderer basic;
     local_scope = registry->get_metadata(LOCALSCOPE).proxy();
