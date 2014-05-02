@@ -1,0 +1,88 @@
+# Chinese (Simplified) translation for unity-scope-mediascanner
+# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
+# This file is distributed under the same license as the unity-scope-mediascanner package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: unity-scope-mediascanner\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-04-29 17:23+0100\n"
+"PO-Revision-Date: 2014-04-30 02:28+0000\n"
+"Last-Translator: Aron Xu <Unknown>\n"
+"Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2014-05-02 07:07+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
+
+#: ../src/music-scope.cpp:122
+msgid "Songs"
+msgstr "歌曲"
+
+#: ../src/music-scope.cpp:159
+msgid "Albums"
+msgstr "专辑"
+
+#: ../src/music-scope.cpp:241 ../src/music-scope.cpp:278
+msgid "Play in music app"
+msgstr "使用音乐应用播放"
+
+#: ../src/video-scope.cpp:102
+msgid "My Videos"
+msgstr "我的视频"
+
+#: ../src/video-scope.cpp:151
+msgid "Play"
+msgstr "播放"
+
+#: tmp/mediascanner-music.ini.in.in.h:1
+msgid "Local Music"
+msgstr "本地音乐"
+
+#: tmp/mediascanner-music.ini.in.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that scans the device for music and allows "
+"it to be searched and displayed in the Dash."
+msgstr ""
+
+#: tmp/mediascanner-music.ini.in.in.h:3
+msgid "Search local music collection"
+msgstr "搜索本地音乐集合"
+
+#: tmp/mediascanner-video.ini.in.in.h:1
+msgid "Local Videos"
+msgstr "本地视频"
+
+#: tmp/mediascanner-video.ini.in.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that scans the device for videos and allows "
+"them to be searched and displayed in the Dash."
+msgstr ""
+
+#: tmp/musicaggregator.ini.in.in.h:1
+msgid "Music"
+msgstr "音乐"
+
+#: tmp/musicaggregator.ini.in.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that merges all music sources into one."
+msgstr ""
+
+#: tmp/musicaggregator.ini.in.in.h:3
+msgid "Search music"
+msgstr "搜索音乐"
+
+#: tmp/videoaggregator.ini.in.in.h:1
+msgid "Video"
+msgstr "视频"
+
+#: tmp/videoaggregator.ini.in.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that merges all video sources into one."
+msgstr ""
+
+#: tmp/videoaggregator.ini.in.in.h:3
+msgid "Search video"
+msgstr "搜索视频"
