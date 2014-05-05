@@ -6,6 +6,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <mediascanner/MediaFile.hh>
+#include <mediascanner/MediaFileBuilder.hh>
 #include <mediascanner/MediaStore.hh>
 #include <unity/scopes/testing/Category.h>
 #include <unity/scopes/testing/MockPreviewReply.h>
@@ -47,19 +48,38 @@ protected:
 
     void populateStore() {
         MediaStore store(MS_READ_WRITE);
-
-        store.insert(MediaFile("/path/elephantsdream.ogv", "video/ogg", "etag",
-                               "Elephant's Dream", "2006-03-24", "",
-                               "", "", 0, 654, VideoMedia));
-        store.insert(MediaFile("/path/bigbuckbunny.ogv", "video/ogg", "etag",
-                               "Big Buck Bunny", "2008-04-10", "",
-                               "", "", 0, 596, VideoMedia));
-        store.insert(MediaFile("/path/sintel.ogv", "video/ogg", "etag",
-                               "Sintel", "2010-09-27", "",
-                               "", "", 0, 888, VideoMedia));
-        store.insert(MediaFile("/path/tearsofsteel.ogv", "video/ogg", "etag",
-                               "Tears of Steel", "2012-09-26", "",
-                               "", "", 0, 734, VideoMedia));
+        {
+            MediaFileBuilder builder("/path/elephantsdream.ogv");
+            builder.setType(VideoMedia);
+            builder.setTitle("Elephant's Dream");
+            builder.setDate("2006-03-24");
+            builder.setDuration(654);
+            store.insert(builder.build());
+        }
+        {
+            MediaFileBuilder builder("/path/bigbuckbunny.ogv");
+            builder.setType(VideoMedia);
+            builder.setTitle("Big Buck Bunny");
+            builder.setDate("2008-04-10");
+            builder.setDuration(596);
+            store.insert(builder.build());
+        }
+        {
+            MediaFileBuilder builder("/path/sintel.ogv");
+            builder.setType(VideoMedia);
+            builder.setTitle("Sintel");
+            builder.setDate("2010-09-27");
+            builder.setDuration(888);
+            store.insert(builder.build());
+        }
+        {
+            MediaFileBuilder builder("/path/tearsofsteel.ogv");
+            builder.setType(VideoMedia);
+            builder.setTitle("Tears of Steel");
+            builder.setDate("2012-09-26");
+            builder.setDuration(734);
+            store.insert(builder.build());
+        }
     }
 
     std::string cachedir;

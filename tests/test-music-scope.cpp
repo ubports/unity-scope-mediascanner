@@ -6,6 +6,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <mediascanner/MediaFile.hh>
+#include <mediascanner/MediaFileBuilder.hh>
 #include <mediascanner/MediaStore.hh>
 #include <unity/scopes/testing/Category.h>
 #include <unity/scopes/testing/MockPreviewReply.h>
@@ -47,31 +48,83 @@ protected:
 
     void populateStore() {
         MediaStore store(MS_READ_WRITE);
-
-        store.insert(MediaFile("/path/foo1.ogg", "audio/ogg", "etag",
-                               "Straight Through The Sun", "2013-11-15", "Spiderbait",
-                               "Spiderbait", "Spiderbait", 1, 235, AudioMedia));
-        store.insert(MediaFile("/path/foo2.ogg", "audio/ogg", "etag",
-                               "It's Beautiful", "2013-11-15", "Spiderbait",
-                               "Spiderbait", "Spiderbait", 2, 220, AudioMedia));
-
-        store.insert(MediaFile("/path/foo3.ogg", "audio/ogg", "etag",
-                               "Buy Me a Pony", "1996-10-04", "Spiderbait",
-                               "Ivy and the Big Apples", "Spiderbait", 3, 104, AudioMedia));
-
-        store.insert(MediaFile("/path/foo4.ogg", "audio/ogg", "etag",
-                               "Peaches & Cream", "2004-03-08", "The John Butler Trio",
-                               "Sunrise Over Sea", "The John Butler Trio", 2, 407, AudioMedia));
-        store.insert(MediaFile("/path/foo5.ogg", "audio/ogg", "etag",
-                               "Zebra", "2004-03-08", "The John Butler Trio",
-                               "Sunrise Over Sea", "The John Butler Trio", 10, 237, AudioMedia));
-
-        store.insert(MediaFile("/path/foo6.ogg", "audio/ogg", "etag",
-                               "Revolution", "2010-01-01", "The John Butler Trio",
-                               "April Uprising", "The John Butler Trio", 1, 305, AudioMedia));
-        store.insert(MediaFile("/path/foo7.ogg", "audio/ogg", "etag",
-                               "One Way Road", "2010-01-01", "The John Butler Trio",
-                               "April Uprising", "The John Butler Trio", 2, 185, AudioMedia));
+        {
+            MediaFileBuilder builder("/path/foo1.ogg");
+            builder.setType(AudioMedia);
+            builder.setTitle("Straight Through The Sun");
+            builder.setAuthor("Spiderbait");
+            builder.setAlbum("Spiderbait");
+            builder.setDate("2013-11-15");
+            builder.setTrackNumber(1);
+            builder.setDuration(235);
+            store.insert(builder.build());
+        }
+        {
+            MediaFileBuilder builder("/path/foo2.ogg");
+            builder.setType(AudioMedia);
+            builder.setTitle("It's Beautiful");
+            builder.setAuthor("Spiderbait");
+            builder.setAlbum("Spiderbait");
+            builder.setDate("2013-11-15");
+            builder.setTrackNumber(2);
+            builder.setDuration(220);
+            store.insert(builder.build());
+        }
+        {
+            MediaFileBuilder builder("/path/foo3.ogg");
+            builder.setType(AudioMedia);
+            builder.setTitle("Buy Me a Pony");
+            builder.setAuthor("Spiderbait");
+            builder.setAlbum("Ivy and the Big Apples");
+            builder.setDate("1996-10-04");
+            builder.setTrackNumber(3);
+            builder.setDuration(104);
+            store.insert(builder.build());
+        }
+        {
+            MediaFileBuilder builder("/path/foo4.ogg");
+            builder.setType(AudioMedia);
+            builder.setTitle("Peaches & Cream");
+            builder.setAuthor("The John Butler Trio");
+            builder.setAlbum("Sunrise Over Sea");
+            builder.setDate("2004-03-08");
+            builder.setTrackNumber(2);
+            builder.setDuration(407);
+            store.insert(builder.build());
+        }
+        {
+            MediaFileBuilder builder("/path/foo5.ogg");
+            builder.setType(AudioMedia);
+            builder.setTitle("Zebra");
+            builder.setAuthor("The John Butler Trio");
+            builder.setAlbum("Sunrise Over Sea");
+            builder.setDate("2004-03-08");
+            builder.setTrackNumber(10);
+            builder.setDuration(237);
+            store.insert(builder.build());
+        }
+        {
+            MediaFileBuilder builder("/path/foo6.ogg");
+            builder.setType(AudioMedia);
+            builder.setTitle("Revolution");
+            builder.setAuthor("The John Butler Trio");
+            builder.setAlbum("April Uprising");
+            builder.setDate("2010-01-01");
+            builder.setTrackNumber(1);
+            builder.setDuration(305);
+            store.insert(builder.build());
+        }
+        {
+            MediaFileBuilder builder("/path/foo7.ogg");
+            builder.setType(AudioMedia);
+            builder.setTitle("One Way Road");
+            builder.setAuthor("The John Butler Trio");
+            builder.setAlbum("April Uprising");
+            builder.setDate("2010-01-01");
+            builder.setTrackNumber(2);
+            builder.setDuration(185);
+            store.insert(builder.build());
+        }
     }
 
     std::string cachedir;
