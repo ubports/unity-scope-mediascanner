@@ -26,7 +26,7 @@
 class NotifyStrategy
 {
 public:
-    virtual ~NotifyStrategy() = 0;
+    virtual ~NotifyStrategy() {}
     virtual bool is_ready(unity::scopes::CategorisedResult result) = 0;
 };
 
