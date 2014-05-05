@@ -19,7 +19,7 @@
 
 #include "notify-strategy.h"
 
-bool WaitForAnyResult::is_ready(unity::scopes::CategorisedResult result)
+bool WaitForAnyResult::is_ready(unity::scopes::CategorisedResult const&)
 {
     return true;
 }
@@ -29,7 +29,7 @@ WaitForAllCategories::WaitForAllCategories(std::initializer_list<std::string> ca
 {
 }
 
-bool WaitForAllCategories::is_ready(unity::scopes::CategorisedResult result)
+bool WaitForAllCategories::is_ready(unity::scopes::CategorisedResult const& result)
 {
     auto it = category_ids_.find(result.category()->id());
     if (it != category_ids_.end())

@@ -27,20 +27,20 @@ class NotifyStrategy
 {
 public:
     virtual ~NotifyStrategy() {}
-    virtual bool is_ready(unity::scopes::CategorisedResult result) = 0;
+    virtual bool is_ready(unity::scopes::CategorisedResult const& result) = 0;
 };
 
 class WaitForAnyResult : public NotifyStrategy
 {
 public:
-    bool is_ready(unity::scopes::CategorisedResult result) override;
+    bool is_ready(unity::scopes::CategorisedResult const &result) override;
 };
 
 class WaitForAllCategories : public NotifyStrategy
 {
 public:
     WaitForAllCategories(std::initializer_list<std::string> category_ids);
-    bool is_ready(unity::scopes::CategorisedResult result) override;
+    bool is_ready(unity::scopes::CategorisedResult const& result) override;
 
 private:
     std::set<std::string> category_ids_;
