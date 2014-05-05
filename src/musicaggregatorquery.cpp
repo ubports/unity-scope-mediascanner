@@ -20,6 +20,8 @@
 #include "musicaggregatorquery.h"
 #include "resultforwarder.h"
 #include "onlinemusicresultforwarder.h"
+#include "notify-strategy.h"
+#include <memory>
 #include <unity/scopes/Annotation.h>
 #include <unity/scopes/CategorisedResult.h>
 #include <unity/scopes/CategoryRenderer.h>
@@ -40,7 +42,8 @@ void MusicAggregatorQuery::cancelled() {
 }
 
 void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_reply) {
-    std::shared_ptr<ResultForwarder> local_reply(new ResultForwarder(parent_reply));
+    std::shared_ptr<ResultForwarder> local_reply(new ResultForwarder(parent_reply,
+                std::shared_ptr<WaitForAllCategories>(new WaitForAllCategories({"songs", "albums"}))));
     std::shared_ptr<ResultForwarder> online_reply;
     if(online_scope)
     {

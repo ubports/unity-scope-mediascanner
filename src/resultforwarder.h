@@ -25,14 +25,20 @@
 #include<unity/scopes/ListenerBase.h>
 #include<unity/scopes/CategorisedResult.h>
 #include<list>
+#include<memory>
+#include<cassert>
+#include "notify-strategy.h"
 
 class ResultForwarder : public unity::scopes::SearchListenerBase {
 
 public:
 
-    ResultForwarder(unity::scopes::SearchReplyProxy const& upstream) :
+    ResultForwarder(unity::scopes::SearchReplyProxy const& upstream,
+                    std::shared_ptr<NotifyStrategy> notify_strategy = std::make_shared<WaitForAnyResult>()) :
         upstream(upstream),
+        notify_strategy_(notify_strategy),
         ready_(false) {
+            assert(notify_strategy != nullptr);
     }
     virtual ~ResultForwarder() {}
 
@@ -50,6 +56,7 @@ protected:
 
 private:
     std::list<std::shared_ptr<ResultForwarder>> observers_;
+    std::shared_ptr<NotifyStrategy> notify_strategy_;
     bool ready_;
 };
 

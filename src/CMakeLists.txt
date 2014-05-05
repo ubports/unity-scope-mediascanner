@@ -21,14 +21,15 @@ musicaggregatorquery.cpp
 resultforwarder.cpp
 onlinemusicresultforwarder.cpp
 bufferedresultforwarder.cpp
-)
+notify-strategy.cpp)
 target_link_libraries(musicaggregator ${UNITY_SCOPES_LDFLAGS})
 
 add_library(videoaggregator SHARED
 videoaggregatorscope.cpp
 videoaggregatorquery.cpp
 resultforwarder.cpp
-bufferedresultforwarder.cpp)
+bufferedresultforwarder.cpp
+notify-strategy.cpp)
 target_link_libraries(videoaggregator ${UNITY_SCOPES_LDFLAGS})
 
 install(
