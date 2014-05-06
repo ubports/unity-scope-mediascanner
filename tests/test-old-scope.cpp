@@ -1,6 +1,7 @@
 #include <config.h>
 #include <glib.h>
 #include <mediascanner/MediaFile.hh>
+#include <mediascanner/MediaFileBuilder.hh>
 #include "../oldscope/scope.h"
 #include "utils.h"
 
@@ -11,9 +12,18 @@ test_music_add_result ()
 {
     TestResultSet *result_set = test_result_set_new ();
 
-    MediaFile media("/path/foo.ogg", "audio/ogg", "etag", "Title", "2014-01-01", "Artist", "Album", "Artist", 42, 60, AudioMedia);
-
-    music_add_result (UNITY_RESULT_SET (result_set), media);
+    MediaFileBuilder builder("/path/foo.ogg");
+    builder.setType(AudioMedia);
+    builder.setContentType("audio/ogg");
+    builder.setETag("etag");
+    builder.setTitle("Title");
+    builder.setDate("2014-01-01");
+    builder.setAuthor("Artist");
+    builder.setAlbum("Album");
+    builder.setAlbumArtist("Artist");
+    builder.setTrackNumber(42);
+    builder.setDuration(60);
+    music_add_result (UNITY_RESULT_SET (result_set), builder.build());
 
     UnityScopeResult *result = &result_set->last_result;
     g_assert_cmpstr (result->uri, ==, "file:///path/foo.ogg");
@@ -146,10 +156,20 @@ test_music_preview ()
 static void
 test_music_search ()
 {
-    MediaFile media("/path/foo.ogg", "audio/ogg", "etag", "Title", "2014-01-01", "Artist", "Album", "Artist", 42, 60, AudioMedia);
+    MediaFileBuilder builder("/path/foo.ogg");
+    builder.setType(AudioMedia);
+    builder.setContentType("audio/ogg");
+    builder.setETag("etag");
+    builder.setTitle("Title");
+    builder.setDate("2014-01-01");
+    builder.setAuthor("Artist");
+    builder.setAlbum("Album");
+    builder.setAlbumArtist("Artist");
+    builder.setTrackNumber(42);
+    builder.setDuration(60);
 
     auto store = std::make_shared<MediaStore>(":memory:", MS_READ_WRITE);
-    store->insert(media);
+    store->insert(builder.build());
 
     UnityAbstractScope *scope = music_scope_new (store);
 
@@ -165,10 +185,20 @@ test_music_search ()
 static void
 test_music_surfacing ()
 {
-    MediaFile media("/path/foo.ogg", "audio/ogg", "etag", "Title", "2014-01-01", "Artist", "Album", "Artist", 42, 60, AudioMedia);
+    MediaFileBuilder builder("/path/foo.ogg");
+    builder.setType(AudioMedia);
+    builder.setContentType("audio/ogg");
+    builder.setETag("etag");
+    builder.setTitle("Title");
+    builder.setDate("2014-01-01");
+    builder.setAuthor("Artist");
+    builder.setAlbum("Album");
+    builder.setAlbumArtist("Artist");
+    builder.setTrackNumber(42);
+    builder.setDuration(60);
 
     auto store = std::make_shared<MediaStore>(":memory:", MS_READ_WRITE);
-    store->insert(media);
+    store->insert(builder.build());
 
     UnityAbstractScope *scope = music_scope_new (store);
 
@@ -222,9 +252,15 @@ test_video_add_result ()
 {
     TestResultSet *result_set = test_result_set_new ();
 
-    MediaFile media("/path/foo.mp4", "video/mp4", "etag", "Title", "2014-01-01", "", "", "", 0, 60, VideoMedia);
+    MediaFileBuilder builder("/path/foo.mp4");
+    builder.setType(VideoMedia);
+    builder.setContentType("video/mp4");
+    builder.setETag("etag");
+    builder.setTitle("Title");
+    builder.setDate("2014-01-01");
+    builder.setDuration(60);
 
-    video_add_result (UNITY_RESULT_SET (result_set), media);
+    video_add_result (UNITY_RESULT_SET (result_set), builder.build());
 
     UnityScopeResult *result = &result_set->last_result;
     g_assert_cmpstr (result->uri, ==, "file:///path/foo.mp4");
@@ -285,10 +321,16 @@ test_video_preview ()
 static void
 test_video_search ()
 {
-    MediaFile media("/path/foo.mp4", "video/mp4", "etag", "Title", "2014-01-01", "", "", "", 0, 60, VideoMedia);
+    MediaFileBuilder builder("/path/foo.mp4");
+    builder.setType(VideoMedia);
+    builder.setContentType("video/mp4");
+    builder.setETag("etag");
+    builder.setTitle("Title");
+    builder.setDate("2014-01-01");
+    builder.setDuration(60);
 
     auto store = std::make_shared<MediaStore>(":memory:", MS_READ_WRITE);
-    store->insert(media);
+    store->insert(builder.build());
 
     UnityAbstractScope *scope = video_scope_new (store);
 
@@ -304,10 +346,16 @@ test_video_search ()
 static void
 test_video_surfacing ()
 {
-    MediaFile media("/path/foo.mp4", "video/mp4", "etag", "Title", "2014-01-01", "", "", "", 0, 60, VideoMedia);
+    MediaFileBuilder builder("/path/foo.mp4");
+    builder.setType(VideoMedia);
+    builder.setContentType("video/mp4");
+    builder.setETag("etag");
+    builder.setTitle("Title");
+    builder.setDate("2014-01-01");
+    builder.setDuration(60);
 
     auto store = std::make_shared<MediaStore>(":memory:", MS_READ_WRITE);
-    store->insert(media);
+    store->insert(builder.build());
 
     UnityAbstractScope *scope = video_scope_new (store);
 
