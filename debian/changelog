@@ -1,3 +1,15 @@
+unity-scope-mediascanner (0.2+14.10.20140506-0ubuntu1) utopic; urgency=low
+
+  [ James Henstridge ]
+  * Add tests for the search functionality of the local music and video
+    scopes using the unity::scopes::testing::* infrastructure.
+
+  [ Pawel Stolowski ]
+  * Wait for a result from albums and songs categories before forwarding
+    online results. (LP: #1315441)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 06 May 2014 17:31:57 +0000
+
 unity-scope-mediascanner (0.2+14.10.20140430-0ubuntu1) utopic; urgency=low
 
   [ Michal Hruby ]
