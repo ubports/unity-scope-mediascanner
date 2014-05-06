@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-04-29 17:23+0100\n"
-"PO-Revision-Date: 2014-05-03 16:59+0000\n"
+"PO-Revision-Date: 2014-05-05 20:08+0000\n"
 "Last-Translator: Anne <anneonyme017@gmail.com>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-04 06:33+0000\n"
-"X-Generator: Launchpad (build 16985)\n"
+"X-Launchpad-Export-Date: 2014-05-06 07:34+0000\n"
+"X-Generator: Launchpad (build 16996)\n"
 
 #: ../src/music-scope.cpp:122
 msgid "Songs"
@@ -46,10 +46,13 @@ msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
+"Il s'agit d'un greffon de recherche Ubuntu qui parcourt la musique présente "
+"sur le périphérique et permet sa recherche et son affichage dans le Tableau "
+"de bord."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr ""
+msgstr "Rechercher dans la bibliothèque locale de musique"
 
 #: tmp/mediascanner-video.ini.in.in.h:1
 msgid "Local Videos"
@@ -60,6 +63,9 @@ msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
+"Il s'agit d'un greffon de recherche Ubuntu qui parcourt les vidéos présentes "
+"sur le périphérique et permet leur recherche et leur affichage dans le "
+"Tableau de bord."
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
