@@ -14,6 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authored by Jussi Pakkanen <jussi.pakkanen@canonical.com>
+ *             Pawel Stolowski <pawel.stolowski@canonical.com>
  *
  */
 
@@ -30,8 +31,11 @@ void ResultForwarder::push(CategorisedResult result) {
     upstream->push(result);
     if (!ready_)
     {
-        ready_ = true;
-        notify_observers();
+        ready_ = notify_strategy_->is_ready(result);
+        if (ready_)
+        {
+            notify_observers();
+        }
     }
 }
 
