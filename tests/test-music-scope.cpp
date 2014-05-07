@@ -21,6 +21,7 @@ using namespace unity::scopes;
 using ::testing::_;
 using ::testing::AllOf;
 using ::testing::Return;
+using ::testing::Matcher;
 
 class MusicScopeTest : public unity::scopes::testing::TypedScopeFixture<MusicScope> {
 protected:
@@ -156,22 +157,22 @@ TEST_F(MusicScopeTest, QueryResult) {
         .WillOnce(Return(songs_category));
     EXPECT_CALL(reply, register_category("albums", _, _, _))
         .WillOnce(Return(albums_category));
-    EXPECT_CALL(reply, push(AllOf(
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
             ResultProp("uri", "file:///path/foo7.ogg"),
             ResultProp("dnd_uri", "file:///path/foo7.ogg"),
             ResultProp("title", "One Way Road"),
             ResultProp("duration", 185),
             ResultProp("album", "April Uprising"),
             ResultProp("artist", "The John Butler Trio"),
-            ResultProp("track-number", 2))))
+            ResultProp("track-number", 2)))))
         .WillOnce(Return(true));
 
-    EXPECT_CALL(reply, push(AllOf(
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
             ResultProp("uri", "album:///The%20John%20Butler%20Trio/April%20Uprising"),
             ResultProp("title", "April Uprising"),
             ResultProp("album", "April Uprising"),
             ResultProp("artist", "The John Butler Trio"),
-            ResultProp("isalbum", true))))
+            ResultProp("isalbum", true)))))
         .WillOnce(Return(true));
 
     SearchReplyProxy proxy(&reply, [](SearchReply*){});
@@ -195,14 +196,14 @@ TEST_F(MusicScopeTest, ShortQuery) {
         .WillOnce(Return(songs_category));
     EXPECT_CALL(reply, register_category("albums", _, _, _))
         .WillOnce(Return(albums_category));
-    EXPECT_CALL(reply, push(ResultProp("title", "One Way Road")))
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "One Way Road"))))
         .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(ResultProp("title", "Revolution")))
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Revolution"))))
         .WillOnce(Return(true));
 
-    EXPECT_CALL(reply, push(AllOf(
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
             ResultProp("title", "April Uprising"),
-            ResultProp("isalbum", true))))
+            ResultProp("isalbum", true)))))
         .WillOnce(Return(true));
 
     SearchReplyProxy proxy(&reply, [](SearchReply*){});
@@ -225,36 +226,36 @@ TEST_F(MusicScopeTest, SurfacingQuery) {
         .WillOnce(Return(songs_category));
     EXPECT_CALL(reply, register_category("albums", _, _, _))
         .WillOnce(Return(albums_category));
-    EXPECT_CALL(reply, push(ResultProp("title", "Straight Through The Sun")))
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Straight Through The Sun"))))
         .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(ResultProp("title", "It's Beautiful")))
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "It's Beautiful"))))
         .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(ResultProp("title", "Buy Me a Pony")))
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Buy Me a Pony"))))
         .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(ResultProp("title", "Peaches & Cream")))
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Peaches & Cream"))))
         .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(ResultProp("title", "Zebra")))
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Zebra"))))
         .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(ResultProp("title", "Revolution")))
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Revolution"))))
         .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(ResultProp("title", "One Way Road")))
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "One Way Road"))))
         .WillOnce(Return(true));
 
-    EXPECT_CALL(reply, push(AllOf(
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
             ResultProp("title", "Spiderbait"),
-            ResultProp("isalbum", true))))
+            ResultProp("isalbum", true)))))
         .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(AllOf(
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
             ResultProp("title", "Ivy and the Big Apples"),
-            ResultProp("isalbum", true))))
+            ResultProp("isalbum", true)))))
         .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(AllOf(
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
             ResultProp("title", "Sunrise Over Sea"),
-            ResultProp("isalbum", true))))
+            ResultProp("isalbum", true)))))
         .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(AllOf(
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
             ResultProp("title", "April Uprising"),
-            ResultProp("isalbum", true))))
+            ResultProp("isalbum", true)))))
         .WillOnce(Return(true));
 
     SearchReplyProxy proxy(&reply, [](SearchReply*){});
