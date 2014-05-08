@@ -19,6 +19,13 @@ find_program(MSGFMT_BIN msgfmt)
 find_program(INTLTOOL_EXTRACT_BIN intltool-extract)
 find_program(INTLTOOL_MERGE_BIN intltool-merge)
 
+if(NOT MSGFMT_BIN)
+  message(FATAL_ERROR "Gettext binaries not found.")
+endif()
+if(NOT INTLTOOL_MERGE_BIN)
+  message(FATAL_ERROR "Intltool binaries not found.")
+endif()
+
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wmissing-prototypes -pedantic -std=c99")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wmissing-declarations -pedantic -std=c++11")
 
