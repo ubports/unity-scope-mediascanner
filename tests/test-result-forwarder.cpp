@@ -27,6 +27,7 @@
 using namespace unity::scopes;
 using ::testing::Truly;
 using ::testing::InSequence;
+using ::testing::Matcher;
 
 struct HasCategory
 {
@@ -73,9 +74,9 @@ protected:
 TEST_F(ResultForwarderTest, OnlineFirst) {
     InSequence s; // enforce strict order of push calls
 
-    EXPECT_CALL(parent_reply, push(Truly(HasCategory("songs"))));
-    EXPECT_CALL(parent_reply, push(Truly(HasCategory("albums"))));
-    EXPECT_CALL(parent_reply, push(Truly(HasCategory("online"))));
+    EXPECT_CALL(parent_reply, push(Matcher<CategorisedResult const&>(Truly(HasCategory("songs")))));
+    EXPECT_CALL(parent_reply, push(Matcher<CategorisedResult const&>(Truly(HasCategory("albums")))));
+    EXPECT_CALL(parent_reply, push(Matcher<CategorisedResult const&>(Truly(HasCategory("online")))));
 
     {
         CategorisedResult res0(online_category);
@@ -91,9 +92,9 @@ TEST_F(ResultForwarderTest, OnlineFirst) {
 TEST_F(ResultForwarderTest, OnlineSecond) {
     InSequence s; // enforce strict order of push calls
 
-    EXPECT_CALL(parent_reply, push(Truly(HasCategory("songs"))));
-    EXPECT_CALL(parent_reply, push(Truly(HasCategory("albums"))));
-    EXPECT_CALL(parent_reply, push(Truly(HasCategory("online"))));
+    EXPECT_CALL(parent_reply, push(Matcher<CategorisedResult const&>(Truly(HasCategory("songs")))));
+    EXPECT_CALL(parent_reply, push(Matcher<CategorisedResult const&>(Truly(HasCategory("albums")))));
+    EXPECT_CALL(parent_reply, push(Matcher<CategorisedResult const&>(Truly(HasCategory("online")))));
 
     {
         CategorisedResult res0(online_category);
@@ -112,10 +113,10 @@ TEST_F(ResultForwarderTest, OnlineSecond) {
 TEST_F(ResultForwarderTest, UnknownCategory) {
     InSequence s; // enforce strict order of push calls
 
-    EXPECT_CALL(parent_reply, push(Truly(HasCategory("songs"))));
-    EXPECT_CALL(parent_reply, push(Truly(HasCategory("unknown"))));
-    EXPECT_CALL(parent_reply, push(Truly(HasCategory("albums"))));
-    EXPECT_CALL(parent_reply, push(Truly(HasCategory("online"))));
+    EXPECT_CALL(parent_reply, push(Matcher<CategorisedResult const&>(Truly(HasCategory("songs")))));
+    EXPECT_CALL(parent_reply, push(Matcher<CategorisedResult const&>(Truly(HasCategory("unknown")))));
+    EXPECT_CALL(parent_reply, push(Matcher<CategorisedResult const&>(Truly(HasCategory("albums")))));
+    EXPECT_CALL(parent_reply, push(Matcher<CategorisedResult const&>(Truly(HasCategory("online")))));
 
     {
         CategorisedResult res0(online_category);

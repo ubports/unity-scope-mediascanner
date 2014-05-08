@@ -21,6 +21,7 @@ using namespace unity::scopes;
 using ::testing::_;
 using ::testing::AllOf;
 using ::testing::Return;
+using ::testing::Matcher;
 
 class VideoScopeTest : public unity::scopes::testing::TypedScopeFixture<VideoScope> {
 protected:
@@ -107,11 +108,11 @@ TEST_F(VideoScopeTest, QueryResult) {
     unity::scopes::testing::MockSearchReply reply;
     EXPECT_CALL(reply, register_category("local", _, _, _))
         .WillOnce(Return(category));
-    EXPECT_CALL(reply, push(AllOf(
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
             ResultProp("uri", "file:///path/bigbuckbunny.ogv"),
             ResultProp("dnd_uri", "file:///path/bigbuckbunny.ogv"),
             ResultProp("title", "Big Buck Bunny"),
-            ResultProp("duration", 596))))
+            ResultProp("duration", 596)))))
         .WillOnce(Return(true));
 
     SearchReplyProxy proxy(&reply, [](SearchReply*){});
@@ -131,9 +132,9 @@ TEST_F(VideoScopeTest, ShortQuery) {
     unity::scopes::testing::MockSearchReply reply;
     EXPECT_CALL(reply, register_category("local", _, _, _))
         .WillOnce(Return(category));
-    EXPECT_CALL(reply, push(ResultProp("title", "Sintel")))
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Sintel"))))
         .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(ResultProp("title", "Tears of Steel")))
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Tears of Steel"))))
         .WillOnce(Return(true));
 
     SearchReplyProxy proxy(&reply, [](SearchReply*){});
@@ -152,13 +153,13 @@ TEST_F(VideoScopeTest, SurfacingQuery) {
     unity::scopes::testing::MockSearchReply reply;
     EXPECT_CALL(reply, register_category("local", _, _, _))
         .WillOnce(Return(category));
-    EXPECT_CALL(reply, push(ResultProp("title", Variant("Elephant's Dream"))))
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", Variant("Elephant's Dream")))))
         .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(ResultProp("title", Variant("Big Buck Bunny"))))
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", Variant("Big Buck Bunny")))))
         .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(ResultProp("title", Variant("Sintel"))))
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", Variant("Sintel")))))
         .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(ResultProp("title", Variant("Tears of Steel"))))
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", Variant("Tears of Steel")))))
         .WillOnce(Return(true));
 
     SearchReplyProxy proxy(&reply, [](SearchReply*){});
