@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-04-29 17:23+0100\n"
-"PO-Revision-Date: 2014-04-29 08:26+0000\n"
-"Last-Translator: Roman Mindlin <mindline@mail.ru>\n"
+"PO-Revision-Date: 2014-05-16 09:54+0000\n"
+"Last-Translator: Oleg Koptev <koptev.oleg@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-14 06:28+0000\n"
-"X-Generator: Launchpad (build 17002)\n"
+"X-Launchpad-Export-Date: 2014-05-17 07:15+0000\n"
+"X-Generator: Launchpad (build 17007)\n"
 
 #: ../src/music-scope.cpp:122
 msgid "Songs"
@@ -46,6 +46,8 @@ msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
+"Этот поисковый модуль Ubuntu ищет музыку на внешних устройствах, индексирует "
+"ее и отображает в Dash."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
@@ -60,6 +62,8 @@ msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
+"Этот поисковый модуль Ubuntu ищет видеофайлы на внешних устройствах, "
+"индексирует их и отображает в Dash."
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
@@ -69,6 +73,7 @@ msgstr "Музыка"
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr ""
+"Этот поисковый модуль Ubuntu объединяет все источники музыки в одном месте."
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
@@ -82,6 +87,7 @@ msgstr "Видео"
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr ""
+"Этот поисковый модуль Ubuntu объединяет все источники видео в одном месте."
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
