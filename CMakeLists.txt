@@ -1,4 +1,4 @@
-project(unity-scope-hollywood C CXX)
+project(unity-scope-mediascanner C CXX)
 cmake_minimum_required(VERSION 2.8.9)
 
 find_package(PkgConfig REQUIRED)
