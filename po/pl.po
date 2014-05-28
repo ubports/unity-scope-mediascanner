@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-04-29 17:23+0100\n"
-"PO-Revision-Date: 2014-05-23 14:35+0000\n"
+"PO-Revision-Date: 2014-05-27 14:18+0000\n"
 "Last-Translator: GTriderXC <gtriderxc@yahoo.com>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-24 06:52+0000\n"
+"X-Launchpad-Export-Date: 2014-05-28 05:54+0000\n"
 "X-Generator: Launchpad (build 17017)\n"
 
 #: ../src/music-scope.cpp:122
@@ -53,7 +53,7 @@ msgstr "Przeglądanie lokalnej kolekcji muzyki"
 
 #: tmp/mediascanner-video.ini.in.in.h:1
 msgid "Local Videos"
-msgstr ""
+msgstr "Lokalne wideo"
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
@@ -69,6 +69,7 @@ msgstr "Muzyka"
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr ""
+"To jest wtyczka wyszukiwania Ubuntu, łącząca wszystkie źródła audio w jedno."
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
@@ -82,6 +83,7 @@ msgstr "Wideo"
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr ""
+"To jest wtyczka wyszukiwania Ubuntu, łącząca wszystkie źródła wideo w jedno."
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
