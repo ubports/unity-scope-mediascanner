@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-04-29 17:23+0100\n"
-"PO-Revision-Date: 2014-04-29 20:52+0000\n"
+"PO-Revision-Date: 2014-05-30 09:37+0000\n"
 "Last-Translator: Jānis-Marks Gailis <jeanmarc.gailis@gmail.com>\n"
 "Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-14 06:28+0000\n"
-"X-Generator: Launchpad (build 17002)\n"
+"X-Launchpad-Export-Date: 2014-05-31 06:01+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
 
 #: ../src/music-scope.cpp:122
 msgid "Songs"
@@ -27,7 +27,7 @@ msgstr "Albūmi"
 
 #: ../src/music-scope.cpp:241 ../src/music-scope.cpp:278
 msgid "Play in music app"
-msgstr ""
+msgstr "Spēlēt mūziku aplikācijā"
 
 #: ../src/video-scope.cpp:102
 msgid "My Videos"
@@ -53,7 +53,7 @@ msgstr ""
 
 #: tmp/mediascanner-video.ini.in.in.h:1
 msgid "Local Videos"
-msgstr ""
+msgstr "Lokālas Video"
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
@@ -85,4 +85,4 @@ msgstr ""
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
-msgstr ""
+msgstr "Meklēt video"
