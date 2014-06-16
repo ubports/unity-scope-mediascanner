@@ -31,7 +31,7 @@ class OnlineMusicResultForwarder: public BufferedResultForwarder {
 public:
     OnlineMusicResultForwarder(unity::scopes::SearchReplyProxy const& upstream);
     virtual void push(unity::scopes::CategorisedResult result) override;
-    virtual void push(unity::scopes::Category::SCPtr category) override;
+    virtual void push(unity::scopes::Category::SCPtr const& category) override;
 
     static const std::string songs_category_id;
 };

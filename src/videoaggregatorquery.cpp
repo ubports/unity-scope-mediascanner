@@ -29,8 +29,10 @@
 
 using namespace unity::scopes;
 
-VideoAggregatorQuery::VideoAggregatorQuery(CannedQuery const& query, ScopeProxy local_scope, ScopeProxy online_scope) :
-query(query), local_scope(local_scope), online_scope(online_scope) {
+VideoAggregatorQuery::VideoAggregatorQuery(CannedQuery const& query, SearchMetadata const& hints,
+        ScopeProxy local_scope, ScopeProxy online_scope) :
+    SearchQueryBase(query, hints),
+    local_scope(local_scope), online_scope(online_scope) {
 }
 
 VideoAggregatorQuery::~VideoAggregatorQuery() {
@@ -46,7 +48,7 @@ void VideoAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     {
         online_reply.reset(new BufferedResultForwarder(parent_reply));
         local_reply->add_observer(online_reply);
-        subsearch(online_scope, query.query_string(), online_reply);
+        subsearch(online_scope, query().query_string(), online_reply);
     }
-    subsearch(local_scope, query.query_string(), local_reply);
+    subsearch(local_scope, query().query_string(), local_reply);
 }

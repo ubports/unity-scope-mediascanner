@@ -81,27 +81,28 @@ void VideoScope::stop() {
 
 SearchQueryBase::UPtr VideoScope::search(CannedQuery const &q,
                                          SearchMetadata const& hints) {
-    SearchQueryBase::UPtr query(new VideoQuery(*this, q));
+    SearchQueryBase::UPtr query(new VideoQuery(*this, q, hints));
     return query;
 }
 
 PreviewQueryBase::UPtr VideoScope::preview(Result const& result,
                                     ActionMetadata const& hints) {
-    PreviewQueryBase::UPtr previewer(new VideoPreview(*this, result));
+    PreviewQueryBase::UPtr previewer(new VideoPreview(*this, result, hints));
     return previewer;
 }
 
-VideoQuery::VideoQuery(VideoScope &scope, CannedQuery const& query)
-    : scope(scope), query(query) {
+VideoQuery::VideoQuery(VideoScope &scope, CannedQuery const& query, SearchMetadata const& hints)
+    : SearchQueryBase(query, hints),
+      scope(scope) {
 }
 
 void VideoQuery::cancelled() {
 }
 
 void VideoQuery::run(SearchReplyProxy const&reply) {
-    CategoryRenderer renderer(query.query_string() == "" ? LOCAL_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
+    CategoryRenderer renderer(query().query_string() == "" ? LOCAL_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
     auto cat = reply->register_category("local", _("My Videos"), LOCAL_CATEGORY_ICON, renderer);
-    for (const auto &media : scope.store->query(query.query_string(), VideoMedia, MAX_RESULTS)) {
+    for (const auto &media : scope.store->query(query().query_string(), VideoMedia, MAX_RESULTS)) {
         CategorisedResult res(cat);
         res.set_uri(media.getUri());
         res.set_dnd_uri(media.getUri());
@@ -118,8 +119,9 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
     }
 }
 
-VideoPreview::VideoPreview(VideoScope &scope, Result const& result)
-    : scope(scope), result(result) {
+VideoPreview::VideoPreview(VideoScope &scope, Result const& result, ActionMetadata const& hints)
+    : PreviewQueryBase(result, hints),
+      scope(scope) {
 }
 
 void VideoPreview::cancelled() {

@@ -47,7 +47,7 @@ void VideoAggregatorScope::stop() {
 }
 
 SearchQueryBase::UPtr VideoAggregatorScope::search(CannedQuery const& q,
-                                                   SearchMetadata const&) {
+                                                   SearchMetadata const& hints) {
     // FIXME: workaround for problem with no remote scopes on first run
     // until network becomes available
     if (online_scope == nullptr)
@@ -60,7 +60,7 @@ SearchQueryBase::UPtr VideoAggregatorScope::search(CannedQuery const& q,
             // silently ignore
         }
     }
-    SearchQueryBase::UPtr query(new VideoAggregatorQuery(q, local_scope, online_scope));
+    SearchQueryBase::UPtr query(new VideoAggregatorQuery(q, hints, local_scope, online_scope));
     return query;
 }
 

@@ -23,7 +23,7 @@
 
 using namespace unity::scopes;
 
-void ResultForwarder::push(Category::SCPtr category) {
+void ResultForwarder::push(Category::SCPtr const& category) {
     upstream->register_category(category);
 }
 
