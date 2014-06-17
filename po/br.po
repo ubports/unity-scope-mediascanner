@@ -1,0 +1,96 @@
+# Breton translation for unity-scope-mediascanner
+# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
+# This file is distributed under the same license as the unity-scope-mediascanner package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: unity-scope-mediascanner\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-04-29 17:23+0100\n"
+"PO-Revision-Date: 2014-06-16 11:50+0000\n"
+"Last-Translator: Fohanno Thierry <thierry.fohanno@ofis-bzh.org>\n"
+"Language-Team: Breton <br@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2014-06-17 06:51+0000\n"
+"X-Generator: Launchpad (build 17045)\n"
+
+#: ../src/music-scope.cpp:122
+msgid "Songs"
+msgstr "Tonioù"
+
+#: ../src/music-scope.cpp:159
+msgid "Albums"
+msgstr "Albomoù"
+
+#: ../src/music-scope.cpp:241 ../src/music-scope.cpp:278
+msgid "Play in music app"
+msgstr "Lenn gant an arload sonerezh"
+
+#: ../src/video-scope.cpp:102
+msgid "My Videos"
+msgstr "Ma videoioù"
+
+#: ../src/video-scope.cpp:151
+msgid "Play"
+msgstr "Lenn"
+
+#: tmp/mediascanner-music.ini.in.in.h:1
+msgid "Local Music"
+msgstr "Sonerezh lec'hel"
+
+#: tmp/mediascanner-music.ini.in.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that scans the device for music and allows "
+"it to be searched and displayed in the Dash."
+msgstr ""
+"Hemañ zo ul lugant enklask Ubuntu hag a glask sonerezh er benveg dezhañ da "
+"vezañ furchet ha diskwelet en daolenn-vourzh."
+
+#: tmp/mediascanner-music.ini.in.in.h:3
+msgid "Search local music collection"
+msgstr "Klask en dastumad sonerezh lec'hel"
+
+#: tmp/mediascanner-video.ini.in.in.h:1
+msgid "Local Videos"
+msgstr "Videoioù lec'hel"
+
+#: tmp/mediascanner-video.ini.in.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that scans the device for videos and allows "
+"them to be searched and displayed in the Dash."
+msgstr ""
+"Hemañ zo ul lugant enklask Ubuntu hag a glask videoioù er benveg dezho da "
+"vezañ furchet ha diskwelet en daolenn-vourzh."
+
+#: tmp/musicaggregator.ini.in.in.h:1
+msgid "Music"
+msgstr "Sonerezh"
+
+#: tmp/musicaggregator.ini.in.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that merges all music sources into one."
+msgstr ""
+"Hemañ zo ul lugant enklask Ubuntu hag a gendeuz an holl vammennoù sonerezh "
+"en unan hepken."
+
+#: tmp/musicaggregator.ini.in.in.h:3
+msgid "Search music"
+msgstr "Klask sonerezh"
+
+#: tmp/videoaggregator.ini.in.in.h:1
+msgid "Video"
+msgstr "Video"
+
+#: tmp/videoaggregator.ini.in.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that merges all video sources into one."
+msgstr ""
+"Hemañ zo ul lugant enklask Ubuntu hag a gendeuz an holl vammennoù videoioù "
+"en unan hepken."
+
+#: tmp/videoaggregator.ini.in.in.h:3
+msgid "Search video"
+msgstr "Klask video"
