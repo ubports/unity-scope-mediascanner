@@ -26,21 +26,32 @@
 
 using namespace unity::scopes;
 
+const std::vector<const char*> SUBSCOPE_NAMES{
+    "mediascanner-video",
+    "com.canonical.scopes.remotevideos",
+};
+
 const char *LOCALSCOPE = "mediascanner-video";
 const char *ONLINESCOPE = "com.canonical.scopes.remotevideos";
 
 int VideoAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
     setlocale(LC_ALL, "");
     this->registry = registry;
-    CategoryRenderer basic;
-    local_scope = registry->get_metadata(LOCALSCOPE).proxy();
-    try {
-        online_scope = registry->get_metadata(ONLINESCOPE).proxy();
-    } catch(const std::exception &e)
-    {
-        std::cerr << "Could not instantiate online scope:" << e.what() << std::endl;
-    }
+    find_subscopes(true);
     return VERSION;
+}
+
+void VideoAggregatorScope::find_subscopes(bool warn_missing) {
+    subscopes.clear();
+    for (const auto &scope_name : SUBSCOPE_NAMES) {
+        try {
+            subscopes.emplace_back(registry->get_metadata(scope_name));
+        } catch (const std::exception &e) {
+            if (warn_missing) {
+                std::cerr << "Could not find scope '" << scope_name << "': " << e.what() << std::endl;
+            }
+        }
+    }
 }
 
 void VideoAggregatorScope::stop() {
@@ -50,17 +61,10 @@ SearchQueryBase::UPtr VideoAggregatorScope::search(CannedQuery const& q,
                                                    SearchMetadata const& hints) {
     // FIXME: workaround for problem with no remote scopes on first run
     // until network becomes available
-    if (online_scope == nullptr)
-    {
-        try
-        {
-            online_scope = registry->get_metadata(ONLINESCOPE).proxy();
-        } catch(std::exception &e)
-        {
-            // silently ignore
-        }
+    if (subscopes.size() != SUBSCOPE_NAMES.size()) {
+        find_subscopes(false);
     }
-    SearchQueryBase::UPtr query(new VideoAggregatorQuery(q, hints, local_scope, online_scope));
+    SearchQueryBase::UPtr query(new VideoAggregatorQuery(q, hints, subscopes));
     return query;
 }
 

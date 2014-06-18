@@ -29,10 +29,29 @@
 
 using namespace unity::scopes;
 
-VideoAggregatorQuery::VideoAggregatorQuery(CannedQuery const& query, SearchMetadata const& hints,
-        ScopeProxy local_scope, ScopeProxy online_scope) :
+class VideoResultForwarder : public BufferedResultForwarder {
+public:
+    VideoResultForwarder(SearchReplyProxy const &upstream, Category::SCPtr const& category) :
+        BufferedResultForwarder(upstream), category(category) {
+        ResultForwarder::push(category);
+    }
+
+    virtual void push(Category::SCPtr const &cat) override {
+        /* nothing: we replace the subscope categories */
+    }
+
+    virtual void push(CategorisedResult result) override {
+        result.set_category(category);
+        BufferedResultForwarder::push(std::move(result));
+    }
+
+private:
+    Category::SCPtr category;
+};
+
+VideoAggregatorQuery::VideoAggregatorQuery(CannedQuery const& query, SearchMetadata const& hints, std::vector<ScopeMetadata> subscopes) :
     SearchQueryBase(query, hints),
-    local_scope(local_scope), online_scope(online_scope) {
+    subscopes(subscopes) {
 }
 
 VideoAggregatorQuery::~VideoAggregatorQuery() {
@@ -42,13 +61,16 @@ void VideoAggregatorQuery::cancelled() {
 }
 
 void VideoAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_reply) {
-    std::shared_ptr<ResultForwarder> local_reply(new ResultForwarder(parent_reply));
-    std::shared_ptr<ResultForwarder> online_reply;
-    if(online_scope)
-    {
-        online_reply.reset(new BufferedResultForwarder(parent_reply));
-        local_reply->add_observer(online_reply);
-        subsearch(online_scope, query().query_string(), online_reply);
+    auto first_reply = std::make_shared<ResultForwarder>(parent_reply);
+    // Create forwarders for the other sub-scopes
+    for (unsigned int i = 1; i < subscopes.size(); i++) {
+        const auto &metadata = subscopes[i];
+        auto category = parent_reply->register_category(
+            metadata.scope_id(), metadata.display_name(), "" /* icon */,
+            CategoryRenderer());
+        auto subscope_reply = std::make_shared<VideoResultForwarder>(parent_reply, category);
+        first_reply->add_observer(subscope_reply);
+        subsearch(metadata.proxy(), query().query_string(), subscope_reply);
     }
-    subsearch(local_scope, query().query_string(), local_reply);
+    subsearch(subscopes[0].proxy(), query().query_string(), first_reply);
 }
