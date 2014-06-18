@@ -29,7 +29,7 @@ using namespace unity::scopes;
 const char *LOCALSCOPE = "mediascanner-video";
 const char *ONLINESCOPE = "com.canonical.scopes.remotevideos";
 
-int VideoAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
+void VideoAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
     setlocale(LC_ALL, "");
     this->registry = registry;
     CategoryRenderer basic;
@@ -40,14 +40,13 @@ int VideoAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy
     {
         std::cerr << "Could not instantiate online scope:" << e.what() << std::endl;
     }
-    return VERSION;
 }
 
 void VideoAggregatorScope::stop() {
 }
 
 SearchQueryBase::UPtr VideoAggregatorScope::search(CannedQuery const& q,
-                                                   SearchMetadata const&) {
+                                                   SearchMetadata const& hints) {
     // FIXME: workaround for problem with no remote scopes on first run
     // until network becomes available
     if (online_scope == nullptr)
@@ -60,7 +59,7 @@ SearchQueryBase::UPtr VideoAggregatorScope::search(CannedQuery const& q,
             // silently ignore
         }
     }
-    SearchQueryBase::UPtr query(new VideoAggregatorQuery(q, local_scope, online_scope));
+    SearchQueryBase::UPtr query(new VideoAggregatorQuery(q, hints, local_scope, online_scope));
     return query;
 }
 

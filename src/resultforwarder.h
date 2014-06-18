@@ -42,7 +42,7 @@ public:
     }
     virtual ~ResultForwarder() {}
 
-    virtual void push(unity::scopes::Category::SCPtr category) override;
+    virtual void push(unity::scopes::Category::SCPtr const& category) override;
     virtual void push(unity::scopes::CategorisedResult result) override;
     void add_observer(std::shared_ptr<ResultForwarder> result_forwarder);
 

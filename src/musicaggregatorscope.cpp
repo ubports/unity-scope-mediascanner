@@ -29,7 +29,7 @@ using namespace unity::scopes;
 const char *LOCALSCOPE = "mediascanner-music";
 const char *ONLINESCOPE = "com.canonical.scopes.grooveshark";
 
-int MusicAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
+void MusicAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
     setlocale(LC_ALL, "");
     this->registry = registry;
     CategoryRenderer basic;
@@ -41,14 +41,13 @@ int MusicAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy
     {
         std::cerr << "Could not instantiate online music scope: " << e.what() << std::endl;
     }
-    return VERSION;
 }
 
 void MusicAggregatorScope::stop() {
 }
 
 SearchQueryBase::UPtr MusicAggregatorScope::search(CannedQuery const& q,
-                                                   SearchMetadata const&) {
+                                                   SearchMetadata const& hints) {
     // FIXME: workaround for problem with no remote scopes on first run
     // until network becomes available
     if (online_scope == nullptr)
@@ -61,7 +60,7 @@ SearchQueryBase::UPtr MusicAggregatorScope::search(CannedQuery const& q,
             // silently ignore
         }
     }
-    SearchQueryBase::UPtr query(new MusicAggregatorQuery(q, local_scope, online_scope));
+    SearchQueryBase::UPtr query(new MusicAggregatorQuery(q, hints, local_scope, online_scope));
     return query;
 }
 

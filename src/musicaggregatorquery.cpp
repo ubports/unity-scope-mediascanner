@@ -31,8 +31,10 @@
 
 using namespace unity::scopes;
 
-MusicAggregatorQuery::MusicAggregatorQuery(CannedQuery const& query, ScopeProxy local_scope, ScopeProxy online_scope) :
-query(query), local_scope(local_scope), online_scope(online_scope) {
+MusicAggregatorQuery::MusicAggregatorQuery(CannedQuery const& query, SearchMetadata const& hints,
+        ScopeProxy local_scope, ScopeProxy online_scope) :
+    SearchQueryBase(query, hints),
+    local_scope(local_scope), online_scope(online_scope) {
 }
 
 MusicAggregatorQuery::~MusicAggregatorQuery() {
@@ -49,7 +51,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     {
         online_reply.reset(new OnlineMusicResultForwarder(parent_reply));
         local_reply->add_observer(online_reply);
-        subsearch(online_scope, query.query_string(), online_reply);
+        subsearch(online_scope, query().query_string(), online_reply);
     }
-    subsearch(local_scope, query.query_string(), local_reply);
+    subsearch(local_scope, query().query_string(), local_reply);
 }

@@ -27,7 +27,7 @@
 class VideoAggregatorScope : public unity::scopes::ScopeBase
 {
 public:
-    virtual int start(std::string const&, unity::scopes::RegistryProxy const&) override;
+    virtual void start(std::string const&, unity::scopes::RegistryProxy const&) override;
 
     virtual void stop() override;
 
@@ -35,10 +35,9 @@ public:
             const unity::scopes::ActionMetadata&) override;
 
     virtual unity::scopes::SearchQueryBase::UPtr search(unity::scopes::CannedQuery const& q,
-            unity::scopes::SearchMetadata const&) override;
+            unity::scopes::SearchMetadata const& hints) override;
 
 private:
-    std::string query;
     unity::scopes::ScopeProxy local_scope;
     unity::scopes::ScopeProxy online_scope;
     unity::scopes::RegistryProxy registry;
