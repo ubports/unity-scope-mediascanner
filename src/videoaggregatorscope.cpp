@@ -29,7 +29,7 @@ using namespace unity::scopes;
 const char *LOCALSCOPE = "mediascanner-video";
 const char *ONLINESCOPE = "com.canonical.scopes.remotevideos";
 
-int VideoAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
+void VideoAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
     setlocale(LC_ALL, "");
     this->registry = registry;
     CategoryRenderer basic;
@@ -40,7 +40,6 @@ int VideoAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy
     {
         std::cerr << "Could not instantiate online scope:" << e.what() << std::endl;
     }
-    return VERSION;
 }
 
 void VideoAggregatorScope::stop() {

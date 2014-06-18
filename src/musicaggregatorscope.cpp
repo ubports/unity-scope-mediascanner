@@ -29,7 +29,7 @@ using namespace unity::scopes;
 const char *LOCALSCOPE = "mediascanner-music";
 const char *ONLINESCOPE = "com.canonical.scopes.grooveshark";
 
-int MusicAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
+void MusicAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
     setlocale(LC_ALL, "");
     this->registry = registry;
     CategoryRenderer basic;
@@ -41,7 +41,6 @@ int MusicAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy
     {
         std::cerr << "Could not instantiate online music scope: " << e.what() << std::endl;
     }
-    return VERSION;
 }
 
 void MusicAggregatorScope::stop() {
