@@ -1,3 +1,10 @@
+unity-scope-mediascanner (0.2+14.10.20140618.1-0ubuntu1) utopic; urgency=low
+
+  [ Pawel Stolowski ]
+  * Updated for api changes. Requires unity-scopes-api 0.5.0.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 18 Jun 2014 14:47:57 +0000
+
 unity-scope-mediascanner (0.2+14.10.20140529.1-0ubuntu1) utopic; urgency=low
 
   [ Marcus Tomlinson ]
