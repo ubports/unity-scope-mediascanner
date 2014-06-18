@@ -35,7 +35,7 @@ void OnlineMusicResultForwarder::push(unity::scopes::CategorisedResult result)
     }
 }
     
-void OnlineMusicResultForwarder::push(unity::scopes::Category::SCPtr category)
+void OnlineMusicResultForwarder::push(unity::scopes::Category::SCPtr const& category)
 {
     if (category->id() == songs_category_id)
     {

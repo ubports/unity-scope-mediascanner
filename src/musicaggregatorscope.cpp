@@ -48,7 +48,7 @@ void MusicAggregatorScope::stop() {
 }
 
 SearchQueryBase::UPtr MusicAggregatorScope::search(CannedQuery const& q,
-                                                   SearchMetadata const&) {
+                                                   SearchMetadata const& hints) {
     // FIXME: workaround for problem with no remote scopes on first run
     // until network becomes available
     if (online_scope == nullptr)
@@ -61,7 +61,7 @@ SearchQueryBase::UPtr MusicAggregatorScope::search(CannedQuery const& q,
             // silently ignore
         }
     }
-    SearchQueryBase::UPtr query(new MusicAggregatorQuery(q, local_scope, online_scope));
+    SearchQueryBase::UPtr query(new MusicAggregatorQuery(q, hints, local_scope, online_scope));
     return query;
 }
 

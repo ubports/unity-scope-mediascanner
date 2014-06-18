@@ -25,25 +25,23 @@ private:
 class VideoQuery : public unity::scopes::SearchQueryBase
 {
 public:
-    VideoQuery(VideoScope &scope, unity::scopes::CannedQuery const& query);
+    VideoQuery(VideoScope &scope, unity::scopes::CannedQuery const& query, unity::scopes::SearchMetadata const& hints);
     virtual void cancelled() override;
     virtual void run(unity::scopes::SearchReplyProxy const&reply) override;
 
 private:
     const VideoScope &scope;
-    const unity::scopes::CannedQuery query;
 };
 
 class VideoPreview : public unity::scopes::PreviewQueryBase
 {
 public:
-    VideoPreview(VideoScope &scope, unity::scopes::Result const& result);
+    VideoPreview(VideoScope &scope, unity::scopes::Result const& result, unity::scopes::ActionMetadata const& hints);
     virtual void cancelled() override;
     virtual void run(unity::scopes::PreviewReplyProxy const& reply) override;
 
 private:
     const VideoScope &scope;
-    const unity::scopes::Result result;
 };
 
 #endif
