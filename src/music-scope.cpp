@@ -84,10 +84,9 @@ static const char SEARCH_CATEGORY_DEFINITION[] = R"(
 using namespace mediascanner;
 using namespace unity::scopes;
 
-int MusicScope::start(std::string const&, RegistryProxy const&) {
+void MusicScope::start(std::string const&, RegistryProxy const&) {
     setlocale(LC_ALL, "");
     store.reset(new MediaStore(MS_READ_ONLY));
-    return VERSION;
 }
 
 void MusicScope::stop() {

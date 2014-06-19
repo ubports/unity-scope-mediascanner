@@ -29,7 +29,7 @@
 class VideoAggregatorScope : public unity::scopes::ScopeBase
 {
 public:
-    virtual int start(std::string const&, unity::scopes::RegistryProxy const&) override;
+    virtual void start(std::string const&, unity::scopes::RegistryProxy const&) override;
 
     virtual void stop() override;
 

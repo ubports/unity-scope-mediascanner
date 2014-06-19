@@ -69,10 +69,9 @@ static const char SEARCH_CATEGORY_DEFINITION[] = R"(
 }
 )";
 
-int VideoScope::start(std::string const&, RegistryProxy const&) {
+void VideoScope::start(std::string const&, RegistryProxy const&) {
     setlocale(LC_ALL, "");
     store.reset(new MediaStore(MS_READ_ONLY));
-    return VERSION;
 }
 
 void VideoScope::stop() {

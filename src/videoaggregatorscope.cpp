@@ -34,11 +34,10 @@ const std::vector<const char*> SUBSCOPE_NAMES{
 const char *LOCALSCOPE = "mediascanner-video";
 const char *ONLINESCOPE = "com.canonical.scopes.remotevideos";
 
-int VideoAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
+void VideoAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
     setlocale(LC_ALL, "");
     this->registry = registry;
     find_subscopes(true);
-    return VERSION;
 }
 
 void VideoAggregatorScope::find_subscopes(bool warn_missing) {
