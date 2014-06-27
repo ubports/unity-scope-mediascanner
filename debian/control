@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 Build-Depends: cmake (>= 2.8),
 # To avoid GCC 4.8/4.9 ABI break issues.
-               g++-4.9,
+               g++-4.9:native,
                debhelper (>= 9),
                google-mock,
                intltool,

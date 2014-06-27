@@ -2,6 +2,7 @@
 # -*- makefile -*-
 
 export DPKG_GENSYMBOLS_CHECK_LEVEL=4
+include /usr/share/dpkg/default.mk
 
 # Explicitly selecting a G{CC,++}-version here to avoid accidental
 # ABI breaks introduced by toolchain updates.
