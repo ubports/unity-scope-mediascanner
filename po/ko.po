@@ -1,0 +1,88 @@
+# Korean translation for unity-scope-mediascanner
+# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
+# This file is distributed under the same license as the unity-scope-mediascanner package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: unity-scope-mediascanner\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-04-29 17:23+0100\n"
+"PO-Revision-Date: 2014-07-19 14:43+0000\n"
+"Last-Translator: MinSik CHO <Unknown>\n"
+"Language-Team: Korean <ko@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2014-07-20 06:18+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
+
+#: ../src/music-scope.cpp:122
+msgid "Songs"
+msgstr "노래"
+
+#: ../src/music-scope.cpp:159
+msgid "Albums"
+msgstr "앨범"
+
+#: ../src/music-scope.cpp:241 ../src/music-scope.cpp:278
+msgid "Play in music app"
+msgstr "음악 애플리케이션으로 재생하기"
+
+#: ../src/video-scope.cpp:102
+msgid "My Videos"
+msgstr "내 동영상"
+
+#: ../src/video-scope.cpp:151
+msgid "Play"
+msgstr "재생"
+
+#: tmp/mediascanner-music.ini.in.in.h:1
+msgid "Local Music"
+msgstr "내 장치에 있는 음악"
+
+#: tmp/mediascanner-music.ini.in.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that scans the device for music and allows "
+"it to be searched and displayed in the Dash."
+msgstr "이 우분투 플러그인은 장치에서 음악을 찾고, 대시에서 검색하여 볼 수 있도록 합니다."
+
+#: tmp/mediascanner-music.ini.in.in.h:3
+msgid "Search local music collection"
+msgstr "장치에 있는 음악 찾기"
+
+#: tmp/mediascanner-video.ini.in.in.h:1
+msgid "Local Videos"
+msgstr "내 장치에 있는 동영상"
+
+#: tmp/mediascanner-video.ini.in.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that scans the device for videos and allows "
+"them to be searched and displayed in the Dash."
+msgstr "이 우분투 플러그인은 장치에서 동영상을 찾고, 대시에서 검색하여 볼 수 있도록 합니다."
+
+#: tmp/musicaggregator.ini.in.in.h:1
+msgid "Music"
+msgstr "음악"
+
+#: tmp/musicaggregator.ini.in.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that merges all music sources into one."
+msgstr "이 우분투 플러그인은 모든 음악 소스를 하나로 합치는 플러그인입니다."
+
+#: tmp/musicaggregator.ini.in.in.h:3
+msgid "Search music"
+msgstr "음악 검색"
+
+#: tmp/videoaggregator.ini.in.in.h:1
+msgid "Video"
+msgstr "동영상"
+
+#: tmp/videoaggregator.ini.in.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that merges all video sources into one."
+msgstr "이 우분투 플러그인은 모든 동영상 소스를 하나로 합치는 플러그인입니다."
+
+#: tmp/videoaggregator.ini.in.in.h:3
+msgid "Search video"
+msgstr "동영상 검색"
