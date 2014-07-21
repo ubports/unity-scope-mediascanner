@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-04-29 17:23+0100\n"
-"PO-Revision-Date: 2014-07-18 21:42+0000\n"
+"PO-Revision-Date: 2014-07-20 20:44+0000\n"
 "Last-Translator: Pedro Albuquerque <palbuquerque73@gmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-19 06:19+0000\n"
+"X-Launchpad-Export-Date: 2014-07-21 07:05+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 
 #: ../src/music-scope.cpp:122
@@ -39,7 +39,7 @@ msgstr "Reproduzir"
 
 #: tmp/mediascanner-music.ini.in.in.h:1
 msgid "Local Music"
-msgstr ""
+msgstr "Música local"
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
@@ -53,7 +53,7 @@ msgstr ""
 
 #: tmp/mediascanner-video.ini.in.in.h:1
 msgid "Local Videos"
-msgstr ""
+msgstr "Vídeos locais"
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
