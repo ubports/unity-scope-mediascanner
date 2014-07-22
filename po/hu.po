@@ -1,4 +1,4 @@
-# Basque translation for unity-scope-mediascanner
+# Hungarian translation for unity-scope-mediascanner
 # Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
 # This file is distributed under the same license as the unity-scope-mediascanner package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-04-29 17:23+0100\n"
-"PO-Revision-Date: 2014-07-21 22:30+0000\n"
-"Last-Translator: Ibai Oihanguren Sala <Unknown>\n"
-"Language-Team: Basque <eu@li.org>\n"
+"PO-Revision-Date: 2014-07-22 06:53+0000\n"
+"Last-Translator: Gabor Kelemen <kelemeng@openscope.org>\n"
+"Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,78 +19,74 @@ msgstr ""
 
 #: ../src/music-scope.cpp:122
 msgid "Songs"
-msgstr "Abestiak"
+msgstr "Számok"
 
 #: ../src/music-scope.cpp:159
 msgid "Albums"
-msgstr "Albumak"
+msgstr "Albumok"
 
 #: ../src/music-scope.cpp:241 ../src/music-scope.cpp:278
 msgid "Play in music app"
-msgstr "Erreproduzitu musika-aplikazioan"
+msgstr "Lejátszás a zene appban"
 
 #: ../src/video-scope.cpp:102
 msgid "My Videos"
-msgstr "Nire bideoak"
+msgstr "Saját videók"
 
 #: ../src/video-scope.cpp:151
 msgid "Play"
-msgstr "Erreproduzitu"
+msgstr "Lejátszás"
 
 #: tmp/mediascanner-music.ini.in.in.h:1
 msgid "Local Music"
-msgstr "Musika lokala"
+msgstr "Helyi zene"
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
-"Honako hau Ubunturen bilaketa-plugina da, gailua arakatzen duena musika "
-"bilatu eta abio-leihoan bistaratzea ahalbidetzeko."
+"Ez egy Ubuntu keresőbővítmény, amely zenét keres a készüléken, valamint "
+"kereshetővé és megjeleníthetővé teszi azokat a Dash-ben."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr "Bilatu musika-bilduma lokala"
+msgstr "Keresés a helyi zenegyűjteményben"
 
 #: tmp/mediascanner-video.ini.in.in.h:1
 msgid "Local Videos"
-msgstr "Bideo lokalak"
+msgstr "Helyi videók"
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
-"Honako hau Ubunturen bilaketa-plugina da, gailua arakatzen duena bideoak "
-"bilatu eta abio-leihoan bistaratzea ahalbidetzeko."
+"Ez egy Ubuntu keresőbővítmény, amely videókat keres a készüléken, valamint "
+"kereshetővé és megjeleníthetővé teszi azokat a Dash-ben."
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
-msgstr "Musika"
+msgstr "Zene"
 
 #: tmp/musicaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
-msgstr ""
-"Honako hau Ubunturen bilaketa-plugina da, musika-jatorri guztiak bateratzen "
-"dituena."
+msgstr "Ez egy Ubuntu keresőbővítmény, amely minden zeneforrást egyesít."
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
-msgstr "Bilatu musika"
+msgstr "Zene keresése"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
-msgstr "Bideoak"
+msgstr "Videó"
 
 #: tmp/videoaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
-msgstr ""
-"Honako hau Ubunturen bilaketa-plugina da, bideo-jatorri guztiak bateratzen "
-"dituena."
+msgstr "Ez egy Ubuntu keresőbővítmény, amely minden videoforrást egyesít."
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
-msgstr "Bilatu bideoak"
+msgstr "Videó keresése"
