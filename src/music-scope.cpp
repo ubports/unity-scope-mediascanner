@@ -66,6 +66,20 @@ static const char ALBUMS_CATEGORY_DEFINITION[] = R"(
 }
 )";
 
+static const char ARTISTS_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-size": "medium"
+  },
+  "components": {
+    "title": "title",
+    "art":  "art"
+  }
+}
+)";
+
 // Category renderer to use when presenting search results
 // FIXME: This should use list category-layout (LP #1279279)
 static const char SEARCH_CATEGORY_DEFINITION[] = R"(
@@ -134,7 +148,7 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
     {
         // TODO
     }
-    else
+    else // empty department id or 'artists'
     {
         query_artists(reply);
     }
@@ -142,16 +156,15 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
 
 void MusicQuery::populate_departments(unity::scopes::SearchReplyProxy const &reply) const
 {
-    unity::scopes::Department::SPtr root = unity::scopes::Department::create("", query(), _("All"));
-    unity::scopes::Department::SPtr artists = unity::scopes::Department::create("artists", query(), _("Artists"));
+    unity::scopes::Department::SPtr artists = unity::scopes::Department::create("", query(), _("Artists"));
     unity::scopes::Department::SPtr albums = unity::scopes::Department::create("albums", query(), _("Albums"));
     unity::scopes::Department::SPtr tracks = unity::scopes::Department::create("tracks", query(), _("Tracks"));
 
-    root->set_subdepartments({artists, albums, tracks});
+    artists->set_subdepartments({albums, tracks});
 
     try
     {
-        reply->register_departments(root);
+        reply->register_departments(artists);
     }
     catch (const std::exception& e)
     {
@@ -161,8 +174,10 @@ void MusicQuery::populate_departments(unity::scopes::SearchReplyProxy const &rep
 
 void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply) const
 {
-    CategoryRenderer renderer(query().query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
-    auto cat = reply->register_category("artists", _("Artists"), SONGS_CATEGORY_ICON, renderer); //FIXME: no title
+    const bool show_title = !query().query_string().empty();
+
+    CategoryRenderer renderer(query().query_string() == "" ? ARTISTS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
+    auto cat = reply->register_category("artists", show_title ? _("Artists") : "", SONGS_CATEGORY_ICON, renderer); //FIXME: icon
 
     CannedQuery artist_search(query());
     artist_search.set_department_id("albums_of_artist");
@@ -182,8 +197,10 @@ void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply) con
 }
 
 void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply) const {
+    const bool show_title = !query().query_string().empty();
+
     CategoryRenderer renderer(query().query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
-    auto cat = reply->register_category("songs", _("Songs"), SONGS_CATEGORY_ICON, renderer);
+    auto cat = reply->register_category("songs", show_title ? _("Songs") : "", SONGS_CATEGORY_ICON, renderer);
     for (const auto &media : scope.store->query(query().query_string(), AudioMedia, MAX_RESULTS)) {
         CategorisedResult res(cat);
         res.set_uri(media.getUri());
@@ -218,9 +235,12 @@ static std::string uriencode(const std::string &src) {
     return result;
 }
 
+
 void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply) const {
+    const bool show_title = !query().query_string().empty();
+
     CategoryRenderer renderer(query().query_string() == "" ? ALBUMS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
-    auto cat = reply->register_category("albums", _("Albums"), SONGS_CATEGORY_ICON, renderer);
+    auto cat = reply->register_category("albums", show_title ? _("Albums") : "", SONGS_CATEGORY_ICON, renderer);
     for (const auto &album : scope.store->queryAlbums(query().query_string(), MAX_RESULTS)) {
         CategorisedResult res(cat);
         res.set_uri("album:///" + uriencode(album.getArtist()) + "/" +
