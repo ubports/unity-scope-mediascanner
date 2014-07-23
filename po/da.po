@@ -1,96 +1,93 @@
-# Basque translation for unity-scope-mediascanner
+# Danish translation for unity-scope-mediascanner
 # Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
 # This file is distributed under the same license as the unity-scope-mediascanner package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#
+# Ask Hjorth Larsen <asklarsen@gmail.com>, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-04-29 17:23+0100\n"
-"PO-Revision-Date: 2014-07-21 22:30+0000\n"
-"Last-Translator: Ibai Oihanguren Sala <Unknown>\n"
-"Language-Team: Basque <eu@li.org>\n"
+"PO-Revision-Date: 2014-07-22 15:46+0000\n"
+"Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
+"Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-22 07:18+0000\n"
+"X-Launchpad-Export-Date: 2014-07-23 07:01+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 
 #: ../src/music-scope.cpp:122
 msgid "Songs"
-msgstr "Abestiak"
+msgstr "Sange"
 
 #: ../src/music-scope.cpp:159
 msgid "Albums"
-msgstr "Albumak"
+msgstr "Albummer"
 
 #: ../src/music-scope.cpp:241 ../src/music-scope.cpp:278
 msgid "Play in music app"
-msgstr "Erreproduzitu musika-aplikazioan"
+msgstr "Afspil i musik-app"
 
 #: ../src/video-scope.cpp:102
 msgid "My Videos"
-msgstr "Nire bideoak"
+msgstr "Mine videoer"
 
 #: ../src/video-scope.cpp:151
 msgid "Play"
-msgstr "Erreproduzitu"
+msgstr "Afspil"
 
 #: tmp/mediascanner-music.ini.in.in.h:1
 msgid "Local Music"
-msgstr "Musika lokala"
+msgstr "Lokal musik"
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
-"Honako hau Ubunturen bilaketa-plugina da, gailua arakatzen duena musika "
-"bilatu eta abio-leihoan bistaratzea ahalbidetzeko."
+"Dette er et Ubuntu-søgemodul som scanner enheden for musik med mulighed for "
+"søgning og visning på instrumentbrættet."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr "Bilatu musika-bilduma lokala"
+msgstr "Søg i lokal musiksamling"
 
 #: tmp/mediascanner-video.ini.in.in.h:1
 msgid "Local Videos"
-msgstr "Bideo lokalak"
+msgstr "Lokale videoer"
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
-"Honako hau Ubunturen bilaketa-plugina da, gailua arakatzen duena bideoak "
-"bilatu eta abio-leihoan bistaratzea ahalbidetzeko."
+"Dette er et Ubuntu-søgemodul som scanner enheden for videoer med mulighed "
+"for søgning og visning i instrumentbrættet."
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
-msgstr "Musika"
+msgstr "Musik"
 
 #: tmp/musicaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
-msgstr ""
-"Honako hau Ubunturen bilaketa-plugina da, musika-jatorri guztiak bateratzen "
-"dituena."
+msgstr "Dette er et Ubuntu-søgemodul som fletter alle musikkilder sammen."
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
-msgstr "Bilatu musika"
+msgstr "Søg efter musik"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
-msgstr "Bideoak"
+msgstr "Video"
 
 #: tmp/videoaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
-msgstr ""
-"Honako hau Ubunturen bilaketa-plugina da, bideo-jatorri guztiak bateratzen "
-"dituena."
+msgstr "Dette er et Ubuntu-søgemodul som fletter alle videokilder sammen."
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
-msgstr "Bilatu bideoak"
+msgstr "Søg efter video"

@@ -8,81 +8,81 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-04-29 17:23+0100\n"
-"PO-Revision-Date: 2014-07-15 13:58+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2014-07-18 10:14+0000\n"
+"Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-16 07:28+0000\n"
-"X-Generator: Launchpad (build 17112)\n"
+"X-Launchpad-Export-Date: 2014-07-19 06:20+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 
 #: ../src/music-scope.cpp:122
 msgid "Songs"
-msgstr ""
+msgstr "歌曲"
 
 #: ../src/music-scope.cpp:159
 msgid "Albums"
-msgstr ""
+msgstr "專輯"
 
 #: ../src/music-scope.cpp:241 ../src/music-scope.cpp:278
 msgid "Play in music app"
-msgstr ""
+msgstr "以音樂程式播放"
 
 #: ../src/video-scope.cpp:102
 msgid "My Videos"
-msgstr ""
+msgstr "我的影片"
 
 #: ../src/video-scope.cpp:151
 msgid "Play"
-msgstr ""
+msgstr "播放"
 
 #: tmp/mediascanner-music.ini.in.in.h:1
 msgid "Local Music"
-msgstr ""
+msgstr "本機音樂"
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
-msgstr ""
+msgstr "這是個搜尋裝置中的音樂，並使其可在 Dash 中搜尋到且顯示的 Ubuntu 搜尋插件。"
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr ""
+msgstr "搜尋本機音樂收藏"
 
 #: tmp/mediascanner-video.ini.in.in.h:1
 msgid "Local Videos"
-msgstr ""
+msgstr "本機影片"
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
-msgstr ""
+msgstr "這是個搜尋裝置中的影片，並使其可在 Dash 中搜尋到且顯示的 Ubuntu 搜尋插件。"
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
-msgstr ""
+msgstr "音樂"
 
 #: tmp/musicaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
-msgstr ""
+msgstr "這是個可將所有音樂來源合併在一處的 Ubuntu 搜尋插件。"
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
-msgstr ""
+msgstr "搜尋音樂"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
-msgstr ""
+msgstr "影片"
 
 #: tmp/videoaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
-msgstr ""
+msgstr "這是個可將所有影片來源合併在一處的 Ubuntu 搜尋插件。"
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
-msgstr ""
+msgstr "搜尋影片"
