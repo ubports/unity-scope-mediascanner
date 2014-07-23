@@ -17,9 +17,11 @@
  *
  */
 #include <config.h>
+#include <iostream>
 
 #include <mediascanner/MediaFile.hh>
 #include <mediascanner/Album.hh>
+#include <mediascanner/Filter.hh>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/CategorisedResult.h>
 #include <unity/scopes/ColumnLayout.h>
@@ -114,8 +116,69 @@ void MusicQuery::cancelled() {
 }
 
 void MusicQuery::run(SearchReplyProxy const&reply) {
-    query_songs(reply);
-    query_albums(reply);
+    if (query().query_string().empty())
+    {
+        populate_departments(reply);
+    }
+
+    auto const current_department = query().department_id();
+    if (current_department == "tracks")
+    {
+        query_songs(reply);
+    }
+    else if (current_department == "albums")
+    {
+        query_albums(reply);
+    }
+    else if (current_department == "albums_of_artist") // fake department that's not really displayed
+    {
+        // TODO
+    }
+    else
+    {
+        query_artists(reply);
+    }
+}
+
+void MusicQuery::populate_departments(unity::scopes::SearchReplyProxy const &reply) const
+{
+    unity::scopes::Department::SPtr root = unity::scopes::Department::create("", query(), _("All"));
+    unity::scopes::Department::SPtr artists = unity::scopes::Department::create("artists", query(), _("Artists"));
+    unity::scopes::Department::SPtr albums = unity::scopes::Department::create("albums", query(), _("Albums"));
+    unity::scopes::Department::SPtr tracks = unity::scopes::Department::create("tracks", query(), _("Tracks"));
+
+    root->set_subdepartments({artists, albums, tracks});
+
+    try
+    {
+        reply->register_departments(root);
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << "Failed to register departments: " << e.what() << std::endl;
+    }
+}
+
+void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply) const
+{
+    CategoryRenderer renderer(query().query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
+    auto cat = reply->register_category("artists", _("Artists"), SONGS_CATEGORY_ICON, renderer); //FIXME: no title
+
+    CannedQuery artist_search(query());
+    artist_search.set_department_id("albums_of_artist");
+
+    for (const auto &artist: scope.store->listArtists(mediascanner::Filter(), MAX_RESULTS)) { //FIXME: queryArtists once available
+        artist_search.set_query_string(artist);
+
+        CategorisedResult res(cat);
+        res.set_uri(artist_search.to_uri());
+        res.set_title(artist);
+
+        if(!reply->push(res))
+        {
+            return;
+        }
+    }
 }
 
 void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply) const {

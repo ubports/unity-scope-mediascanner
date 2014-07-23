@@ -35,8 +35,10 @@ public:
 private:
     const MusicScope &scope;
 
+    void populate_departments(unity::scopes::SearchReplyProxy const &reply) const;
     void query_songs(unity::scopes::SearchReplyProxy const&reply) const;
     void query_albums(unity::scopes::SearchReplyProxy const&reply) const;
+    void query_artists(unity::scopes::SearchReplyProxy const& reply) const;
 };
 
 class MusicPreview : public unity::scopes::PreviewQueryBase
