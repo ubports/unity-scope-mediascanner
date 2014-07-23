@@ -33,6 +33,7 @@
 #include "i18n.h"
 
 #define MAX_RESULTS 100
+#define MAX_GENRES 100
 
 static const char MISSING_ALBUM_ART[] = "/usr/share/unity/icons/album_missing.png";
 static const char SONGS_CATEGORY_ICON[] = "/usr/share/icons/unity-icon-theme/places/svg/group-songs.svg";
@@ -144,6 +145,9 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
     {
         query_albums(reply);
     }
+    else if (current_department == "genres")
+    {
+    }
     else if (current_department == "albums_of_artist") // fake department that's not really displayed
     {
         // TODO
@@ -158,9 +162,22 @@ void MusicQuery::populate_departments(unity::scopes::SearchReplyProxy const &rep
 {
     unity::scopes::Department::SPtr artists = unity::scopes::Department::create("", query(), _("Artists"));
     unity::scopes::Department::SPtr albums = unity::scopes::Department::create("albums", query(), _("Albums"));
+    unity::scopes::Department::SPtr genres = unity::scopes::Department::create("genres", query(), _("Genres"));
+    if (query().department_id() == "genres")
+    {
+        for (const auto &genre: scope.store->listGenres(MAX_GENRES))
+        {
+            genres->add_subdepartment(unity::scopes::Department::create("genre:" + genre, query(), genre));
+        }
+    }
+    else
+    {
+        genres->set_has_subdepartments(true);
+    }
+
     unity::scopes::Department::SPtr tracks = unity::scopes::Department::create("tracks", query(), _("Tracks"));
 
-    artists->set_subdepartments({albums, tracks});
+    artists->set_subdepartments({albums, genres, tracks});
 
     try
     {
@@ -180,7 +197,7 @@ void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply) con
     auto cat = reply->register_category("artists", show_title ? _("Artists") : "", SONGS_CATEGORY_ICON, renderer); //FIXME: icon
 
     CannedQuery artist_search(query());
-    artist_search.set_department_id("albums_of_artist");
+    artist_search.set_department_id("albums_of_artist"); // virtual department
 
     for (const auto &artist: scope.store->listArtists(mediascanner::Filter(), MAX_RESULTS)) { //FIXME: queryArtists once available
         artist_search.set_query_string(artist);
