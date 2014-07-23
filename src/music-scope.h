@@ -37,8 +37,10 @@ private:
 
     void populate_departments(unity::scopes::SearchReplyProxy const &reply) const;
     void query_songs(unity::scopes::SearchReplyProxy const&reply) const;
-    void query_albums(unity::scopes::SearchReplyProxy const&reply) const;
+    void query_albums(unity::scopes::SearchReplyProxy const&reply, const std::string& genre = "") const;
     void query_artists(unity::scopes::SearchReplyProxy const& reply) const;
+
+    static unity::scopes::CategorisedResult create_album_result(unity::scopes::Category::SCPtr const& category, mediascanner::Album const& album);
 };
 
 class MusicPreview : public unity::scopes::PreviewQueryBase
