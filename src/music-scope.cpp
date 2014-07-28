@@ -237,7 +237,7 @@ void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply) const 
     const bool show_title = !query().query_string().empty();
 
     CategoryRenderer renderer(query().query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
-    auto cat = reply->register_category("songs", show_title ? _("Songs") : "", SONGS_CATEGORY_ICON, renderer);
+    auto cat = reply->register_category("songs", show_title ? _("Tracks") : "", SONGS_CATEGORY_ICON, renderer);
     for (const auto &media : scope.store->query(query().query_string(), AudioMedia, MAX_RESULTS)) {
         if(!reply->push(create_song_result(cat, media)))
         {
