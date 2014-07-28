@@ -131,7 +131,9 @@ void MusicQuery::cancelled() {
 }
 
 void MusicQuery::run(SearchReplyProxy const&reply) {
-    if (query().query_string().empty())
+    const bool empty_search_query = query().query_string().empty();
+
+    if (empty_search_query)
     {
         populate_departments(reply);
     }
@@ -163,6 +165,12 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
     else // empty department id or 'artists'
     {
         query_artists(reply);
+
+        if (!empty_search_query)
+        {
+            query_albums(reply);
+            query_songs(reply);
+        }
     }
 }
 
