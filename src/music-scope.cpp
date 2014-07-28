@@ -82,13 +82,13 @@ static const char ARTISTS_CATEGORY_DEFINITION[] = R"(
 )";
 
 // Category renderer to use when presenting search results
-// FIXME: This should use list category-layout (LP #1279279)
 static const char SEARCH_CATEGORY_DEFINITION[] = R"(
 {
   "schema-version": 1,
   "template": {
     "category-layout": "grid",
-    "card-size": "small"
+    "card-layout" : "horizontal",
+    "card-size": "large"
   },
   "components": {
     "title": "title",
