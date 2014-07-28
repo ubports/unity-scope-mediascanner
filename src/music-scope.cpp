@@ -177,7 +177,8 @@ void MusicQuery::populate_departments(unity::scopes::SearchReplyProxy const &rep
 
     if (current_department == "genres" || current_department.find("genre:") == 0)
     {
-        for (const auto &genre: scope.store->listGenres(MAX_GENRES))
+        const mediascanner::Filter filter;
+        for (const auto &genre: scope.store->listGenres(filter))
         {
             genres->add_subdepartment(unity::scopes::Department::create("genre:" + genre, query(), genre));
         }
@@ -209,7 +210,8 @@ void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply) con
     CannedQuery artist_search(query());
     artist_search.set_department_id("albums_of_artist"); // virtual department
 
-    for (const auto &artist: scope.store->listArtists(mediascanner::Filter(), MAX_RESULTS)) { //FIXME: queryArtists once available
+    for (const auto &artist: scope.store->queryArtists(query().query_string(), MAX_RESULTS))
+    {
         artist_search.set_query_string(artist);
 
         CategorisedResult res(cat);
@@ -245,7 +247,7 @@ void MusicQuery::query_songs_by_artist(unity::scopes::SearchReplyProxy const &re
     mediascanner::Filter filter;
     filter.setArtist(artist);
 
-    for (const auto &media : scope.store->listSongs(filter, MAX_RESULTS)) {
+    for (const auto &media : scope.store->listSongs(filter)) {
         if(!reply->push(create_song_result(cat, media)))
         {
             return;
@@ -301,7 +303,7 @@ void MusicQuery::query_albums_by_genre(unity::scopes::SearchReplyProxy const&rep
 
     mediascanner::Filter filter;
     filter.setGenre(genre);
-    for (const auto &album: scope.store->listAlbums(filter, MAX_RESULTS))
+    for (const auto &album: scope.store->listAlbums(filter))
     {
         if (!reply->push(create_album_result(cat, album)))
         {
@@ -317,7 +319,7 @@ void MusicQuery::query_albums_by_artist(unity::scopes::SearchReplyProxy const &r
 
     mediascanner::Filter filter;
     filter.setArtist(artist);
-    for (const auto &album: scope.store->listAlbums(filter, MAX_RESULTS))
+    for (const auto &album: scope.store->listAlbums(filter))
     {
         if (!reply->push(create_album_result(cat, album)))
         {
