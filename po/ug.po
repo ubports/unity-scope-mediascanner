@@ -1,88 +1,94 @@
 # Uyghur translation for unity-scope-mediascanner
 # Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
 # This file is distributed under the same license as the unity-scope-mediascanner package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+# Gheyret Kenji <gheyret@gmail.com>, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-04-29 17:23+0100\n"
-"PO-Revision-Date: 2014-06-10 03:28+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Uyghur <ug@li.org>\n"
+"PO-Revision-Date: 2014-07-03 01:25+0000\n"
+"Last-Translator: Gheyret T.Kenji <Unknown>\n"
+"Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-11 06:37+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-07-04 06:32+0000\n"
+"X-Generator: Launchpad (build 17086)\n"
 
 #: ../src/music-scope.cpp:122
 msgid "Songs"
-msgstr ""
+msgstr "ناخشىلار"
 
 #: ../src/music-scope.cpp:159
 msgid "Albums"
-msgstr ""
+msgstr "ئالبوملار"
 
 #: ../src/music-scope.cpp:241 ../src/music-scope.cpp:278
 msgid "Play in music app"
-msgstr ""
+msgstr "مۇزىكا ئەپتە قوي"
 
 #: ../src/video-scope.cpp:102
 msgid "My Videos"
-msgstr ""
+msgstr "سىنلىرىم"
 
 #: ../src/video-scope.cpp:151
 msgid "Play"
-msgstr ""
+msgstr "قوي"
 
 #: tmp/mediascanner-music.ini.in.in.h:1
 msgid "Local Music"
-msgstr ""
+msgstr "يەرلىك مۇزىكا"
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
+"بۇ ئۈسكۈنىدىن مۇزىكىلارنى ئىزدەپ، نەتىجىنى باش تاختا(Dash)دا كۆرسىتىدىغان "
+"ئۇبۇنتۇنىڭ ئىزدەش قىستۇرمىسىدۇر."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr ""
+msgstr "يەرلىك مۇزىكا توپلىمىنى ئىزدە"
 
 #: tmp/mediascanner-video.ini.in.in.h:1
 msgid "Local Videos"
-msgstr ""
+msgstr "يەرلىك سىنلار"
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
+"بۇ ئۈسكۈنىدىن سىنلارنى ئىزدەپ، نەتىجىنى باش تاختا(Dash)دا كۆرسىتىدىغان "
+"ئۇبۇنتۇنىڭ ئىزدەش قىستۇرمىسىدۇر."
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
-msgstr ""
+msgstr "مۇزىكا"
 
 #: tmp/musicaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr ""
+"بۇ بارلىق مۇزىكا مەنبەسىنى بىرلەشتۈرىدىغان ئۇبۇنتۇنىڭ ئىزدەش قىستۇرمىسىدۇر."
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
-msgstr ""
+msgstr "مۇزىكا ئىزدەش"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
-msgstr ""
+msgstr "سىن"
 
 #: tmp/videoaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr ""
+"بۇ بارلىق سىن مەنبەسىنى بىرلەشتۈرىدىغان ئۇبۇنتۇنىڭ ئىزدەش قىستۇرمىسىدۇر."
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
-msgstr ""
+msgstr "سىن ئىزدە"

@@ -1,4 +1,4 @@
-# Galician translation for unity-scope-mediascanner
+# English (United Kingdom) translation for unity-scope-mediascanner
 # Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
 # This file is distributed under the same license as the unity-scope-mediascanner package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
@@ -8,89 +8,87 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-04-29 17:23+0100\n"
-"PO-Revision-Date: 2014-07-05 16:29+0000\n"
-"Last-Translator: Marcos Lans <Unknown>\n"
-"Language-Team: Galician <gl@li.org>\n"
+"PO-Revision-Date: 2014-07-09 17:06+0000\n"
+"Last-Translator: Anthony Harrington <untaintableangel@ubuntu.com>\n"
+"Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-06 06:04+0000\n"
-"X-Generator: Launchpad (build 17086)\n"
+"X-Launchpad-Export-Date: 2014-07-10 07:30+0000\n"
+"X-Generator: Launchpad (build 17100)\n"
 
 #: ../src/music-scope.cpp:122
 msgid "Songs"
-msgstr "Cancións"
+msgstr "Songs"
 
 #: ../src/music-scope.cpp:159
 msgid "Albums"
-msgstr "Álbums"
+msgstr "Albums"
 
 #: ../src/music-scope.cpp:241 ../src/music-scope.cpp:278
 msgid "Play in music app"
-msgstr "Reproducir no aplicativo de música"
+msgstr "Play in music app"
 
 #: ../src/video-scope.cpp:102
 msgid "My Videos"
-msgstr "Os meus vídeos"
+msgstr "My Videos"
 
 #: ../src/video-scope.cpp:151
 msgid "Play"
-msgstr "Reproducir"
+msgstr "Play"
 
 #: tmp/mediascanner-music.ini.in.in.h:1
 msgid "Local Music"
-msgstr "Música no dispositivo"
+msgstr "Local Music"
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
-"Este é un engadido de busca de Ubuntu que procura música no dispositivo e "
-"permite mostrala no Panel."
+"This is an Ubuntu search plug-in that scans the device for music and allows "
+"it to be searched and displayed in the Dash."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr "Buscar na colección local de música"
+msgstr "Search local music collection"
 
 #: tmp/mediascanner-video.ini.in.in.h:1
 msgid "Local Videos"
-msgstr "Vídeos no dispositivo"
+msgstr "Local Videos"
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
-"Este é un engadido de busca de Ubuntu que procura vídeos no dispositivo e "
-"permite mostralos no Panel."
+"This is an Ubuntu search plug-in that scans the device for videos and allows "
+"them to be searched and displayed in the Dash."
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
-msgstr "Música"
+msgstr "Music"
 
 #: tmp/musicaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr ""
-"Este é un engadido de busca de Ubuntu que combina todas as orixes de música "
-"nunha soa."
+"This is an Ubuntu search plug-in that merges all music sources into one."
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
-msgstr "Buscar música"
+msgstr "Search music"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
-msgstr "Vídeo"
+msgstr "Video"
 
 #: tmp/videoaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr ""
-"Este é un engadido de busca de Ubuntu que combina todas as orixes de vídeo "
-"nunha soa."
+"This is an Ubuntu search plug-in that merges all video sources into one."
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
-msgstr "Buscar vídeo"
+msgstr "Search video"

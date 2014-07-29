@@ -1,3 +1,23 @@
+unity-scope-mediascanner (0.2+14.10.20140718-0ubuntu1) utopic; urgency=low
+
+  [ Jussi Pakkanen ]
+  * Specify GCC 4.9 explicitly to prevent ABI breakage.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 18 Jul 2014 12:58:22 +0000
+
+unity-scope-mediascanner (0.2+14.10.20140626-0ubuntu1) utopic; urgency=low
+
+  * New rebuild forced
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 26 Jun 2014 11:49:10 +0000
+
+unity-scope-mediascanner (0.2+14.10.20140618.1-0ubuntu1) utopic; urgency=low
+
+  [ Pawel Stolowski ]
+  * Updated for api changes. Requires unity-scopes-api 0.5.0.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 18 Jun 2014 14:47:57 +0000
+
 unity-scope-mediascanner (0.2+14.10.20140529.1-0ubuntu1) utopic; urgency=low
 
   [ Marcus Tomlinson ]
