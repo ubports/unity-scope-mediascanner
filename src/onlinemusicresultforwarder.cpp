@@ -20,16 +20,16 @@
 #include "onlinemusicresultforwarder.h"
 #include <unity/scopes/SearchReply.h>
 
-const std::string OnlineMusicResultForwarder::songs_category_id = "cat_0";
-
-OnlineMusicResultForwarder::OnlineMusicResultForwarder(unity::scopes::SearchReplyProxy const& upstream)
-    : BufferedResultForwarder(upstream)
+OnlineMusicResultForwarder::OnlineMusicResultForwarder(unity::scopes::SearchReplyProxy const& upstream,
+        std::function<bool(unity::scopes::CategorisedResult&)> const& result_filter)
+    : BufferedResultForwarder(upstream),
+      result_filter(result_filter)
 {
 }
 
 void OnlineMusicResultForwarder::push(unity::scopes::CategorisedResult result)
 {
-    if (result.category()->id() == songs_category_id)
+    if (result_filter(result))
     {
         BufferedResultForwarder::push(std::move(result));
     }
@@ -37,9 +37,5 @@ void OnlineMusicResultForwarder::push(unity::scopes::CategorisedResult result)
 
 void OnlineMusicResultForwarder::push(unity::scopes::Category::SCPtr const& category)
 {
-    if (category->id() == songs_category_id)
-    {
-        // replace category to have different title
-        upstream->register_category(category->id(), "Grooveshark", category->icon(), category->renderer_template());
-    }
+    // do nothing
 }

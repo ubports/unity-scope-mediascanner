@@ -21,6 +21,7 @@
 #define ONLINEMUSICRESULTFORWARDER_H
 
 #include "bufferedresultforwarder.h"
+#include <functional>
 
 /*
    ResultForwarder that buffers results up until it gets
@@ -29,11 +30,15 @@
 class OnlineMusicResultForwarder: public BufferedResultForwarder {
 
 public:
-    OnlineMusicResultForwarder(unity::scopes::SearchReplyProxy const& upstream);
+    OnlineMusicResultForwarder(unity::scopes::SearchReplyProxy const& upstream,
+            std::function<bool(unity::scopes::CategorisedResult&)> const &result_filter);
     virtual void push(unity::scopes::CategorisedResult result) override;
     virtual void push(unity::scopes::Category::SCPtr const& category) override;
 
     static const std::string songs_category_id;
+
+private:
+    std::function<bool(unity::scopes::CategorisedResult&)> result_filter;
 };
 
 #endif

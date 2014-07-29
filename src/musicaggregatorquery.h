@@ -43,6 +43,7 @@ private:
     unity::scopes::ScopeProxy grooveshark_scope;
     unity::scopes::ScopeProxy soundcloud_scope;
     unity::scopes::ScopeProxy sevendigital_scope;
+    static const std::string grooveshark_songs_category_id;
 };
 
 #endif
