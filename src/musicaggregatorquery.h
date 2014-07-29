@@ -23,6 +23,7 @@
 #include <unity/scopes/SearchQueryBase.h>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/ReplyProxyFwd.h>
+#include <vector>
 
 class MusicAggregatorQuery : public unity::scopes::SearchQueryBase
 {
@@ -30,7 +31,7 @@ public:
     MusicAggregatorQuery(unity::scopes::CannedQuery const& query,
             unity::scopes::SearchMetadata const& hints,
             unity::scopes::ScopeProxy local_scope,
-            unity::scopes::ScopeProxy online_scope);
+            std::vector<unity::scopes::ScopeProxy> const& online_scopes);
     ~MusicAggregatorQuery();
     virtual void cancelled() override;
 
@@ -38,7 +39,7 @@ public:
 
 private:
     unity::scopes::ScopeProxy local_scope;
-    unity::scopes::ScopeProxy online_scope;
+    std::vector<unity::scopes::ScopeProxy> online_scopes;
 };
 
 #endif

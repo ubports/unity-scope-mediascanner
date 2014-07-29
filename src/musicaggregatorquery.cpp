@@ -32,9 +32,9 @@
 using namespace unity::scopes;
 
 MusicAggregatorQuery::MusicAggregatorQuery(CannedQuery const& query, SearchMetadata const& hints,
-        ScopeProxy local_scope, ScopeProxy online_scope) :
+        ScopeProxy local_scope, std::vector<ScopeProxy> const& online_scopes) :
     SearchQueryBase(query, hints),
-    local_scope(local_scope), online_scope(online_scope) {
+    local_scope(local_scope), online_scopes(online_scopes) {
 }
 
 MusicAggregatorQuery::~MusicAggregatorQuery() {
@@ -44,14 +44,33 @@ void MusicAggregatorQuery::cancelled() {
 }
 
 void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_reply) {
-    std::shared_ptr<ResultForwarder> local_reply(new ResultForwarder(parent_reply,
-                std::shared_ptr<WaitForAllCategories>(new WaitForAllCategories({"songs", "albums"}))));
-    std::shared_ptr<ResultForwarder> online_reply;
-    if(online_scope)
+    std::shared_ptr<ResultForwarder> local_reply(new ResultForwarder(parent_reply));
+    /*if(online_scope)
     {
         online_reply.reset(new OnlineMusicResultForwarder(parent_reply));
         local_reply->add_observer(online_reply);
         subsearch(online_scope, query().query_string(), online_reply);
+    }
+    subsearch(local_scope, query().query_string(), local_reply);*/
+
+    ScopeProxy online_scope;
+    std::vector<std::shared_ptr<ResultForwarder>> online_reply;
+
+    if (online_scopes.size() > 0)
+    {
+        online_scope = online_scopes[0];
+        auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply);
+        online_reply.push_back(reply);
+        local_reply->add_observer(reply);
+
+        for (unsigned int i = 1; i < online_scopes.size(); ++i)
+        {
+            auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply);
+            online_reply.push_back(reply);
+            online_reply[i-1]->add_observer(reply);
+
+            subsearch(online_scopes[i], query().query_string(), reply);
+        }
     }
     subsearch(local_scope, query().query_string(), local_reply);
 }

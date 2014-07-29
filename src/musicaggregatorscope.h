@@ -39,8 +39,12 @@ public:
             unity::scopes::SearchMetadata const& hints) override;
 
 private:
+    void init_scope_proxies();
+    void init_scope_proxy(std::string const& scope, unity::scopes::ScopeProxy& proxy);
     unity::scopes::ScopeProxy local_scope;
-    unity::scopes::ScopeProxy online_scope;
+    unity::scopes::ScopeProxy grooveshark_scope;
+    unity::scopes::ScopeProxy soundcloud_scope;
+    unity::scopes::ScopeProxy sevendigital_scope;
     unity::scopes::RegistryProxy registry;
 };
 

@@ -22,25 +22,21 @@
 #include <unity/scopes/Registry.h>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/CategoryRenderer.h>
+#include <vector>
 #include <iostream>
 
 using namespace unity::scopes;
 
 const char *LOCALSCOPE = "mediascanner-music";
-const char *ONLINESCOPE = "com.canonical.scopes.grooveshark";
+const char *GROOVESHARKSCOPE = "com.canonical.scopes.grooveshark";
+const char *SEVENDIGITAL = "com.canonical.scopes.sevendigital";
+const char *SOUNDCLOUD = "com.canonical.scopes.soundcloud";
 
 void MusicAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
     setlocale(LC_ALL, "");
     this->registry = registry;
     CategoryRenderer basic;
     local_scope = registry->get_metadata(LOCALSCOPE).proxy();
-    try
-    {
-        online_scope = registry->get_metadata(ONLINESCOPE).proxy();
-    } catch(std::exception &e)
-    {
-        std::cerr << "Could not instantiate online music scope: " << e.what() << std::endl;
-    }
 }
 
 void MusicAggregatorScope::stop() {
@@ -50,18 +46,38 @@ SearchQueryBase::UPtr MusicAggregatorScope::search(CannedQuery const& q,
                                                    SearchMetadata const& hints) {
     // FIXME: workaround for problem with no remote scopes on first run
     // until network becomes available
-    if (online_scope == nullptr)
+    init_scope_proxies();
+    std::vector<unity::scopes::ScopeProxy> online_scopes;
+    if (grooveshark_scope)
+        online_scopes.push_back(grooveshark_scope);
+    if (soundcloud_scope)
+        online_scopes.push_back(soundcloud_scope);
+    if (sevendigital_scope)
+        online_scopes.push_back(sevendigital_scope);
+
+    SearchQueryBase::UPtr query(new MusicAggregatorQuery(q, hints, local_scope, online_scopes));
+    return query;
+}
+
+void MusicAggregatorScope::init_scope_proxy(std::string const& scope, unity::scopes::ScopeProxy& proxy)
+{
+    if (proxy == nullptr)
     {
         try
         {
-            online_scope = registry->get_metadata(ONLINESCOPE).proxy();
+            proxy = registry->get_metadata(scope).proxy();
         } catch(std::exception &e)
         {
             // silently ignore
         }
     }
-    SearchQueryBase::UPtr query(new MusicAggregatorQuery(q, hints, local_scope, online_scope));
-    return query;
+}
+
+void MusicAggregatorScope::init_scope_proxies()
+{
+    init_scope_proxy(GROOVESHARKSCOPE, grooveshark_scope);
+    init_scope_proxy(SEVENDIGITAL, sevendigital_scope);
+    init_scope_proxy(SOUNDCLOUD, soundcloud_scope);
 }
 
 PreviewQueryBase::UPtr MusicAggregatorScope::preview(Result const& /*result*/, ActionMetadata const& /*hints*/) {
