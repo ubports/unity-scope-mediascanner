@@ -47,15 +47,7 @@ SearchQueryBase::UPtr MusicAggregatorScope::search(CannedQuery const& q,
     // FIXME: workaround for problem with no remote scopes on first run
     // until network becomes available
     init_scope_proxies();
-    std::vector<unity::scopes::ScopeProxy> online_scopes;
-    if (grooveshark_scope)
-        online_scopes.push_back(grooveshark_scope);
-    if (soundcloud_scope)
-        online_scopes.push_back(soundcloud_scope);
-    if (sevendigital_scope)
-        online_scopes.push_back(sevendigital_scope);
-
-    SearchQueryBase::UPtr query(new MusicAggregatorQuery(q, hints, local_scope, online_scopes));
+    SearchQueryBase::UPtr query(new MusicAggregatorQuery(q, hints, local_scope, grooveshark_scope, soundcloud_scope, sevendigital_scope));
     return query;
 }
 

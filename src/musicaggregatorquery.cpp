@@ -32,9 +32,17 @@
 using namespace unity::scopes;
 
 MusicAggregatorQuery::MusicAggregatorQuery(CannedQuery const& query, SearchMetadata const& hints,
-        ScopeProxy local_scope, std::vector<ScopeProxy> const& online_scopes) :
+        ScopeProxy local_scope,
+        unity::scopes::ScopeProxy const& grooveshark_scope,
+        unity::scopes::ScopeProxy const& soundcloud_scope,
+        unity::scopes::ScopeProxy const& sevendigital_scope
+        ) :
     SearchQueryBase(query, hints),
-    local_scope(local_scope), online_scopes(online_scopes) {
+    local_scope(local_scope),
+    grooveshark_scope(grooveshark_scope),
+    soundcloud_scope(soundcloud_scope),
+    sevendigital_scope(sevendigital_scope)
+{
 }
 
 MusicAggregatorQuery::~MusicAggregatorQuery() {
@@ -45,32 +53,33 @@ void MusicAggregatorQuery::cancelled() {
 
 void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_reply) {
     std::shared_ptr<ResultForwarder> local_reply(new ResultForwarder(parent_reply));
-    /*if(online_scope)
-    {
-        online_reply.reset(new OnlineMusicResultForwarder(parent_reply));
-        local_reply->add_observer(online_reply);
-        subsearch(online_scope, query().query_string(), online_reply);
-    }
-    subsearch(local_scope, query().query_string(), local_reply);*/
 
-    ScopeProxy online_scope;
-    std::vector<std::shared_ptr<ResultForwarder>> online_reply;
+    std::vector<unity::scopes::ScopeProxy> scopes({local_scope});
+    if (grooveshark_scope)
+        scopes.push_back(grooveshark_scope);
+    if (soundcloud_scope)
+        scopes.push_back(soundcloud_scope);
+    if (sevendigital_scope)
+        scopes.push_back(sevendigital_scope);
 
-    if (online_scopes.size() > 0)
+    std::vector<std::shared_ptr<ResultForwarder>> replies({local_reply});
+
+    // create and chain buffered result forwarders to enforce proper order of categories
+    for (unsigned int i = 0; i < scopes.size(); ++i)
     {
-        online_scope = online_scopes[0];
         auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply);
-        online_reply.push_back(reply);
-        local_reply->add_observer(reply);
-
-        for (unsigned int i = 1; i < online_scopes.size(); ++i)
-        {
-            auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply);
-            online_reply.push_back(reply);
-            online_reply[i-1]->add_observer(reply);
-
-            subsearch(online_scopes[i], query().query_string(), reply);
-        }
+        replies.push_back(reply);
+        replies[i-1]->add_observer(reply);
     }
-    subsearch(local_scope, query().query_string(), local_reply);
+
+    // dispatch search to subscopes
+    for (unsigned int i = 0; i < replies.size(); ++i)
+    {
+        std::string dept;
+        if (scopes[i] == sevendigital_scope)
+        {
+            dept = "newreleases";
+        }
+        subsearch(scopes[i], query().query_string(), dept, FilterState(), replies[i]);
+    }
 }
