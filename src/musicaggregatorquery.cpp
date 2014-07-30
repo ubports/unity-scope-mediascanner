@@ -20,12 +20,13 @@
 
 #include <config.h>
 #include "musicaggregatorquery.h"
+#include "musicaggregatorscope.h"
 #include "resultforwarder.h"
 #include "onlinemusicresultforwarder.h"
 #include "notify-strategy.h"
 #include "i18n.h"
 #include <memory>
-#include <cassert>
+
 #include <unity/scopes/Annotation.h>
 #include <unity/scopes/CategorisedResult.h>
 #include <unity/scopes/CategoryRenderer.h>
@@ -41,8 +42,7 @@ static const char MYMUSIC_CATEGORYDEFINITION[] = R"(
   "schema-version": 1,
   "template": {
     "category-layout": "carousel",
-    "overlay": true,
-    "card-size": "medium"
+    "card-size": "small"
   },
   "components": {
     "title": "title",
@@ -62,7 +62,8 @@ static const char GROOVESHARK_CATEGORY_DEFINITION[] = R"(
     },
     "template": {
         "category-layout": "grid",
-        "card-size": "small"
+        "card-size": "small",
+        "collapsed-rows": 1
     }
 }
 )";
@@ -82,8 +83,7 @@ static const char SEVENDIGITAL_CATEGORY_DEFINITION[] = R"(
     "template":
     {
         "category-layout": "grid",
-        "card-size": "medium",
-        "collapsed-rows": 0
+        "card-size": "medium"
     }
 }
 )";
@@ -115,10 +115,14 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     std::vector<std::shared_ptr<ResultForwarder>> replies;
     std::vector<unity::scopes::ScopeProxy> scopes({local_scope});
 
-    auto mymusic_cat = parent_reply->register_category("mymusic", _("My Music"), "", CategoryRenderer(MYMUSIC_CATEGORYDEFINITION));
-    auto grooveshark_cat = parent_reply->register_category("grooveshark", _("Grooveshark Broadcasts"), "", CategoryRenderer(GROOVESHARK_CATEGORY_DEFINITION));
+    const CannedQuery mymusic_query(MusicAggregatorScope::LOCALSCOPE, query().query_string(), "");
+    const CannedQuery grooveshark_query(MusicAggregatorScope::GROOVESHARKSCOPE, query().query_string(), "");
+    const CannedQuery sevendigital_query(MusicAggregatorScope::SEVENDIGITAL, query().query_string(), "newreleases");
+
+    auto mymusic_cat = parent_reply->register_category("mymusic", _("My Music"), "", mymusic_query, CategoryRenderer(MYMUSIC_CATEGORYDEFINITION));
+    auto grooveshark_cat = parent_reply->register_category("grooveshark", _("Grooveshark Broadcasts"), "", grooveshark_query, CategoryRenderer(GROOVESHARK_CATEGORY_DEFINITION));
     //auto soundcloud_cat = parent_reply->register_category("soundcloud", _("Stream from Soundcloud"), "", CategoryRenderer(SOUNDCLOUD_CATEGORY_DEFINITION));
-    auto sevendigital_cat = parent_reply->register_category("7digital", _("New albums from 7digital"), "", CategoryRenderer(SEVENDIGITAL_CATEGORY_DEFINITION));
+    auto sevendigital_cat = parent_reply->register_category("7digital", _("New albums from 7digital"), "", sevendigital_query, CategoryRenderer(SEVENDIGITAL_CATEGORY_DEFINITION));
 
     {
         auto local_reply = std::make_shared<ResultForwarder>(parent_reply, [this, mymusic_cat](CategorisedResult& res) -> bool {

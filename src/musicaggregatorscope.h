@@ -28,6 +28,11 @@
 class MusicAggregatorScope : public unity::scopes::ScopeBase
 {
 public:
+    static const std::string LOCALSCOPE;
+    static const std::string GROOVESHARKSCOPE;
+    static const std::string SEVENDIGITAL;
+    static const std::string SOUNDCLOUD;
+
     virtual void start(std::string const&, unity::scopes::RegistryProxy const&) override;
 
     virtual void stop() override;

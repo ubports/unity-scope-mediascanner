@@ -27,10 +27,10 @@
 
 using namespace unity::scopes;
 
-const char *LOCALSCOPE = "mediascanner-music";
-const char *GROOVESHARKSCOPE = "com.canonical.scopes.grooveshark";
-const char *SEVENDIGITAL = "com.canonical.scopes.sevendigital";
-const char *SOUNDCLOUD = "com.canonical.scopes.soundcloud";
+const std::string MusicAggregatorScope::LOCALSCOPE = "mediascanner-music";
+const std::string MusicAggregatorScope::GROOVESHARKSCOPE = "com.canonical.scopes.grooveshark";
+const std::string MusicAggregatorScope::SEVENDIGITAL = "com.canonical.scopes.sevendigital";
+const std::string MusicAggregatorScope::SOUNDCLOUD = "com.canonical.scopes.soundcloud";
 
 void MusicAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
     setlocale(LC_ALL, "");
