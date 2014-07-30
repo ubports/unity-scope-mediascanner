@@ -32,6 +32,7 @@
 #include <unity/scopes/Category.h>
 #include <unity/scopes/CannedQuery.h>
 #include <unity/scopes/SearchReply.h>
+#include <unity/scopes/SearchMetadata.h>
 
 using namespace unity::scopes;
 
@@ -173,6 +174,8 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
         {
             dept = "tracks";
         }
-        subsearch(scopes[i], query().query_string(), dept, FilterState(), replies[i]);
+        SearchMetadata metadata(search_metadata());
+        metadata.set_cardinality(20);
+        subsearch(scopes[i], query().query_string(), dept, FilterState(), metadata, replies[i]);
     }
 }
