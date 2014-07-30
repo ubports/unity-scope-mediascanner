@@ -52,8 +52,10 @@ protected:
 
         parent_reply_proxy = SearchReplyProxy(&parent_reply, [](SearchReply*){});
 
+        auto const result_filter = [](CategorisedResult&) -> bool { return true; };
+
         unity::scopes::testing::MockSearchReply reply;
-        local_reply.reset(new ResultForwarder(parent_reply_proxy, std::shared_ptr<WaitForAllCategories>(new WaitForAllCategories({"songs", "albums"}))));
+        local_reply.reset(new ResultForwarder(parent_reply_proxy, result_filter, std::shared_ptr<WaitForAllCategories>(new WaitForAllCategories({"songs", "albums"}))));
         online_reply.reset(new BufferedResultForwarder(parent_reply_proxy));
         local_reply->add_observer(online_reply);
     }

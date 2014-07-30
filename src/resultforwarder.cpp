@@ -30,7 +30,10 @@ void ResultForwarder::push(Category::SCPtr const& category) {
 void ResultForwarder::push(CategorisedResult result) {
     {
         std::lock_guard<std::mutex> lock(mtx_);
-        upstream->push(result);
+        if (result_filter(result))
+        {
+            upstream->push(result);
+        }
     }
     if (!ready_)
     {

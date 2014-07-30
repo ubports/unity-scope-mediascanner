@@ -106,31 +106,28 @@ MusicAggregatorQuery::~MusicAggregatorQuery() {
 void MusicAggregatorQuery::cancelled() {
 }
 
-void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_reply) {
-    std::shared_ptr<ResultForwarder> local_reply(new ResultForwarder(parent_reply));
-
+void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_reply)
+{
     std::vector<unity::scopes::ScopeProxy> scopes({local_scope});
-    if (grooveshark_scope)
-        scopes.push_back(grooveshark_scope);
-    if (soundcloud_scope)
-        scopes.push_back(soundcloud_scope);
-    if (sevendigital_scope)
-        scopes.push_back(sevendigital_scope);
 
     auto mymusic_cat = parent_reply->register_category("mymusic", _("My Music"), "", CategoryRenderer(MYMUSIC_CATEGORYDEFINITION));
     auto grooveshark_cat = parent_reply->register_category("grooveshark", _("Grooveshark"), "", CategoryRenderer(GROOVESHARK_CATEGORY_DEFINITION));
     //auto soundcloud_cat = parent_reply->register_category("soundcloud", _("Soundcloud"), "", CategoryRenderer(SOUNDCLOUD_CATEGORY_DEFINITION));
     auto sevendigital_cat = parent_reply->register_category("7digital", _("7digital"), "", CategoryRenderer(SEVENDIGITAL_CATEGORY_DEFINITION));
 
-    replies.push_back(local_reply);
-
-    // create and chain buffered result forwarders to enforce proper order of categories
-    for (unsigned int i = 1; i < scopes.size(); ++i)
     {
-        std::shared_ptr<OnlineMusicResultForwarder> reply;
-        if (scopes[i] == grooveshark_scope)
-        {
-            reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, grooveshark_cat](CategorisedResult& res) -> bool {
+        auto local_reply = std::make_shared<ResultForwarder>(parent_reply, [this, mymusic_cat](CategorisedResult& res) -> bool {
+                res.set_category(mymusic_cat);
+                return true;
+                });
+        replies.push_back(local_reply);
+    }
+
+    if (grooveshark_scope)
+    {
+        scopes.push_back(grooveshark_scope);
+
+        auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, grooveshark_cat](CategorisedResult& res) -> bool {
                     if (res.category()->id() == grooveshark_songs_category_id)
                     {
                         res.set_category(grooveshark_cat);
@@ -138,28 +135,29 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
                     }
                     return false;
                 });
-        }
-        else if (scopes[i] == local_scope)
-        {
-            reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, mymusic_cat](CategorisedResult& res) -> bool {
-                    res.set_category(mymusic_cat);
-                    return true;
-                });
-        }
-        else if (scopes[i] == sevendigital_scope)
-        {
-            reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, sevendigital_cat](CategorisedResult& res) -> bool {
-                    res.set_category(sevendigital_cat);
-                    return true;
-                });
-        }
 
-        assert(reply);
         replies.push_back(reply);
+    }
+    /*if (soundcloud_scope)
+    {
+        scopes.push_back(soundcloud_scope);
+    }*/
+    if (sevendigital_scope)
+    {
+        scopes.push_back(sevendigital_scope);
+        auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, sevendigital_cat](CategorisedResult& res) -> bool {
+                res.set_category(sevendigital_cat);
+                return true;
+                });
+        replies.push_back(reply);
+    }
 
+    // create and chain result forwarders to enforce proper order of categories
+    for (unsigned int i = 1; i < scopes.size(); ++i)
+    {
         for (unsigned int j = 0; j<i; j++)
         {
-            replies[j]->add_observer(reply);
+            replies[j]->add_observer(replies[i]);
         }
     }
 

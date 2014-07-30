@@ -22,17 +22,13 @@
 
 OnlineMusicResultForwarder::OnlineMusicResultForwarder(unity::scopes::SearchReplyProxy const& upstream,
         std::function<bool(unity::scopes::CategorisedResult&)> const& result_filter)
-    : BufferedResultForwarder(upstream),
-      result_filter(result_filter)
+    : BufferedResultForwarder(upstream, result_filter)
 {
 }
 
 void OnlineMusicResultForwarder::push(unity::scopes::CategorisedResult result)
 {
-    if (result_filter(result))
-    {
-        BufferedResultForwarder::push(std::move(result));
-    }
+    BufferedResultForwarder::push(std::move(result));
 }
 
 void OnlineMusicResultForwarder::push(unity::scopes::Category::SCPtr const& category)

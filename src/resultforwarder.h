@@ -28,6 +28,7 @@
 #include<memory>
 #include<cassert>
 #include <mutex>
+#include <functional>
 #include "notify-strategy.h"
 
 class ResultForwarder : public unity::scopes::SearchListenerBase {
@@ -35,8 +36,10 @@ class ResultForwarder : public unity::scopes::SearchListenerBase {
 public:
 
     ResultForwarder(unity::scopes::SearchReplyProxy const& upstream,
+                    std::function<bool(unity::scopes::CategorisedResult&)> const &result_filter = [](unity::scopes::CategorisedResult&) -> bool { return true; },
                     std::shared_ptr<NotifyStrategy> notify_strategy = std::make_shared<WaitForAnyResult>()) :
         upstream(upstream),
+        result_filter(result_filter),
         notify_strategy_(notify_strategy),
         ready_(false) {
             assert(notify_strategy != nullptr);
@@ -60,9 +63,9 @@ private:
     std::mutex mtx_;
     std::list<std::shared_ptr<ResultForwarder>> observers_;
     std::list<ResultForwarder*> wait_for_;
+    std::function<bool(unity::scopes::CategorisedResult&)> result_filter;
     std::shared_ptr<NotifyStrategy> notify_strategy_;
     bool ready_;
 };
-
 
 #endif
