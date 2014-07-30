@@ -28,7 +28,10 @@ void ResultForwarder::push(Category::SCPtr const& category) {
 }
 
 void ResultForwarder::push(CategorisedResult result) {
-    upstream->push(result);
+    {
+        std::lock_guard<std::mutex> lock(mtx_);
+        upstream->push(result);
+    }
     if (!ready_)
     {
         ready_ = notify_strategy_->is_ready(result);
@@ -62,22 +65,18 @@ void ResultForwarder::add_observer(std::shared_ptr<ResultForwarder> result_forwa
     {
         observers_.push_back(result_forwarder);
 
-        std::lock_guard<std::mutex> lock(mtx_);
+        std::lock_guard<std::mutex> lock(result_forwarder->mtx_);
         result_forwarder->wait_for_.push_back(std::shared_ptr<ResultForwarder>(this));
     }
 }
 
 void ResultForwarder::on_forwarder_ready(ResultForwarder *fw)
 {
-    size_t sz = 0;
-    {
-        std::lock_guard<std::mutex> lock(mtx_);
-        //
-        // remove the forwarder that notified us from the wait_for_ list;
-        wait_for_.remove_if([fw](std::shared_ptr<ResultForwarder> const& r) -> bool { return r.get() == fw; });
-        sz = wait_for_.size();
-    }
-    if (sz == 0)
+    std::lock_guard<std::mutex> lock(mtx_);
+    //
+    // remove the forwarder that notified us from the wait_for_ list;
+    wait_for_.remove_if([fw](std::shared_ptr<ResultForwarder> const& r) -> bool { return r.get() == fw; });
+    if (wait_for_.size() == 0)
     {
         on_all_forwarders_ready();
     }
