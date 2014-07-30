@@ -42,7 +42,8 @@ static const char MYMUSIC_CATEGORYDEFINITION[] = R"(
   "schema-version": 1,
   "template": {
     "category-layout": "carousel",
-    "card-size": "small"
+    "card-size": "small",
+    "collapsed-rows": 1
   },
   "components": {
     "title": "title",
@@ -63,8 +64,7 @@ static const char GROOVESHARK_CATEGORY_DEFINITION[] = R"(
     "template": {
         "category-layout": "grid",
         "card-size": "large",
-        "card-layout" : "horizontal",
-        "collapsed-rows": 1
+        "card-layout" : "horizontal"
     }
 }
 )";
@@ -81,7 +81,7 @@ static const char SEVENDIGITAL_CATEGORY_DEFINITION[] = R"(
     "template":
     {
         "category-layout": "grid",
-        "card-size": "large"
+        "card-size": "medium"
     }
 }
 )";
@@ -181,16 +181,30 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     for (unsigned int i = 0; i < replies.size(); ++i)
     {
         std::string dept;
-        if (scopes[i] == sevendigital_scope && empty_search)
+        SearchMetadata metadata(search_metadata());
+        if (scopes[i] == sevendigital_scope)
         {
-            dept = "newreleases";
+            if (empty_search)
+            {
+                dept = "newreleases";
+            }
+            metadata.set_cardinality(2);
         }
         else if (scopes[i] == local_scope)
         {
-            dept = "tracks";
+            dept = "albums"; //FIXME: this should be albums, but it'll be possible once we have artists art/bio support
+            if (empty_search)
+            {
+                metadata.set_cardinality(3);
+            }
         }
-        SearchMetadata metadata(search_metadata());
-        metadata.set_cardinality(20);
+        else if (scopes[i] == grooveshark_scope)
+        {
+            if (empty_search)
+            {
+                metadata.set_cardinality(3);
+            }
+        }
         subsearch(scopes[i], query().query_string(), dept, FilterState(), metadata, replies[i]);
     }
 }
