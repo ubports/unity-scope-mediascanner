@@ -46,7 +46,7 @@ void BufferedResultForwarder::flush()
     result_buffer_.clear();
 }
 
-void BufferedResultForwarder::on_forwarder_ready(ResultForwarder*)
+void BufferedResultForwarder::on_all_forwarders_ready()
 {
     buffer_ = false;
     flush();

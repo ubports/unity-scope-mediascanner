@@ -29,7 +29,7 @@
 #include<cassert>
 #include "notify-strategy.h"
 
-class ResultForwarder : public unity::scopes::SearchListenerBase {
+class ResultForwarder : public unity::scopes::SearchListenerBase, public std::enable_shared_from_this<ResultForwarder> {
 
 public:
 
@@ -50,12 +50,14 @@ public:
             std::string const& error_message) override;
 
 protected:
-    virtual void on_forwarder_ready(ResultForwarder*);
+    void on_forwarder_ready(ResultForwarder *fw);
+    virtual void on_all_forwarders_ready();
     unity::scopes::SearchReplyProxy upstream;
     void notify_observers();
 
 private:
     std::list<std::shared_ptr<ResultForwarder>> observers_;
+    std::list<std::shared_ptr<ResultForwarder>> wait_for_;
     std::shared_ptr<NotifyStrategy> notify_strategy_;
     bool ready_;
 };

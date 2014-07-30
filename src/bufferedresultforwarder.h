@@ -39,7 +39,7 @@ public:
     void flush();
 
 protected:
-    void on_forwarder_ready(ResultForwarder*) override;
+    void on_all_forwarders_ready() override;
 
 private:
     bool buffer_;

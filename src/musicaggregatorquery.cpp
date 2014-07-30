@@ -124,7 +124,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     auto sevendigital_cat = parent_reply->register_category("7digital", _("7digital"), "", CategoryRenderer(SEVENDIGITAL_CATEGORY_DEFINITION));
 
     // create and chain buffered result forwarders to enforce proper order of categories
-    for (unsigned int i = 0; i < scopes.size(); ++i)
+    for (unsigned int i = 1; i < scopes.size(); ++i)
     {
         std::shared_ptr<OnlineMusicResultForwarder> reply;
         if (scopes[i] == grooveshark_scope)
@@ -143,7 +143,11 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
             reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [](CategorisedResult& res) -> bool { return true; });
         }
         replies.push_back(reply);
-        replies[i-1]->add_observer(reply);
+
+        for (unsigned int j = 0; j<i; j++)
+        {
+            replies[j]->add_observer(reply);
+        }
     }
 
     // dispatch search to subscopes
