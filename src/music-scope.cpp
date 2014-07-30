@@ -219,7 +219,7 @@ void MusicQuery::query_genres(unity::scopes::SearchReplyProxy const&reply) const
 
     for (int i = 0; i < genre_limit; i++)
     {
-        auto cat = reply->register_category("genre:" + genres[i], "", "", renderer);
+        auto cat = reply->register_category("genre:" + genres[i], genres[i], "", renderer); //FIXME: how to make genre i18n-friendly?
 
         filter.setGenre(genres[i]);
         for (const auto &album: scope.store->listAlbums(filter))
