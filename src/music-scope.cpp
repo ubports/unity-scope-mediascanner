@@ -43,7 +43,6 @@ static const char SONGS_CATEGORY_DEFINITION[] = R"(
   "schema-version": 1,
   "template": {
     "category-layout": "grid",
-    "overlay": true,
     "card-size": "large",
     "card-layout" : "horizontal"
   },
