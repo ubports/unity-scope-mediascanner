@@ -42,9 +42,10 @@ static const char SONGS_CATEGORY_DEFINITION[] = R"(
 {
   "schema-version": 1,
   "template": {
-    "category-layout": "carousel",
+    "category-layout": "grid",
     "overlay": true,
-    "card-size": "medium"
+    "card-size": "large",
+    "card-layout" : "horizontal"
   },
   "components": {
     "title": "title",
@@ -58,7 +59,7 @@ static const char ALBUMS_CATEGORY_DEFINITION[] = R"(
   "schema-version": 1,
   "template": {
     "category-layout": "grid",
-    "card-size": "medium"
+    "card-size": "small"
   },
   "components": {
     "title": "title",
