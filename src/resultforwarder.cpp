@@ -66,7 +66,7 @@ void ResultForwarder::add_observer(std::shared_ptr<ResultForwarder> result_forwa
         observers_.push_back(result_forwarder);
 
         std::lock_guard<std::mutex> lock(result_forwarder->mtx_);
-        result_forwarder->wait_for_.push_back(std::shared_ptr<ResultForwarder>(this));
+        result_forwarder->wait_for_.push_back(this);
     }
 }
 
@@ -75,7 +75,7 @@ void ResultForwarder::on_forwarder_ready(ResultForwarder *fw)
     std::lock_guard<std::mutex> lock(mtx_);
     //
     // remove the forwarder that notified us from the wait_for_ list;
-    wait_for_.remove_if([fw](std::shared_ptr<ResultForwarder> const& r) -> bool { return r.get() == fw; });
+    wait_for_.remove_if([fw](ResultForwarder* r) -> bool { return r == fw; });
     if (wait_for_.size() == 0)
     {
         on_all_forwarders_ready();
