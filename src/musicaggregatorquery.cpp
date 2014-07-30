@@ -113,9 +113,9 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     std::vector<unity::scopes::ScopeProxy> scopes({local_scope});
 
     auto mymusic_cat = parent_reply->register_category("mymusic", _("My Music"), "", CategoryRenderer(MYMUSIC_CATEGORYDEFINITION));
-    auto grooveshark_cat = parent_reply->register_category("grooveshark", _("Grooveshark"), "", CategoryRenderer(GROOVESHARK_CATEGORY_DEFINITION));
-    //auto soundcloud_cat = parent_reply->register_category("soundcloud", _("Soundcloud"), "", CategoryRenderer(SOUNDCLOUD_CATEGORY_DEFINITION));
-    auto sevendigital_cat = parent_reply->register_category("7digital", _("7digital"), "", CategoryRenderer(SEVENDIGITAL_CATEGORY_DEFINITION));
+    auto grooveshark_cat = parent_reply->register_category("grooveshark", _("Grooveshark Broadcasts"), "", CategoryRenderer(GROOVESHARK_CATEGORY_DEFINITION));
+    //auto soundcloud_cat = parent_reply->register_category("soundcloud", _("Stream from Soundcloud"), "", CategoryRenderer(SOUNDCLOUD_CATEGORY_DEFINITION));
+    auto sevendigital_cat = parent_reply->register_category("7digital", _("New albums from 7digital"), "", CategoryRenderer(SEVENDIGITAL_CATEGORY_DEFINITION));
 
     {
         auto local_reply = std::make_shared<ResultForwarder>(parent_reply, [this, mymusic_cat](CategorisedResult& res) -> bool {
@@ -140,10 +140,10 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
 
         replies.push_back(reply);
     }
-    /*if (soundcloud_scope)
+    if (soundcloud_scope)
     {
-        scopes.push_back(soundcloud_scope);
-    }*/
+        // TODO when available
+    }
     if (sevendigital_scope)
     {
         scopes.push_back(sevendigital_scope);
