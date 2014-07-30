@@ -62,7 +62,7 @@ static const char GROOVESHARK_CATEGORY_DEFINITION[] = R"(
     },
     "template": {
         "category-layout": "grid",
-        "card-size": "medium"
+        "card-size": "small"
     }
 }
 )";
@@ -73,13 +73,16 @@ static const char SEVENDIGITAL_CATEGORY_DEFINITION[] = R"(
     "components": {
         "subtitle": "subtitle",
         "attributes": "attributes",
-        "art": "art",
+        "art": {
+            "field": "art",
+            "aspect-ratio": 1.5
+        },
         "title": "title"
     },
     "template":
     {
         "category-layout": "grid",
-        "card-size": "small",
+        "card-size": "medium",
         "collapsed-rows": 0
     }
 }
