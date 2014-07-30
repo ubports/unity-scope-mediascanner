@@ -18,6 +18,7 @@
  */
 #include <config.h>
 #include <iostream>
+#include <algorithm>
 
 #include <mediascanner/MediaFile.hh>
 #include <mediascanner/Album.hh>
@@ -149,7 +150,7 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
     }
     else if (current_department == "genres")
     {
-        query_albums(reply); //TODO
+        query_genres(reply);
     }
     else if (current_department.find("genre:") == 0)
     {
@@ -205,6 +206,27 @@ void MusicQuery::populate_departments(unity::scopes::SearchReplyProxy const &rep
     catch (const std::exception& e)
     {
         std::cerr << "Failed to register departments: " << e.what() << std::endl;
+    }
+}
+
+void MusicQuery::query_genres(unity::scopes::SearchReplyProxy const&reply) const
+{
+    const CategoryRenderer renderer(ALBUMS_CATEGORY_DEFINITION);
+    mediascanner::Filter filter;
+
+    auto const genres = scope.store->listGenres(filter);
+    auto const genre_limit = std::max(static_cast<int>(genres.size()), 10);
+
+    for (int i = 0; i < genre_limit; i++)
+    {
+        auto cat = reply->register_category("genre:" + genres[i], "", "", renderer);
+
+        filter.setGenre(genres[i]);
+        for (const auto &album: scope.store->listAlbums(filter))
+        {
+            if (!reply->push(create_album_result(cat, album)))
+                return;
+        }
     }
 }
 
