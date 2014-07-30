@@ -62,7 +62,8 @@ static const char GROOVESHARK_CATEGORY_DEFINITION[] = R"(
     },
     "template": {
         "category-layout": "grid",
-        "card-size": "small",
+        "card-size": "large",
+        "card-layout" : "horizontal"
         "collapsed-rows": 1
     }
 }
@@ -74,16 +75,13 @@ static const char SEVENDIGITAL_CATEGORY_DEFINITION[] = R"(
     "components": {
         "subtitle": "subtitle",
         "attributes": "attributes",
-        "art": {
-            "field": "art",
-            "aspect-ratio": 1.5
-        },
+        "art": "art",
         "title": "title"
     },
     "template":
     {
         "category-layout": "grid",
-        "card-size": "medium"
+        "card-size": "large"
     }
 }
 )";
@@ -119,10 +117,19 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     const CannedQuery grooveshark_query(MusicAggregatorScope::GROOVESHARKSCOPE, query().query_string(), "");
     const CannedQuery sevendigital_query(MusicAggregatorScope::SEVENDIGITAL, query().query_string(), "newreleases");
 
-    auto mymusic_cat = parent_reply->register_category("mymusic", _("My Music"), "", mymusic_query, CategoryRenderer(MYMUSIC_CATEGORYDEFINITION));
-    auto grooveshark_cat = parent_reply->register_category("grooveshark", _("Grooveshark Broadcasts"), "", grooveshark_query, CategoryRenderer(GROOVESHARK_CATEGORY_DEFINITION));
-    //auto soundcloud_cat = parent_reply->register_category("soundcloud", _("Stream from Soundcloud"), "", CategoryRenderer(SOUNDCLOUD_CATEGORY_DEFINITION));
-    auto sevendigital_cat = parent_reply->register_category("7digital", _("New albums from 7digital"), "", sevendigital_query, CategoryRenderer(SEVENDIGITAL_CATEGORY_DEFINITION));
+    const bool empty_search = query().query_string().empty();
+
+    //
+    // register categories
+    auto mymusic_cat = empty_search ? parent_reply->register_category("mymusic", _("My Music"), "",
+            mymusic_query, CategoryRenderer(MYMUSIC_CATEGORYDEFINITION))
+        : parent_reply->register_category("mymusic", _("My Music"), "", CategoryRenderer(MYMUSIC_CATEGORYDEFINITION));
+    auto grooveshark_cat = empty_search ? parent_reply->register_category("grooveshark", _("Popular tracks on Grooveshark"), "",
+            grooveshark_query, CategoryRenderer(GROOVESHARK_CATEGORY_DEFINITION))
+        : parent_reply->register_category("grooveshark", _("Grooveshark"), "", CategoryRenderer(GROOVESHARK_CATEGORY_DEFINITION));
+    auto sevendigital_cat = empty_search ? parent_reply->register_category("7digital", _("New albums from 7digital"), "",
+            sevendigital_query, CategoryRenderer(SEVENDIGITAL_CATEGORY_DEFINITION))
+        : parent_reply->register_category("7digital", _("7digital"), "", CategoryRenderer(SEVENDIGITAL_CATEGORY_DEFINITION));
 
     {
         auto local_reply = std::make_shared<ResultForwarder>(parent_reply, [this, mymusic_cat](CategorisedResult& res) -> bool {
@@ -174,7 +181,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     for (unsigned int i = 0; i < replies.size(); ++i)
     {
         std::string dept;
-        if (scopes[i] == sevendigital_scope)
+        if (scopes[i] == sevendigital_scope && empty_search)
         {
             dept = "newreleases";
         }
