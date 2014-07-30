@@ -138,10 +138,21 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
                     return false;
                 });
         }
-        else
+        else if (scopes[i] == local_scope)
         {
-            reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [](CategorisedResult& res) -> bool { return true; });
+            reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, mymusic_cat](CategorisedResult& res) -> bool {
+                    res.set_category(mymusic_cat);
+                    return true;
+                });
         }
+        else if (scopes[i] == sevendigital_scope)
+        {
+            reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, sevendigital_cat](CategorisedResult& res) -> bool {
+                    res.set_category(sevendigital_cat);
+                    return true;
+                });
+        }
+
         replies.push_back(reply);
 
         for (unsigned int j = 0; j<i; j++)
