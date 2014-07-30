@@ -37,13 +37,29 @@
 
 using namespace unity::scopes;
 
-static const char MYMUSIC_CATEGORYDEFINITION[] = R"(
+static const char MYMUSIC_CATEGORY_DEFINITION[] = R"(
 {
   "schema-version": 1,
   "template": {
     "category-layout": "carousel",
     "card-size": "small",
     "collapsed-rows": 1
+  },
+  "components": {
+    "title": "title",
+    "art":  "art",
+    "subtitle": "artist"
+  }
+}
+)";
+
+static const char MYMUSIC_SEARCH_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-layout" : "horizontal",
+    "card-size": "large"
   },
   "components": {
     "title": "title",
@@ -69,6 +85,22 @@ static const char GROOVESHARK_CATEGORY_DEFINITION[] = R"(
 }
 )";
 
+static const char GROOVESHARK_SEARCH_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-layout" : "horizontal",
+    "card-size": "large"
+  },
+  "components": {
+    "title": "title",
+    "art":  "art",
+    "subtitle": "artist"
+  }
+}
+)";
+
 static const char SEVENDIGITAL_CATEGORY_DEFINITION[] = R"(
 {
     "schema-version": 1,
@@ -83,6 +115,23 @@ static const char SEVENDIGITAL_CATEGORY_DEFINITION[] = R"(
         "category-layout": "grid",
         "card-size": "medium"
     }
+}
+)";
+
+static const char SEVENDIGITAL_SEARCH_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-layout" : "horizontal",
+    "card-size": "large"
+  },
+  "components": {
+        "subtitle": "subtitle",
+        "attributes": "attributes",
+        "art": "art",
+        "title": "title"
+  }
 }
 )";
 
@@ -122,14 +171,14 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     //
     // register categories
     auto mymusic_cat = empty_search ? parent_reply->register_category("mymusic", _("My Music"), "",
-            mymusic_query, CategoryRenderer(MYMUSIC_CATEGORYDEFINITION))
-        : parent_reply->register_category("mymusic", _("My Music"), "", CategoryRenderer(MYMUSIC_CATEGORYDEFINITION));
+            mymusic_query, CategoryRenderer(MYMUSIC_CATEGORY_DEFINITION))
+        : parent_reply->register_category("mymusic", _("My Music"), "", CategoryRenderer(MYMUSIC_SEARCH_CATEGORY_DEFINITION));
     auto grooveshark_cat = empty_search ? parent_reply->register_category("grooveshark", _("Popular tracks on Grooveshark"), "",
             grooveshark_query, CategoryRenderer(GROOVESHARK_CATEGORY_DEFINITION))
-        : parent_reply->register_category("grooveshark", _("Grooveshark"), "", CategoryRenderer(GROOVESHARK_CATEGORY_DEFINITION));
+        : parent_reply->register_category("grooveshark", _("Grooveshark"), "", CategoryRenderer(GROOVESHARK_SEARCH_CATEGORY_DEFINITION));
     auto sevendigital_cat = empty_search ? parent_reply->register_category("7digital", _("New albums from 7digital"), "",
             sevendigital_query, CategoryRenderer(SEVENDIGITAL_CATEGORY_DEFINITION))
-        : parent_reply->register_category("7digital", _("7digital"), "", CategoryRenderer(SEVENDIGITAL_CATEGORY_DEFINITION));
+        : parent_reply->register_category("7digital", _("7digital"), "", CategoryRenderer(SEVENDIGITAL_SEARCH_CATEGORY_DEFINITION));
 
     {
         auto local_reply = std::make_shared<ResultForwarder>(parent_reply, [this, mymusic_cat](CategorisedResult& res) -> bool {
