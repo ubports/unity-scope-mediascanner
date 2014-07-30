@@ -72,7 +72,7 @@ void ResultForwarder::on_forwarder_ready(ResultForwarder *fw)
     wait_for_.remove_if([fw](std::shared_ptr<ResultForwarder> const& r) -> bool { return r.get() == fw; });
     if (wait_for_.size() == 0)
     {
-        on_forwarder_ready(fw);
+        on_all_forwarders_ready();
     }
 }
 
