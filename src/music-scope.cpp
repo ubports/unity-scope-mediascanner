@@ -163,9 +163,9 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
         query_albums_by_artist(reply, query().query_string());
         query_songs_by_artist(reply, query().query_string());
     }
-    else // empty department id or 'artists'
+    else // empty department id - default view
     {
-        query_artists(reply);
+        query_albums(reply);
 
         if (!empty_search_query)
         {
@@ -177,8 +177,7 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
 
 void MusicQuery::populate_departments(unity::scopes::SearchReplyProxy const &reply) const
 {
-    unity::scopes::Department::SPtr artists = unity::scopes::Department::create("", query(), _("Artists"));
-    unity::scopes::Department::SPtr albums = unity::scopes::Department::create("albums", query(), _("Albums"));
+    unity::scopes::Department::SPtr albums = unity::scopes::Department::create("", query(), _("Albums"));
     unity::scopes::Department::SPtr tracks = unity::scopes::Department::create("tracks", query(), _("Tracks"));
     unity::scopes::Department::SPtr genres = unity::scopes::Department::create("genres", query(), _("Genres"));
 
@@ -197,11 +196,11 @@ void MusicQuery::populate_departments(unity::scopes::SearchReplyProxy const &rep
         genres->set_has_subdepartments(true);
     }
 
-    artists->set_subdepartments({albums, genres, tracks});
+    albums->set_subdepartments({genres, tracks});
 
     try
     {
-        reply->register_departments(artists);
+        reply->register_departments(albums);
     }
     catch (const std::exception& e)
     {
