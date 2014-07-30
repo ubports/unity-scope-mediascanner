@@ -109,6 +109,7 @@ void MusicAggregatorQuery::cancelled() {
 
 void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_reply)
 {
+    std::vector<std::shared_ptr<ResultForwarder>> replies;
     std::vector<unity::scopes::ScopeProxy> scopes({local_scope});
 
     auto mymusic_cat = parent_reply->register_category("mymusic", _("My Music"), "", CategoryRenderer(MYMUSIC_CATEGORYDEFINITION));
