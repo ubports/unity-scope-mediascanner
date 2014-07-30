@@ -88,9 +88,9 @@ const std::string MusicAggregatorQuery::grooveshark_songs_category_id = "cat_0";
 
 MusicAggregatorQuery::MusicAggregatorQuery(CannedQuery const& query, SearchMetadata const& hints,
         ScopeProxy local_scope,
-        unity::scopes::ScopeProxy const& grooveshark_scope,
-        unity::scopes::ScopeProxy const& soundcloud_scope,
-        unity::scopes::ScopeProxy const& sevendigital_scope
+        ScopeProxy const& grooveshark_scope,
+        ScopeProxy const& soundcloud_scope,
+        ScopeProxy const& sevendigital_scope
         ) :
     SearchQueryBase(query, hints),
     local_scope(local_scope),

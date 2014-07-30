@@ -27,6 +27,7 @@
 #include<list>
 #include<memory>
 #include<cassert>
+#include <mutex>
 #include "notify-strategy.h"
 
 class ResultForwarder : public unity::scopes::SearchListenerBase, public std::enable_shared_from_this<ResultForwarder> {
@@ -56,6 +57,7 @@ protected:
     void notify_observers();
 
 private:
+    std::mutex mtx_;
     std::list<std::shared_ptr<ResultForwarder>> observers_;
     std::list<std::shared_ptr<ResultForwarder>> wait_for_;
     std::shared_ptr<NotifyStrategy> notify_strategy_;

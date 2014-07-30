@@ -61,16 +61,23 @@ void ResultForwarder::add_observer(std::shared_ptr<ResultForwarder> result_forwa
     if (result_forwarder.get() != this)
     {
         observers_.push_back(result_forwarder);
+
+        std::lock_guard<std::mutex> lock(mtx_);
         result_forwarder->wait_for_.push_back(std::shared_ptr<ResultForwarder>(this));
     }
 }
 
 void ResultForwarder::on_forwarder_ready(ResultForwarder *fw)
 {
-    //
-    // remove the forwarder that notified us from the wait_for_ list;
-    wait_for_.remove_if([fw](std::shared_ptr<ResultForwarder> const& r) -> bool { return r.get() == fw; });
-    if (wait_for_.size() == 0)
+    size_t sz = 0;
+    {
+        std::lock_guard<std::mutex> lock(mtx_);
+        //
+        // remove the forwarder that notified us from the wait_for_ list;
+        wait_for_.remove_if([fw](std::shared_ptr<ResultForwarder> const& r) -> bool { return r.get() == fw; });
+        sz = wait_for_.size();
+    }
+    if (sz == 0)
     {
         on_all_forwarders_ready();
     }
