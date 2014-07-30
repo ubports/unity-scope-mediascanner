@@ -117,12 +117,12 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     if (sevendigital_scope)
         scopes.push_back(sevendigital_scope);
 
-    std::vector<std::shared_ptr<ResultForwarder>> replies({local_reply});
-
     auto mymusic_cat = parent_reply->register_category("mymusic", _("My Music"), "", CategoryRenderer(MYMUSIC_CATEGORYDEFINITION));
     auto grooveshark_cat = parent_reply->register_category("grooveshark", _("Grooveshark"), "", CategoryRenderer(GROOVESHARK_CATEGORY_DEFINITION));
     //auto soundcloud_cat = parent_reply->register_category("soundcloud", _("Soundcloud"), "", CategoryRenderer(SOUNDCLOUD_CATEGORY_DEFINITION));
     auto sevendigital_cat = parent_reply->register_category("7digital", _("7digital"), "", CategoryRenderer(SEVENDIGITAL_CATEGORY_DEFINITION));
+
+    replies.push_back(local_reply);
 
     // create and chain buffered result forwarders to enforce proper order of categories
     for (unsigned int i = 1; i < scopes.size(); ++i)
