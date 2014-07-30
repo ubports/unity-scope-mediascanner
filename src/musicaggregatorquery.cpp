@@ -25,6 +25,7 @@
 #include "notify-strategy.h"
 #include "i18n.h"
 #include <memory>
+#include <cassert>
 #include <unity/scopes/Annotation.h>
 #include <unity/scopes/CategorisedResult.h>
 #include <unity/scopes/CategoryRenderer.h>
@@ -153,6 +154,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
                 });
         }
 
+        assert(reply);
         replies.push_back(reply);
 
         for (unsigned int j = 0; j<i; j++)
