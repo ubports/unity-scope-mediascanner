@@ -27,7 +27,6 @@
 #include<list>
 #include<memory>
 #include<cassert>
-#include <mutex>
 #include <functional>
 #include "notify-strategy.h"
 
@@ -60,7 +59,6 @@ protected:
     void notify_observers();
 
 private:
-    std::mutex mtx_;
     std::list<std::shared_ptr<ResultForwarder>> observers_;
     std::list<ResultForwarder*> wait_for_;
     std::function<bool(unity::scopes::CategorisedResult&)> result_filter;

@@ -29,7 +29,6 @@ void ResultForwarder::push(Category::SCPtr const& category) {
 
 void ResultForwarder::push(CategorisedResult result) {
     {
-        std::lock_guard<std::mutex> lock(mtx_);
         if (result_filter(result))
         {
             upstream->push(result);
@@ -67,15 +66,12 @@ void ResultForwarder::add_observer(std::shared_ptr<ResultForwarder> result_forwa
     if (result_forwarder.get() != this)
     {
         observers_.push_back(result_forwarder);
-
-        std::lock_guard<std::mutex> lock(result_forwarder->mtx_);
         result_forwarder->wait_for_.push_back(this);
     }
 }
 
 void ResultForwarder::on_forwarder_ready(ResultForwarder *fw)
 {
-    std::lock_guard<std::mutex> lock(mtx_);
     //
     // remove the forwarder that notified us from the wait_for_ list;
     wait_for_.remove_if([fw](ResultForwarder* r) -> bool { return r == fw; });
