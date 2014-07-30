@@ -63,7 +63,7 @@ static const char GROOVESHARK_CATEGORY_DEFINITION[] = R"(
     "template": {
         "category-layout": "grid",
         "card-size": "large",
-        "card-layout" : "horizontal"
+        "card-layout" : "horizontal",
         "collapsed-rows": 1
     }
 }
