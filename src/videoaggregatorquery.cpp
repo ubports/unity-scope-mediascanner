@@ -53,24 +53,6 @@ static char SURFACING_CATEGORY_DEFINITION[] = R"(
 }
 )";
 
-static const char LOCAL_SURFACING_CATEGORY_DEFINITION[] = R"(
-{
-  "schema-version": 1,
-  "template": {
-    "category-layout": "carousel",
-    "overlay": true,
-    "card-size": "medium"
-  },
-  "components": {
-    "title": "title",
-    "art":  {
-      "field": "art",
-      "aspect-ratio": 1.5
-    }
-  }
-}
-)";
-
 static char SEARCH_CATEGORY_DEFINITION[] = R"(
 {
   "schema-version": 1,
@@ -127,14 +109,7 @@ void VideoAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     const FilterState filter_state;
     const VariantMap config = settings();
 
-    Category::SCPtr category = parent_reply->register_category(
-        subscopes[0].scope_id(), _("My Videos"), "" /* icon */,
-        CannedQuery(subscopes[0].scope_id(), query().query_string(), ""),
-        CategoryRenderer(surfacing ?
-                         LOCAL_SURFACING_CATEGORY_DEFINITION :
-                         SEARCH_CATEGORY_DEFINITION));
-    auto first_reply = std::make_shared<VideoResultForwarder>(
-        parent_reply, category);
+    auto first_reply = std::make_shared<ResultForwarder>(parent_reply);
 
     // Create forwarders for the other sub-scopes
     for (unsigned int i = 1; i < subscopes.size(); i++) {
@@ -148,6 +123,7 @@ void VideoAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
             /* If the setting is missing, consider child enabled. */
         }
 
+        Category::SCPtr category;
         CannedQuery category_query(scope_id, query().query_string(), "");
         if (surfacing) {
             char title[500];
