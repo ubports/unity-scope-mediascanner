@@ -116,17 +116,16 @@ static bool from_camera(const std::string &filename) {
 }
 
 void VideoQuery::run(SearchReplyProxy const&reply) {
+    Department::SPtr root_dept = Department::create("", query(), _("Everything"));
+    root_dept->set_subdepartments({
+            Department::create("camera", query(), _("My Roll")),
+            Department::create("downloads", query(), _("Downloaded")),
+        });
     if (query().department_id() == AGGREGATOR_DEPT_ID) {
-        reply->register_departments(
-            Department::create(AGGREGATOR_DEPT_ID, query(), ""));
-    } else {
-        Department::SPtr root_dept = Department::create("", query(), _("Everything"));
-        root_dept->set_subdepartments({
-                Department::create("camera", query(), _("My Roll")),
-                Department::create("downloads", query(), _("Downloaded")),
-            });
-        reply->register_departments(root_dept);
+        root_dept->add_subdepartment(
+            Department::create(AGGREGATOR_DEPT_ID, query(), "dummy"));
     }
+    reply->register_departments(root_dept);
 
     VideoType department = VideoType::ALL;
     if (query().department_id() == "camera") {
