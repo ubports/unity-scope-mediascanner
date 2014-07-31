@@ -18,6 +18,8 @@
  */
 #include <config.h>
 
+#include <stdio.h>
+
 #include <boost/regex.hpp>
 #include <mediascanner/MediaFile.hh>
 #include <unity/scopes/Category.h>
@@ -107,8 +109,8 @@ void VideoQuery::cancelled() {
 }
 
 static bool from_camera(const std::string &filename) {
-    static const boost::regex expr(R"(.*/video\d{9}_\d{4}.mp4$)");
-    return regex_match(filename, expr);
+    static const boost::regex pattern(R"(.*/video\d{8}_\d{4}\.mp4$)");
+    return boost::regex_match(filename, pattern);
 }
 
 void VideoQuery::run(SearchReplyProxy const&reply) {
