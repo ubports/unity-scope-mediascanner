@@ -83,7 +83,7 @@ void MusicAggregatorScope::init_scope_proxies()
     const auto config = settings();
     init_scope_proxy(GROOVESHARKSCOPE, grooveshark_scope, config);
     init_scope_proxy(SEVENDIGITAL, sevendigital_scope, config);
-    init_scope_proxy(SOUNDCLOUD, soundcloud_scope, config);
+    //init_scope_proxy(SOUNDCLOUD, soundcloud_scope, config);
 }
 
 PreviewQueryBase::UPtr MusicAggregatorScope::preview(Result const& /*result*/, ActionMetadata const& /*hints*/) {
