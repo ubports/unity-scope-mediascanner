@@ -1,88 +1,93 @@
 # Danish translation for unity-scope-mediascanner
 # Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
 # This file is distributed under the same license as the unity-scope-mediascanner package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#
+# Ask Hjorth Larsen <asklarsen@gmail.com>, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-04-29 17:23+0100\n"
-"PO-Revision-Date: 2014-07-20 20:47+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Danish <da@li.org>\n"
+"PO-Revision-Date: 2014-07-22 15:46+0000\n"
+"Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
+"Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-21 07:05+0000\n"
+"X-Launchpad-Export-Date: 2014-07-24 06:32+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 
 #: ../src/music-scope.cpp:122
 msgid "Songs"
-msgstr ""
+msgstr "Sange"
 
 #: ../src/music-scope.cpp:159
 msgid "Albums"
-msgstr ""
+msgstr "Albummer"
 
 #: ../src/music-scope.cpp:241 ../src/music-scope.cpp:278
 msgid "Play in music app"
-msgstr ""
+msgstr "Afspil i musik-app"
 
 #: ../src/video-scope.cpp:102
 msgid "My Videos"
-msgstr ""
+msgstr "Mine videoer"
 
 #: ../src/video-scope.cpp:151
 msgid "Play"
-msgstr ""
+msgstr "Afspil"
 
 #: tmp/mediascanner-music.ini.in.in.h:1
 msgid "Local Music"
-msgstr ""
+msgstr "Lokal musik"
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
+"Dette er et Ubuntu-søgemodul som scanner enheden for musik med mulighed for "
+"søgning og visning på instrumentbrættet."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr ""
+msgstr "Søg i lokal musiksamling"
 
 #: tmp/mediascanner-video.ini.in.in.h:1
 msgid "Local Videos"
-msgstr ""
+msgstr "Lokale videoer"
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
+"Dette er et Ubuntu-søgemodul som scanner enheden for videoer med mulighed "
+"for søgning og visning i instrumentbrættet."
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
-msgstr ""
+msgstr "Musik"
 
 #: tmp/musicaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
-msgstr ""
+msgstr "Dette er et Ubuntu-søgemodul som fletter alle musikkilder sammen."
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
-msgstr ""
+msgstr "Søg efter musik"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
-msgstr ""
+msgstr "Video"
 
 #: tmp/videoaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
-msgstr ""
+msgstr "Dette er et Ubuntu-søgemodul som fletter alle videokilder sammen."
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
-msgstr ""
+msgstr "Søg efter video"

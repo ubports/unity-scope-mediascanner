@@ -1,3 +1,20 @@
+unity-scope-mediascanner (0.2+14.10.20140730-0ubuntu1) utopic; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ James Henstridge ]
+  * No change rebuild to handle soname bump in mediascanner2.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 30 Jul 2014 10:52:17 +0000
+
+unity-scope-mediascanner (0.2+14.10.20140718-0ubuntu1) utopic; urgency=low
+
+  [ Jussi Pakkanen ]
+  * Specify GCC 4.9 explicitly to prevent ABI breakage.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 18 Jul 2014 12:58:22 +0000
+
 unity-scope-mediascanner (0.2+14.10.20140626-0ubuntu1) utopic; urgency=low
 
   * New rebuild forced

@@ -5,7 +5,7 @@ set(SCOPE_SOURCES
   video-scope.cpp
 )
 
-include_directories(${UNITY_INCLUDE_DIRS})
+include_directories(${UNITY_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 
 add_library(mediascanner-music MODULE music-scope.cpp)
 #set_target_properties(mediascanner-music PROPERTIES PREFIX "")
@@ -13,7 +13,7 @@ target_link_libraries(mediascanner-music ${UNITY_LDFLAGS})
 
 add_library(mediascanner-video MODULE video-scope.cpp)
 #set_target_properties(mediascanner-video PROPERTIES PREFIX "")
-target_link_libraries(mediascanner-video ${UNITY_LDFLAGS})
+target_link_libraries(mediascanner-video ${UNITY_LDFLAGS} ${Boost_LIBRARIES})
 
 add_library(musicaggregator SHARED
 musicaggregatorscope.cpp

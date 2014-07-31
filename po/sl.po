@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-04-29 17:23+0100\n"
-"PO-Revision-Date: 2014-04-29 08:33+0000\n"
+"PO-Revision-Date: 2014-07-24 09:05+0000\n"
 "Last-Translator: Damir Jerovšek <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-14 06:28+0000\n"
-"X-Generator: Launchpad (build 17002)\n"
+"X-Launchpad-Export-Date: 2014-07-25 07:54+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 
 #: ../src/music-scope.cpp:122
 msgid "Songs"
@@ -27,7 +27,7 @@ msgstr "Albumi"
 
 #: ../src/music-scope.cpp:241 ../src/music-scope.cpp:278
 msgid "Play in music app"
-msgstr ""
+msgstr "Predvajaj v programu glasbe"
 
 #: ../src/video-scope.cpp:102
 msgid "My Videos"
@@ -46,10 +46,12 @@ msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
+"To je iskalni vstavek Ubuntuja, ki preišče napravo za glasbo in dovoli, da "
+"jo poišče in prikaže v pregledni plošči."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr ""
+msgstr "Poišči krajevno zbirko glasbe"
 
 #: tmp/mediascanner-video.ini.in.in.h:1
 msgid "Local Videos"
@@ -60,6 +62,8 @@ msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
+"To je iskalni vstavek Ubuntuja, ki preišče napravo za video in dovoli, da ga "
+"poišče in prikaže v pregledni plošči."
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
@@ -68,7 +72,7 @@ msgstr "Glasba"
 #: tmp/musicaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
-msgstr ""
+msgstr "To je iskalni vstavek Ubuntuja, ki združi vse vire glasbe v eno."
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
@@ -81,7 +85,7 @@ msgstr "Video"
 #: tmp/videoaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
-msgstr ""
+msgstr "To je iskalni vstavek Ubuntuja, ki združi vse vire videa v eno."
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"

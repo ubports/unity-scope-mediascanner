@@ -3,10 +3,13 @@ Section: gnome
 Priority: optional
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 Build-Depends: cmake (>= 2.8),
+# To avoid GCC 4.8/4.9 ABI break issues.
+               g++-4.9,
                debhelper (>= 9),
                google-mock,
                intltool,
-               libmediascanner-2.0-dev (>= 0.102+14.10.20140725),
+               libboost-regex-dev,
+               libmediascanner-2.0-dev (>= 0.102),
                libunity-dev (>= 7.0.9),
                libunity-scopes-dev (>= 0.5.0),
                libglib2.0-dev,

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-04-29 17:23+0100\n"
-"PO-Revision-Date: 2014-07-20 20:44+0000\n"
-"Last-Translator: Pedro Albuquerque <palbuquerque73@gmail.com>\n"
+"PO-Revision-Date: 2014-07-25 14:02+0000\n"
+"Last-Translator: Ivo Xavier <ivofernandes12@gmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-21 07:05+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-07-26 07:17+0000\n"
+"X-Generator: Launchpad (build 17131)\n"
 
 #: ../src/music-scope.cpp:122
 msgid "Songs"
@@ -46,10 +46,12 @@ msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
+"Isto é uma extensão de procura do Ubuntu que pesquisa música no dispositivo "
+"e permite que seja mostrada no painel."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr ""
+msgstr "Procurar na colecção de música local"
 
 #: tmp/mediascanner-video.ini.in.in.h:1
 msgid "Local Videos"
@@ -60,6 +62,8 @@ msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
+"Isto é uma extensão de procura do Ubuntu que pesquisa vídeos no dispositivo "
+"e permite que sejam mostrados no painel."
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
@@ -69,10 +73,12 @@ msgstr "Música"
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr ""
+"Isto é uma extensão de procura do Ubuntu que junta todas as fontes de música "
+"numa só."
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
-msgstr ""
+msgstr "Procurar música"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
@@ -82,7 +88,9 @@ msgstr "Vídeo"
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr ""
+"Isto é uma extensão de procura do Ubuntu que junta todas as fontes de vídeo "
+"numa só."
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
-msgstr ""
+msgstr "Procurar vídeo"
