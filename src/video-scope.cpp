@@ -158,7 +158,8 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
     Category::SCPtr cat;
     if (is_aggregated) {
         cat = reply->register_category(
-            "local", _("My Videos"), LOCAL_CATEGORY_ICON, query(),
+            "local", _("My Videos"), LOCAL_CATEGORY_ICON,
+            CannedQuery(query().scope_id(), query().query_string(), ""),
             CategoryRenderer(surfacing ? AGGREGATOR_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION));
     } else {
         cat = reply->register_category(
