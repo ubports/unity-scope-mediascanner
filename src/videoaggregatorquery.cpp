@@ -44,6 +44,25 @@ static char SURFACING_CATEGORY_DEFINITION[] = R"(
   },
   "components": {
     "title": "title",
+    "subtitle": "subtitle",
+    "art":  {
+      "field": "art",
+      "aspect-ratio": 1.5
+    }
+  }
+}
+)";
+
+static const char LOCAL_SURFACING_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "carousel",
+    "overlay": true,
+    "card-size": "medium"
+  },
+  "components": {
+    "title": "title",
     "art":  {
       "field": "art",
       "aspect-ratio": 1.5
@@ -62,6 +81,7 @@ static char SEARCH_CATEGORY_DEFINITION[] = R"(
   },
   "components": {
     "title": "title",
+    "subtitle": "subtitle",
     "art":  {
       "field": "art",
       "aspect-ratio": 1.5
@@ -103,11 +123,19 @@ void VideoAggregatorQuery::cancelled() {
 void VideoAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_reply) {
     const std::string query_string = query().query_string();
     const bool surfacing = query_string.empty();
-    const std::string department_id = surfacing ? "featured" : "";
+    const std::string department_id = "aggregated-by:videoaggregator";
     const FilterState filter_state;
     const VariantMap config = settings();
 
-    auto first_reply = std::make_shared<ResultForwarder>(parent_reply);
+    Category::SCPtr category = parent_reply->register_category(
+        subscopes[0].scope_id(), _("My Videos"), "" /* icon */,
+        CannedQuery(subscopes[0].scope_id(), query().query_string(), ""),
+        CategoryRenderer(surfacing ?
+                         LOCAL_SURFACING_CATEGORY_DEFINITION :
+                         SEARCH_CATEGORY_DEFINITION));
+    auto first_reply = std::make_shared<VideoResultForwarder>(
+        parent_reply, category);
+
     // Create forwarders for the other sub-scopes
     for (unsigned int i = 1; i < subscopes.size(); i++) {
         const auto &metadata = subscopes[i];
@@ -120,7 +148,6 @@ void VideoAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
             /* If the setting is missing, consider child enabled. */
         }
 
-        Category::SCPtr category;
         CannedQuery category_query(scope_id, query().query_string(), "");
         if (surfacing) {
             char title[500];
@@ -142,5 +169,6 @@ void VideoAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
         subsearch(metadata.proxy(), query_string, department_id, filter_state,
                   subscope_reply);
     }
-    subsearch(subscopes[0].proxy(), query().query_string(), first_reply);
+    subsearch(subscopes[0].proxy(), query_string, department_id, filter_state,
+              first_reply);
 }
