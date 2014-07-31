@@ -190,7 +190,10 @@ void MusicQuery::populate_departments(unity::scopes::SearchReplyProxy const &rep
         const mediascanner::Filter filter;
         for (const auto &genre: scope.store->listGenres(filter))
         {
-            genres->add_subdepartment(unity::scopes::Department::create("genre:" + genre, query(), genre));
+            if (!genre.empty())
+            {
+                genres->add_subdepartment(unity::scopes::Department::create("genre:" + genre, query(), genre));
+            }
         }
     }
     else
