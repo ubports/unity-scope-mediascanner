@@ -149,7 +149,7 @@ TEST_F(MusicScopeTest, QueryResult) {
     auto query = scope->search(q, hints);
 
     Category::SCPtr songs_category = std::make_shared<unity::scopes::testing::Category>(
-        "songs", "Songs", "icon", CategoryRenderer());
+        "songs", "Tracks", "icon", CategoryRenderer());
     Category::SCPtr albums_category = std::make_shared<unity::scopes::testing::Category>(
         "albums", "Albums", "icon", CategoryRenderer());
     unity::scopes::testing::MockSearchReply reply;
@@ -218,28 +218,14 @@ TEST_F(MusicScopeTest, SurfacingQuery) {
     auto query = scope->search(q, hints);
 
     Category::SCPtr songs_category = std::make_shared<unity::scopes::testing::Category>(
-        "songs", "Songs", "icon", CategoryRenderer());
+        "songs", "Tracks", "icon", CategoryRenderer());
     Category::SCPtr albums_category = std::make_shared<unity::scopes::testing::Category>(
         "albums", "Albums", "icon", CategoryRenderer());
     unity::scopes::testing::MockSearchReply reply;
-    EXPECT_CALL(reply, register_category("songs", _, _, _))
-        .WillOnce(Return(songs_category));
+
+    EXPECT_CALL(reply, register_departments(_));
     EXPECT_CALL(reply, register_category("albums", _, _, _))
         .WillOnce(Return(albums_category));
-    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Straight Through The Sun"))))
-        .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "It's Beautiful"))))
-        .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Buy Me a Pony"))))
-        .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Peaches & Cream"))))
-        .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Zebra"))))
-        .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Revolution"))))
-        .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "One Way Road"))))
-        .WillOnce(Return(true));
 
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
             ResultProp("title", "Spiderbait"),

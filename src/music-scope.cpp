@@ -165,9 +165,11 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
     }
     else // empty department id - default view
     {
-        query_albums(reply);
-
-        if (!empty_search_query)
+        if (empty_search_query) // surfacing
+        {
+            query_albums(reply);
+        }
+        else // non-empty search in albums and songs
         {
             query_albums(reply);
             query_songs(reply);
