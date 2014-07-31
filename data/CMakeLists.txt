@@ -7,9 +7,9 @@ set(OLD_SCOPES_DIR "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes")
 set(SCOPE_CONFIG_FILES
   mediascanner-music.ini
   mediascanner-video.ini
-  mediascanner-video-settings.ini
   musicaggregator.ini
   videoaggregator.ini
+  videoaggregator-settings.ini
 )
 
 foreach(configfile ${SCOPE_CONFIG_FILES})
