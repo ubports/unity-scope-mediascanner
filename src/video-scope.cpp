@@ -38,7 +38,7 @@
 using namespace mediascanner;
 using namespace unity::scopes;
 
-static const char AGGREGATOR_DEPT_ID[] = "aggregated-by:videoaggregator";
+static const char AGGREGATOR_DEPT_ID[] = "aggregated:videoaggregator";
 
 static const char LOCAL_CATEGORY_ICON[] = "/usr/share/icons/unity-icon-theme/places/svg/group-videos.svg";
 static const char LOCAL_CATEGORY_DEFINITION[] = R"(
@@ -48,6 +48,24 @@ static const char LOCAL_CATEGORY_DEFINITION[] = R"(
     "category-layout": "grid",
     "card-size": "medium",
     "card-layout": "horizontal"
+  },
+  "components": {
+    "title": "title",
+    "art":  {
+      "field": "art",
+      "aspect-ratio": 1.5
+    }
+  }
+}
+)";
+
+static const char AGGREGATOR_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "carousel",
+    "overlay": true,
+    "card-size": "medium"
   },
   "components": {
     "title": "title",
@@ -116,12 +134,15 @@ static bool from_camera(const std::string &filename) {
 }
 
 void VideoQuery::run(SearchReplyProxy const&reply) {
+    bool surfacing = query().query_string() == "";
+    bool is_aggregated = query().department_id() == AGGREGATOR_DEPT_ID;
+
     Department::SPtr root_dept = Department::create("", query(), _("Everything"));
     root_dept->set_subdepartments({
             Department::create("camera", query(), _("My Roll")),
             Department::create("downloads", query(), _("Downloaded")),
         });
-    if (query().department_id() == AGGREGATOR_DEPT_ID) {
+    if (is_aggregated) {
         root_dept->add_subdepartment(
             Department::create(AGGREGATOR_DEPT_ID, query(), "dummy"));
     }
@@ -134,8 +155,17 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
         department = VideoType::DOWNLOADS;
     }
 
-    CategoryRenderer renderer(query().query_string() == "" ? LOCAL_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
-    auto cat = reply->register_category("local", _("My Videos"), LOCAL_CATEGORY_ICON, renderer);
+    Category::SCPtr cat;
+    if (is_aggregated) {
+        cat = reply->register_category(
+            "local", _("My Videos"), LOCAL_CATEGORY_ICON,
+            CannedQuery(query().scope_id(), query().query_string(), ""),
+            CategoryRenderer(surfacing ? AGGREGATOR_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION));
+    } else {
+        cat = reply->register_category(
+            "local", _("My Videos"), LOCAL_CATEGORY_ICON,
+            CategoryRenderer(surfacing ? LOCAL_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION));
+    }
     for (const auto &media : scope.store->query(query().query_string(), VideoMedia, MAX_RESULTS)) {
         // Filter results if we are in a department
         switch (department) {
