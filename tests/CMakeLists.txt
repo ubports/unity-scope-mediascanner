@@ -9,7 +9,7 @@ foreach(target ${gtest_libs})
   set_property(TARGET ${target} APPEND_STRING PROPERTY COMPILE_FLAGS " -Wno-missing-field-initializers -Wno-missing-declarations")
 endforeach()
 
-include_directories(${UNITY_INCLUDE_DIRS} ${OLDUNITY_INCLUDE_DIRS})
+include_directories(${UNITY_INCLUDE_DIRS} ${OLDUNITY_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 
 add_executable(test-music-scope
   test-music-scope.cpp
@@ -22,7 +22,7 @@ add_executable(test-video-scope
   test-video-scope.cpp
   ../src/video-scope.cpp
 )
-target_link_libraries(test-video-scope ${UNITY_LDFLAGS} ${gtest_libs})
+target_link_libraries(test-video-scope ${UNITY_LDFLAGS} ${gtest_libs} ${Boost_LIBRARIES})
 add_test(test-video-scope test-video-scope)
 
 add_executable(test-result-forwarder
