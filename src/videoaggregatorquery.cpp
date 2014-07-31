@@ -121,19 +121,20 @@ void VideoAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
         }
 
         Category::SCPtr category;
+        CannedQuery category_query(scope_id, query().query_string(), "");
         if (surfacing) {
             char title[500];
             snprintf(title, sizeof(title), _("%s Features"),
                      metadata.display_name().c_str());
             category = parent_reply->register_category(
-                scope_id, title, "" /* icon */,
+                scope_id, title, "" /* icon */, category_query,
                 CategoryRenderer(SURFACING_CATEGORY_DEFINITION));
         } else {
             char title[500];
             snprintf(title, sizeof(title), _("Results from %s"),
                      metadata.display_name().c_str());
             category = parent_reply->register_category(
-                scope_id, title, "" /* icon */,
+                scope_id, title, "" /* icon */, category_query,
                 CategoryRenderer(SEARCH_CATEGORY_DEFINITION));
         }
         auto subscope_reply = std::make_shared<VideoResultForwarder>(parent_reply, category);
