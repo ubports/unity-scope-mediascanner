@@ -1,9 +1,9 @@
 [grooveshark]
-type = boolean
-defaultValue = true
-_displayName = Display results from Grooveshark
+type=boolean
+defaultValue=true
+_displayName=Display results from Grooveshark
 
 [sevendigital]
-type = boolean
-defaultValue = true
-_displayName = Display results from 7digital
+type=boolean
+defaultValue=true
+_displayName=Display results from 7digital
