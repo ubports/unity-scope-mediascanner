@@ -51,8 +51,21 @@ SearchQueryBase::UPtr MusicAggregatorScope::search(CannedQuery const& q,
     return query;
 }
 
-void MusicAggregatorScope::init_scope_proxy(std::string const& scope, unity::scopes::ScopeProxy& proxy)
+void MusicAggregatorScope::init_scope_proxy(std::string const& scope, unity::scopes::ScopeProxy& proxy, unity::scopes::VariantMap const& config)
 {
+    try
+    {
+        if (!config.at(scope).get_bool())
+        {
+            proxy = nullptr;
+            return;
+        }
+    }
+    catch (const std::exception &e)
+    {
+        // setting is missing, consider enabled
+    }
+
     if (proxy == nullptr)
     {
         try
@@ -60,16 +73,17 @@ void MusicAggregatorScope::init_scope_proxy(std::string const& scope, unity::sco
             proxy = registry->get_metadata(scope).proxy();
         } catch(std::exception &e)
         {
-            // silently ignore
+            std::cerr << "Failed to get proxy for scope " << scope << std::endl;
         }
     }
 }
 
 void MusicAggregatorScope::init_scope_proxies()
 {
-    init_scope_proxy(GROOVESHARKSCOPE, grooveshark_scope);
-    init_scope_proxy(SEVENDIGITAL, sevendigital_scope);
-    init_scope_proxy(SOUNDCLOUD, soundcloud_scope);
+    const auto config = settings();
+    init_scope_proxy(GROOVESHARKSCOPE, grooveshark_scope, config);
+    init_scope_proxy(SEVENDIGITAL, sevendigital_scope, config);
+    init_scope_proxy(SOUNDCLOUD, soundcloud_scope, config);
 }
 
 PreviewQueryBase::UPtr MusicAggregatorScope::preview(Result const& /*result*/, ActionMetadata const& /*hints*/) {

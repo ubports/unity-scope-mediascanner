@@ -24,6 +24,7 @@
 #include <unity/scopes/SearchQueryBase.h>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/ReplyProxyFwd.h>
+#include <unity/scopes/Variant.h>
 
 class MusicAggregatorScope : public unity::scopes::ScopeBase
 {
@@ -45,7 +46,7 @@ public:
 
 private:
     void init_scope_proxies();
-    void init_scope_proxy(std::string const& scope, unity::scopes::ScopeProxy& proxy);
+    void init_scope_proxy(std::string const& scope, unity::scopes::ScopeProxy& proxy, unity::scopes::VariantMap const& config);
     unity::scopes::ScopeProxy local_scope;
     unity::scopes::ScopeProxy grooveshark_scope;
     unity::scopes::ScopeProxy soundcloud_scope;
