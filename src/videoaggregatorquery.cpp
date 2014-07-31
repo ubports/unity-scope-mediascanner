@@ -105,7 +105,7 @@ void VideoAggregatorQuery::cancelled() {
 void VideoAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_reply) {
     const std::string query_string = query().query_string();
     const bool surfacing = query_string.empty();
-    const std::string department_id = "aggregated-by:videoaggregator";
+    const std::string department_id = "aggregated:videoaggregator";
     const FilterState filter_state;
     const VariantMap config = settings();
 

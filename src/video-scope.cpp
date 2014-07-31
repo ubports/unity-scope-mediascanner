@@ -38,7 +38,7 @@
 using namespace mediascanner;
 using namespace unity::scopes;
 
-static const char AGGREGATOR_DEPT_ID[] = "aggregated-by:videoaggregator";
+static const char AGGREGATOR_DEPT_ID[] = "aggregated:videoaggregator";
 
 static const char LOCAL_CATEGORY_ICON[] = "/usr/share/icons/unity-icon-theme/places/svg/group-videos.svg";
 static const char LOCAL_CATEGORY_DEFINITION[] = R"(
