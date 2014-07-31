@@ -105,25 +105,35 @@ void VideoAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     const bool surfacing = query_string.empty();
     const std::string department_id = surfacing ? "featured" : "";
     const FilterState filter_state;
+    const VariantMap config = settings();
 
     auto first_reply = std::make_shared<ResultForwarder>(parent_reply);
     // Create forwarders for the other sub-scopes
     for (unsigned int i = 1; i < subscopes.size(); i++) {
         const auto &metadata = subscopes[i];
+        const std::string scope_id = metadata.scope_id();
+        try {
+            if (!config.at(scope_id).get_bool()) {
+                continue;
+            }
+        } catch (const std::exception &e) {
+            /* If the setting is missing, consider child enabled. */
+        }
+
         Category::SCPtr category;
         if (surfacing) {
             char title[500];
             snprintf(title, sizeof(title), _("%s Features"),
                      metadata.display_name().c_str());
             category = parent_reply->register_category(
-                metadata.scope_id(), title, "" /* icon */,
+                scope_id, title, "" /* icon */,
                 CategoryRenderer(SURFACING_CATEGORY_DEFINITION));
         } else {
             char title[500];
             snprintf(title, sizeof(title), _("Results from %s"),
                      metadata.display_name().c_str());
             category = parent_reply->register_category(
-                metadata.scope_id(), title, "" /* icon */,
+                scope_id, title, "" /* icon */,
                 CategoryRenderer(SEARCH_CATEGORY_DEFINITION));
         }
         auto subscope_reply = std::make_shared<VideoResultForwarder>(parent_reply, category);

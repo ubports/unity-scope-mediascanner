@@ -28,7 +28,7 @@ using namespace unity::scopes;
 
 const std::vector<const char*> SUBSCOPE_NAMES{
     "mediascanner-video",
-    "com.canonical.scopes.remotevideos",
+    "com.ubuntu.scopes.youtube_youtube",
 };
 
 void VideoAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
