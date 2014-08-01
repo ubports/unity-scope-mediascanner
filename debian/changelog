@@ -1,3 +1,14 @@
+unity-scope-mediascanner (0.2+14.10.20140801-0ubuntu1) utopic; urgency=low
+
+  [ James Henstridge ]
+  * Implement new design of video aggregator scope.
+
+  [ Pawel Stolowski ]
+  * Changes to musicaggregator and local music scopes according to final
+    designs.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 01 Aug 2014 07:46:39 +0000
+
 unity-scope-mediascanner (0.2+14.10.20140730-0ubuntu1) utopic; urgency=low
 
   [ CI bot ]
