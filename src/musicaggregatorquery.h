@@ -24,13 +24,17 @@
 #include <unity/scopes/Category.h>
 #include <unity/scopes/ReplyProxyFwd.h>
 
+class ResultForwarder;
+
 class MusicAggregatorQuery : public unity::scopes::SearchQueryBase
 {
 public:
     MusicAggregatorQuery(unity::scopes::CannedQuery const& query,
             unity::scopes::SearchMetadata const& hints,
             unity::scopes::ScopeProxy local_scope,
-            unity::scopes::ScopeProxy online_scope);
+            unity::scopes::ScopeProxy const& grooveshark_scope,
+            unity::scopes::ScopeProxy const& soundcloud_scope,
+            unity::scopes::ScopeProxy const& sevendigital_scope);
     ~MusicAggregatorQuery();
     virtual void cancelled() override;
 
@@ -38,7 +42,10 @@ public:
 
 private:
     unity::scopes::ScopeProxy local_scope;
-    unity::scopes::ScopeProxy online_scope;
+    unity::scopes::ScopeProxy grooveshark_scope;
+    unity::scopes::ScopeProxy soundcloud_scope;
+    unity::scopes::ScopeProxy sevendigital_scope;
+    static const std::string grooveshark_songs_category_id;
 };
 
 #endif

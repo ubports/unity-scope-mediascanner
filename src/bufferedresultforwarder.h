@@ -32,14 +32,15 @@ class BufferedResultForwarder : public ResultForwarder {
 
 public:
 
-    BufferedResultForwarder(unity::scopes::SearchReplyProxy const& upstream);
+    BufferedResultForwarder(unity::scopes::SearchReplyProxy const& upstream,
+            std::function<bool(unity::scopes::CategorisedResult&)> const &result_filter = [](unity::scopes::CategorisedResult&) -> bool { return true; });
     virtual ~BufferedResultForwarder() {}
 
     virtual void push(unity::scopes::CategorisedResult result) override;
     void flush();
 
 protected:
-    void on_forwarder_ready(ResultForwarder*) override;
+    void on_all_forwarders_ready() override;
 
 private:
     bool buffer_;

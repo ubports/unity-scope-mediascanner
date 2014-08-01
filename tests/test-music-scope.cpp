@@ -52,6 +52,7 @@ protected:
         {
             MediaFileBuilder builder("/path/foo1.ogg");
             builder.setType(AudioMedia);
+            builder.setGenre("Rock");
             builder.setTitle("Straight Through The Sun");
             builder.setAuthor("Spiderbait");
             builder.setAlbum("Spiderbait");
@@ -63,6 +64,7 @@ protected:
         {
             MediaFileBuilder builder("/path/foo2.ogg");
             builder.setType(AudioMedia);
+            builder.setGenre("Rock");
             builder.setTitle("It's Beautiful");
             builder.setAuthor("Spiderbait");
             builder.setAlbum("Spiderbait");
@@ -74,6 +76,7 @@ protected:
         {
             MediaFileBuilder builder("/path/foo3.ogg");
             builder.setType(AudioMedia);
+            builder.setGenre("Rock");
             builder.setTitle("Buy Me a Pony");
             builder.setAuthor("Spiderbait");
             builder.setAlbum("Ivy and the Big Apples");
@@ -85,6 +88,7 @@ protected:
         {
             MediaFileBuilder builder("/path/foo4.ogg");
             builder.setType(AudioMedia);
+            builder.setGenre("Folk");
             builder.setTitle("Peaches & Cream");
             builder.setAuthor("The John Butler Trio");
             builder.setAlbum("Sunrise Over Sea");
@@ -96,6 +100,7 @@ protected:
         {
             MediaFileBuilder builder("/path/foo5.ogg");
             builder.setType(AudioMedia);
+            builder.setGenre("Folk");
             builder.setTitle("Zebra");
             builder.setAuthor("The John Butler Trio");
             builder.setAlbum("Sunrise Over Sea");
@@ -118,6 +123,7 @@ protected:
         {
             MediaFileBuilder builder("/path/foo7.ogg");
             builder.setType(AudioMedia);
+            builder.setGenre("Metal");
             builder.setTitle("One Way Road");
             builder.setAuthor("The John Butler Trio");
             builder.setAlbum("April Uprising");
@@ -149,7 +155,7 @@ TEST_F(MusicScopeTest, QueryResult) {
     auto query = scope->search(q, hints);
 
     Category::SCPtr songs_category = std::make_shared<unity::scopes::testing::Category>(
-        "songs", "Songs", "icon", CategoryRenderer());
+        "songs", "Tracks", "icon", CategoryRenderer());
     Category::SCPtr albums_category = std::make_shared<unity::scopes::testing::Category>(
         "albums", "Albums", "icon", CategoryRenderer());
     unity::scopes::testing::MockSearchReply reply;
@@ -218,28 +224,14 @@ TEST_F(MusicScopeTest, SurfacingQuery) {
     auto query = scope->search(q, hints);
 
     Category::SCPtr songs_category = std::make_shared<unity::scopes::testing::Category>(
-        "songs", "Songs", "icon", CategoryRenderer());
+        "songs", "Tracks", "icon", CategoryRenderer());
     Category::SCPtr albums_category = std::make_shared<unity::scopes::testing::Category>(
         "albums", "Albums", "icon", CategoryRenderer());
     unity::scopes::testing::MockSearchReply reply;
-    EXPECT_CALL(reply, register_category("songs", _, _, _))
-        .WillOnce(Return(songs_category));
+
+    EXPECT_CALL(reply, register_departments(_));
     EXPECT_CALL(reply, register_category("albums", _, _, _))
         .WillOnce(Return(albums_category));
-    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Straight Through The Sun"))))
-        .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "It's Beautiful"))))
-        .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Buy Me a Pony"))))
-        .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Peaches & Cream"))))
-        .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Zebra"))))
-        .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Revolution"))))
-        .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "One Way Road"))))
-        .WillOnce(Return(true));
 
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
             ResultProp("title", "Spiderbait"),
@@ -255,6 +247,67 @@ TEST_F(MusicScopeTest, SurfacingQuery) {
         .WillOnce(Return(true));
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
             ResultProp("title", "April Uprising"),
+            ResultProp("isalbum", true)))))
+        .WillOnce(Return(true));
+
+    SearchReplyProxy proxy(&reply, [](SearchReply*){});
+    query->run(proxy);
+}
+
+TEST_F(MusicScopeTest, TracksDepartmentSurfacing) {
+    populateStore();
+
+    CannedQuery q("mediascanner-music", "", "tracks");
+    SearchMetadata hints("en_AU", "phone");
+    auto query = scope->search(q, hints);
+
+    Category::SCPtr songs_category = std::make_shared<unity::scopes::testing::Category>(
+        "songs", "Tracks", "icon", CategoryRenderer());
+    unity::scopes::testing::MockSearchReply reply;
+    EXPECT_CALL(reply, register_departments(_));
+    EXPECT_CALL(reply, register_category("songs", _, _, _))
+        .WillOnce(Return(songs_category));
+
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Straight Through The Sun"))))
+        .WillOnce(Return(true));
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "It's Beautiful"))))
+        .WillOnce(Return(true));
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Buy Me a Pony"))))
+        .WillOnce(Return(true));
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Peaches & Cream"))))
+        .WillOnce(Return(true));
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Zebra"))))
+        .WillOnce(Return(true));
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Revolution"))))
+        .WillOnce(Return(true));
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "One Way Road"))))
+        .WillOnce(Return(true));
+
+    SearchReplyProxy proxy(&reply, [](SearchReply*){});
+    query->run(proxy);
+}
+
+TEST_F(MusicScopeTest, GenresDepartmentSurfacing) {
+    populateStore();
+
+    CannedQuery q("mediascanner-music", "", "genre:Rock");
+    SearchMetadata hints("en_AU", "phone");
+    auto query = scope->search(q, hints);
+
+    Category::SCPtr albums_category = std::make_shared<unity::scopes::testing::Category>(
+        "albums", "", "icon", CategoryRenderer());
+    unity::scopes::testing::MockSearchReply reply;
+
+    EXPECT_CALL(reply, register_departments(_));
+    EXPECT_CALL(reply, register_category("albums", _, _, _))
+        .WillOnce(Return(albums_category));
+
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
+            ResultProp("title", "Spiderbait"),
+            ResultProp("isalbum", true)))))
+        .WillOnce(Return(true));
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
+            ResultProp("title", "Ivy and the Big Apples"),
             ResultProp("isalbum", true)))))
         .WillOnce(Return(true));
 

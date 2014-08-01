@@ -14,27 +14,141 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authored by Jussi Pakkanen <jussi.pakkanen@canonical.com>
+ *             Pawel Stolowski <pawel.stolowski@canonical.com>
  *
  */
 
+#include <config.h>
 #include "musicaggregatorquery.h"
+#include "musicaggregatorscope.h"
 #include "resultforwarder.h"
 #include "onlinemusicresultforwarder.h"
 #include "notify-strategy.h"
+#include "i18n.h"
 #include <memory>
+
 #include <unity/scopes/Annotation.h>
 #include <unity/scopes/CategorisedResult.h>
 #include <unity/scopes/CategoryRenderer.h>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/CannedQuery.h>
 #include <unity/scopes/SearchReply.h>
+#include <unity/scopes/SearchMetadata.h>
 
 using namespace unity::scopes;
 
+static const char MYMUSIC_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "carousel",
+    "card-size": "small",
+    "collapsed-rows": 1
+  },
+  "components": {
+    "title": "title",
+    "art":  "art",
+    "subtitle": "artist"
+  }
+}
+)";
+
+static const char MYMUSIC_SEARCH_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-layout" : "horizontal",
+    "card-size": "large"
+  },
+  "components": {
+    "title": "title",
+    "art":  "art",
+    "subtitle": "artist"
+  }
+}
+)";
+
+static const char GROOVESHARK_CATEGORY_DEFINITION[] = R"(
+{
+    "schema-version": 1,
+    "components": {
+        "subtitle": "artist",
+        "art": "art",
+        "title": "title"
+    },
+    "template": {
+        "category-layout": "grid",
+        "card-size": "large",
+        "card-layout" : "horizontal"
+    }
+}
+)";
+
+static const char GROOVESHARK_SEARCH_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-layout" : "horizontal",
+    "card-size": "large"
+  },
+  "components": {
+    "title": "title",
+    "art":  "art",
+    "subtitle": "artist"
+  }
+}
+)";
+
+static const char SEVENDIGITAL_CATEGORY_DEFINITION[] = R"(
+{
+    "schema-version": 1,
+    "components": {
+        "subtitle": "subtitle",
+        "attributes": "attributes",
+        "art": "art",
+        "title": "title"
+    },
+    "template":
+    {
+        "category-layout": "grid",
+        "card-size": "medium"
+    }
+}
+)";
+
+static const char SEVENDIGITAL_SEARCH_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-layout" : "horizontal",
+    "card-size": "large"
+  },
+  "components": {
+        "subtitle": "subtitle",
+        "attributes": "attributes",
+        "art": "art",
+        "title": "title"
+  }
+}
+)";
+
+const std::string MusicAggregatorQuery::grooveshark_songs_category_id = "cat_0";
+
 MusicAggregatorQuery::MusicAggregatorQuery(CannedQuery const& query, SearchMetadata const& hints,
-        ScopeProxy local_scope, ScopeProxy online_scope) :
+        ScopeProxy local_scope,
+        ScopeProxy const& grooveshark_scope,
+        ScopeProxy const& soundcloud_scope,
+        ScopeProxy const& sevendigital_scope
+        ) :
     SearchQueryBase(query, hints),
-    local_scope(local_scope), online_scope(online_scope) {
+    local_scope(local_scope),
+    grooveshark_scope(grooveshark_scope),
+    soundcloud_scope(soundcloud_scope),
+    sevendigital_scope(sevendigital_scope)
+{
 }
 
 MusicAggregatorQuery::~MusicAggregatorQuery() {
@@ -43,15 +157,103 @@ MusicAggregatorQuery::~MusicAggregatorQuery() {
 void MusicAggregatorQuery::cancelled() {
 }
 
-void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_reply) {
-    std::shared_ptr<ResultForwarder> local_reply(new ResultForwarder(parent_reply,
-                std::shared_ptr<WaitForAllCategories>(new WaitForAllCategories({"songs", "albums"}))));
-    std::shared_ptr<ResultForwarder> online_reply;
-    if(online_scope)
+void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_reply)
+{
+    std::vector<std::shared_ptr<ResultForwarder>> replies;
+    std::vector<unity::scopes::ScopeProxy> scopes({local_scope});
+
+    const CannedQuery mymusic_query(MusicAggregatorScope::LOCALSCOPE, query().query_string(), "");
+    const CannedQuery grooveshark_query(MusicAggregatorScope::GROOVESHARKSCOPE, query().query_string(), "");
+    const CannedQuery sevendigital_query(MusicAggregatorScope::SEVENDIGITAL, query().query_string(), "newreleases");
+
+    const bool empty_search = query().query_string().empty();
+
+    //
+    // register categories
+    auto mymusic_cat = empty_search ? parent_reply->register_category("mymusic", _("My Music"), "",
+            mymusic_query, CategoryRenderer(MYMUSIC_CATEGORY_DEFINITION))
+        : parent_reply->register_category("mymusic", _("My Music"), "", CategoryRenderer(MYMUSIC_SEARCH_CATEGORY_DEFINITION));
+    auto grooveshark_cat = empty_search ? parent_reply->register_category("grooveshark", _("Popular tracks on Grooveshark"), "",
+            grooveshark_query, CategoryRenderer(GROOVESHARK_CATEGORY_DEFINITION))
+        : parent_reply->register_category("grooveshark", _("Grooveshark"), "", CategoryRenderer(GROOVESHARK_SEARCH_CATEGORY_DEFINITION));
+    auto sevendigital_cat = empty_search ? parent_reply->register_category("7digital", _("New albums from 7digital"), "",
+            sevendigital_query, CategoryRenderer(SEVENDIGITAL_CATEGORY_DEFINITION))
+        : parent_reply->register_category("7digital", _("7digital"), "", CategoryRenderer(SEVENDIGITAL_SEARCH_CATEGORY_DEFINITION));
+
     {
-        online_reply.reset(new OnlineMusicResultForwarder(parent_reply));
-        local_reply->add_observer(online_reply);
-        subsearch(online_scope, query().query_string(), online_reply);
+        auto local_reply = std::make_shared<ResultForwarder>(parent_reply, [this, mymusic_cat](CategorisedResult& res) -> bool {
+                res.set_category(mymusic_cat);
+                return true;
+                });
+        replies.push_back(local_reply);
     }
-    subsearch(local_scope, query().query_string(), local_reply);
+
+    if (grooveshark_scope)
+    {
+        scopes.push_back(grooveshark_scope);
+
+        auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, grooveshark_cat](CategorisedResult& res) -> bool {
+                    if (res.category()->id() == grooveshark_songs_category_id)
+                    {
+                        res.set_category(grooveshark_cat);
+                        return true;
+                    }
+                    return false;
+                });
+
+        replies.push_back(reply);
+    }
+    if (soundcloud_scope)
+    {
+        // TODO when available
+    }
+    if (sevendigital_scope)
+    {
+        scopes.push_back(sevendigital_scope);
+        auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, sevendigital_cat](CategorisedResult& res) -> bool {
+                res.set_category(sevendigital_cat);
+                return true;
+                });
+        replies.push_back(reply);
+    }
+
+    // create and chain result forwarders to enforce proper order of categories
+    for (unsigned int i = 1; i < scopes.size(); ++i)
+    {
+        for (unsigned int j = 0; j<i; j++)
+        {
+            replies[j]->add_observer(replies[i]);
+        }
+    }
+
+    // dispatch search to subscopes
+    for (unsigned int i = 0; i < replies.size(); ++i)
+    {
+        std::string dept;
+        SearchMetadata metadata(search_metadata());
+        if (scopes[i] == sevendigital_scope)
+        {
+            if (empty_search)
+            {
+                dept = "newreleases";
+            }
+            metadata.set_cardinality(2);
+        }
+        else if (scopes[i] == local_scope)
+        {
+            dept = "albums"; //FIXME: this should be artists, but it'll be possible once we have artists art/bio support
+            if (empty_search)
+            {
+                metadata.set_cardinality(3);
+            }
+        }
+        else if (scopes[i] == grooveshark_scope)
+        {
+            if (empty_search)
+            {
+                metadata.set_cardinality(3);
+            }
+        }
+        subsearch(scopes[i], query().query_string(), dept, FilterState(), metadata, replies[i]);
+    }
 }

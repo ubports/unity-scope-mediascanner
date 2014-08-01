@@ -24,10 +24,16 @@
 #include <unity/scopes/SearchQueryBase.h>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/ReplyProxyFwd.h>
+#include <unity/scopes/Variant.h>
 
 class MusicAggregatorScope : public unity::scopes::ScopeBase
 {
 public:
+    static const std::string LOCALSCOPE;
+    static const std::string GROOVESHARKSCOPE;
+    static const std::string SEVENDIGITAL;
+    static const std::string SOUNDCLOUD;
+
     virtual void start(std::string const&, unity::scopes::RegistryProxy const&) override;
 
     virtual void stop() override;
@@ -39,8 +45,12 @@ public:
             unity::scopes::SearchMetadata const& hints) override;
 
 private:
+    void init_scope_proxies();
+    void init_scope_proxy(std::string const& scope, unity::scopes::ScopeProxy& proxy, unity::scopes::VariantMap const& config);
     unity::scopes::ScopeProxy local_scope;
-    unity::scopes::ScopeProxy online_scope;
+    unity::scopes::ScopeProxy grooveshark_scope;
+    unity::scopes::ScopeProxy soundcloud_scope;
+    unity::scopes::ScopeProxy sevendigital_scope;
     unity::scopes::RegistryProxy registry;
 };
 

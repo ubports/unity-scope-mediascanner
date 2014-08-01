@@ -17,9 +17,12 @@
  *
  */
 #include <config.h>
+#include <iostream>
+#include <algorithm>
 
 #include <mediascanner/MediaFile.hh>
 #include <mediascanner/Album.hh>
+#include <mediascanner/Filter.hh>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/CategorisedResult.h>
 #include <unity/scopes/ColumnLayout.h>
@@ -31,6 +34,7 @@
 #include "i18n.h"
 
 #define MAX_RESULTS 100
+#define MAX_GENRES 100
 
 static const char MISSING_ALBUM_ART[] = "/usr/share/unity/icons/album_missing.png";
 static const char SONGS_CATEGORY_ICON[] = "/usr/share/icons/unity-icon-theme/places/svg/group-songs.svg";
@@ -38,9 +42,9 @@ static const char SONGS_CATEGORY_DEFINITION[] = R"(
 {
   "schema-version": 1,
   "template": {
-    "category-layout": "carousel",
-    "overlay": true,
-    "card-size": "medium"
+    "category-layout": "grid",
+    "card-size": "large",
+    "card-layout" : "horizontal"
   },
   "components": {
     "title": "title",
@@ -54,7 +58,7 @@ static const char ALBUMS_CATEGORY_DEFINITION[] = R"(
   "schema-version": 1,
   "template": {
     "category-layout": "grid",
-    "card-size": "medium"
+    "card-size": "small"
   },
   "components": {
     "title": "title",
@@ -64,14 +68,28 @@ static const char ALBUMS_CATEGORY_DEFINITION[] = R"(
 }
 )";
 
+static const char ARTISTS_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-size": "medium"
+  },
+  "components": {
+    "title": "title",
+    "art":  "art"
+  }
+}
+)";
+
 // Category renderer to use when presenting search results
-// FIXME: This should use list category-layout (LP #1279279)
 static const char SEARCH_CATEGORY_DEFINITION[] = R"(
 {
   "schema-version": 1,
   "template": {
     "category-layout": "grid",
-    "card-size": "small"
+    "card-layout" : "horizontal",
+    "card-size": "large"
   },
   "components": {
     "title": "title",
@@ -114,30 +132,161 @@ void MusicQuery::cancelled() {
 }
 
 void MusicQuery::run(SearchReplyProxy const&reply) {
-    query_songs(reply);
-    query_albums(reply);
+    const bool empty_search_query = query().query_string().empty();
+
+    if (empty_search_query)
+    {
+        populate_departments(reply);
+    }
+
+    auto const current_department = query().department_id();
+    if (current_department == "tracks")
+    {
+        query_songs(reply);
+    }
+    else if (current_department == "albums")
+    {
+        query_albums(reply);
+    }
+    else if (current_department == "genres")
+    {
+        query_genres(reply);
+    }
+    else if (current_department.find("genre:") == 0)
+    {
+        const int index = current_department.find(":");
+        auto const genre = current_department.substr(index + 1);
+        query_albums_by_genre(reply, genre);
+    }
+    else if (current_department == "albums_of_artist") // fake department that's not really displayed
+    {
+        query_albums_by_artist(reply, query().query_string());
+        query_songs_by_artist(reply, query().query_string());
+    }
+    else // empty department id - default view
+    {
+        if (empty_search_query) // surfacing
+        {
+            query_albums(reply);
+        }
+        else // non-empty search in albums and songs
+        {
+            query_albums(reply);
+            query_songs(reply);
+        }
+    }
 }
 
-void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply) const {
-    CategoryRenderer renderer(query().query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
-    auto cat = reply->register_category("songs", _("Songs"), SONGS_CATEGORY_ICON, renderer);
-    for (const auto &media : scope.store->query(query().query_string(), AudioMedia, MAX_RESULTS)) {
-        CategorisedResult res(cat);
-        res.set_uri(media.getUri());
-        res.set_dnd_uri(media.getUri());
-        res.set_title(media.getTitle());
+void MusicQuery::populate_departments(unity::scopes::SearchReplyProxy const &reply) const
+{
+    unity::scopes::Department::SPtr albums = unity::scopes::Department::create("", query(), _("Albums"));
+    unity::scopes::Department::SPtr tracks = unity::scopes::Department::create("tracks", query(), _("Tracks"));
+    unity::scopes::Department::SPtr genres = unity::scopes::Department::create("genres", query(), _("Genres"));
 
-        res["duration"] = media.getDuration();
-        res["album"] = media.getAlbum();
-        res["artist"] = media.getAuthor();
-        res["track-number"] = media.getTrackNumber();
+    auto const current_department = query().department_id();
+
+    if (current_department == "genres" || current_department.find("genre:") == 0)
+    {
+        const mediascanner::Filter filter;
+        for (const auto &genre: scope.store->listGenres(filter))
+        {
+            if (!genre.empty())
+            {
+                genres->add_subdepartment(unity::scopes::Department::create("genre:" + genre, query(), genre));
+            }
+        }
+    }
+    else
+    {
+        genres->set_has_subdepartments(true);
+    }
+
+    albums->set_subdepartments({genres, tracks});
+
+    try
+    {
+        reply->register_departments(albums);
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << "Failed to register departments: " << e.what() << std::endl;
+    }
+}
+
+void MusicQuery::query_genres(unity::scopes::SearchReplyProxy const&reply) const
+{
+    const CategoryRenderer renderer(ALBUMS_CATEGORY_DEFINITION);
+    mediascanner::Filter filter;
+
+    auto const genres = scope.store->listGenres(filter);
+    auto const genre_limit = std::max(static_cast<int>(genres.size()), 10);
+
+    for (int i = 0; i < genre_limit; i++)
+    {
+        auto cat = reply->register_category("genre:" + genres[i], genres[i], "", renderer); //FIXME: how to make genre i18n-friendly?
+
+        filter.setGenre(genres[i]);
+        for (const auto &album: scope.store->listAlbums(filter))
+        {
+            if (!reply->push(create_album_result(cat, album)))
+                return;
+        }
+    }
+}
+
+void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply) const
+{
+    const bool show_title = !query().query_string().empty();
+
+    CategoryRenderer renderer(query().query_string() == "" ? ARTISTS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
+    auto cat = reply->register_category("artists", show_title ? _("Artists") : "", SONGS_CATEGORY_ICON, renderer); //FIXME: icon
+
+    CannedQuery artist_search(query());
+    artist_search.set_department_id("albums_of_artist"); // virtual department
+
+    for (const auto &artist: scope.store->queryArtists(query().query_string(), MAX_RESULTS))
+    {
+        artist_search.set_query_string(artist);
+
+        CategorisedResult res(cat);
+        res.set_uri(artist_search.to_uri());
+        res.set_title(artist);
 
         if(!reply->push(res))
         {
             return;
         }
     }
+}
 
+void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply) const {
+    const bool show_title = !query().query_string().empty();
+
+    CategoryRenderer renderer(query().query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
+    auto cat = reply->register_category("songs", show_title ? _("Tracks") : "", SONGS_CATEGORY_ICON, renderer);
+    for (const auto &media : scope.store->query(query().query_string(), AudioMedia, MAX_RESULTS)) {
+        if(!reply->push(create_song_result(cat, media)))
+        {
+            return;
+        }
+    }
+
+}
+
+void MusicQuery::query_songs_by_artist(unity::scopes::SearchReplyProxy const &reply, const std::string& artist) const
+{
+    CategoryRenderer renderer(query().query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
+    auto cat = reply->register_category("songs", _("Tracks"), SONGS_CATEGORY_ICON, renderer);
+
+    mediascanner::Filter filter;
+    filter.setArtist(artist);
+
+    for (const auto &media : scope.store->listSongs(filter)) {
+        if(!reply->push(create_song_result(cat, media)))
+        {
+            return;
+        }
+    }
 }
 
 static std::string uriencode(const std::string &src) {
@@ -155,18 +304,75 @@ static std::string uriencode(const std::string &src) {
     return result;
 }
 
-void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply) const {
-    CategoryRenderer renderer(query().query_string() == "" ? ALBUMS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
+unity::scopes::CategorisedResult MusicQuery::create_album_result(unity::scopes::Category::SCPtr const& category, mediascanner::Album const& album)
+{
+    CategorisedResult res(category);
+    res.set_uri("album:///" + uriencode(album.getArtist()) + "/" + uriencode(album.getTitle()));
+    res.set_title(album.getTitle());
+    res["artist"] = album.getArtist();
+    res["album"] = album.getTitle();
+    res["isalbum"] = true;
+    return res;
+}
+
+unity::scopes::CategorisedResult MusicQuery::create_song_result(unity::scopes::Category::SCPtr const& category, mediascanner::MediaFile const& media)
+{
+    CategorisedResult res(category);
+    res.set_uri(media.getUri());
+    res.set_dnd_uri(media.getUri());
+    res.set_title(media.getTitle());
+
+    res["duration"] = media.getDuration();
+    res["album"] = media.getAlbum();
+    res["artist"] = media.getAuthor();
+    res["track-number"] = media.getTrackNumber();
+
+    return res;
+}
+
+void MusicQuery::query_albums_by_genre(unity::scopes::SearchReplyProxy const&reply, const std::string& genre) const
+{
+    CategoryRenderer renderer(ALBUMS_CATEGORY_DEFINITION);
+    auto cat = reply->register_category("albums", "", SONGS_CATEGORY_ICON, renderer);
+
+    mediascanner::Filter filter;
+    filter.setGenre(genre);
+    for (const auto &album: scope.store->listAlbums(filter))
+    {
+        if (!reply->push(create_album_result(cat, album)))
+        {
+            return;
+        }
+    }
+}
+
+void MusicQuery::query_albums_by_artist(unity::scopes::SearchReplyProxy const &reply, const std::string& artist) const
+{
+    CategoryRenderer renderer(ALBUMS_CATEGORY_DEFINITION);
     auto cat = reply->register_category("albums", _("Albums"), SONGS_CATEGORY_ICON, renderer);
+
+    mediascanner::Filter filter;
+    filter.setArtist(artist);
+    for (const auto &album: scope.store->listAlbums(filter))
+    {
+        if (!reply->push(create_album_result(cat, album)))
+        {
+            return;
+        }
+    }
+}
+
+void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply) const {
+    const bool show_title = !query().query_string().empty();
+
+    CategoryRenderer renderer(query().query_string() == "" ? ALBUMS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
+    auto cat = reply->register_category("albums", show_title ? _("Albums") : "", SONGS_CATEGORY_ICON, renderer);
+
     for (const auto &album : scope.store->queryAlbums(query().query_string(), MAX_RESULTS)) {
-        CategorisedResult res(cat);
-        res.set_uri("album:///" + uriencode(album.getArtist()) + "/" +
-                uriencode(album.getTitle()));
-        res.set_title(album.getTitle());
-        res["artist"] = album.getArtist();
-        res["album"] = album.getTitle();
-        res["isalbum"] = true;
-        reply->push(res);
+        if (!reply->push(create_album_result(cat, album)))
+        {
+            return;
+        }
     }
 }
 

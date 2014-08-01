@@ -8,6 +8,7 @@ set(SCOPE_CONFIG_FILES
   mediascanner-music.ini
   mediascanner-video.ini
   musicaggregator.ini
+  musicaggregator-settings.ini
   videoaggregator.ini
   videoaggregator-settings.ini
 )

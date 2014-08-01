@@ -35,8 +35,17 @@ public:
 private:
     const MusicScope &scope;
 
+    void populate_departments(unity::scopes::SearchReplyProxy const &reply) const;
     void query_songs(unity::scopes::SearchReplyProxy const&reply) const;
     void query_albums(unity::scopes::SearchReplyProxy const&reply) const;
+    void query_genres(unity::scopes::SearchReplyProxy const&reply) const;
+    void query_albums_by_genre(unity::scopes::SearchReplyProxy const &reply, const std::string& genre) const;
+    void query_albums_by_artist(unity::scopes::SearchReplyProxy const &reply, const std::string& artist) const;
+    void query_songs_by_artist(unity::scopes::SearchReplyProxy const &reply, const std::string& artist) const;
+    void query_artists(unity::scopes::SearchReplyProxy const& reply) const;
+
+    static unity::scopes::CategorisedResult create_album_result(unity::scopes::Category::SCPtr const& category, mediascanner::Album const& album);
+    static unity::scopes::CategorisedResult create_song_result(unity::scopes::Category::SCPtr const& category, mediascanner::MediaFile const& media);
 };
 
 class MusicPreview : public unity::scopes::PreviewQueryBase

@@ -1,5 +1,5 @@
 [ScopeConfig]
-_DisplayName=Local Music
+_DisplayName=My Music
 _Description=This is an Ubuntu search plugin that scans the device for music and allows it to be searched and displayed in the Dash.
 Author=Canonical Ltd.
 Art=@SCOPES_DATADIR@/mediascanner-music/mediascanner-music-screenshot.jpg
