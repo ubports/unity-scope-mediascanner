@@ -99,7 +99,7 @@ enum class VideoType {
     DOWNLOADS,
 };
 
-void VideoScope::start(std::string const&, RegistryProxy const&) {
+void VideoScope::start(std::string const&) {
     setlocale(LC_ALL, "");
     store.reset(new MediaStore(MS_READ_ONLY));
 }
