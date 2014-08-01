@@ -29,7 +29,7 @@
 class VideoAggregatorScope : public unity::scopes::ScopeBase
 {
 public:
-    virtual void start(std::string const&, unity::scopes::RegistryProxy const&) override;
+    virtual void start(std::string const&) override;
 
     virtual void stop() override;
 
@@ -43,7 +43,6 @@ private:
     void find_subscopes(bool warn_missing);
 
     std::vector<unity::scopes::ScopeMetadata> subscopes;
-    unity::scopes::RegistryProxy registry;
 };
 
 #endif

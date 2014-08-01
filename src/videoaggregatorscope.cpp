@@ -31,9 +31,8 @@ const std::vector<const char*> SUBSCOPE_NAMES{
     "com.ubuntu.scopes.youtube_youtube",
 };
 
-void VideoAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
+void VideoAggregatorScope::start(std::string const&) {
     setlocale(LC_ALL, "");
-    this->registry = registry;
     find_subscopes(true);
 }
 
@@ -41,7 +40,7 @@ void VideoAggregatorScope::find_subscopes(bool warn_missing) {
     subscopes.clear();
     for (const auto &scope_name : SUBSCOPE_NAMES) {
         try {
-            subscopes.emplace_back(registry->get_metadata(scope_name));
+            subscopes.emplace_back(registry()->get_metadata(scope_name));
         } catch (const std::exception &e) {
             if (warn_missing) {
                 std::cerr << "Could not find scope '" << scope_name << "': " << e.what() << std::endl;

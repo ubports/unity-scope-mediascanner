@@ -32,11 +32,10 @@ const std::string MusicAggregatorScope::GROOVESHARKSCOPE = "com.canonical.scopes
 const std::string MusicAggregatorScope::SEVENDIGITAL = "com.canonical.scopes.sevendigital";
 const std::string MusicAggregatorScope::SOUNDCLOUD = "com.canonical.scopes.soundcloud";
 
-void MusicAggregatorScope::start(std::string const&, unity::scopes::RegistryProxy const& registry) {
+void MusicAggregatorScope::start(std::string const&) {
     setlocale(LC_ALL, "");
-    this->registry = registry;
     CategoryRenderer basic;
-    local_scope = registry->get_metadata(LOCALSCOPE).proxy();
+    local_scope = registry()->get_metadata(LOCALSCOPE).proxy();
 }
 
 void MusicAggregatorScope::stop() {
@@ -70,7 +69,7 @@ void MusicAggregatorScope::init_scope_proxy(std::string const& scope, unity::sco
     {
         try
         {
-            proxy = registry->get_metadata(scope).proxy();
+            proxy = registry()->get_metadata(scope).proxy();
         } catch(std::exception &e)
         {
             std::cerr << "Failed to get proxy for scope " << scope << std::endl;

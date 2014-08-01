@@ -44,7 +44,7 @@ void ResultForwarder::push(CategorisedResult result) {
     }
 }
 
-void ResultForwarder::finished(ListenerBase::Reason /*reason*/, std::string const& /*error_message*/) {
+void ResultForwarder::finished(unity::scopes::CompletionDetails const& /*details*/) {
     if (!ready_)
     {
         ready_ = true;
