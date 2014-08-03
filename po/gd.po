@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-31 16:02+0200\n"
-"PO-Revision-Date: 2014-05-17 21:02+0000\n"
-"Last-Translator: Akerbeltz <fios@akerbeltz.org>\n"
+"PO-Revision-Date: 2014-08-02 20:28+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Gaelic; Scottish <gd@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-02 06:40+0000\n"
+"X-Launchpad-Export-Date: 2014-08-03 06:14+0000\n"
 "X-Generator: Launchpad (build 17147)\n"
 
 #: ../src/video-scope.cpp:140
 msgid "Everything"
-msgstr ""
+msgstr "Gach nì"
 
 #: ../src/video-scope.cpp:142
 msgid "My Roll"
@@ -27,7 +27,7 @@ msgstr ""
 
 #: ../src/video-scope.cpp:143
 msgid "Downloaded"
-msgstr ""
+msgstr "Air a luchdadh a-nuas"
 
 #: ../src/video-scope.cpp:161 ../src/video-scope.cpp:166
 #: tmp/mediascanner-video.ini.in.in.h:1
@@ -77,15 +77,15 @@ msgstr "Albaman"
 #: ../src/music-scope.cpp:183 ../src/music-scope.cpp:266
 #: ../src/music-scope.cpp:279
 msgid "Tracks"
-msgstr ""
+msgstr "Tracaichean"
 
 #: ../src/music-scope.cpp:184
 msgid "Genres"
-msgstr ""
+msgstr "Gnèithean"
 
 #: ../src/music-scope.cpp:242
 msgid "Artists"
-msgstr ""
+msgstr "Luchd-ciùil"
 
 #: ../src/music-scope.cpp:451 ../src/music-scope.cpp:490
 msgid "Play in music app"
