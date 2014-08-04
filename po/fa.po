@@ -7,82 +7,148 @@ msgid ""
 msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-04-29 17:23+0100\n"
-"PO-Revision-Date: 2014-07-28 18:10+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-07-31 16:02+0200\n"
+"PO-Revision-Date: 2014-08-03 11:10+0000\n"
+"Last-Translator: Danial Behzadi <dani.behzi@gmail.com>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-29 06:54+0000\n"
-"X-Generator: Launchpad (build 17131)\n"
+"X-Launchpad-Export-Date: 2014-08-04 06:32+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 
-#: ../src/music-scope.cpp:122
-msgid "Songs"
+#: ../src/video-scope.cpp:140
+msgid "Everything"
+msgstr "همه چیز"
+
+#: ../src/video-scope.cpp:142
+msgid "My Roll"
 msgstr ""
 
-#: ../src/music-scope.cpp:159
-msgid "Albums"
-msgstr ""
+#: ../src/video-scope.cpp:143
+msgid "Downloaded"
+msgstr "بارگیری‌شده"
 
-#: ../src/music-scope.cpp:241 ../src/music-scope.cpp:278
-msgid "Play in music app"
-msgstr ""
-
-#: ../src/video-scope.cpp:102
+#: ../src/video-scope.cpp:161 ../src/video-scope.cpp:166
+#: tmp/mediascanner-video.ini.in.in.h:1
 msgid "My Videos"
-msgstr ""
+msgstr "ویدیوهای من"
 
-#: ../src/video-scope.cpp:151
+#: ../src/video-scope.cpp:234
 msgid "Play"
-msgstr ""
+msgstr "اجرا"
 
+#: ../src/musicaggregatorquery.cpp:173 ../src/musicaggregatorquery.cpp:175
 #: tmp/mediascanner-music.ini.in.in.h:1
-msgid "Local Music"
-msgstr ""
+msgid "My Music"
+msgstr "آهنگ‌های من"
+
+#: ../src/musicaggregatorquery.cpp:176
+msgid "Popular tracks on Grooveshark"
+msgstr "قطعه‌های محبوب روی گروشارک"
+
+#: ../src/musicaggregatorquery.cpp:178
+msgid "Grooveshark"
+msgstr "گروشارک"
+
+#: ../src/musicaggregatorquery.cpp:179
+msgid "New albums from 7digital"
+msgstr "آلبوم‌های جدید از ۷دیجیتال"
+
+#: ../src/musicaggregatorquery.cpp:181
+msgid "7digital"
+msgstr "۷دیجیتال"
+
+#: ../src/videoaggregatorquery.cpp:130
+#, c-format
+msgid "%s Features"
+msgstr "%s معرَفی می‌کند"
+
+#: ../src/videoaggregatorquery.cpp:137
+#, c-format
+msgid "Results from %s"
+msgstr "یافته‌ها از %s"
+
+#: ../src/music-scope.cpp:182 ../src/music-scope.cpp:352
+#: ../src/music-scope.cpp:369
+msgid "Albums"
+msgstr "آلبوم‌ها"
+
+#: ../src/music-scope.cpp:183 ../src/music-scope.cpp:266
+#: ../src/music-scope.cpp:279
+msgid "Tracks"
+msgstr "قطعه‌ها"
+
+#: ../src/music-scope.cpp:184
+msgid "Genres"
+msgstr "سبک‌ها"
+
+#: ../src/music-scope.cpp:242
+msgid "Artists"
+msgstr "هنرمندان"
+
+#: ../src/music-scope.cpp:451 ../src/music-scope.cpp:490
+msgid "Play in music app"
+msgstr "اجرا در اپ آهنگ‌ها"
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
+"این یک پلاگین جست‌وجوی اوبونتو است که دستگاه را برای آهنگ‌ها پویش کرده و "
+"اجازه می‌دهد آن‌ها جست‌وجو شده و در دش نمایش داده شوند."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr ""
-
-#: tmp/mediascanner-video.ini.in.in.h:1
-msgid "Local Videos"
-msgstr ""
+msgstr "جست‌وجوی مجموعه‌ آهنگ‌های محلّی"
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
+"این یک پلاگین جست‌وجوی اوبونتو است که دستگاه را برای ویدیوها پویش کرده و "
+"اجازه می‌دهد آن‌ها جست‌وجو شده و در دش نمایش داده شوند."
+
+#: tmp/musicaggregator-settings.ini.in.in.h:1
+msgid "Display results from Grooveshark"
+msgstr "نمایش سافته‌ها از گروشارک"
+
+#: tmp/musicaggregator-settings.ini.in.in.h:2
+msgid "Display results from 7digital"
+msgstr "نمایش سافته‌ها از ۷دیجیتال"
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
-msgstr ""
+msgstr "آهنگ‌ها"
 
 #: tmp/musicaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr ""
+"این یک پلاگین جست‌وجوی اوبونتو است که همه‌ی منبع‌های آهنگ را در یکی ادغام "
+"می‌کند."
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
-msgstr ""
+msgstr "جست‌وجوی آهنگ"
+
+#: tmp/videoaggregator-settings.ini.in.in.h:1
+msgid "Display results from YouTube"
+msgstr "نمایش یافته‌ها از یوتوب"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
-msgstr ""
+msgstr "ویدیو"
 
 #: tmp/videoaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr ""
+"این یک پلاگین جست‌وجوی اوبونتو است که همه‌ی منبع‌های ویدیو را در یکی ادغام "
+"می‌کند."
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
-msgstr ""
+msgstr "جست‌وجوی ویدیو"

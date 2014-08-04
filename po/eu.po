@@ -7,39 +7,89 @@ msgid ""
 msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-04-29 17:23+0100\n"
-"PO-Revision-Date: 2014-07-21 22:30+0000\n"
+"POT-Creation-Date: 2014-07-31 16:02+0200\n"
+"PO-Revision-Date: 2014-08-02 03:30+0000\n"
 "Last-Translator: Ibai Oihanguren Sala <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-24 06:32+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-08-03 06:14+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 
-#: ../src/music-scope.cpp:122
-msgid "Songs"
-msgstr "Abestiak"
+#: ../src/video-scope.cpp:140
+msgid "Everything"
+msgstr "Guztia"
 
-#: ../src/music-scope.cpp:159
-msgid "Albums"
-msgstr "Albumak"
+#: ../src/video-scope.cpp:142
+msgid "My Roll"
+msgstr "Nire argazki-filma"
 
-#: ../src/music-scope.cpp:241 ../src/music-scope.cpp:278
-msgid "Play in music app"
-msgstr "Erreproduzitu musika-aplikazioan"
+#: ../src/video-scope.cpp:143
+msgid "Downloaded"
+msgstr "Deskargatuak"
 
-#: ../src/video-scope.cpp:102
+#: ../src/video-scope.cpp:161 ../src/video-scope.cpp:166
+#: tmp/mediascanner-video.ini.in.in.h:1
 msgid "My Videos"
 msgstr "Nire bideoak"
 
-#: ../src/video-scope.cpp:151
+#: ../src/video-scope.cpp:234
 msgid "Play"
 msgstr "Erreproduzitu"
 
+#: ../src/musicaggregatorquery.cpp:173 ../src/musicaggregatorquery.cpp:175
 #: tmp/mediascanner-music.ini.in.in.h:1
-msgid "Local Music"
-msgstr "Musika lokala"
+msgid "My Music"
+msgstr "Nire musika"
+
+#: ../src/musicaggregatorquery.cpp:176
+msgid "Popular tracks on Grooveshark"
+msgstr "Grooveshark-eko abesti arrakastatsuak"
+
+#: ../src/musicaggregatorquery.cpp:178
+msgid "Grooveshark"
+msgstr "Grooveshark"
+
+#: ../src/musicaggregatorquery.cpp:179
+msgid "New albums from 7digital"
+msgstr "7digital-eko album berriak"
+
+#: ../src/musicaggregatorquery.cpp:181
+msgid "7digital"
+msgstr "7digital"
+
+#: ../src/videoaggregatorquery.cpp:130
+#, c-format
+msgid "%s Features"
+msgstr "%s eginbideak"
+
+#: ../src/videoaggregatorquery.cpp:137
+#, c-format
+msgid "Results from %s"
+msgstr "%s(e)ko emaitzak"
+
+#: ../src/music-scope.cpp:182 ../src/music-scope.cpp:352
+#: ../src/music-scope.cpp:369
+msgid "Albums"
+msgstr "Albumak"
+
+#: ../src/music-scope.cpp:183 ../src/music-scope.cpp:266
+#: ../src/music-scope.cpp:279
+msgid "Tracks"
+msgstr "Abestiak"
+
+#: ../src/music-scope.cpp:184
+msgid "Genres"
+msgstr "Generoak"
+
+#: ../src/music-scope.cpp:242
+msgid "Artists"
+msgstr "Artistak"
+
+#: ../src/music-scope.cpp:451 ../src/music-scope.cpp:490
+msgid "Play in music app"
+msgstr "Erreproduzitu musika-aplikazioan"
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
@@ -53,10 +103,6 @@ msgstr ""
 msgid "Search local music collection"
 msgstr "Bilatu musika-bilduma lokala"
 
-#: tmp/mediascanner-video.ini.in.in.h:1
-msgid "Local Videos"
-msgstr "Bideo lokalak"
-
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
@@ -64,6 +110,14 @@ msgid ""
 msgstr ""
 "Honako hau Ubunturen bilaketa-plugina da, gailua arakatzen duena bideoak "
 "bilatu eta abio-leihoan bistaratzea ahalbidetzeko."
+
+#: tmp/musicaggregator-settings.ini.in.in.h:1
+msgid "Display results from Grooveshark"
+msgstr "Erakutsi Grooveshark-eko emaitzak"
+
+#: tmp/musicaggregator-settings.ini.in.in.h:2
+msgid "Display results from 7digital"
+msgstr "Erakutsi 7digital-eko emaitzak"
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
@@ -79,6 +133,10 @@ msgstr ""
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
 msgstr "Bilatu musika"
+
+#: tmp/videoaggregator-settings.ini.in.in.h:1
+msgid "Display results from YouTube"
+msgstr "Erakutsi YouTube-eko emaitzak"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
