@@ -87,7 +87,8 @@ static const char ARTIST_BIO_CATEGORY_DEFINITION[] = R"(
   "schema-version": 1,
   "template": {
     "category-layout": "grid",
-    "card-size": "large"
+    "card-size": "large",
+    "non-interactive": "true"
   },
   "components": {
     "title": "title",
