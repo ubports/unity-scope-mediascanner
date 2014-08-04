@@ -226,11 +226,11 @@ TEST_F(MusicScopeTest, SurfacingQuery) {
     Category::SCPtr songs_category = std::make_shared<unity::scopes::testing::Category>(
         "songs", "Tracks", "icon", CategoryRenderer());
     Category::SCPtr albums_category = std::make_shared<unity::scopes::testing::Category>(
-        "albums", "Albums", "icon", CategoryRenderer());
+        "albums", "Artists", "icon", CategoryRenderer());
     unity::scopes::testing::MockSearchReply reply;
 
     EXPECT_CALL(reply, register_departments(_));
-    EXPECT_CALL(reply, register_category("albums", _, _, _))
+    EXPECT_CALL(reply, register_category("artists", _, _, _))
         .WillOnce(Return(albums_category));
 
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(

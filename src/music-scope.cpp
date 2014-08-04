@@ -82,6 +82,21 @@ static const char ARTISTS_CATEGORY_DEFINITION[] = R"(
 }
 )";
 
+static const char ARTIST_BIO_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-size": "large"
+  },
+  "components": {
+    "title": "title",
+    "summary": "summary",
+    "art":  "art"
+  }
+}
+)";
+
 // Category renderer to use when presenting search results
 static const char SEARCH_CATEGORY_DEFINITION[] = R"(
 {
@@ -101,6 +116,35 @@ static const char SEARCH_CATEGORY_DEFINITION[] = R"(
 
 using namespace mediascanner;
 using namespace unity::scopes;
+
+static std::string uriencode(const std::string &src) {
+    const char DEC2HEX[16+1] = "0123456789ABCDEF";
+    std::string result = "";
+    for (const char ch : src) {
+        if (isalnum(ch)) {
+            result += ch;
+        } else {
+            result += '%';
+            result += DEC2HEX[(unsigned char)ch >> 4];
+            result += DEC2HEX[(unsigned char)ch & 0x0F];
+        }
+    }
+    return result;
+}
+
+static std::string make_album_art_uri(const std::string &artist, const std::string &album) {
+    std::string result = "image://albumart/";
+    result += "artist=" + uriencode(artist);
+    result += "&album=" + uriencode(album);
+    return result;
+}
+
+static std::string make_artist_art_uri(const std::string &artist, const std::string &album) {
+    std::string result = "image://artistart/";
+    result += "artist=" + uriencode(artist);
+    result += "&album=" + uriencode(album);
+    return result;
+}
 
 void MusicScope::start(std::string const&, RegistryProxy const&) {
     setlocale(LC_ALL, "");
@@ -160,8 +204,9 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
     }
     else if (current_department == "albums_of_artist") // fake department that's not really displayed
     {
-        query_albums_by_artist(reply, query().query_string());
-        query_songs_by_artist(reply, query().query_string());
+        const std::string artist = query().query_string();
+        query_albums_by_artist(reply, artist);
+        query_songs_by_artist(reply, artist);
     }
     else // empty department id - default view
     {
@@ -171,6 +216,7 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
         }
         else // non-empty search in albums and songs
         {
+            query_artists(reply);
             query_albums(reply);
             query_songs(reply);
         }
@@ -179,7 +225,8 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
 
 void MusicQuery::populate_departments(unity::scopes::SearchReplyProxy const &reply) const
 {
-    unity::scopes::Department::SPtr albums = unity::scopes::Department::create("", query(), _("Albums"));
+    unity::scopes::Department::SPtr artists = unity::scopes::Department::create("", query(), _("Artists"));
+    unity::scopes::Department::SPtr albums = unity::scopes::Department::create("albums", query(), _("Albums"));
     unity::scopes::Department::SPtr tracks = unity::scopes::Department::create("tracks", query(), _("Tracks"));
     unity::scopes::Department::SPtr genres = unity::scopes::Department::create("genres", query(), _("Genres"));
 
@@ -201,7 +248,7 @@ void MusicQuery::populate_departments(unity::scopes::SearchReplyProxy const &rep
         genres->set_has_subdepartments(true);
     }
 
-    albums->set_subdepartments({genres, tracks});
+    artists->set_subdepartments({albums, genres, tracks});
 
     try
     {
@@ -252,6 +299,24 @@ void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply) con
         res.set_uri(artist_search.to_uri());
         res.set_title(artist);
 
+        // find first non-empty album of this artist, needed to get artist-art
+        {
+            std::string art;
+            mediascanner::Filter filter;
+            filter.setArtist(artist);
+            for (auto const album: scope.store->listAlbums(filter))
+            {
+                if (!album.getTitle().empty())
+                {
+                    art = make_artist_art_uri(artist, album.getTitle());
+                    break;
+                }
+            }
+            if (art.empty())
+                art = MISSING_ALBUM_ART;
+            res["art"] = art;
+        }
+
         if(!reply->push(res))
         {
             return;
@@ -287,21 +352,6 @@ void MusicQuery::query_songs_by_artist(unity::scopes::SearchReplyProxy const &re
             return;
         }
     }
-}
-
-static std::string uriencode(const std::string &src) {
-    const char DEC2HEX[16+1] = "0123456789ABCDEF";
-    std::string result = "";
-    for (const char ch : src) {
-        if (isalnum(ch)) {
-            result += ch;
-        } else {
-            result += '%';
-            result += DEC2HEX[(unsigned char)ch >> 4];
-            result += DEC2HEX[(unsigned char)ch & 0x0F];
-        }
-    }
-    return result;
 }
 
 unity::scopes::CategorisedResult MusicQuery::create_album_result(unity::scopes::Category::SCPtr const& category, mediascanner::Album const& album)
@@ -348,14 +398,34 @@ void MusicQuery::query_albums_by_genre(unity::scopes::SearchReplyProxy const&rep
 
 void MusicQuery::query_albums_by_artist(unity::scopes::SearchReplyProxy const &reply, const std::string& artist) const
 {
+    CategoryRenderer bio_renderer(ARTIST_BIO_CATEGORY_DEFINITION);
     CategoryRenderer renderer(ALBUMS_CATEGORY_DEFINITION);
-    auto cat = reply->register_category("albums", _("Albums"), SONGS_CATEGORY_ICON, renderer);
+
+    auto biocat = reply->register_category("bio", "", "", bio_renderer);
+    auto albumcat = reply->register_category("albums", _("Albums"), SONGS_CATEGORY_ICON, renderer);
+
+    bool show_bio = true;
+    // TODO: fetch bio
+    std::string bio_text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec convallis tellus venenatis, commodo purus quis, adipiscing ipsum.  Quisque eu semper ipsum, tempus bibendum urna.";
 
     mediascanner::Filter filter;
     filter.setArtist(artist);
     for (const auto &album: scope.store->listAlbums(filter))
     {
-        if (!reply->push(create_album_result(cat, album)))
+        if (show_bio && !album.getTitle().empty())
+        {
+            CannedQuery artist_search(query());
+            artist_search.set_department_id("albums_of_artist"); // virtual department
+
+            CategorisedResult artist_info(biocat);
+            artist_info.set_uri(artist_search.to_uri()); //FIXME: when support for 'interactive' flag is in
+            artist_info.set_title(artist);
+            artist_info["summary"] = bio_text;
+            artist_info["art"] = make_artist_art_uri(artist, album.getTitle());
+            reply->push(artist_info);
+            show_bio = false;
+        }
+        if (!reply->push(create_album_result(albumcat, album)))
         {
             return;
         }
@@ -382,13 +452,6 @@ MusicPreview::MusicPreview(MusicScope &scope, Result const& result, ActionMetada
 }
 
 void MusicPreview::cancelled() {
-}
-
-static std::string make_art_uri(const std::string &artist, const std::string &album) {
-    std::string result = "image://albumart/";
-    result += "artist=" + uriencode(artist);
-    result += "&album=" + uriencode(album);
-    return result;
 }
 
 void MusicPreview::run(PreviewReplyProxy const& reply)
@@ -428,7 +491,7 @@ void MusicPreview::song_preview(unity::scopes::PreviewReplyProxy const &reply) c
     if (artist.empty() || album.empty()) {
         art = MISSING_ALBUM_ART;
     } else {
-        art = make_art_uri(artist, album);
+        art = make_album_art_uri(artist, album);
     }
     artwork.add_attribute_value("source", Variant(art));
 
@@ -474,7 +537,7 @@ void MusicPreview::album_preview(unity::scopes::PreviewReplyProxy const &reply) 
     if (artist.empty() || album_name.empty()) {
         art = MISSING_ALBUM_ART;
     } else {
-        art = make_art_uri(artist, album_name);
+        art = make_album_art_uri(artist, album_name);
     }
     artwork.add_attribute_value("source", Variant(art));
 
