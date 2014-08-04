@@ -147,6 +147,13 @@ MATCHER_P2(ResultProp, prop, value, "") {
     return arg.contains(prop) && arg[prop] == unity::scopes::Variant(value);
 }
 
+MATCHER_P(ResultUriMatchesCannedQuery, q, "") {
+    auto const query = unity::scopes::CannedQuery::from_uri(arg.uri());
+    return query.scope_id() == q.scope_id()
+        && query.query_string() == q.query_string()
+        && query.department_id() == q.department_id();
+}
+
 TEST_F(MusicScopeTest, QueryResult) {
     populateStore();
 
@@ -154,15 +161,25 @@ TEST_F(MusicScopeTest, QueryResult) {
     SearchMetadata hints("en_AU", "phone");
     auto query = scope->search(q, hints);
 
+    Category::SCPtr artists_category = std::make_shared<unity::scopes::testing::Category>(
+        "artists", "Artists", "icon", CategoryRenderer());
     Category::SCPtr songs_category = std::make_shared<unity::scopes::testing::Category>(
         "songs", "Tracks", "icon", CategoryRenderer());
     Category::SCPtr albums_category = std::make_shared<unity::scopes::testing::Category>(
         "albums", "Albums", "icon", CategoryRenderer());
     unity::scopes::testing::MockSearchReply reply;
+    EXPECT_CALL(reply, register_category("artists", _, _, _))
+        .WillOnce(Return(artists_category));
     EXPECT_CALL(reply, register_category("songs", _, _, _))
         .WillOnce(Return(songs_category));
     EXPECT_CALL(reply, register_category("albums", _, _, _))
         .WillOnce(Return(albums_category));
+
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
+            ResultProp("uri", "scope://mediascanner%2Dmusic?q=The%20John%20Butler%20Trio&dep=albums%5Fof%5Fartist"),
+            ResultProp("title", "The John Butler Trio")))))
+        .WillOnce(Return(true));
+
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
             ResultProp("uri", "file:///path/foo7.ogg"),
             ResultProp("dnd_uri", "file:///path/foo7.ogg"),
@@ -193,15 +210,23 @@ TEST_F(MusicScopeTest, ShortQuery) {
     SearchMetadata hints("en_AU", "phone");
     auto query = scope->search(q, hints);
 
+    Category::SCPtr artists_category = std::make_shared<unity::scopes::testing::Category>(
+        "artists", "Artists", "icon", CategoryRenderer());
     Category::SCPtr songs_category = std::make_shared<unity::scopes::testing::Category>(
         "songs", "Songs", "icon", CategoryRenderer());
     Category::SCPtr albums_category = std::make_shared<unity::scopes::testing::Category>(
         "albums", "Albums", "icon", CategoryRenderer());
     unity::scopes::testing::MockSearchReply reply;
+    EXPECT_CALL(reply, register_category("artists", _, _, _))
+        .WillOnce(Return(artists_category));
     EXPECT_CALL(reply, register_category("songs", _, _, _))
         .WillOnce(Return(songs_category));
     EXPECT_CALL(reply, register_category("albums", _, _, _))
         .WillOnce(Return(albums_category));
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
+            ResultUriMatchesCannedQuery(CannedQuery("mediascanner-music", "The John Butler Trio", "albums_of_artist")),
+            ResultProp("title", "The John Butler Trio")))))
+        .WillOnce(Return(true));
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "One Way Road"))))
         .WillOnce(Return(true));
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Revolution"))))
@@ -234,20 +259,15 @@ TEST_F(MusicScopeTest, SurfacingQuery) {
         .WillOnce(Return(albums_category));
 
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
-            ResultProp("title", "Spiderbait"),
-            ResultProp("isalbum", true)))))
+                        ResultUriMatchesCannedQuery(CannedQuery("mediascanner-music", "Spiderbait", "albums_of_artist")),
+                        ResultProp("title", "Spiderbait")
+                        ))))
         .WillOnce(Return(true));
+
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
-            ResultProp("title", "Ivy and the Big Apples"),
-            ResultProp("isalbum", true)))))
-        .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
-            ResultProp("title", "Sunrise Over Sea"),
-            ResultProp("isalbum", true)))))
-        .WillOnce(Return(true));
-    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
-            ResultProp("title", "April Uprising"),
-            ResultProp("isalbum", true)))))
+                        ResultUriMatchesCannedQuery(CannedQuery("mediascanner-music", "The John Butler Trio", "albums_of_artist")),
+                        ResultProp("title", "The John Butler Trio"))
+            )))
         .WillOnce(Return(true));
 
     SearchReplyProxy proxy(&reply, [](SearchReply*){});
