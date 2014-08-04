@@ -2,20 +2,21 @@
 # Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
 # This file is distributed under the same license as the unity-scope-mediascanner package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-31 16:02+0200\n"
-"PO-Revision-Date: 2014-08-02 20:28+0000\n"
+"PO-Revision-Date: 2014-08-03 22:43+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Gaelic; Scottish <gd@li.org>\n"
+"Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-03 06:14+0000\n"
+"X-Launchpad-Export-Date: 2014-08-04 06:32+0000\n"
 "X-Generator: Launchpad (build 17147)\n"
+"Language: gd\n"
 
 #: ../src/video-scope.cpp:140
 msgid "Everything"
@@ -23,7 +24,7 @@ msgstr "Gach nì"
 
 #: ../src/video-scope.cpp:142
 msgid "My Roll"
-msgstr ""
+msgstr "Albam a' chamara agam"
 
 #: ../src/video-scope.cpp:143
 msgid "Downloaded"
@@ -41,23 +42,23 @@ msgstr "Cluich"
 #: ../src/musicaggregatorquery.cpp:173 ../src/musicaggregatorquery.cpp:175
 #: tmp/mediascanner-music.ini.in.in.h:1
 msgid "My Music"
-msgstr ""
+msgstr "An ceòl agam"
 
 #: ../src/musicaggregatorquery.cpp:176
 msgid "Popular tracks on Grooveshark"
-msgstr ""
+msgstr "Tracaichean fèillmhor air Grooveshark"
 
 #: ../src/musicaggregatorquery.cpp:178
 msgid "Grooveshark"
-msgstr ""
+msgstr "Grooveshark"
 
 #: ../src/musicaggregatorquery.cpp:179
 msgid "New albums from 7digital"
-msgstr ""
+msgstr "Albaman ùra o 7digital"
 
 #: ../src/musicaggregatorquery.cpp:181
 msgid "7digital"
-msgstr ""
+msgstr "7digital"
 
 #: ../src/videoaggregatorquery.cpp:130
 #, c-format
@@ -67,7 +68,7 @@ msgstr ""
 #: ../src/videoaggregatorquery.cpp:137
 #, c-format
 msgid "Results from %s"
-msgstr ""
+msgstr "Toraidhean o %s"
 
 #: ../src/music-scope.cpp:182 ../src/music-scope.cpp:352
 #: ../src/music-scope.cpp:369
@@ -113,11 +114,11 @@ msgstr ""
 
 #: tmp/musicaggregator-settings.ini.in.in.h:1
 msgid "Display results from Grooveshark"
-msgstr ""
+msgstr "Seall toraidhean o Ghrooveshark"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:2
 msgid "Display results from 7digital"
-msgstr ""
+msgstr "Seall toraidhean o 7digital"
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
@@ -134,7 +135,7 @@ msgstr "Lorg sa cheòl"
 
 #: tmp/videoaggregator-settings.ini.in.in.h:1
 msgid "Display results from YouTube"
-msgstr ""
+msgstr "Seall toraidhean o YouTube"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"

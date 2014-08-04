@@ -8,26 +8,26 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-31 16:02+0200\n"
-"PO-Revision-Date: 2014-07-20 03:07+0000\n"
+"PO-Revision-Date: 2014-08-03 16:10+0000\n"
 "Last-Translator: samson <Unknown>\n"
 "Language-Team: Amharic <am@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-02 06:39+0000\n"
+"X-Launchpad-Export-Date: 2014-08-04 06:32+0000\n"
 "X-Generator: Launchpad (build 17147)\n"
 
 #: ../src/video-scope.cpp:140
 msgid "Everything"
-msgstr ""
+msgstr "ሁሉንም"
 
 #: ../src/video-scope.cpp:142
 msgid "My Roll"
-msgstr ""
+msgstr "የኔ ሚና"
 
 #: ../src/video-scope.cpp:143
 msgid "Downloaded"
-msgstr ""
+msgstr "ወርዷል"
 
 #: ../src/video-scope.cpp:161 ../src/video-scope.cpp:166
 #: tmp/mediascanner-video.ini.in.in.h:1
@@ -41,7 +41,7 @@ msgstr "ማጫወቻ"
 #: ../src/musicaggregatorquery.cpp:173 ../src/musicaggregatorquery.cpp:175
 #: tmp/mediascanner-music.ini.in.in.h:1
 msgid "My Music"
-msgstr ""
+msgstr "የኔ ሙዚቃ"
 
 #: ../src/musicaggregatorquery.cpp:176
 msgid "Popular tracks on Grooveshark"
@@ -49,25 +49,25 @@ msgstr ""
 
 #: ../src/musicaggregatorquery.cpp:178
 msgid "Grooveshark"
-msgstr ""
+msgstr "ግሩቭ ሻርክ"
 
 #: ../src/musicaggregatorquery.cpp:179
 msgid "New albums from 7digital"
-msgstr ""
+msgstr "አዲስ አልበሞች ከ 7ዲጂታል"
 
 #: ../src/musicaggregatorquery.cpp:181
 msgid "7digital"
-msgstr ""
+msgstr "7ዲጂታል"
 
 #: ../src/videoaggregatorquery.cpp:130
 #, c-format
 msgid "%s Features"
-msgstr ""
+msgstr "%s ገጽታዎች"
 
 #: ../src/videoaggregatorquery.cpp:137
 #, c-format
 msgid "Results from %s"
-msgstr ""
+msgstr "ውጤቶች ከ %s"
 
 #: ../src/music-scope.cpp:182 ../src/music-scope.cpp:352
 #: ../src/music-scope.cpp:369
@@ -77,7 +77,7 @@ msgstr "አልበሞች"
 #: ../src/music-scope.cpp:183 ../src/music-scope.cpp:266
 #: ../src/music-scope.cpp:279
 msgid "Tracks"
-msgstr ""
+msgstr "ተረኛ"
 
 #: ../src/music-scope.cpp:184
 msgid "Genres"
@@ -85,7 +85,7 @@ msgstr ""
 
 #: ../src/music-scope.cpp:242
 msgid "Artists"
-msgstr ""
+msgstr "ተዋንያን"
 
 #: ../src/music-scope.cpp:451 ../src/music-scope.cpp:490
 msgid "Play in music app"
@@ -99,7 +99,7 @@ msgstr ""
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr ""
+msgstr "የ አካባቢ ሙዚቃ ስብስብ መፈለጊያ"
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
@@ -109,11 +109,11 @@ msgstr ""
 
 #: tmp/musicaggregator-settings.ini.in.in.h:1
 msgid "Display results from Grooveshark"
-msgstr ""
+msgstr "ከ ግሩቭ ሻርክ ውጤቶችን ማሳያ"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:2
 msgid "Display results from 7digital"
-msgstr ""
+msgstr "ከ 7ዲጂታል ውጤቶችን ማሳያ"
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
@@ -122,7 +122,7 @@ msgstr "ሙዚቃ"
 #: tmp/musicaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
-msgstr ""
+msgstr "ይህ የ ኡቡንቱ መፈለጊያ ተሰኪ ነው: የሙዚቃ ምንጮችን ወደ አንድ ማዋሀጃ"
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
@@ -130,7 +130,7 @@ msgstr "ሙዚቃ መፈለጊያ"
 
 #: tmp/videoaggregator-settings.ini.in.in.h:1
 msgid "Display results from YouTube"
-msgstr ""
+msgstr "ከ ዩቱብ ውጤቶችን ማሳያ"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
@@ -139,7 +139,7 @@ msgstr "ቪዲዮ"
 #: tmp/videoaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
-msgstr ""
+msgstr "ይህ የ ኡቡንቱ መፈለጊያ ተሰኪ ነው: ሁሉንም የቪዲዮ ምንጮች ወደ አንድ ማዋሀጃ"
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
