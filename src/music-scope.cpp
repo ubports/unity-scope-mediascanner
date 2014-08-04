@@ -252,7 +252,7 @@ void MusicQuery::populate_departments(unity::scopes::SearchReplyProxy const &rep
 
     try
     {
-        reply->register_departments(albums);
+        reply->register_departments(artists);
     }
     catch (const std::exception& e)
     {
