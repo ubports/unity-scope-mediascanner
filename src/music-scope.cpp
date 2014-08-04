@@ -212,7 +212,7 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
     {
         if (empty_search_query) // surfacing
         {
-            query_albums(reply);
+            query_artists(reply);
         }
         else // non-empty search in albums and songs
         {
