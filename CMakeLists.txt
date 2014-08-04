@@ -10,11 +10,6 @@ pkg_check_modules(UNITY REQUIRED
   mediascanner-2.0
 )
 
-pkg_check_modules(OLDUNITY REQUIRED
-  "unity >= 7.0.9"
-  mediascanner-2.0
-)
-
 find_program(XGETTEXT_BIN xgettext)
 find_program(MSGFMT_BIN msgfmt)
 find_program(INTLTOOL_EXTRACT_BIN intltool-extract)
@@ -47,7 +42,6 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 add_subdirectory("po")
 add_subdirectory("src")
-add_subdirectory("oldscope")
 add_subdirectory("data")
 
 enable_testing()
