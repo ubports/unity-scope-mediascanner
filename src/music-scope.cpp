@@ -147,7 +147,7 @@ static std::string make_artist_art_uri(const std::string &artist, const std::str
     return result;
 }
 
-void MusicScope::start(std::string const&, RegistryProxy const&) {
+void MusicScope::start(std::string const&) {
     setlocale(LC_ALL, "");
     store.reset(new MediaStore(MS_READ_ONLY));
 }

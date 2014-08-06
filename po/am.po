@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-31 16:02+0200\n"
-"PO-Revision-Date: 2014-08-03 16:10+0000\n"
+"PO-Revision-Date: 2014-08-04 17:18+0000\n"
 "Last-Translator: samson <Unknown>\n"
 "Language-Team: Amharic <am@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-04 06:32+0000\n"
+"X-Launchpad-Export-Date: 2014-08-05 06:45+0000\n"
 "X-Generator: Launchpad (build 17147)\n"
 
 #: ../src/video-scope.cpp:140
@@ -45,7 +45,7 @@ msgstr "የኔ ሙዚቃ"
 
 #: ../src/musicaggregatorquery.cpp:176
 msgid "Popular tracks on Grooveshark"
-msgstr ""
+msgstr "በ ግሩቭ ሻርክ ውስጥ የተወደዱ ተረኞች"
 
 #: ../src/musicaggregatorquery.cpp:178
 msgid "Grooveshark"
@@ -81,7 +81,7 @@ msgstr "ተረኛ"
 
 #: ../src/music-scope.cpp:184
 msgid "Genres"
-msgstr ""
+msgstr "ምድብ"
 
 #: ../src/music-scope.cpp:242
 msgid "Artists"
@@ -95,7 +95,7 @@ msgstr "በሙዚቃ ማጫወቻ መተግበሪያ"
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
-msgstr ""
+msgstr "ይህ የ ኡቡንቱ መፈለጊያ ተሰኪ ነው: የ ሙዚቃ አካሎችን ያስሳል እና በ መፈለጊያው ውስጥ እንዲታዩ ያደርጋል"
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
@@ -105,7 +105,7 @@ msgstr "የ አካባቢ ሙዚቃ ስብስብ መፈለጊያ"
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
-msgstr ""
+msgstr "ይህ የ ኡቡንቱ መፈለጊያ ተሰኪ ነው: የ ቪዲዮ አካሎችን ያስሳል እና በ መፈለጊያው ውስጥ እንዲታዩ ያደርጋል"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:1
 msgid "Display results from Grooveshark"

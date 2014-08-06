@@ -49,8 +49,7 @@ public:
     virtual void push(unity::scopes::CategorisedResult result) override;
     void add_observer(std::shared_ptr<ResultForwarder> result_forwarder);
 
-    virtual void finished(unity::scopes::ListenerBase::Reason reason,
-            std::string const& error_message) override;
+    virtual void finished(unity::scopes::CompletionDetails const& details) override;
 
 protected:
     void on_forwarder_ready(ResultForwarder *fw);
