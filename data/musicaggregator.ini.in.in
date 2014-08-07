@@ -8,7 +8,7 @@ _SearchHint=Search music
 HotKey=
 
 [Appearance]
-LogoOverlayColor=#00000026
+LogoOverlayColor=#26000000
 
 [Desktop Entry]
 X-Ubuntu-Gettext-Domain=unity-scope-musicaggregator
