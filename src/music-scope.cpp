@@ -26,6 +26,7 @@
 #include <core/net/http/response.h>
 #include <core/net/http/request.h>
 #include <core/net/uri.h>
+#include <json/json.h>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/CategorisedResult.h>
 #include <unity/scopes/ColumnLayout.h>
@@ -121,6 +122,7 @@ static const char SEARCH_CATEGORY_DEFINITION[] = R"(
 using namespace mediascanner;
 using namespace unity::scopes;
 using namespace core::net;
+namespace json = Json;
 
 static std::string uriencode(const std::string &src) {
     const char DEC2HEX[16+1] = "0123456789ABCDEF";
@@ -404,6 +406,53 @@ void MusicQuery::query_albums_by_genre(unity::scopes::SearchReplyProxy const&rep
     }
 }
 
+std::string MusicQuery::fetch_biography_sync(const std::string& artist, const std::string &album) const
+{
+    std::string bio_text;
+    http::Request::Configuration config;
+    core::net::Uri::QueryParameters params;
+    auto uri = core::net::make_uri(
+            "https://dash.ubuntu.com",
+            {"musicproxy", "v1", "artist-bio"},
+            {{"artist", artist}, {"album", album}});
+    config.uri = scope.client->uri_to_string(uri);
+    auto request = scope.client->get(config);
+    http::Request::Handler handler;
+    try
+    {
+        auto response = request->execute([this](const http::Request::Progress&) -> http::Request::Progress::Next {
+                return query_cancelled ?  http::Request::Progress::Next::abort_operation : http::Request::Progress::Next::continue_operation;
+                });
+        json::Value root;
+        json::Reader reader;
+        if (reader.parse(response.body, root))
+        {
+            if (root.isObject() && root.isMember("biography"))
+            {
+                json::Value data = root["biography"];
+                if (data.isString())
+                {
+                    bio_text = data.asString();
+                }
+            }
+            if (bio_text.empty())
+            {
+                std::cerr << "Artist info is empty for " << artist << ", " << album << std::endl;
+            }
+        }
+        else
+        {
+            std::cerr << "Failed to parse artist-bio response: " << response.body << std::endl;
+        }
+    }
+    catch (const std::runtime_error &e)
+    {
+        std::cerr << "Failed to get artist info: " << e.what() << std::endl;
+    }
+
+    return bio_text;
+}
+
 void MusicQuery::query_albums_by_artist(unity::scopes::SearchReplyProxy const &reply, const std::string& artist) const
 {
     CategoryRenderer bio_renderer(ARTIST_BIO_CATEGORY_DEFINITION);
@@ -413,8 +462,7 @@ void MusicQuery::query_albums_by_artist(unity::scopes::SearchReplyProxy const &r
     auto albumcat = reply->register_category("albums", _("Albums"), SONGS_CATEGORY_ICON, renderer);
 
     bool show_bio = true;
-    // TODO: fetch bio
-    std::string bio_text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec convallis tellus venenatis, commodo purus quis, adipiscing ipsum.  Quisque eu semper ipsum, tempus bibendum urna.";
+    std::string bio_text;
 
     mediascanner::Filter filter;
     filter.setArtist(artist);
@@ -426,26 +474,10 @@ void MusicQuery::query_albums_by_artist(unity::scopes::SearchReplyProxy const &r
         {
             if (search_metadata().internet_connectivity() != QueryMetadata::ConnectivityStatus::Disconnected)
             {
-                http::Request::Configuration config;
-                core::net::Uri::QueryParameters params;
-                auto uri = core::net::make_uri(
-                        "https://dash.ubuntu.com",
-                        {"musicproxy", "v1", "artist-bio"},
-                        {{"artist", artist}, {"album", album.getTitle()}});
-                config.uri = scope.client->uri_to_string(uri);
-                auto request = scope.client->get(config);
-                http::Request::Handler handler;
-                try
-                {
-                    auto response = request->execute([this](const http::Request::Progress&) -> http::Request::Progress::Next {
-                            return query_cancelled ?  http::Request::Progress::Next::abort_operation : http::Request::Progress::Next::continue_operation;
-                            });
-                    std::cerr << "Got body: " << response.body << std::endl;
-                }
-                catch (const std::runtime_error &e)
-                {
-                    std::cerr << "Failed to get artist info: " << e.what() << std::endl;
-                }
+                //
+                // biography has to be the first result to display and we have all the other results ready
+                // so it's ok to fetch biography synchronously.
+                bio_text = fetch_biography_sync(artist, album.getTitle());
             }
 
             CannedQuery artist_search(query());
@@ -454,7 +486,10 @@ void MusicQuery::query_albums_by_artist(unity::scopes::SearchReplyProxy const &r
             CategorisedResult artist_info(biocat);
             artist_info.set_uri(artist_search.to_uri());
             artist_info.set_title(artist);
-            artist_info["summary"] = bio_text;
+            if (!bio_text.empty())
+            {
+                artist_info["summary"] = bio_text;
+            }
             artist_info["art"] = make_artist_art_uri(artist, album.getTitle());
             reply->push(artist_info);
             show_bio = false;

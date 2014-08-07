@@ -47,6 +47,7 @@ private:
     void query_albums_by_artist(unity::scopes::SearchReplyProxy const &reply, const std::string& artist) const;
     void query_songs_by_artist(unity::scopes::SearchReplyProxy const &reply, const std::string& artist) const;
     void query_artists(unity::scopes::SearchReplyProxy const& reply) const;
+    std::string fetch_biography_sync(const std::string& artist, const std::string &album) const;
 
     static unity::scopes::CategorisedResult create_album_result(unity::scopes::Category::SCPtr const& category, mediascanner::Album const& album);
     static unity::scopes::CategorisedResult create_song_result(unity::scopes::Category::SCPtr const& category, mediascanner::MediaFile const& media);
