@@ -489,10 +489,7 @@ void MusicQuery::query_albums_by_artist(unity::scopes::SearchReplyProxy const &r
             CategorisedResult artist_info(biocat);
             artist_info.set_uri(artist_search.to_uri());
             artist_info.set_title(artist);
-            if (!bio_text.empty())
-            {
-                artist_info["summary"] = bio_text;
-            }
+            artist_info["summary"] = bio_text;
             artist_info["art"] = make_artist_art_uri(artist, album.getTitle());
             reply->push(artist_info);
             show_bio = false;
