@@ -23,6 +23,9 @@
 #include <mediascanner/MediaFile.hh>
 #include <mediascanner/Album.hh>
 #include <mediascanner/Filter.hh>
+#include <core/net/http/response.h>
+#include <core/net/http/request.h>
+#include <core/net/uri.h>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/CategorisedResult.h>
 #include <unity/scopes/ColumnLayout.h>
@@ -117,6 +120,7 @@ static const char SEARCH_CATEGORY_DEFINITION[] = R"(
 
 using namespace mediascanner;
 using namespace unity::scopes;
+using namespace core::net;
 
 static std::string uriencode(const std::string &src) {
     const char DEC2HEX[16+1] = "0123456789ABCDEF";
@@ -150,6 +154,7 @@ static std::string make_artist_art_uri(const std::string &artist, const std::str
 void MusicScope::start(std::string const&) {
     setlocale(LC_ALL, "");
     store.reset(new MediaStore(MS_READ_ONLY));
+    client = http::make_client();
 }
 
 void MusicScope::stop() {
@@ -170,10 +175,12 @@ PreviewQueryBase::UPtr MusicScope::preview(Result const& result,
 
 MusicQuery::MusicQuery(MusicScope &scope, CannedQuery const& query, SearchMetadata const& hints)
     : SearchQueryBase(query, hints),
-      scope(scope) {
+      scope(scope),
+      query_cancelled(false) {
 }
 
 void MusicQuery::cancelled() {
+    query_cancelled = true;
 }
 
 void MusicQuery::run(SearchReplyProxy const&reply) {
@@ -411,15 +418,41 @@ void MusicQuery::query_albums_by_artist(unity::scopes::SearchReplyProxy const &r
 
     mediascanner::Filter filter;
     filter.setArtist(artist);
-    for (const auto &album: scope.store->listAlbums(filter))
+    auto const albums = scope.store->listAlbums(filter);
+
+    for (const auto &album: albums)
     {
         if (show_bio && !album.getTitle().empty())
         {
+            if (search_metadata().internet_connectivity() != QueryMetadata::ConnectivityStatus::Disconnected)
+            {
+                http::Request::Configuration config;
+                core::net::Uri::QueryParameters params;
+                auto uri = core::net::make_uri(
+                        "https://dash.ubuntu.com",
+                        {"musicproxy", "v1", "artist-bio"},
+                        {{"artist", artist}, {"album", album.getTitle()}});
+                config.uri = scope.client->uri_to_string(uri);
+                auto request = scope.client->get(config);
+                http::Request::Handler handler;
+                try
+                {
+                    auto response = request->execute([this](const http::Request::Progress&) -> http::Request::Progress::Next {
+                            return query_cancelled ?  http::Request::Progress::Next::abort_operation : http::Request::Progress::Next::continue_operation;
+                            });
+                    std::cerr << "Got body: " << response.body << std::endl;
+                }
+                catch (const std::runtime_error &e)
+                {
+                    std::cerr << "Failed to get artist info: " << e.what() << std::endl;
+                }
+            }
+
             CannedQuery artist_search(query());
             artist_search.set_department_id("albums_of_artist"); // virtual department
 
             CategorisedResult artist_info(biocat);
-            artist_info.set_uri(artist_search.to_uri()); //FIXME: when support for 'interactive' flag is in
+            artist_info.set_uri(artist_search.to_uri());
             artist_info.set_title(artist);
             artist_info["summary"] = bio_text;
             artist_info["art"] = make_artist_art_uri(artist, album.getTitle());

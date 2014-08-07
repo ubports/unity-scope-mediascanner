@@ -2,11 +2,13 @@
 #define MUSIC_SCOPE_H
 
 #include <memory>
+#include <atomic>
 
 #include <mediascanner/MediaStore.hh>
 #include <unity/scopes/SearchReply.h>
 #include <unity/scopes/ScopeBase.h>
 #include <unity/scopes/Variant.h>
+#include <core/net/http/client.h>
 
 class MusicScope : public unity::scopes::ScopeBase
 {
@@ -23,6 +25,7 @@ public:
 
 private:
     std::unique_ptr<mediascanner::MediaStore> store;
+    std::shared_ptr<core::net::http::Client> client;
 };
 
 class MusicQuery : public unity::scopes::SearchQueryBase
@@ -34,6 +37,7 @@ public:
 
 private:
     const MusicScope &scope;
+    std::atomic<bool> query_cancelled;
 
     void populate_departments(unity::scopes::SearchReplyProxy const &reply) const;
     void query_songs(unity::scopes::SearchReplyProxy const&reply) const;
