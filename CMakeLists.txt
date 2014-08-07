@@ -7,6 +7,8 @@ find_package(Boost COMPONENTS regex REQUIRED)
 
 pkg_check_modules(UNITY REQUIRED
   "libunity-scopes >= 0.6.0"
+  net-cpp>=1.1.0
+  jsoncpp
   mediascanner-2.0
 )
 
