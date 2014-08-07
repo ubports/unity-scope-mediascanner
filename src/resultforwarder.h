@@ -27,6 +27,7 @@
 #include<list>
 #include<memory>
 #include<cassert>
+#include <functional>
 #include "notify-strategy.h"
 
 class ResultForwarder : public unity::scopes::SearchListenerBase {
@@ -34,8 +35,10 @@ class ResultForwarder : public unity::scopes::SearchListenerBase {
 public:
 
     ResultForwarder(unity::scopes::SearchReplyProxy const& upstream,
+                    std::function<bool(unity::scopes::CategorisedResult&)> const &result_filter = [](unity::scopes::CategorisedResult&) -> bool { return true; },
                     std::shared_ptr<NotifyStrategy> notify_strategy = std::make_shared<WaitForAnyResult>()) :
         upstream(upstream),
+        result_filter(result_filter),
         notify_strategy_(notify_strategy),
         ready_(false) {
             assert(notify_strategy != nullptr);
@@ -46,19 +49,20 @@ public:
     virtual void push(unity::scopes::CategorisedResult result) override;
     void add_observer(std::shared_ptr<ResultForwarder> result_forwarder);
 
-    virtual void finished(unity::scopes::ListenerBase::Reason reason,
-            std::string const& error_message) override;
+    virtual void finished(unity::scopes::CompletionDetails const& details) override;
 
 protected:
-    virtual void on_forwarder_ready(ResultForwarder*);
+    void on_forwarder_ready(ResultForwarder *fw);
+    virtual void on_all_forwarders_ready();
     unity::scopes::SearchReplyProxy upstream;
     void notify_observers();
 
 private:
     std::list<std::shared_ptr<ResultForwarder>> observers_;
+    std::list<ResultForwarder*> wait_for_;
+    std::function<bool(unity::scopes::CategorisedResult&)> result_filter;
     std::shared_ptr<NotifyStrategy> notify_strategy_;
     bool ready_;
 };
-
 
 #endif

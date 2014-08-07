@@ -18,10 +18,14 @@
  */
 #include <config.h>
 
+#include <stdio.h>
+
+#include <boost/regex.hpp>
 #include <mediascanner/MediaFile.hh>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/CategorisedResult.h>
 #include <unity/scopes/ColumnLayout.h>
+#include <unity/scopes/Department.h>
 #include <unity/scopes/PreviewReply.h>
 #include <unity/scopes/PreviewWidget.h>
 #include <unity/scopes/VariantBuilder.h>
@@ -34,8 +38,28 @@
 using namespace mediascanner;
 using namespace unity::scopes;
 
+static const char AGGREGATOR_DEPT_ID[] = "aggregated:videoaggregator";
+
 static const char LOCAL_CATEGORY_ICON[] = "/usr/share/icons/unity-icon-theme/places/svg/group-videos.svg";
 static const char LOCAL_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-size": "medium",
+    "card-layout": "horizontal"
+  },
+  "components": {
+    "title": "title",
+    "art":  {
+      "field": "art",
+      "aspect-ratio": 1.5
+    }
+  }
+}
+)";
+
+static const char AGGREGATOR_CATEGORY_DEFINITION[] = R"(
 {
   "schema-version": 1,
   "template": {
@@ -69,7 +93,13 @@ static const char SEARCH_CATEGORY_DEFINITION[] = R"(
 }
 )";
 
-void VideoScope::start(std::string const&, RegistryProxy const&) {
+enum class VideoType {
+    ALL,
+    CAMERA,
+    DOWNLOADS,
+};
+
+void VideoScope::start(std::string const&) {
     setlocale(LC_ALL, "");
     store.reset(new MediaStore(MS_READ_ONLY));
 }
@@ -98,10 +128,61 @@ VideoQuery::VideoQuery(VideoScope &scope, CannedQuery const& query, SearchMetada
 void VideoQuery::cancelled() {
 }
 
+static bool from_camera(const std::string &filename) {
+    static const boost::regex pattern(R"(.*/video\d{8}_\d{4}\.mp4$)");
+    return boost::regex_match(filename, pattern);
+}
+
 void VideoQuery::run(SearchReplyProxy const&reply) {
-    CategoryRenderer renderer(query().query_string() == "" ? LOCAL_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
-    auto cat = reply->register_category("local", _("My Videos"), LOCAL_CATEGORY_ICON, renderer);
+    bool surfacing = query().query_string() == "";
+    bool is_aggregated = query().department_id() == AGGREGATOR_DEPT_ID;
+
+    Department::SPtr root_dept = Department::create("", query(), _("Everything"));
+    root_dept->set_subdepartments({
+            Department::create("camera", query(), _("My Roll")),
+            Department::create("downloads", query(), _("Downloaded")),
+        });
+    if (is_aggregated) {
+        root_dept->add_subdepartment(
+            Department::create(AGGREGATOR_DEPT_ID, query(), "dummy"));
+    }
+    reply->register_departments(root_dept);
+
+    VideoType department = VideoType::ALL;
+    if (query().department_id() == "camera") {
+        department = VideoType::CAMERA;
+    } else if (query().department_id() == "downloads") {
+        department = VideoType::DOWNLOADS;
+    }
+
+    Category::SCPtr cat;
+    if (is_aggregated) {
+        cat = reply->register_category(
+            "local", _("My Videos"), LOCAL_CATEGORY_ICON,
+            CannedQuery(query().scope_id(), query().query_string(), ""),
+            CategoryRenderer(surfacing ? AGGREGATOR_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION));
+    } else {
+        cat = reply->register_category(
+            "local", _("My Videos"), LOCAL_CATEGORY_ICON,
+            CategoryRenderer(surfacing ? LOCAL_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION));
+    }
     for (const auto &media : scope.store->query(query().query_string(), VideoMedia, MAX_RESULTS)) {
+        // Filter results if we are in a department
+        switch (department) {
+        case VideoType::ALL:
+            break;
+        case VideoType::CAMERA:
+            if (!from_camera(media.getFileName())) {
+                continue;
+            }
+            break;
+        case VideoType::DOWNLOADS:
+            if (from_camera(media.getFileName())) {
+                continue;
+            }
+            break;
+        }
+
         CategorisedResult res(cat);
         res.set_uri(media.getUri());
         res.set_dnd_uri(media.getUri());

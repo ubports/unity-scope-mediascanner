@@ -7,39 +7,89 @@ msgid ""
 msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-04-29 17:23+0100\n"
+"POT-Creation-Date: 2014-07-31 16:02+0200\n"
 "PO-Revision-Date: 2014-07-18 10:14+0000\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-24 06:32+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-08-05 06:45+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 
-#: ../src/music-scope.cpp:122
-msgid "Songs"
-msgstr "歌曲"
+#: ../src/video-scope.cpp:140
+msgid "Everything"
+msgstr ""
 
-#: ../src/music-scope.cpp:159
-msgid "Albums"
-msgstr "專輯"
+#: ../src/video-scope.cpp:142
+msgid "My Roll"
+msgstr ""
 
-#: ../src/music-scope.cpp:241 ../src/music-scope.cpp:278
-msgid "Play in music app"
-msgstr "以音樂程式播放"
+#: ../src/video-scope.cpp:143
+msgid "Downloaded"
+msgstr ""
 
-#: ../src/video-scope.cpp:102
+#: ../src/video-scope.cpp:161 ../src/video-scope.cpp:166
+#: tmp/mediascanner-video.ini.in.in.h:1
 msgid "My Videos"
 msgstr "我的影片"
 
-#: ../src/video-scope.cpp:151
+#: ../src/video-scope.cpp:234
 msgid "Play"
 msgstr "播放"
 
+#: ../src/musicaggregatorquery.cpp:173 ../src/musicaggregatorquery.cpp:175
 #: tmp/mediascanner-music.ini.in.in.h:1
-msgid "Local Music"
-msgstr "本機音樂"
+msgid "My Music"
+msgstr ""
+
+#: ../src/musicaggregatorquery.cpp:176
+msgid "Popular tracks on Grooveshark"
+msgstr ""
+
+#: ../src/musicaggregatorquery.cpp:178
+msgid "Grooveshark"
+msgstr ""
+
+#: ../src/musicaggregatorquery.cpp:179
+msgid "New albums from 7digital"
+msgstr ""
+
+#: ../src/musicaggregatorquery.cpp:181
+msgid "7digital"
+msgstr ""
+
+#: ../src/videoaggregatorquery.cpp:130
+#, c-format
+msgid "%s Features"
+msgstr ""
+
+#: ../src/videoaggregatorquery.cpp:137
+#, c-format
+msgid "Results from %s"
+msgstr ""
+
+#: ../src/music-scope.cpp:182 ../src/music-scope.cpp:352
+#: ../src/music-scope.cpp:369
+msgid "Albums"
+msgstr "專輯"
+
+#: ../src/music-scope.cpp:183 ../src/music-scope.cpp:266
+#: ../src/music-scope.cpp:279
+msgid "Tracks"
+msgstr ""
+
+#: ../src/music-scope.cpp:184
+msgid "Genres"
+msgstr ""
+
+#: ../src/music-scope.cpp:242
+msgid "Artists"
+msgstr ""
+
+#: ../src/music-scope.cpp:451 ../src/music-scope.cpp:490
+msgid "Play in music app"
+msgstr "以音樂程式播放"
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
@@ -51,15 +101,19 @@ msgstr "這是個搜尋裝置中的音樂，並使其可在 Dash 中搜尋到且
 msgid "Search local music collection"
 msgstr "搜尋本機音樂收藏"
 
-#: tmp/mediascanner-video.ini.in.in.h:1
-msgid "Local Videos"
-msgstr "本機影片"
-
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr "這是個搜尋裝置中的影片，並使其可在 Dash 中搜尋到且顯示的 Ubuntu 搜尋插件。"
+
+#: tmp/musicaggregator-settings.ini.in.in.h:1
+msgid "Display results from Grooveshark"
+msgstr ""
+
+#: tmp/musicaggregator-settings.ini.in.in.h:2
+msgid "Display results from 7digital"
+msgstr ""
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
@@ -73,6 +127,10 @@ msgstr "這是個可將所有音樂來源合併在一處的 Ubuntu 搜尋插件�
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
 msgstr "搜尋音樂"
+
+#: tmp/videoaggregator-settings.ini.in.in.h:1
+msgid "Display results from YouTube"
+msgstr ""
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"

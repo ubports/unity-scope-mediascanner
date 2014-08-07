@@ -1,5 +1,5 @@
 [ScopeConfig]
-_DisplayName=Local Videos
+_DisplayName=My Videos
 _Description=This is an Ubuntu search plugin that scans the device for videos and allows them to be searched and displayed in the Dash.
 Author=Canonical Ltd.
 Art=@SCOPES_DATADIR@/mediascanner-video/mediascanner-video-screenshot.jpg

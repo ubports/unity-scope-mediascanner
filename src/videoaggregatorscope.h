@@ -20,14 +20,16 @@
 #ifndef VIDEOAGGREGATORSCOPE_H
 #define VIDEOAGGREGATORSCOPE_H
 
+#include <vector>
+
 #include <unity/scopes/ScopeBase.h>
-#include <unity/scopes/Category.h>
+#include <unity/scopes/ScopeMetadata.h>
 #include <unity/scopes/ReplyProxyFwd.h>
 
 class VideoAggregatorScope : public unity::scopes::ScopeBase
 {
 public:
-    virtual void start(std::string const&, unity::scopes::RegistryProxy const&) override;
+    virtual void start(std::string const&) override;
 
     virtual void stop() override;
 
@@ -38,9 +40,9 @@ public:
             unity::scopes::SearchMetadata const& hints) override;
 
 private:
-    unity::scopes::ScopeProxy local_scope;
-    unity::scopes::ScopeProxy online_scope;
-    unity::scopes::RegistryProxy registry;
+    void find_subscopes(bool warn_missing);
+
+    std::vector<unity::scopes::ScopeMetadata> subscopes;
 };
 
 #endif

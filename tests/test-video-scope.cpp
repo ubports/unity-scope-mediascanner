@@ -81,6 +81,13 @@ protected:
             builder.setDuration(734);
             store.insert(builder.build());
         }
+        {
+            MediaFileBuilder builder("/home/phablet/Videos/video20140702_0001.mp4");
+            builder.setType(VideoMedia);
+            builder.setTitle("From camera");
+            builder.setDuration(100);
+            store.insert(builder.build());
+        }
     }
 
     std::string cachedir;
@@ -106,6 +113,7 @@ TEST_F(VideoScopeTest, QueryResult) {
     Category::SCPtr category = std::make_shared<unity::scopes::testing::Category>(
         "local", "My Videos", "icon", CategoryRenderer());
     unity::scopes::testing::MockSearchReply reply;
+    EXPECT_CALL(reply, register_departments(_));
     EXPECT_CALL(reply, register_category("local", _, _, _))
         .WillOnce(Return(category));
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
@@ -130,6 +138,7 @@ TEST_F(VideoScopeTest, ShortQuery) {
     Category::SCPtr category = std::make_shared<unity::scopes::testing::Category>(
         "local", "My Videos", "icon", CategoryRenderer());
     unity::scopes::testing::MockSearchReply reply;
+    EXPECT_CALL(reply, register_departments(_));
     EXPECT_CALL(reply, register_category("local", _, _, _))
         .WillOnce(Return(category));
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "Sintel"))))
@@ -151,6 +160,55 @@ TEST_F(VideoScopeTest, SurfacingQuery) {
     Category::SCPtr category = std::make_shared<unity::scopes::testing::Category>(
         "local", "My Videos", "icon", CategoryRenderer());
     unity::scopes::testing::MockSearchReply reply;
+    EXPECT_CALL(reply, register_departments(_));
+    EXPECT_CALL(reply, register_category("local", _, _, _))
+        .WillOnce(Return(category));
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", Variant("Elephant's Dream")))))
+        .WillOnce(Return(true));
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", Variant("Big Buck Bunny")))))
+        .WillOnce(Return(true));
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", Variant("Sintel")))))
+        .WillOnce(Return(true));
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", Variant("Tears of Steel")))))
+        .WillOnce(Return(true));
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", Variant("From camera")))))
+        .WillOnce(Return(true));
+
+    SearchReplyProxy proxy(&reply, [](SearchReply*){});
+    query->run(proxy);
+}
+
+TEST_F(VideoScopeTest, CameraDepartmentQuery) {
+    populateStore();
+
+    CannedQuery q("mediascanner-music", "", "camera");
+    SearchMetadata hints("en_AU", "phone");
+    auto query = scope->search(q, hints);
+
+    Category::SCPtr category = std::make_shared<unity::scopes::testing::Category>(
+        "local", "My Videos", "icon", CategoryRenderer());
+    unity::scopes::testing::MockSearchReply reply;
+    EXPECT_CALL(reply, register_departments(_));
+    EXPECT_CALL(reply, register_category("local", _, _, _))
+        .WillOnce(Return(category));
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", Variant("From camera")))))
+        .WillOnce(Return(true));
+
+    SearchReplyProxy proxy(&reply, [](SearchReply*){});
+    query->run(proxy);
+}
+
+TEST_F(VideoScopeTest, DownloadsDepartmentQuery) {
+    populateStore();
+
+    CannedQuery q("mediascanner-music", "", "downloads");
+    SearchMetadata hints("en_AU", "phone");
+    auto query = scope->search(q, hints);
+
+    Category::SCPtr category = std::make_shared<unity::scopes::testing::Category>(
+        "local", "My Videos", "icon", CategoryRenderer());
+    unity::scopes::testing::MockSearchReply reply;
+    EXPECT_CALL(reply, register_departments(_));
     EXPECT_CALL(reply, register_category("local", _, _, _))
         .WillOnce(Return(category));
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", Variant("Elephant's Dream")))))

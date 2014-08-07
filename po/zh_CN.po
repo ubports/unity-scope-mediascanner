@@ -7,39 +7,89 @@ msgid ""
 msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-04-29 17:23+0100\n"
-"PO-Revision-Date: 2014-06-12 08:55+0000\n"
-"Last-Translator: Anthony Wong <anthony.wong@ubuntu.com>\n"
+"POT-Creation-Date: 2014-07-31 16:02+0200\n"
+"PO-Revision-Date: 2014-08-04 02:23+0000\n"
+"Last-Translator: Luo Lei <luolei@ubuntukylin.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-13 07:01+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-08-05 06:45+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 
-#: ../src/music-scope.cpp:122
-msgid "Songs"
-msgstr "歌曲"
+#: ../src/video-scope.cpp:140
+msgid "Everything"
+msgstr "全部"
 
-#: ../src/music-scope.cpp:159
-msgid "Albums"
-msgstr "专辑"
+#: ../src/video-scope.cpp:142
+msgid "My Roll"
+msgstr "My Roll"
 
-#: ../src/music-scope.cpp:241 ../src/music-scope.cpp:278
-msgid "Play in music app"
-msgstr "使用音乐应用播放"
+#: ../src/video-scope.cpp:143
+msgid "Downloaded"
+msgstr "已下载"
 
-#: ../src/video-scope.cpp:102
+#: ../src/video-scope.cpp:161 ../src/video-scope.cpp:166
+#: tmp/mediascanner-video.ini.in.in.h:1
 msgid "My Videos"
 msgstr "我的视频"
 
-#: ../src/video-scope.cpp:151
+#: ../src/video-scope.cpp:234
 msgid "Play"
 msgstr "播放"
 
+#: ../src/musicaggregatorquery.cpp:173 ../src/musicaggregatorquery.cpp:175
 #: tmp/mediascanner-music.ini.in.in.h:1
-msgid "Local Music"
-msgstr "本地音乐"
+msgid "My Music"
+msgstr "我的音乐"
+
+#: ../src/musicaggregatorquery.cpp:176
+msgid "Popular tracks on Grooveshark"
+msgstr "Grooveshark 上的热门歌曲"
+
+#: ../src/musicaggregatorquery.cpp:178
+msgid "Grooveshark"
+msgstr "鯊客 (Grooveshark)"
+
+#: ../src/musicaggregatorquery.cpp:179
+msgid "New albums from 7digital"
+msgstr "7digital 的新专辑"
+
+#: ../src/musicaggregatorquery.cpp:181
+msgid "7digital"
+msgstr "7digital"
+
+#: ../src/videoaggregatorquery.cpp:130
+#, c-format
+msgid "%s Features"
+msgstr ""
+
+#: ../src/videoaggregatorquery.cpp:137
+#, c-format
+msgid "Results from %s"
+msgstr "来自 %s 的搜索结果"
+
+#: ../src/music-scope.cpp:182 ../src/music-scope.cpp:352
+#: ../src/music-scope.cpp:369
+msgid "Albums"
+msgstr "专辑"
+
+#: ../src/music-scope.cpp:183 ../src/music-scope.cpp:266
+#: ../src/music-scope.cpp:279
+msgid "Tracks"
+msgstr "歌曲"
+
+#: ../src/music-scope.cpp:184
+msgid "Genres"
+msgstr "类型"
+
+#: ../src/music-scope.cpp:242
+msgid "Artists"
+msgstr "表演者"
+
+#: ../src/music-scope.cpp:451 ../src/music-scope.cpp:490
+msgid "Play in music app"
+msgstr "使用音乐应用播放"
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
@@ -51,15 +101,19 @@ msgstr "这是一个音乐搜索插件，它能扫描设备上的音乐并使其
 msgid "Search local music collection"
 msgstr "搜索本地音乐集合"
 
-#: tmp/mediascanner-video.ini.in.in.h:1
-msgid "Local Videos"
-msgstr "本地视频"
-
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr "这是一个视频搜索插件，它能扫描设备上的视频并使其能在 Dash 中被搜索和显示。"
+
+#: tmp/musicaggregator-settings.ini.in.in.h:1
+msgid "Display results from Grooveshark"
+msgstr "播放来自 Grooveshark 的搜索结果"
+
+#: tmp/musicaggregator-settings.ini.in.in.h:2
+msgid "Display results from 7digital"
+msgstr "播放来自 7digital 的搜索结果"
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
@@ -68,11 +122,15 @@ msgstr "音乐"
 #: tmp/musicaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
-msgstr ""
+msgstr "Ubuntu 音乐综合搜索插件。"
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
 msgstr "搜索音乐"
+
+#: tmp/videoaggregator-settings.ini.in.in.h:1
+msgid "Display results from YouTube"
+msgstr "播放来自 YouTube 的搜索结果"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
@@ -81,7 +139,7 @@ msgstr "视频"
 #: tmp/videoaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
-msgstr ""
+msgstr "Ubuntu 视频综合搜索插件。"
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"

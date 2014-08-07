@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef NOTIFYSTRATEGY_Y
-#define NOTIFYSTRATEGY_Y
+#ifndef NOTIFYSTRATEGY_H
+#define NOTIFYSTRATEGY_H
 
 #include <unity/scopes/CategorisedResult.h>
 #include <set>

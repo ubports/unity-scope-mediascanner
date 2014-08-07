@@ -29,7 +29,8 @@
 class OnlineMusicResultForwarder: public BufferedResultForwarder {
 
 public:
-    OnlineMusicResultForwarder(unity::scopes::SearchReplyProxy const& upstream);
+    OnlineMusicResultForwarder(unity::scopes::SearchReplyProxy const& upstream,
+            std::function<bool(unity::scopes::CategorisedResult&)> const &result_filter);
     virtual void push(unity::scopes::CategorisedResult result) override;
     virtual void push(unity::scopes::Category::SCPtr const& category) override;
 

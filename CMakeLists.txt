@@ -3,9 +3,10 @@ cmake_minimum_required(VERSION 2.8.9)
 
 find_package(PkgConfig REQUIRED)
 find_package(Threads REQUIRED)
+find_package(Boost COMPONENTS regex REQUIRED)
 
 pkg_check_modules(UNITY REQUIRED
-  "libunity-scopes >= 0.5.0"
+  "libunity-scopes >= 0.6.0"
   mediascanner-2.0
 )
 

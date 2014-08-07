@@ -1,0 +1,9 @@
+[com.canonical.scopes.grooveshark]
+type=boolean
+defaultValue=true
+_displayName=Display results from Grooveshark
+
+[com.canonical.scopes.sevendigital]
+type=boolean
+defaultValue=true
+_displayName=Display results from 7digital

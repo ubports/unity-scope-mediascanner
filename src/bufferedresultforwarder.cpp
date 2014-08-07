@@ -19,8 +19,9 @@
 
 #include "bufferedresultforwarder.h"
 
-BufferedResultForwarder::BufferedResultForwarder(unity::scopes::SearchReplyProxy const& upstream)
-    : ResultForwarder(upstream),
+BufferedResultForwarder::BufferedResultForwarder(unity::scopes::SearchReplyProxy const& upstream,
+        std::function<bool(unity::scopes::CategorisedResult&)> const &result_filter)
+    : ResultForwarder(upstream, result_filter),
       buffer_(true)
 {
 }
@@ -46,7 +47,7 @@ void BufferedResultForwarder::flush()
     result_buffer_.clear();
 }
 
-void BufferedResultForwarder::on_forwarder_ready(ResultForwarder*)
+void BufferedResultForwarder::on_all_forwarders_ready()
 {
     buffer_ = false;
     flush();

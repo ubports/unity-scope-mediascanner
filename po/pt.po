@@ -7,59 +7,117 @@ msgid ""
 msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-04-29 17:23+0100\n"
-"PO-Revision-Date: 2014-07-24 09:15+0000\n"
-"Last-Translator: Tiago Carrondo <tiago@ubuntu-pt.org>\n"
+"POT-Creation-Date: 2014-07-31 16:02+0200\n"
+"PO-Revision-Date: 2014-08-02 10:39+0000\n"
+"Last-Translator: Ivo Xavier <ivofernandes12@gmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-25 07:54+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-08-05 06:45+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 
-#: ../src/music-scope.cpp:122
-msgid "Songs"
-msgstr "Músicas"
+#: ../src/video-scope.cpp:140
+msgid "Everything"
+msgstr "Tudo"
 
-#: ../src/music-scope.cpp:159
-msgid "Albums"
-msgstr "Álbuns"
+#: ../src/video-scope.cpp:142
+msgid "My Roll"
+msgstr ""
 
-#: ../src/music-scope.cpp:241 ../src/music-scope.cpp:278
-msgid "Play in music app"
-msgstr "Reproduzir na aplicação de música"
+#: ../src/video-scope.cpp:143
+msgid "Downloaded"
+msgstr "Transferido"
 
-#: ../src/video-scope.cpp:102
+#: ../src/video-scope.cpp:161 ../src/video-scope.cpp:166
+#: tmp/mediascanner-video.ini.in.in.h:1
 msgid "My Videos"
 msgstr "Os meus vídeos"
 
-#: ../src/video-scope.cpp:151
+#: ../src/video-scope.cpp:234
 msgid "Play"
 msgstr "Reproduzir"
 
+#: ../src/musicaggregatorquery.cpp:173 ../src/musicaggregatorquery.cpp:175
 #: tmp/mediascanner-music.ini.in.in.h:1
-msgid "Local Music"
-msgstr "Música local"
+msgid "My Music"
+msgstr "A minha música"
+
+#: ../src/musicaggregatorquery.cpp:176
+msgid "Popular tracks on Grooveshark"
+msgstr "Músicas populares no Grooveshark"
+
+#: ../src/musicaggregatorquery.cpp:178
+msgid "Grooveshark"
+msgstr "Grooveshark"
+
+#: ../src/musicaggregatorquery.cpp:179
+msgid "New albums from 7digital"
+msgstr "Novos álbuns de 7digital"
+
+#: ../src/musicaggregatorquery.cpp:181
+msgid "7digital"
+msgstr "7digital"
+
+#: ../src/videoaggregatorquery.cpp:130
+#, c-format
+msgid "%s Features"
+msgstr ""
+
+#: ../src/videoaggregatorquery.cpp:137
+#, c-format
+msgid "Results from %s"
+msgstr "Resultados de %s"
+
+#: ../src/music-scope.cpp:182 ../src/music-scope.cpp:352
+#: ../src/music-scope.cpp:369
+msgid "Albums"
+msgstr "Álbuns"
+
+#: ../src/music-scope.cpp:183 ../src/music-scope.cpp:266
+#: ../src/music-scope.cpp:279
+msgid "Tracks"
+msgstr "Faixas"
+
+#: ../src/music-scope.cpp:184
+msgid "Genres"
+msgstr "Géneros"
+
+#: ../src/music-scope.cpp:242
+msgid "Artists"
+msgstr "Artistas"
+
+#: ../src/music-scope.cpp:451 ../src/music-scope.cpp:490
+msgid "Play in music app"
+msgstr "Reproduzir na aplicação de música"
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
+"Isto é uma extensão de procura do Ubuntu que pesquisa música no dispositivo "
+"e permite que seja mostrada no painel."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
 msgstr "Procurar na colecção de música local"
-
-#: tmp/mediascanner-video.ini.in.in.h:1
-msgid "Local Videos"
-msgstr "Vídeos locais"
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
+"Isto é uma extensão de procura do Ubuntu que pesquisa vídeos no dispositivo "
+"e permite que sejam mostrados no painel."
+
+#: tmp/musicaggregator-settings.ini.in.in.h:1
+msgid "Display results from Grooveshark"
+msgstr "Mostrar resultados de Grooveshark"
+
+#: tmp/musicaggregator-settings.ini.in.in.h:2
+msgid "Display results from 7digital"
+msgstr "Mostrar resultados de 7digital"
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
@@ -69,10 +127,16 @@ msgstr "Música"
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr ""
+"Isto é uma extensão de procura do Ubuntu que junta todas as fontes de música "
+"numa só."
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
 msgstr "Procurar música"
+
+#: tmp/videoaggregator-settings.ini.in.in.h:1
+msgid "Display results from YouTube"
+msgstr "Mostrar resultados de Youtube"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
@@ -82,6 +146,8 @@ msgstr "Vídeo"
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr ""
+"Isto é uma extensão de procura do Ubuntu que junta todas as fontes de vídeo "
+"numa só."
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
