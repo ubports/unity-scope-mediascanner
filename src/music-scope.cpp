@@ -97,7 +97,10 @@ static const char ARTIST_BIO_CATEGORY_DEFINITION[] = R"(
   "components": {
     "title": "title",
     "summary": "summary",
-    "art":  "art"
+    "art":  {
+        "field": "art",
+        "aspect-ratio": 1.5
+    }
   }
 }
 )";
