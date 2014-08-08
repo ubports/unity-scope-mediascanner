@@ -413,7 +413,6 @@ std::string MusicQuery::fetch_biography_sync(const std::string& artist, const st
 {
     std::string bio_text;
     http::Request::Configuration config;
-    core::net::Uri::QueryParameters params;
     auto uri = core::net::make_uri(
             "https://dash.ubuntu.com",
             {"musicproxy", "v1", "artist-bio"},
