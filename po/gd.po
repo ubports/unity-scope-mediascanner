@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-31 16:02+0200\n"
-"PO-Revision-Date: 2014-08-03 22:43+0000\n"
+"PO-Revision-Date: 2014-08-07 10:14+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-05 06:45+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2014-08-08 07:07+0000\n"
+"X-Generator: Launchpad (build 17156)\n"
 "Language: gd\n"
 
 #: ../src/video-scope.cpp:140
@@ -63,7 +63,7 @@ msgstr "7digital"
 #: ../src/videoaggregatorquery.cpp:130
 #, c-format
 msgid "%s Features"
-msgstr ""
+msgstr "Brosnaichte air %s"
 
 #: ../src/videoaggregatorquery.cpp:137
 #, c-format

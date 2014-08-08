@@ -1,4 +1,4 @@
-# Brazilian Portuguese translation for unity-scope-mediascanner
+# Japanese translation for unity-scope-mediascanner
 # Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
 # This file is distributed under the same license as the unity-scope-mediascanner package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-31 16:02+0200\n"
-"PO-Revision-Date: 2014-08-07 12:27+0000\n"
-"Last-Translator: Salomão Carneiro de Brito <salomaocar@gmail.com>\n"
-"Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
+"PO-Revision-Date: 2014-08-08 02:42+0000\n"
+"Last-Translator: Mitsuya Shibata <mty.shibata@gmail.com>\n"
+"Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,33 +19,33 @@ msgstr ""
 
 #: ../src/video-scope.cpp:140
 msgid "Everything"
-msgstr "Tudo"
+msgstr "すべて"
 
 #: ../src/video-scope.cpp:142
 msgid "My Roll"
-msgstr "Minha lista"
+msgstr "撮影した動画"
 
 #: ../src/video-scope.cpp:143
 msgid "Downloaded"
-msgstr "Baixado"
+msgstr ""
 
 #: ../src/video-scope.cpp:161 ../src/video-scope.cpp:166
 #: tmp/mediascanner-video.ini.in.in.h:1
 msgid "My Videos"
-msgstr "Meus vídeos"
+msgstr "マイビデオ"
 
 #: ../src/video-scope.cpp:234
 msgid "Play"
-msgstr "Reproduzir"
+msgstr "再生"
 
 #: ../src/musicaggregatorquery.cpp:173 ../src/musicaggregatorquery.cpp:175
 #: tmp/mediascanner-music.ini.in.in.h:1
 msgid "My Music"
-msgstr "Minhas músicas"
+msgstr "マイミュージック"
 
 #: ../src/musicaggregatorquery.cpp:176
 msgid "Popular tracks on Grooveshark"
-msgstr "Músicas populares no Grooveshark"
+msgstr "Groovesharkの人気トラック"
 
 #: ../src/musicaggregatorquery.cpp:178
 msgid "Grooveshark"
@@ -53,7 +53,7 @@ msgstr "Grooveshark"
 
 #: ../src/musicaggregatorquery.cpp:179
 msgid "New albums from 7digital"
-msgstr "Novos álbuns da 7digital"
+msgstr "7digitalの最新アルバム"
 
 #: ../src/musicaggregatorquery.cpp:181
 msgid "7digital"
@@ -62,93 +62,85 @@ msgstr "7digital"
 #: ../src/videoaggregatorquery.cpp:130
 #, c-format
 msgid "%s Features"
-msgstr "%s funcionalidades"
+msgstr "%s特集"
 
 #: ../src/videoaggregatorquery.cpp:137
 #, c-format
 msgid "Results from %s"
-msgstr "Resultados de %s"
+msgstr "%sの結果"
 
 #: ../src/music-scope.cpp:182 ../src/music-scope.cpp:352
 #: ../src/music-scope.cpp:369
 msgid "Albums"
-msgstr "Álbuns"
+msgstr "アルバム"
 
 #: ../src/music-scope.cpp:183 ../src/music-scope.cpp:266
 #: ../src/music-scope.cpp:279
 msgid "Tracks"
-msgstr "Faixas"
+msgstr "トラック"
 
 #: ../src/music-scope.cpp:184
 msgid "Genres"
-msgstr "Gêneros"
+msgstr "ジャンル"
 
 #: ../src/music-scope.cpp:242
 msgid "Artists"
-msgstr "Artistas"
+msgstr "アーティスト"
 
 #: ../src/music-scope.cpp:451 ../src/music-scope.cpp:490
 msgid "Play in music app"
-msgstr "Reproduzir no aplicativo de música"
+msgstr "音楽アプリで再生"
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
-"Isto é um plugin de busca do Ubuntu que procura por músicas no seu "
-"dispositivo, possibilitando a pesquisa e a exibição no Painel."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr "Pesquisar coleção de músicas locais"
+msgstr ""
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
-"Isto é um plugin de busca do Ubuntu que procura por vídeos no seu "
-"dispositivo, possibilitando a pesquisa e a exibição no Painel."
 
 #: tmp/musicaggregator-settings.ini.in.in.h:1
 msgid "Display results from Grooveshark"
-msgstr "Mostrar resultados do Grooveshark"
+msgstr "Groovesharの検索結果を表示する"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:2
 msgid "Display results from 7digital"
-msgstr "Mostrar resultados da 7digital"
+msgstr "7digitalの検索結果を表示する"
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
-msgstr "Música"
+msgstr ""
 
 #: tmp/musicaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
-msgstr ""
-"Isto é um plugin de busca do Ubuntu que mescla todas as fontes de música em "
-"apenas uma."
+msgstr "すべての音楽を結果を一括して探させる検索プラグインです。"
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
-msgstr "Pesquisar música"
+msgstr "音楽を検索"
 
 #: tmp/videoaggregator-settings.ini.in.in.h:1
 msgid "Display results from YouTube"
-msgstr "Mostrar resultados do Youtube"
+msgstr "YouTubeの検索結果を表示する"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
-msgstr "Vídeo"
+msgstr "ビデオ"
 
 #: tmp/videoaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
-msgstr ""
-"Isto é um plugin de busca do Ubuntu que mescla todas as fontes de vídeo em "
-"apenas uma."
+msgstr "すべての動画を結果を一括して探させる検索プラグインです。"
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
-msgstr "Pesquisar vídeo"
+msgstr "動画を検索"
