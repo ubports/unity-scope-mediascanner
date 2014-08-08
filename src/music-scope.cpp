@@ -127,35 +127,6 @@ using namespace unity::scopes;
 using namespace core::net;
 namespace json = Json;
 
-static std::string uriencode(const std::string &src) {
-    const char DEC2HEX[16+1] = "0123456789ABCDEF";
-    std::string result = "";
-    for (const char ch : src) {
-        if (isalnum(ch)) {
-            result += ch;
-        } else {
-            result += '%';
-            result += DEC2HEX[(unsigned char)ch >> 4];
-            result += DEC2HEX[(unsigned char)ch & 0x0F];
-        }
-    }
-    return result;
-}
-
-static std::string make_album_art_uri(const std::string &artist, const std::string &album) {
-    std::string result = "image://albumart/";
-    result += "artist=" + uriencode(artist);
-    result += "&album=" + uriencode(album);
-    return result;
-}
-
-static std::string make_artist_art_uri(const std::string &artist, const std::string &album) {
-    std::string result = "image://artistart/";
-    result += "artist=" + uriencode(artist);
-    result += "&album=" + uriencode(album);
-    return result;
-}
-
 void MusicScope::start(std::string const&) {
     setlocale(LC_ALL, "");
     store.reset(new MediaStore(MS_READ_ONLY));
@@ -176,6 +147,18 @@ PreviewQueryBase::UPtr MusicScope::preview(Result const& result,
                                     ActionMetadata const& hints) {
     PreviewQueryBase::UPtr previewer(new MusicPreview(*this, result, hints));
     return previewer;
+}
+
+std::string MusicScope::make_album_art_uri(const std::string &artist, const std::string &album) const {
+    auto const uri = core::net::make_uri(
+            "image://albumart", {}, {{"artist", artist}, {"album", album}});
+    return client->uri_to_string(uri);
+}
+
+std::string MusicScope::make_artist_art_uri(const std::string &artist, const std::string &album) const {
+    auto const uri = core::net::make_uri(
+            "image://artistart", {}, {{"artist", artist}, {"album", album}});
+    return client->uri_to_string(uri);
 }
 
 MusicQuery::MusicQuery(MusicScope &scope, CannedQuery const& query, SearchMetadata const& hints)
@@ -321,7 +304,7 @@ void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply) con
             {
                 if (!album.getTitle().empty())
                 {
-                    art = make_artist_art_uri(artist, album.getTitle());
+                    art = scope.make_artist_art_uri(artist, album.getTitle());
                     break;
                 }
             }
@@ -367,10 +350,10 @@ void MusicQuery::query_songs_by_artist(unity::scopes::SearchReplyProxy const &re
     }
 }
 
-unity::scopes::CategorisedResult MusicQuery::create_album_result(unity::scopes::Category::SCPtr const& category, mediascanner::Album const& album)
+unity::scopes::CategorisedResult MusicQuery::create_album_result(unity::scopes::Category::SCPtr const& category, mediascanner::Album const& album) const
 {
     CategorisedResult res(category);
-    res.set_uri("album:///" + uriencode(album.getArtist()) + "/" + uriencode(album.getTitle()));
+    res.set_uri("album:///" + scope.client->url_escape(album.getArtist()) + "/" + scope.client->url_escape(album.getTitle()));
     res.set_title(album.getTitle());
     res["artist"] = album.getArtist();
     res["album"] = album.getTitle();
@@ -378,7 +361,7 @@ unity::scopes::CategorisedResult MusicQuery::create_album_result(unity::scopes::
     return res;
 }
 
-unity::scopes::CategorisedResult MusicQuery::create_song_result(unity::scopes::Category::SCPtr const& category, mediascanner::MediaFile const& media)
+unity::scopes::CategorisedResult MusicQuery::create_song_result(unity::scopes::Category::SCPtr const& category, mediascanner::MediaFile const& media) const
 {
     CategorisedResult res(category);
     res.set_uri(media.getUri());
@@ -489,7 +472,7 @@ void MusicQuery::query_albums_by_artist(unity::scopes::SearchReplyProxy const &r
             artist_info.set_uri(artist_search.to_uri());
             artist_info.set_title(artist);
             artist_info["summary"] = bio_text;
-            artist_info["art"] = make_artist_art_uri(artist, album.getTitle());
+            artist_info["art"] = scope.make_artist_art_uri(artist, album.getTitle());
             reply->push(artist_info);
             show_bio = false;
         }
@@ -559,7 +542,7 @@ void MusicPreview::song_preview(unity::scopes::PreviewReplyProxy const &reply) c
     if (artist.empty() || album.empty()) {
         art = MISSING_ALBUM_ART;
     } else {
-        art = make_album_art_uri(artist, album);
+        art = scope.make_album_art_uri(artist, album);
     }
     artwork.add_attribute_value("source", Variant(art));
 
@@ -605,7 +588,7 @@ void MusicPreview::album_preview(unity::scopes::PreviewReplyProxy const &reply) 
     if (artist.empty() || album_name.empty()) {
         art = MISSING_ALBUM_ART;
     } else {
-        art = make_album_art_uri(artist, album_name);
+        art = scope.make_album_art_uri(artist, album_name);
     }
     artwork.add_attribute_value("source", Variant(art));
 
