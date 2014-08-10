@@ -1,0 +1,155 @@
+# Romanian translation for unity-scope-mediascanner
+# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
+# This file is distributed under the same license as the unity-scope-mediascanner package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: unity-scope-mediascanner\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-07-31 16:02+0200\n"
+"PO-Revision-Date: 2014-08-09 07:16+0000\n"
+"Last-Translator: Marian Vasile <marianvasile1972@gmail.com>\n"
+"Language-Team: Romanian <ro@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2014-08-10 06:04+0000\n"
+"X-Generator: Launchpad (build 17156)\n"
+
+#: ../src/video-scope.cpp:140
+msgid "Everything"
+msgstr "Tot"
+
+#: ../src/video-scope.cpp:142
+msgid "My Roll"
+msgstr "Rola mea"
+
+#: ../src/video-scope.cpp:143
+msgid "Downloaded"
+msgstr "Descărcate"
+
+#: ../src/video-scope.cpp:161 ../src/video-scope.cpp:166
+#: tmp/mediascanner-video.ini.in.in.h:1
+msgid "My Videos"
+msgstr "Clipurile mele video"
+
+#: ../src/video-scope.cpp:234
+msgid "Play"
+msgstr "Redare"
+
+#: ../src/musicaggregatorquery.cpp:173 ../src/musicaggregatorquery.cpp:175
+#: tmp/mediascanner-music.ini.in.in.h:1
+msgid "My Music"
+msgstr "Muzica mea"
+
+#: ../src/musicaggregatorquery.cpp:176
+msgid "Popular tracks on Grooveshark"
+msgstr "Melodii apreciate pe Grooveshark"
+
+#: ../src/musicaggregatorquery.cpp:178
+msgid "Grooveshark"
+msgstr "Grooveshark"
+
+#: ../src/musicaggregatorquery.cpp:179
+msgid "New albums from 7digital"
+msgstr "Albume noi de la 7digital"
+
+#: ../src/musicaggregatorquery.cpp:181
+msgid "7digital"
+msgstr "7digital"
+
+#: ../src/videoaggregatorquery.cpp:130
+#, c-format
+msgid "%s Features"
+msgstr "%s Recomandări"
+
+#: ../src/videoaggregatorquery.cpp:137
+#, c-format
+msgid "Results from %s"
+msgstr "Rezultate de la %s"
+
+#: ../src/music-scope.cpp:182 ../src/music-scope.cpp:352
+#: ../src/music-scope.cpp:369
+msgid "Albums"
+msgstr "Albume"
+
+#: ../src/music-scope.cpp:183 ../src/music-scope.cpp:266
+#: ../src/music-scope.cpp:279
+msgid "Tracks"
+msgstr "Piese"
+
+#: ../src/music-scope.cpp:184
+msgid "Genres"
+msgstr "Genuri"
+
+#: ../src/music-scope.cpp:242
+msgid "Artists"
+msgstr "Artiști"
+
+#: ../src/music-scope.cpp:451 ../src/music-scope.cpp:490
+msgid "Play in music app"
+msgstr "Redă cu aplicația pentru muzică"
+
+#: tmp/mediascanner-music.ini.in.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that scans the device for music and allows "
+"it to be searched and displayed in the Dash."
+msgstr ""
+"Acesta este un modul de căutare Ubuntu care scanează dispozitivul după "
+"muzică și permite ca aceasta să fie căutată și afișată în Panoul principal."
+
+#: tmp/mediascanner-music.ini.in.in.h:3
+msgid "Search local music collection"
+msgstr "Caută colecția locală de muzică"
+
+#: tmp/mediascanner-video.ini.in.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that scans the device for videos and allows "
+"them to be searched and displayed in the Dash."
+msgstr ""
+"Acesta este un modul de căutare Ubuntu care scanează dispozitivul după "
+"clipuri video și permite ca acestea să fie căutate și afișate în Panoul "
+"principal."
+
+#: tmp/musicaggregator-settings.ini.in.in.h:1
+msgid "Display results from Grooveshark"
+msgstr "Afișează rezultate de la Grooveshark"
+
+#: tmp/musicaggregator-settings.ini.in.in.h:2
+msgid "Display results from 7digital"
+msgstr "Afișează rezultate de la 7digital"
+
+#: tmp/musicaggregator.ini.in.in.h:1
+msgid "Music"
+msgstr "Muzică"
+
+#: tmp/musicaggregator.ini.in.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that merges all music sources into one."
+msgstr ""
+"Acesta este un modul de căutare Ubuntu care combină toate sursele de muzică "
+"într-una singură."
+
+#: tmp/musicaggregator.ini.in.in.h:3
+msgid "Search music"
+msgstr "Căutare muzică"
+
+#: tmp/videoaggregator-settings.ini.in.in.h:1
+msgid "Display results from YouTube"
+msgstr "Afișează rezultate de la YouTube"
+
+#: tmp/videoaggregator.ini.in.in.h:1
+msgid "Video"
+msgstr "Video"
+
+#: tmp/videoaggregator.ini.in.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that merges all video sources into one."
+msgstr ""
+"Acesta este un modul de căutare Ubuntu care combină toate sursele de clipuri "
+"video într-una singură."
+
+#: tmp/videoaggregator.ini.in.in.h:3
+msgid "Search video"
+msgstr "Caută clipuri video"
