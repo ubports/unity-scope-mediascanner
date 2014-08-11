@@ -3,9 +3,12 @@ _DisplayName=My Music
 _Description=This is an Ubuntu search plugin that scans the device for music and allows it to be searched and displayed in the Dash.
 Author=Canonical Ltd.
 Art=@SCOPES_DATADIR@/mediascanner-music/mediascanner-music-screenshot.jpg
-Icon=@SCOPES_DATADIR@/mediascanner-music/music.png
+Icon=@SCOPES_DATADIR@/mediascanner-music/music-scope.png
 _SearchHint=Search local music collection
 HotKey=
+
+[Appearance]
+LogoOverlayColor=#26000000
 
 [Desktop Entry]
 X-Ubuntu-Gettext-Domain=unity-scope-mediascanner

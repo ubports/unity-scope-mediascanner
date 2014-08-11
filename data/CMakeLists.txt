@@ -25,12 +25,12 @@ endforeach()
 add_custom_target(ini-i18n ALL DEPENDS ${SCOPE_CONFIG_FILES})
 
 install(
-  FILES music.png mediascanner-music-screenshot.jpg
+  FILES music.png music-scope.png mediascanner-music-screenshot.jpg
   DESTINATION "${SCOPES_DATADIR}/mediascanner-music"
 )
 
 install(
-  FILES video.png mediascanner-video-screenshot.jpg
+  FILES video.png video-scope.png mediascanner-video-screenshot.jpg
   DESTINATION "${SCOPES_DATADIR}/mediascanner-video"
 )
 
