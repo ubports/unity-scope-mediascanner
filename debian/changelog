@@ -1,3 +1,10 @@
+unity-scope-mediascanner (0.2+14.10.20140811-0ubuntu1) utopic; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 11 Aug 2014 19:11:23 +0000
+
 unity-scope-mediascanner (0.2+14.10.20140801.1-0ubuntu1) utopic; urgency=low
 
   [ Pete Woods ]
