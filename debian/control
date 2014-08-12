@@ -42,6 +42,7 @@ Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          mediascanner2.0,
+         thumbnailer-service (>= 1.2),
 Description: Media scanner scope for Unity
  This package contains muisc and video scopes for Unity that can be
  used to expose media found by the Ubuntu Media Scanner.
