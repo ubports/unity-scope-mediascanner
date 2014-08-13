@@ -262,7 +262,7 @@ void MusicQuery::query_genres(unity::scopes::SearchReplyProxy const&reply) const
     mediascanner::Filter filter;
 
     auto const genres = scope.store->listGenres(filter);
-    auto const genre_limit = std::max(static_cast<int>(genres.size()), 10);
+    auto const genre_limit = std::min(static_cast<int>(genres.size()), 10);
 
     for (int i = 0; i < genre_limit; i++)
     {
