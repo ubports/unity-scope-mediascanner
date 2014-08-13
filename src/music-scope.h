@@ -2,11 +2,13 @@
 #define MUSIC_SCOPE_H
 
 #include <memory>
+#include <atomic>
 
 #include <mediascanner/MediaStore.hh>
 #include <unity/scopes/SearchReply.h>
 #include <unity/scopes/ScopeBase.h>
 #include <unity/scopes/Variant.h>
+#include <core/net/http/client.h>
 
 class MusicScope : public unity::scopes::ScopeBase
 {
@@ -22,7 +24,11 @@ public:
                                          unity::scopes::ActionMetadata const& hints) override;
 
 private:
+    std::string make_artist_art_uri(const std::string &artist, const std::string &album) const;
+    std::string make_album_art_uri(const std::string &artist, const std::string &album) const;
+
     std::unique_ptr<mediascanner::MediaStore> store;
+    std::shared_ptr<core::net::http::Client> client;
 };
 
 class MusicQuery : public unity::scopes::SearchQueryBase
@@ -34,6 +40,7 @@ public:
 
 private:
     const MusicScope &scope;
+    std::atomic<bool> query_cancelled;
 
     void populate_departments(unity::scopes::SearchReplyProxy const &reply) const;
     void query_songs(unity::scopes::SearchReplyProxy const&reply) const;
@@ -43,9 +50,10 @@ private:
     void query_albums_by_artist(unity::scopes::SearchReplyProxy const &reply, const std::string& artist) const;
     void query_songs_by_artist(unity::scopes::SearchReplyProxy const &reply, const std::string& artist) const;
     void query_artists(unity::scopes::SearchReplyProxy const& reply) const;
+    std::string fetch_biography_sync(const std::string& artist, const std::string &album) const;
 
-    static unity::scopes::CategorisedResult create_album_result(unity::scopes::Category::SCPtr const& category, mediascanner::Album const& album);
-    static unity::scopes::CategorisedResult create_song_result(unity::scopes::Category::SCPtr const& category, mediascanner::MediaFile const& media);
+    unity::scopes::CategorisedResult create_album_result(unity::scopes::Category::SCPtr const& category, mediascanner::Album const& album) const;
+    unity::scopes::CategorisedResult create_song_result(unity::scopes::Category::SCPtr const& category, mediascanner::MediaFile const& media) const;
 };
 
 class MusicPreview : public unity::scopes::PreviewQueryBase

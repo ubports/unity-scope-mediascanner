@@ -241,7 +241,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
         }
         else if (scopes[i] == local_scope)
         {
-            dept = "albums"; //FIXME: this should be artists, but it'll be possible once we have artists art/bio support
+            dept = ""; // artists
             if (empty_search)
             {
                 metadata.set_cardinality(3);

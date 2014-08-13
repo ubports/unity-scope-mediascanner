@@ -15,6 +15,8 @@ Build-Depends: cmake (>= 2.8),
                libglib2.0-dev,
                libsqlite3-dev,
                mediascanner2.0,
+               libjsoncpp-dev,
+               libnet-cpp-dev (>= 1.1.0),
                pkg-config,
                python3,
                python3-dbusmock,
@@ -40,6 +42,7 @@ Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          mediascanner2.0,
+         thumbnailer-service (>= 1.2),
 Description: Media scanner scope for Unity
  This package contains muisc and video scopes for Unity that can be
  used to expose media found by the Ubuntu Media Scanner.
