@@ -8,26 +8,26 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-31 16:02+0200\n"
-"PO-Revision-Date: 2014-05-13 08:16+0000\n"
+"PO-Revision-Date: 2014-08-17 03:36+0000\n"
 "Last-Translator: David Planella <david.planella@ubuntu.com>\n"
 "Language-Team: Catalan <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-05 06:45+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2014-08-17 06:39+0000\n"
+"X-Generator: Launchpad (build 17156)\n"
 
 #: ../src/video-scope.cpp:140
 msgid "Everything"
-msgstr ""
+msgstr "Tot"
 
 #: ../src/video-scope.cpp:142
 msgid "My Roll"
-msgstr ""
+msgstr "El meu rotlle"
 
 #: ../src/video-scope.cpp:143
 msgid "Downloaded"
-msgstr ""
+msgstr "Baixat"
 
 #: ../src/video-scope.cpp:161 ../src/video-scope.cpp:166
 #: tmp/mediascanner-video.ini.in.in.h:1
@@ -41,33 +41,33 @@ msgstr "Reprodueix"
 #: ../src/musicaggregatorquery.cpp:173 ../src/musicaggregatorquery.cpp:175
 #: tmp/mediascanner-music.ini.in.in.h:1
 msgid "My Music"
-msgstr ""
+msgstr "La meva música"
 
 #: ../src/musicaggregatorquery.cpp:176
 msgid "Popular tracks on Grooveshark"
-msgstr ""
+msgstr "Temes populars al Grooveshark"
 
 #: ../src/musicaggregatorquery.cpp:178
 msgid "Grooveshark"
-msgstr ""
+msgstr "Grooveshark"
 
 #: ../src/musicaggregatorquery.cpp:179
 msgid "New albums from 7digital"
-msgstr ""
+msgstr "Àlbums nous de 7digital"
 
 #: ../src/musicaggregatorquery.cpp:181
 msgid "7digital"
-msgstr ""
+msgstr "7digital"
 
 #: ../src/videoaggregatorquery.cpp:130
 #, c-format
 msgid "%s Features"
-msgstr ""
+msgstr "Vídeos de %s"
 
 #: ../src/videoaggregatorquery.cpp:137
 #, c-format
 msgid "Results from %s"
-msgstr ""
+msgstr "Resultats de %s"
 
 #: ../src/music-scope.cpp:182 ../src/music-scope.cpp:352
 #: ../src/music-scope.cpp:369
@@ -77,15 +77,15 @@ msgstr "Àlbums"
 #: ../src/music-scope.cpp:183 ../src/music-scope.cpp:266
 #: ../src/music-scope.cpp:279
 msgid "Tracks"
-msgstr ""
+msgstr "Temes"
 
 #: ../src/music-scope.cpp:184
 msgid "Genres"
-msgstr ""
+msgstr "Gèneres"
 
 #: ../src/music-scope.cpp:242
 msgid "Artists"
-msgstr ""
+msgstr "Artistes"
 
 #: ../src/music-scope.cpp:451 ../src/music-scope.cpp:490
 msgid "Play in music app"
@@ -96,6 +96,8 @@ msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
+"Un connector de cerca de l'Ubuntu que cerca música al dispositiu i permet "
+"fer-hi cerques i mostrar-la al Tauler."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
@@ -106,14 +108,16 @@ msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
+"Un connector de cerca de l'Ubuntu que cerca vídeos al dispositiu i permet "
+"fer-hi cerques i mostrar-la al Tauler."
 
 #: tmp/musicaggregator-settings.ini.in.in.h:1
 msgid "Display results from Grooveshark"
-msgstr ""
+msgstr "Mostra els resultats de Grooveshark"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:2
 msgid "Display results from 7digital"
-msgstr ""
+msgstr "Mostra els resultats de 7digital"
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
@@ -123,6 +127,8 @@ msgstr "Música"
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr ""
+"Un connector de cerca de l'Ubuntu que integra totes les fonts de música en "
+"una única."
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
@@ -130,7 +136,7 @@ msgstr "Cerca música"
 
 #: tmp/videoaggregator-settings.ini.in.in.h:1
 msgid "Display results from YouTube"
-msgstr ""
+msgstr "Mostra els resultats de YouTube"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
@@ -140,6 +146,8 @@ msgstr "Vídeo"
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr ""
+"Un connector de cerca de l'Ubuntu que integra totes les fonts de vídeos en "
+"una única."
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
