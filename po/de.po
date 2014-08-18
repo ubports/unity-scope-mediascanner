@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-31 16:02+0200\n"
-"PO-Revision-Date: 2014-08-08 10:01+0000\n"
-"Last-Translator: Andreas E. <Unknown>\n"
+"PO-Revision-Date: 2014-08-17 17:29+0000\n"
+"Last-Translator: Phillip Sz <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-09 05:48+0000\n"
+"X-Launchpad-Export-Date: 2014-08-18 07:20+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../src/video-scope.cpp:140
@@ -62,7 +62,7 @@ msgstr "7digital"
 #: ../src/videoaggregatorquery.cpp:130
 #, c-format
 msgid "%s Features"
-msgstr ""
+msgstr "%s Features"
 
 #: ../src/videoaggregatorquery.cpp:137
 #, c-format
@@ -96,6 +96,8 @@ msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
+"Dies ist eine Ubuntu-Such-Erweiterung, die das Gerät nach Musik durchsucht "
+"und es ermöglicht diese in der Dash zu suchen und anzuzeigen."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
@@ -106,6 +108,8 @@ msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
+"Dies ist eine Ubuntu-Such-Erweiterung, die das Gerät nach Videos durchsucht "
+"und es ermöglicht diese in der Dash zu suchen und anzuzeigen."
 
 #: tmp/musicaggregator-settings.ini.in.in.h:1
 msgid "Display results from Grooveshark"
@@ -123,6 +127,8 @@ msgstr "Musik"
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr ""
+"Dies ist eine Ubuntu-Such-Erweiterung, die alle Musikquellen in einer "
+"vereint."
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
@@ -130,7 +136,7 @@ msgstr "Suche nach Musik"
 
 #: tmp/videoaggregator-settings.ini.in.in.h:1
 msgid "Display results from YouTube"
-msgstr ""
+msgstr "Ergebnisse von YouTube anzeigen"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
@@ -140,6 +146,8 @@ msgstr "Video"
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr ""
+"Dies ist eine Ubuntu-Such-Erweiterung, die alle Videoquellen in einer "
+"vereint."
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"

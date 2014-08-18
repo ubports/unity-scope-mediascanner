@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-31 16:02+0200\n"
-"PO-Revision-Date: 2014-08-08 02:42+0000\n"
+"PO-Revision-Date: 2014-08-17 13:12+0000\n"
 "Last-Translator: Mitsuya Shibata <mty.shibata@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-09 05:48+0000\n"
+"X-Launchpad-Export-Date: 2014-08-18 07:20+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: ../src/video-scope.cpp:140
@@ -27,7 +27,7 @@ msgstr "撮影した動画"
 
 #: ../src/video-scope.cpp:143
 msgid "Downloaded"
-msgstr ""
+msgstr "ダウンロードした動画"
 
 #: ../src/video-scope.cpp:161 ../src/video-scope.cpp:166
 #: tmp/mediascanner-video.ini.in.in.h:1
@@ -117,7 +117,7 @@ msgstr "7digitalの検索結果を表示する"
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
-msgstr ""
+msgstr "ミュージック"
 
 #: tmp/musicaggregator.ini.in.in.h:2
 msgid ""
