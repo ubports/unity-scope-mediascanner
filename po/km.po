@@ -1,4 +1,4 @@
-# Galician translation for unity-scope-mediascanner
+# Khmer translation for unity-scope-mediascanner
 # Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
 # This file is distributed under the same license as the unity-scope-mediascanner package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-31 16:02+0200\n"
-"PO-Revision-Date: 2014-08-18 18:04+0000\n"
-"Last-Translator: Marcos Lans <Unknown>\n"
-"Language-Team: Galician <gl@li.org>\n"
+"PO-Revision-Date: 2014-08-18 10:19+0000\n"
+"Last-Translator: Sok Sophea <sksophea@gmail.com>\n"
+"Language-Team: Khmer <km@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,33 +19,33 @@ msgstr ""
 
 #: ../src/video-scope.cpp:140
 msgid "Everything"
-msgstr "Todo"
+msgstr "គ្រប់យ៉ាង"
 
 #: ../src/video-scope.cpp:142
 msgid "My Roll"
-msgstr "O meu carrete"
+msgstr "ដុំ​របស់​ខ្ញុំ"
 
 #: ../src/video-scope.cpp:143
 msgid "Downloaded"
-msgstr "Descargado"
+msgstr "បាន​ទាញ​យក"
 
 #: ../src/video-scope.cpp:161 ../src/video-scope.cpp:166
 #: tmp/mediascanner-video.ini.in.in.h:1
 msgid "My Videos"
-msgstr "Os meus vídeos"
+msgstr "វីដេអូ​របស់​ខ្ញុំ"
 
 #: ../src/video-scope.cpp:234
 msgid "Play"
-msgstr "Reproducir"
+msgstr "ចាក់"
 
 #: ../src/musicaggregatorquery.cpp:173 ../src/musicaggregatorquery.cpp:175
 #: tmp/mediascanner-music.ini.in.in.h:1
 msgid "My Music"
-msgstr "A miña música"
+msgstr "តន្ត្រី​របស់​ខ្ញុំ"
 
 #: ../src/musicaggregatorquery.cpp:176
 msgid "Popular tracks on Grooveshark"
-msgstr "Pistas populares de Grooveshark"
+msgstr "បទ​ពេញនិយម​នៅ​លើ Grooveshark"
 
 #: ../src/musicaggregatorquery.cpp:178
 msgid "Grooveshark"
@@ -53,7 +53,7 @@ msgstr "Grooveshark"
 
 #: ../src/musicaggregatorquery.cpp:179
 msgid "New albums from 7digital"
-msgstr "Novos álbums en 7digital"
+msgstr "អាល់ប៊ុម​ថ្មី​ពី 7digital"
 
 #: ../src/musicaggregatorquery.cpp:181
 msgid "7digital"
@@ -62,93 +62,95 @@ msgstr "7digital"
 #: ../src/videoaggregatorquery.cpp:130
 #, c-format
 msgid "%s Features"
-msgstr "Destacados de %s"
+msgstr "%s លក្ខណៈ"
 
 #: ../src/videoaggregatorquery.cpp:137
 #, c-format
 msgid "Results from %s"
-msgstr "Resultados de %s"
+msgstr "លទ្ធផល​ពី %s"
 
 #: ../src/music-scope.cpp:182 ../src/music-scope.cpp:352
 #: ../src/music-scope.cpp:369
 msgid "Albums"
-msgstr "Álbums"
+msgstr "អាល់ប៊ុម"
 
 #: ../src/music-scope.cpp:183 ../src/music-scope.cpp:266
 #: ../src/music-scope.cpp:279
 msgid "Tracks"
-msgstr "Pistas"
+msgstr "បទ"
 
 #: ../src/music-scope.cpp:184
 msgid "Genres"
-msgstr "Xéneros"
+msgstr "ចង្វាក់"
 
 #: ../src/music-scope.cpp:242
 msgid "Artists"
-msgstr "Artistas"
+msgstr "សិល្បករ"
 
 #: ../src/music-scope.cpp:451 ../src/music-scope.cpp:490
 msgid "Play in music app"
-msgstr "Reproducir no aplicativo de música"
+msgstr "ចាក់​នៅ​ក្នុង​កម្មវិធី​តន្ត្រី"
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
-"Este é un engadido de busca de Ubuntu que procura música no dispositivo e "
-"permite mostrala no Panel."
+"នេះ​ជា​កម្មវិធី​ជំនួយ​ស្វែងរក​របស់ Ubuntu "
+"ដើម្បី​វិភាគ​រក​ឧបករណ៍​សម្រាប់​តន្ត្រី ហើយ​អនុញ្ញាត​ឲ្យ​វា​ស្វែងរក "
+"និង​បង្ហាញ​នៅ​ក្នុង​ផ្ទាំង​គ្រប់គ្រង។"
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr "Buscar na colección local de música"
+msgstr "ស្វែងរក​សម្រាំង​តន្ត្រី​មូលដ្ឋាន"
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
-"Este é un engadido de busca de Ubuntu que procura vídeos no dispositivo e "
-"permite mostralos no Panel."
+"នេះ​ជា​កម្មវិធី​ជំនួយ​ស្វែងរក​របស់ Ubuntu "
+"ដើម្បី​វិភាគ​រក​ឧបករណ៍​សម្រាប់​វីដេអូ ហើយ​អនុញ្ញាត​ឲ្យ​វា​ស្វែងរក "
+"និង​បង្ហាញ​នៅ​ក្នុង​ផ្ទាំង​គ្រប់គ្រង។"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:1
 msgid "Display results from Grooveshark"
-msgstr "Mostrar os resultados de Grooveshark"
+msgstr "បង្ហាញ​លទ្ធផល​ពី Grooveshark"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:2
 msgid "Display results from 7digital"
-msgstr "Mostrar os resultados de 7digital"
+msgstr "បង្ហាញ​លទ្ធផល​ពី 7digital"
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
-msgstr "Música"
+msgstr "តន្ត្រី"
 
 #: tmp/musicaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr ""
-"Este é un engadido de busca de Ubuntu que combina todas as orixes de música "
-"nunha soa."
+"នេះ​ជា​កម្មវិធី​ជំនួយ​ស្វែងរក​របស់ Ubuntu "
+"ដែល​បញ្ចូល​ប្រភព​តន្ត្រី​ទាំងអស់​ចូលគ្នា​តែមួយ។"
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
-msgstr "Buscar música"
+msgstr "ស្វែងរក​តន្ត្រី"
 
 #: tmp/videoaggregator-settings.ini.in.in.h:1
 msgid "Display results from YouTube"
-msgstr "Mostrar os resultados de YouTube"
+msgstr "បង្ហាញ​លទ្ធផល​ពី YouTube"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
-msgstr "Vídeo"
+msgstr "វីដេអូ"
 
 #: tmp/videoaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr ""
-"Este é un engadido de busca de Ubuntu que combina todas as orixes de vídeo "
-"nunha soa."
+"នេះ​ជា​កម្មវិធី​ជំនួយ​ស្វែងរក​របស់ Ubuntu "
+"ដែល​បញ្ចូល​ប្រភព​វីដេអូ​ទាំងអស់​ចូលគ្នា​តែមួយ។"
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
-msgstr "Buscar vídeo"
+msgstr "ស្វែងរក​វីដេអូ"
