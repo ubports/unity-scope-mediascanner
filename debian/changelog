@@ -1,3 +1,10 @@
+unity-scope-mediascanner (0.2+14.10.20140820-0ubuntu1) utopic; urgency=low
+
+  [ Martin Pitt ]
+  * Mark for using language packs.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 20 Aug 2014 14:09:35 +0000
+
 unity-scope-mediascanner (0.2+14.10.20140813-0ubuntu1) utopic; urgency=low
 
   [ Pawel Stolowski ]
