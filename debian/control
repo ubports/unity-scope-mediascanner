@@ -27,6 +27,7 @@ Homepage: https://launchpad.net/unity-scope-mediascanner
 # again.
 Vcs-Bzr: bzr+ssh://bazaar.launchpad.net/~unity-team/unity-scope-mediascanner/trunk
 Vcs-Browser: http://bazaar.launchpad.net/~unity-team/unity-scope-mediascanner/trunk/files
+X-Ubuntu-Use-Langpack: yes
 
 Package: unity-scope-mediascanner
 Architecture: any
