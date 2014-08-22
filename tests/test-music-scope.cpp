@@ -176,7 +176,7 @@ TEST_F(MusicScopeTest, QueryResult) {
         .WillOnce(Return(albums_category));
 
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
-            ResultProp("uri", "scope://mediascanner%2Dmusic?q=The%20John%20Butler%20Trio&dep=albums%5Fof%5Fartist"),
+            ResultUriMatchesCannedQuery(CannedQuery("mediascanner-music", "The John Butler Trio", "albums_of_artist")),
             ResultProp("title", "The John Butler Trio")))))
         .WillOnce(Return(true));
 
