@@ -1,4 +1,4 @@
-# Korean translation for unity-scope-mediascanner
+# Greek translation for unity-scope-mediascanner
 # Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
 # This file is distributed under the same license as the unity-scope-mediascanner package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-31 16:02+0200\n"
-"PO-Revision-Date: 2014-08-20 03:58+0000\n"
-"Last-Translator: MinSik CHO <Unknown>\n"
-"Language-Team: Korean <ko@li.org>\n"
+"PO-Revision-Date: 2014-08-20 17:32+0000\n"
+"Last-Translator: Simos Xenitellis <Unknown>\n"
+"Language-Team: Greek <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,41 +19,41 @@ msgstr ""
 
 #: ../src/video-scope.cpp:140
 msgid "Everything"
-msgstr "모두"
+msgstr "Όλα"
 
 #: ../src/video-scope.cpp:142
 msgid "My Roll"
-msgstr "나의 롤"
+msgstr ""
 
 #: ../src/video-scope.cpp:143
 msgid "Downloaded"
-msgstr "다운로드함"
+msgstr "Ληφθέντα"
 
 #: ../src/video-scope.cpp:161 ../src/video-scope.cpp:166
 #: tmp/mediascanner-video.ini.in.in.h:1
 msgid "My Videos"
-msgstr "내 동영상"
+msgstr "Τα βίντεό μου"
 
 #: ../src/video-scope.cpp:234
 msgid "Play"
-msgstr "재생"
+msgstr "Αναπαραγωγή"
 
 #: ../src/musicaggregatorquery.cpp:173 ../src/musicaggregatorquery.cpp:175
 #: tmp/mediascanner-music.ini.in.in.h:1
 msgid "My Music"
-msgstr "나의 음악"
+msgstr "Η μουσική μου"
 
 #: ../src/musicaggregatorquery.cpp:176
 msgid "Popular tracks on Grooveshark"
-msgstr "그루브샤크의 인기 음악"
+msgstr ""
 
 #: ../src/musicaggregatorquery.cpp:178
 msgid "Grooveshark"
-msgstr "그루브샤크"
+msgstr "Grooveshark"
 
 #: ../src/musicaggregatorquery.cpp:179
 msgid "New albums from 7digital"
-msgstr "7digital의 새 앨범"
+msgstr ""
 
 #: ../src/musicaggregatorquery.cpp:181
 msgid "7digital"
@@ -62,85 +62,85 @@ msgstr "7digital"
 #: ../src/videoaggregatorquery.cpp:130
 #, c-format
 msgid "%s Features"
-msgstr "%s 기능"
+msgstr ""
 
 #: ../src/videoaggregatorquery.cpp:137
 #, c-format
 msgid "Results from %s"
-msgstr "%s에서부터의 결과"
+msgstr ""
 
 #: ../src/music-scope.cpp:182 ../src/music-scope.cpp:352
 #: ../src/music-scope.cpp:369
 msgid "Albums"
-msgstr "앨범"
+msgstr ""
 
 #: ../src/music-scope.cpp:183 ../src/music-scope.cpp:266
 #: ../src/music-scope.cpp:279
 msgid "Tracks"
-msgstr "트랙"
+msgstr ""
 
 #: ../src/music-scope.cpp:184
 msgid "Genres"
-msgstr "장르"
+msgstr ""
 
 #: ../src/music-scope.cpp:242
 msgid "Artists"
-msgstr "음악가"
+msgstr "Καλλιτέχνες"
 
 #: ../src/music-scope.cpp:451 ../src/music-scope.cpp:490
 msgid "Play in music app"
-msgstr "음악 애플리케이션으로 재생하기"
+msgstr ""
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
-msgstr "이 우분투 플러그인은 장치에서 음악을 찾고, 대시에서 검색하여 볼 수 있도록 합니다."
+msgstr ""
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr "장치에 있는 음악 찾기"
+msgstr ""
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
-msgstr "이 우분투 플러그인은 장치에서 동영상을 찾고, 대시에서 검색하여 볼 수 있도록 합니다."
+msgstr ""
 
 #: tmp/musicaggregator-settings.ini.in.in.h:1
 msgid "Display results from Grooveshark"
-msgstr "그루브샤크에서 결과 표시하기"
+msgstr ""
 
 #: tmp/musicaggregator-settings.ini.in.in.h:2
 msgid "Display results from 7digital"
-msgstr "7digital에서 결과 표시하기"
+msgstr ""
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
-msgstr "음악"
+msgstr "Μουσική"
 
 #: tmp/musicaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
-msgstr "이 우분투 플러그인은 모든 음악 소스를 하나로 합치는 플러그인입니다."
+msgstr ""
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
-msgstr "음악 검색"
+msgstr "Αναζήτηση μουσικής"
 
 #: tmp/videoaggregator-settings.ini.in.in.h:1
 msgid "Display results from YouTube"
-msgstr "유튜브에서 결과 표시하기"
+msgstr ""
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
-msgstr "동영상"
+msgstr "Βίντεο"
 
 #: tmp/videoaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
-msgstr "이 우분투 플러그인은 모든 동영상 소스를 하나로 합치는 플러그인입니다."
+msgstr ""
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
-msgstr "동영상 검색"
+msgstr ""
