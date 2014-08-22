@@ -1,3 +1,0 @@
-[D-BUS Service]
-Name=com.canonical.Unity.Scope.MediaScanner
-Exec=@CMAKE_INSTALL_FULL_BINDIR@/unity-scope-loader music/mediascanner.scope video/mediascanner.scope
