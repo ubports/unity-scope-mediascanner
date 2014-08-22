@@ -287,7 +287,9 @@ void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply) con
     CannedQuery artist_search(query());
     artist_search.set_department_id("albums_of_artist"); // virtual department
 
-    for (const auto &artist: scope.store->queryArtists(query().query_string(), MAX_RESULTS))
+    mediascanner::Filter filter;
+    filter.setLimit(MAX_RESULTS);
+    for (const auto &artist: scope.store->queryArtists(query().query_string(), filter))
     {
         artist_search.set_query_string(artist);
 
@@ -325,7 +327,9 @@ void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply) const 
 
     CategoryRenderer renderer(query().query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
     auto cat = reply->register_category("songs", show_title ? _("Tracks") : "", SONGS_CATEGORY_ICON, renderer);
-    for (const auto &media : scope.store->query(query().query_string(), AudioMedia, MAX_RESULTS)) {
+    mediascanner::Filter filter;
+    filter.setLimit(MAX_RESULTS);
+    for (const auto &media : scope.store->query(query().query_string(), AudioMedia, filter)) {
         if(!reply->push(create_song_result(cat, media)))
         {
             return;
@@ -489,7 +493,9 @@ void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply) const
     CategoryRenderer renderer(query().query_string() == "" ? ALBUMS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
     auto cat = reply->register_category("albums", show_title ? _("Albums") : "", SONGS_CATEGORY_ICON, renderer);
 
-    for (const auto &album : scope.store->queryAlbums(query().query_string(), MAX_RESULTS)) {
+    mediascanner::Filter filter;
+    filter.setLimit(MAX_RESULTS);
+    for (const auto &album : scope.store->queryAlbums(query().query_string(), filter)) {
         if (!reply->push(create_album_result(cat, album)))
         {
             return;
