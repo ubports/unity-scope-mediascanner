@@ -367,7 +367,7 @@ unity::scopes::CategorisedResult MusicQuery::create_song_result(unity::scopes::C
     std::string imguri;
     if (uri.find("file://") == 0)
     {
-        imguri = "thumbnailer://" + uri.substr(7);
+        imguri = "thumbnail://" + uri.substr(7);
         uri = "music://" + uri.substr(7); // replace file:// with music://
     }
     CategorisedResult res(category);

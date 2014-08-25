@@ -186,7 +186,7 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
         std::string uri = media.getUri();
         std::string imguri;
         if (uri.find("file://") == 0) {
-            imguri = "thumbnailer://" + uri.substr(7);
+            imguri = "thumbnail://" + uri.substr(7);
             uri = "video://" + uri.substr(7); // replace file:// with video://
         }
 
