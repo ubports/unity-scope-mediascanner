@@ -1,3 +1,17 @@
+unity-scope-mediascanner (0.2+14.10.20140825-0ubuntu1) utopic; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ James Henstridge ]
+  * Update to support API changes in mediascanner
+
+  [ Pawel Stolowski ]
+  * Don't limit local artist to 3 in My Music category of aggregator
+    scope.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 25 Aug 2014 12:55:28 +0000
+
 unity-scope-mediascanner (0.2+14.10.20140820-0ubuntu1) utopic; urgency=low
 
   [ Martin Pitt ]
