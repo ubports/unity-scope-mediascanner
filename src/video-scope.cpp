@@ -195,6 +195,7 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
         res.set_dnd_uri(uri);
         res.set_art(imguri);
         res.set_title(media.getTitle());
+        res["media-uri"] = media.getUri();
 
         res["duration"] =media.getDuration();
         // res["width"] = media.getWidth();
@@ -232,13 +233,14 @@ void VideoPreview::run(PreviewReplyProxy const& reply)
     header.add_attribute_mapping("title", "title");
 
     PreviewWidget video("video", "video");
-    video.add_attribute_mapping("source", "uri");
+    video.add_attribute_mapping("source", "media-uri"); // this is a file:// uri
 
     PreviewWidget actions("actions", "actions");
     {
         VariantBuilder builder;
         builder.add_tuple({
                 {"id", Variant("play")},
+                {"uri", Variant(result().uri())}, // this is a video:// uri
                 {"label", Variant(_("Play"))}
             });
         actions.add_attribute_value("actions", builder.end());
