@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-31 16:02+0200\n"
-"PO-Revision-Date: 2014-08-02 13:00+0000\n"
+"PO-Revision-Date: 2014-08-24 12:43+0000\n"
 "Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-05 06:45+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2014-08-25 08:07+0000\n"
+"X-Generator: Launchpad (build 17163)\n"
 
 #: ../src/video-scope.cpp:140
 msgid "Everything"
@@ -45,7 +45,7 @@ msgstr "Saját zenék"
 
 #: ../src/musicaggregatorquery.cpp:176
 msgid "Popular tracks on Grooveshark"
-msgstr "Népszerű számok Grooveshark-on"
+msgstr "Népszerű számok a Grooveshark oldalról"
 
 #: ../src/musicaggregatorquery.cpp:178
 msgid "Grooveshark"
@@ -53,7 +53,7 @@ msgstr "Grooveshark"
 
 #: ../src/musicaggregatorquery.cpp:179
 msgid "New albums from 7digital"
-msgstr "Új albumok a 7digital-ról"
+msgstr "Új albumok a 7digital oldalról"
 
 #: ../src/musicaggregatorquery.cpp:181
 msgid "7digital"
@@ -89,7 +89,7 @@ msgstr "Előadók"
 
 #: ../src/music-scope.cpp:451 ../src/music-scope.cpp:490
 msgid "Play in music app"
-msgstr "Lejátszás a zene appban"
+msgstr "Lejátszás a zene alkalmazásban"
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
@@ -113,11 +113,11 @@ msgstr ""
 
 #: tmp/musicaggregator-settings.ini.in.in.h:1
 msgid "Display results from Grooveshark"
-msgstr "Találatok megjelenítése Grooveshark-ról"
+msgstr "Találatok megjelenítése Groovesharkról"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:2
 msgid "Display results from 7digital"
-msgstr "Találatok megjelenítése 7digital-ról"
+msgstr "Találatok megjelenítése 7digitalról"
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
@@ -134,7 +134,7 @@ msgstr "Zene keresése"
 
 #: tmp/videoaggregator-settings.ini.in.in.h:1
 msgid "Display results from YouTube"
-msgstr "Találatok megjelenítése Yotube-ról"
+msgstr "Találatok megjelenítése Yotuberól"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
