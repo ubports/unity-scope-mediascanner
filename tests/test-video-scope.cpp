@@ -117,8 +117,8 @@ TEST_F(VideoScopeTest, QueryResult) {
     EXPECT_CALL(reply, register_category("local", _, _, _))
         .WillOnce(Return(category));
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
-            ResultProp("uri", "file:///path/bigbuckbunny.ogv"),
-            ResultProp("dnd_uri", "file:///path/bigbuckbunny.ogv"),
+            ResultProp("uri", "video:///path/bigbuckbunny.ogv"),
+            ResultProp("dnd_uri", "video:///path/bigbuckbunny.ogv"),
             ResultProp("title", "Big Buck Bunny"),
             ResultProp("duration", 596)))))
         .WillOnce(Return(true));
@@ -226,7 +226,7 @@ TEST_F(VideoScopeTest, DownloadsDepartmentQuery) {
 
 TEST_F(VideoScopeTest, PreviewVideo) {
     unity::scopes::testing::Result result;
-    result.set_uri("file:///xyz");
+    result.set_uri("video:///xyz");
     result.set_title("Video title");
     result["duration"] = 42;
 
