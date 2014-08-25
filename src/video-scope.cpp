@@ -193,7 +193,7 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
         CategorisedResult res(cat);
         res.set_uri(uri);
         res.set_dnd_uri(uri);
-        res.set_art(media.getUri());
+        res.set_art(imguri);
         res.set_title(media.getTitle());
 
         res["duration"] =media.getDuration();
