@@ -364,17 +364,15 @@ unity::scopes::CategorisedResult MusicQuery::create_album_result(unity::scopes::
 unity::scopes::CategorisedResult MusicQuery::create_song_result(unity::scopes::Category::SCPtr const& category, mediascanner::MediaFile const& media) const
 {
     std::string uri = media.getUri();
-    std::string imguri;
     if (uri.find("file://") == 0)
     {
-        imguri = "thumbnail://" + uri.substr(7);
         uri = "music://" + uri.substr(7); // replace file:// with music://
     }
     CategorisedResult res(category);
     res.set_uri(uri);
     res.set_dnd_uri(uri);
     res.set_title(media.getTitle());
-    res.set_art(imguri);
+    res.set_art(media.getUri());
 
     res["duration"] = media.getDuration();
     res["album"] = media.getAlbum();
