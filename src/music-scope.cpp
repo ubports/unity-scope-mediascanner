@@ -372,7 +372,7 @@ unity::scopes::CategorisedResult MusicQuery::create_song_result(unity::scopes::C
     res.set_uri(uri);
     res.set_dnd_uri(uri);
     res.set_title(media.getTitle());
-    res.set_art(media.getUri());
+    res.set_art(scope.make_album_art_uri(media.getAlbumArtist(), media.getAlbum()));
 
     res["duration"] = media.getDuration();
     res["album"] = media.getAlbum();

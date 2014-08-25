@@ -184,8 +184,10 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
         }
 
         std::string uri = media.getUri();
+        std::string imguri;
         if (uri.find("file://") == 0) {
             uri = "video://" + uri.substr(7); // replace file:// with video://
+            imguri = "image://thumbnailer/" + uri.substr(7);
         }
 
         CategorisedResult res(cat);
