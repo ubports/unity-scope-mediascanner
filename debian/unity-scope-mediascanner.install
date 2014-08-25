@@ -1,3 +1,0 @@
-usr/share/dbus-1/services/*.service
-usr/share/unity/scopes/*/*.scope
-usr/lib/*/unity/unity-scope-mediascanner.so

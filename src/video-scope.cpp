@@ -21,6 +21,7 @@
 #include <stdio.h>
 
 #include <boost/regex.hpp>
+#include <mediascanner/Filter.hh>
 #include <mediascanner/MediaFile.hh>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/CategorisedResult.h>
@@ -166,7 +167,9 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
             "local", _("My Videos"), LOCAL_CATEGORY_ICON,
             CategoryRenderer(surfacing ? LOCAL_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION));
     }
-    for (const auto &media : scope.store->query(query().query_string(), VideoMedia, MAX_RESULTS)) {
+    mediascanner::Filter filter;
+    filter.setLimit(MAX_RESULTS);
+    for (const auto &media : scope.store->query(query().query_string(), VideoMedia, filter)) {
         // Filter results if we are in a department
         switch (department) {
         case VideoType::ALL:

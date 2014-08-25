@@ -9,8 +9,7 @@ Build-Depends: cmake (>= 2.8),
                google-mock,
                intltool,
                libboost-regex-dev,
-               libmediascanner-2.0-dev (>= 0.102),
-               libunity-dev (>= 7.0.9),
+               libmediascanner-2.0-dev (>= 0.104),
                libunity-scopes-dev (>= 0.6.0),
                libglib2.0-dev,
                libsqlite3-dev,
@@ -18,8 +17,6 @@ Build-Depends: cmake (>= 2.8),
                libjsoncpp-dev,
                libnet-cpp-dev (>= 1.1.0),
                pkg-config,
-               python3,
-               python3-dbusmock,
 Standards-Version: 3.9.4
 Homepage: https://launchpad.net/unity-scope-mediascanner
 # If you aren't a member of ~unity-team but need to upload packaging
@@ -28,15 +25,6 @@ Homepage: https://launchpad.net/unity-scope-mediascanner
 Vcs-Bzr: bzr+ssh://bazaar.launchpad.net/~unity-team/unity-scope-mediascanner/trunk
 Vcs-Browser: http://bazaar.launchpad.net/~unity-team/unity-scope-mediascanner/trunk/files
 X-Ubuntu-Use-Langpack: yes
-
-Package: unity-scope-mediascanner
-Architecture: any
-Depends: ${misc:Depends},
-         ${shlibs:Depends},
-         mediascanner2.0,
-Description: Media scanner scope for Unity 7
- This package contains muisc and video scopes for Unity that can be
- used to expose media found by the Ubuntu Media Scanner.
 
 Package: unity-scope-mediascanner2
 Architecture: any

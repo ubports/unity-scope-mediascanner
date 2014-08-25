@@ -1,9 +1,0 @@
-usr/lib/*/unity-scopes/mediascanner-music/*
-usr/lib/*/unity-scopes/mediascanner-video/*
-usr/lib/*/unity-scopes/musicaggregator/*
-usr/lib/*/unity-scopes/videoaggregator/*
-usr/share/unity/scopes/mediascanner-music/*
-usr/share/unity/scopes/mediascanner-video/*
-usr/share/unity/scopes/musicaggregator/*
-usr/share/unity/scopes/videoaggregator/*
-usr/share/locale
