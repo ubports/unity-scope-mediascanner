@@ -191,8 +191,8 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
         }
 
         CategorisedResult res(cat);
-        res.set_uri(media.getUri());
-        res.set_dnd_uri(media.getUri());
+        res.set_uri(uri);
+        res.set_dnd_uri(uri);
         res.set_art(imguri.size() == 0 ? media.getUri() : imguri);
         res.set_title(media.getTitle());
 
