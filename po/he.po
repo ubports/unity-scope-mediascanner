@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-31 16:02+0200\n"
-"PO-Revision-Date: 2014-08-24 08:54+0000\n"
+"PO-Revision-Date: 2014-08-25 09:09+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-25 08:07+0000\n"
+"X-Launchpad-Export-Date: 2014-08-26 07:47+0000\n"
 "X-Generator: Launchpad (build 17163)\n"
 
 #: ../src/video-scope.cpp:140
@@ -23,7 +23,7 @@ msgstr "הכול"
 
 #: ../src/video-scope.cpp:142
 msgid "My Roll"
-msgstr ""
+msgstr "סרט הצילום שלי"
 
 #: ../src/video-scope.cpp:143
 msgid "Downloaded"
@@ -62,7 +62,7 @@ msgstr "7digital"
 #: ../src/videoaggregatorquery.cpp:130
 #, c-format
 msgid "%s Features"
-msgstr ""
+msgstr "התכונות של %s"
 
 #: ../src/videoaggregatorquery.cpp:137
 #, c-format
