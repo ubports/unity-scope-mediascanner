@@ -92,6 +92,7 @@ static const char ARTIST_BIO_CATEGORY_DEFINITION[] = R"(
   "template": {
     "category-layout": "vertical-journal",
     "card-size": "large",
+    "collapsed-rows": 0,
     "non-interactive": "true"
   },
   "components": {
