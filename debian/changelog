@@ -1,9 +1,13 @@
-unity-scope-mediascanner (0.2+14.10.20140825-0ubuntu3) UNRELEASED; urgency=medium
+unity-scope-mediascanner (0.2+14.10.20140828.1-0ubuntu1) utopic; urgency=medium
 
+  [ Pawel Stolowski ]
   * Fix album titles in carousel of 'My Music' category.
   * Fix artist biography result rendering.
 
- -- Pawel Stolowski <pawel.stolowski@ubuntu.com>  Wed, 27 Aug 2014 11:53:58 +0200
+  [ CI bot ]
+  * Resync trunk
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 28 Aug 2014 14:04:52 +0000
 
 unity-scope-mediascanner (0.2+14.10.20140825-0ubuntu1) utopic; urgency=low
 
