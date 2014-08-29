@@ -42,7 +42,6 @@ static const char MYMUSIC_CATEGORY_DEFINITION[] = R"(
   "schema-version": 1,
   "template": {
     "category-layout": "horizontal-list",
-    "overlay": true,
     "card-size": "small"
   },
   "components": {
