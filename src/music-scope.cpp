@@ -150,12 +150,6 @@ PreviewQueryBase::UPtr MusicScope::preview(Result const& result,
     return previewer;
 }
 
-std::string MusicScope::make_album_art_uri(const std::string &artist, const std::string &album) const {
-    auto const uri = core::net::make_uri(
-            "image://albumart", {}, {{"artist", artist}, {"album", album}});
-    return client->uri_to_string(uri);
-}
-
 std::string MusicScope::make_artist_art_uri(const std::string &artist, const std::string &album) const {
     auto const uri = core::net::make_uri(
             "image://artistart", {}, {{"artist", artist}, {"album", album}});
@@ -360,6 +354,7 @@ unity::scopes::CategorisedResult MusicQuery::create_album_result(unity::scopes::
     CategorisedResult res(category);
     res.set_uri("album:///" + scope.client->url_escape(album.getArtist()) + "/" + scope.client->url_escape(album.getTitle()));
     res.set_title(album.getTitle());
+    res.set_art(album.getArtUri());
     res["artist"] = album.getArtist();
     res["album"] = album.getTitle();
     res["isalbum"] = true;
@@ -377,7 +372,7 @@ unity::scopes::CategorisedResult MusicQuery::create_song_result(unity::scopes::C
     res.set_uri(uri);
     res.set_dnd_uri(uri);
     res.set_title(media.getTitle());
-    res.set_art(scope.make_album_art_uri(media.getAlbumArtist(), media.getAlbum()));
+    res.set_art(media.getArtUri());
 
     res["duration"] = media.getDuration();
     res["album"] = media.getAlbum();
@@ -549,15 +544,7 @@ void MusicPreview::song_preview(unity::scopes::PreviewReplyProxy const &reply) c
     auto const res = result();
 
     PreviewWidget artwork("art", "image");
-    std::string artist = res["artist"].get_string();
-    std::string album = res["album"].get_string();
-    std::string art;
-    if (artist.empty() || album.empty()) {
-        art = MISSING_ALBUM_ART;
-    } else {
-        art = scope.make_album_art_uri(artist, album);
-    }
-    artwork.add_attribute_value("source", Variant(art));
+    artwork.add_attribute_mapping("source", "art");
 
     PreviewWidget tracks("tracks", "audio");
     {
@@ -595,15 +582,7 @@ void MusicPreview::album_preview(unity::scopes::PreviewReplyProxy const &reply) 
     auto const res = result();
 
     PreviewWidget artwork("art", "image");
-    std::string artist = res["artist"].get_string();
-    std::string album_name = res["title"].get_string();
-    std::string art;
-    if (artist.empty() || album_name.empty()) {
-        art = MISSING_ALBUM_ART;
-    } else {
-        art = scope.make_album_art_uri(artist, album_name);
-    }
-    artwork.add_attribute_value("source", Variant(art));
+    artwork.add_attribute_mapping("source", "art");
 
     PreviewWidget header("header", "header");
     header.add_attribute_mapping("title", "title");
@@ -621,6 +600,8 @@ void MusicPreview::album_preview(unity::scopes::PreviewReplyProxy const &reply) 
 
     PreviewWidget tracks("tracks", "audio");
     VariantBuilder builder;
+    std::string artist = res["artist"].get_string();
+    std::string album_name = res["title"].get_string();
     Album album(album_name, artist);
     for(const auto &track : scope.store->getAlbumSongs(album)) {
         std::vector<std::pair<std::string, Variant>> tmp;
