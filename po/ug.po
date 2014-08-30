@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-31 16:02+0200\n"
-"PO-Revision-Date: 2014-08-05 00:14+0000\n"
+"PO-Revision-Date: 2014-08-28 09:31+0000\n"
 "Last-Translator: Gheyret T.Kenji <Unknown>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-05 06:45+0000\n"
-"X-Generator: Launchpad (build 17147)\n"
+"X-Launchpad-Export-Date: 2014-08-30 07:47+0000\n"
+"X-Generator: Launchpad (build 17176)\n"
 
 #: ../src/video-scope.cpp:140
 msgid "Everything"
@@ -53,7 +53,7 @@ msgstr "گۇرۇۋشاك(Grooveshark)"
 
 #: ../src/musicaggregatorquery.cpp:179
 msgid "New albums from 7digital"
-msgstr ""
+msgstr "7digital دىكى يېڭى ئالبوملار"
 
 #: ../src/musicaggregatorquery.cpp:181
 msgid "7digital"

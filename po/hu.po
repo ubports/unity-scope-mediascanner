@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-31 16:02+0200\n"
-"PO-Revision-Date: 2014-08-25 08:32+0000\n"
+"PO-Revision-Date: 2014-08-29 12:48+0000\n"
 "Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-27 07:46+0000\n"
-"X-Generator: Launchpad (build 17174)\n"
+"X-Launchpad-Export-Date: 2014-08-30 07:47+0000\n"
+"X-Generator: Launchpad (build 17176)\n"
 
 #: ../src/video-scope.cpp:140
 msgid "Everything"
@@ -113,11 +113,11 @@ msgstr ""
 
 #: tmp/musicaggregator-settings.ini.in.in.h:1
 msgid "Display results from Grooveshark"
-msgstr "Találatok megjelenítése Groovesharkról"
+msgstr "Találatok megjelenítése innen: Grooveshark"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:2
 msgid "Display results from 7digital"
-msgstr "Találatok megjelenítése 7digitalról"
+msgstr "Találatok megjelenítése innen: 7digital"
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
@@ -134,7 +134,7 @@ msgstr "Zene keresése"
 
 #: tmp/videoaggregator-settings.ini.in.in.h:1
 msgid "Display results from YouTube"
-msgstr "Találatok megjelenítése Yotuberól"
+msgstr "Találatok megjelenítése innen: Yotube"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
