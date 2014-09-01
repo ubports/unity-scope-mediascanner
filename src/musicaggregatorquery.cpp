@@ -41,10 +41,8 @@ static const char MYMUSIC_CATEGORY_DEFINITION[] = R"(
 {
   "schema-version": 1,
   "template": {
-    "category-layout": "carousel",
-    "overlay": true,
-    "card-size": "small",
-    "collapsed-rows": 1
+    "category-layout": "horizontal-list",
+    "card-size": "small"
   },
   "components": {
     "title": "title",
