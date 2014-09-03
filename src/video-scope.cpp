@@ -187,9 +187,12 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
         }
 
         std::string uri = media.getUri();
+        /* FIXME: reenable once mediaplayer-app is fixed:
+             https://bugs.launchpad.net/mediaplayer-app/+bug/1340952
         if (uri.find("file://") == 0) {
             uri = "video://" + uri.substr(7); // replace file:// with video://
         }
+        */
 
         CategorisedResult res(cat);
         res.set_uri(uri);
