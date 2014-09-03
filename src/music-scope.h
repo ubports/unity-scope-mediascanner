@@ -25,7 +25,6 @@ public:
 
 private:
     std::string make_artist_art_uri(const std::string &artist, const std::string &album) const;
-    std::string make_album_art_uri(const std::string &artist, const std::string &album) const;
 
     std::unique_ptr<mediascanner::MediaStore> store;
     std::shared_ptr<core::net::http::Client> client;

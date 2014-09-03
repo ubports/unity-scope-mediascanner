@@ -181,8 +181,8 @@ TEST_F(MusicScopeTest, QueryResult) {
         .WillOnce(Return(true));
 
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
-            ResultProp("uri", "file:///path/foo7.ogg"),
-            ResultProp("dnd_uri", "file:///path/foo7.ogg"),
+            ResultProp("uri", "music:///path/foo7.ogg"),
+            ResultProp("dnd_uri", "music:///path/foo7.ogg"),
             ResultProp("title", "One Way Road"),
             ResultProp("duration", 185),
             ResultProp("album", "April Uprising"),
@@ -337,7 +337,7 @@ TEST_F(MusicScopeTest, GenresDepartmentSurfacing) {
 
 TEST_F(MusicScopeTest, PreviewSong) {
     unity::scopes::testing::Result result;
-    result.set_uri("file:///xyz");
+    result.set_uri("music:///xyz");
     result.set_title("Song title");
     result["artist"] = "Artist name";
     result["album"] = "Album name";

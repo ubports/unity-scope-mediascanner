@@ -226,7 +226,7 @@ TEST_F(VideoScopeTest, DownloadsDepartmentQuery) {
 
 TEST_F(VideoScopeTest, PreviewVideo) {
     unity::scopes::testing::Result result;
-    result.set_uri("file:///xyz");
+    result.set_uri("video:///xyz");
     result.set_title("Video title");
     result["duration"] = 42;
 
