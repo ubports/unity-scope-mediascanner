@@ -1,4 +1,4 @@
-# Hungarian translation for unity-scope-mediascanner
+# Azerbaijani translation for unity-scope-mediascanner
 # Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
 # This file is distributed under the same license as the unity-scope-mediascanner package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-31 16:02+0200\n"
-"PO-Revision-Date: 2014-09-03 10:35+0000\n"
-"Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
-"Language-Team: Hungarian <hu@li.org>\n"
+"PO-Revision-Date: 2014-09-05 07:07+0000\n"
+"Last-Translator: Nicat Məmmədov <n1c4t97@gmail.com>\n"
+"Language-Team: Azerbaijani <az@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,33 +19,33 @@ msgstr ""
 
 #: ../src/video-scope.cpp:140
 msgid "Everything"
-msgstr "Minden"
+msgstr "Hər şey"
 
 #: ../src/video-scope.cpp:142
 msgid "My Roll"
-msgstr "Sajátok"
+msgstr ""
 
 #: ../src/video-scope.cpp:143
 msgid "Downloaded"
-msgstr "Letöltve"
+msgstr "Endirilib"
 
 #: ../src/video-scope.cpp:161 ../src/video-scope.cpp:166
 #: tmp/mediascanner-video.ini.in.in.h:1
 msgid "My Videos"
-msgstr "Saját videók"
+msgstr "Videolarım"
 
 #: ../src/video-scope.cpp:234
 msgid "Play"
-msgstr "Lejátszás"
+msgstr "Başlat"
 
 #: ../src/musicaggregatorquery.cpp:173 ../src/musicaggregatorquery.cpp:175
 #: tmp/mediascanner-music.ini.in.in.h:1
 msgid "My Music"
-msgstr "Saját zenék"
+msgstr "Mahnılarım"
 
 #: ../src/musicaggregatorquery.cpp:176
 msgid "Popular tracks on Grooveshark"
-msgstr "Népszerű számok a Grooveshark oldalról"
+msgstr ""
 
 #: ../src/musicaggregatorquery.cpp:178
 msgid "Grooveshark"
@@ -53,98 +53,94 @@ msgstr "Grooveshark"
 
 #: ../src/musicaggregatorquery.cpp:179
 msgid "New albums from 7digital"
-msgstr "Új albumok a 7digital oldalról"
+msgstr ""
 
 #: ../src/musicaggregatorquery.cpp:181
 msgid "7digital"
-msgstr "7digital"
+msgstr ""
 
 #: ../src/videoaggregatorquery.cpp:130
 #, c-format
 msgid "%s Features"
-msgstr "%s találatai"
+msgstr ""
 
 #: ../src/videoaggregatorquery.cpp:137
 #, c-format
 msgid "Results from %s"
-msgstr "Találatok innen: %s"
+msgstr ""
 
 #: ../src/music-scope.cpp:182 ../src/music-scope.cpp:352
 #: ../src/music-scope.cpp:369
 msgid "Albums"
-msgstr "Albumok"
+msgstr "Albomlar"
 
 #: ../src/music-scope.cpp:183 ../src/music-scope.cpp:266
 #: ../src/music-scope.cpp:279
 msgid "Tracks"
-msgstr "Számok"
+msgstr "Mahnılar"
 
 #: ../src/music-scope.cpp:184
 msgid "Genres"
-msgstr "Műfajok"
+msgstr "Janrlar"
 
 #: ../src/music-scope.cpp:242
 msgid "Artists"
-msgstr "Előadók"
+msgstr "İfaçılar"
 
 #: ../src/music-scope.cpp:451 ../src/music-scope.cpp:490
 msgid "Play in music app"
-msgstr "Lejátszás a zene alkalmazásban"
+msgstr ""
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
-"Ez egy Ubuntu keresőbővítmény, amely zenét keres a készüléken, valamint "
-"kereshetővé és megjeleníthetővé teszi azokat a Dash-ben."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr "Keresés a helyi zenegyűjteményben"
+msgstr ""
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
-"Ez egy Ubuntu keresőbővítmény, amely videókat keres a készüléken, valamint "
-"kereshetővé és megjeleníthetővé teszi azokat a Dash-ben."
 
 #: tmp/musicaggregator-settings.ini.in.in.h:1
 msgid "Display results from Grooveshark"
-msgstr "Találatok megjelenítése innen: Grooveshark"
+msgstr ""
 
 #: tmp/musicaggregator-settings.ini.in.in.h:2
 msgid "Display results from 7digital"
-msgstr "Találatok megjelenítése innen: 7digital"
+msgstr ""
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
-msgstr "Zene"
+msgstr ""
 
 #: tmp/musicaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
-msgstr "Ez egy Ubuntu keresőbővítmény, amely minden zeneforrást egyesít."
+msgstr ""
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
-msgstr "Zene keresése"
+msgstr "Mahnı axtar"
 
 #: tmp/videoaggregator-settings.ini.in.in.h:1
 msgid "Display results from YouTube"
-msgstr "Találatok megjelenítése innen: Youtube"
+msgstr ""
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
-msgstr "Videó"
+msgstr "Video"
 
 #: tmp/videoaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
-msgstr "Ez egy Ubuntu keresőbővítmény, amely minden videoforrást egyesít."
+msgstr ""
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
-msgstr "Videó keresése"
+msgstr "Video axtar"
