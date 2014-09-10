@@ -20,8 +20,9 @@ using namespace mediascanner;
 using namespace unity::scopes;
 using ::testing::_;
 using ::testing::AllOf;
-using ::testing::Return;
+using ::testing::ElementsAre;
 using ::testing::Matcher;
+using ::testing::Return;
 
 class MusicScopeTest : public unity::scopes::testing::TypedScopeFixture<MusicScope> {
 protected:
@@ -148,10 +149,16 @@ MATCHER_P2(ResultProp, prop, value, "") {
 }
 
 MATCHER_P(ResultUriMatchesCannedQuery, q, "") {
+    *result_listener << "result.uri is " << arg.uri();
     auto const query = unity::scopes::CannedQuery::from_uri(arg.uri());
     return query.scope_id() == q.scope_id()
         && query.query_string() == q.query_string()
         && query.department_id() == q.department_id();
+}
+
+MATCHER_P(PreviewWidgetType, value, "") {
+    *result_listener << "widget.widget_type is " << arg.widget_type();
+    return arg.widget_type() == value;
 }
 
 TEST_F(MusicScopeTest, QueryResult) {
@@ -181,8 +188,8 @@ TEST_F(MusicScopeTest, QueryResult) {
         .WillOnce(Return(true));
 
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
-            ResultProp("uri", "music:///path/foo7.ogg"),
-            ResultProp("dnd_uri", "music:///path/foo7.ogg"),
+            ResultProp("uri", "file:///path/foo7.ogg"),
+            ResultProp("dnd_uri", "file:///path/foo7.ogg"),
             ResultProp("title", "One Way Road"),
             ResultProp("duration", 185),
             ResultProp("album", "April Uprising"),
@@ -337,7 +344,7 @@ TEST_F(MusicScopeTest, GenresDepartmentSurfacing) {
 
 TEST_F(MusicScopeTest, PreviewSong) {
     unity::scopes::testing::Result result;
-    result.set_uri("music:///xyz");
+    result.set_uri("file:///xyz");
     result.set_title("Song title");
     result["artist"] = "Artist name";
     result["album"] = "Album name";
@@ -347,12 +354,16 @@ TEST_F(MusicScopeTest, PreviewSong) {
     ActionMetadata hints("en_AU", "phone");
     auto previewer = scope->preview(result, hints);
 
-    // MockPreviewReply is currently broken and can't be instantiated.
-#if 0
     unity::scopes::testing::MockPreviewReply reply;
+    EXPECT_CALL(reply, register_layout(_));
+    EXPECT_CALL(reply, push(Matcher<PreviewWidgetList const&>(ElementsAre(
+        PreviewWidgetType("image"),
+        PreviewWidgetType("header"),
+        PreviewWidgetType("actions"),
+        PreviewWidgetType("audio")))));
+
     PreviewReplyProxy proxy(&reply, [](PreviewReply*){});
     previewer->run(proxy);
-#endif
 }
 
 int main(int argc, char **argv) {
