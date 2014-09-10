@@ -31,7 +31,7 @@ protected:
     virtual void SetUp() {
         cachedir = "/tmp/mediastore.XXXXXX";
         // mkdtemp edits the string in place without changing its length
-        if (mkdtemp(const_cast<char*>(cachedir.c_str())) == NULL) {
+        if (mkdtemp(const_cast<char*>(cachedir.c_str())) == nullptr) {
             throw std::runtime_error(strerror(errno));
         }
         ASSERT_EQ(0, setenv("MEDIASCANNER_CACHEDIR", cachedir.c_str(), 1));
