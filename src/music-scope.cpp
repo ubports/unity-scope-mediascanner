@@ -565,7 +565,7 @@ void MusicPreview::song_preview(unity::scopes::PreviewReplyProxy const &reply) c
         builder.add_tuple({
                 {"id", Variant("play")},
                 {"uri", Variant(uri)},
-                {"label", Variant(_("Play in music app"))},
+                {"label", Variant(_("Play in music app"))}
             });
         actions.add_attribute_value("actions", builder.end());
     }
