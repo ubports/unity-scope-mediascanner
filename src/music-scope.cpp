@@ -595,6 +595,7 @@ void MusicPreview::album_preview(unity::scopes::PreviewReplyProxy const &reply) 
     {
         VariantBuilder builder;
         builder.add_tuple({
+                {"id", Variant("play")},
                 {"uri", Variant(res.uri())},
                 {"label", Variant(_("Play in music app"))}
             });
