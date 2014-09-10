@@ -364,10 +364,6 @@ unity::scopes::CategorisedResult MusicQuery::create_album_result(unity::scopes::
 unity::scopes::CategorisedResult MusicQuery::create_song_result(unity::scopes::Category::SCPtr const& category, mediascanner::MediaFile const& media) const
 {
     std::string uri = media.getUri();
-    if (uri.find("file://") == 0)
-    {
-        uri = "music://" + uri.substr(7); // replace file:// with music://
-    }
     CategorisedResult res(category);
     res.set_uri(uri);
     res.set_dnd_uri(uri);
@@ -559,9 +555,16 @@ void MusicPreview::song_preview(unity::scopes::PreviewReplyProxy const &reply) c
 
     PreviewWidget actions("actions", "actions");
     {
+        std::string uri = res.uri();
+        if (uri.find("file://") == 0)
+        {
+            uri = "music://" + uri.substr(7); // replace file:// with music://
+        }
+
         VariantBuilder builder;
         builder.add_tuple({
                 {"id", Variant("play")},
+                {"uri", Variant(uri)},
                 {"label", Variant(_("Play in music app"))}
             });
         actions.add_attribute_value("actions", builder.end());
@@ -592,6 +595,7 @@ void MusicPreview::album_preview(unity::scopes::PreviewReplyProxy const &reply) 
     {
         VariantBuilder builder;
         builder.add_tuple({
+                {"id", Variant("play")},
                 {"uri", Variant(res.uri())},
                 {"label", Variant(_("Play in music app"))}
             });
