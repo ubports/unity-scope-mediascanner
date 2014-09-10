@@ -22,7 +22,9 @@ using ::testing::_;
 using ::testing::AllOf;
 using ::testing::ElementsAre;
 using ::testing::Matcher;
+using ::testing::Property;
 using ::testing::Return;
+using ::testing::Truly;
 
 class MusicScopeTest : public unity::scopes::testing::TypedScopeFixture<MusicScope> {
 protected:
@@ -154,11 +156,6 @@ MATCHER_P(ResultUriMatchesCannedQuery, q, "") {
     return query.scope_id() == q.scope_id()
         && query.query_string() == q.query_string()
         && query.department_id() == q.department_id();
-}
-
-MATCHER_P(PreviewWidgetType, value, "") {
-    *result_listener << "widget.widget_type is " << arg.widget_type();
-    return arg.widget_type() == value;
 }
 
 TEST_F(MusicScopeTest, QueryResult) {
@@ -357,10 +354,51 @@ TEST_F(MusicScopeTest, PreviewSong) {
     unity::scopes::testing::MockPreviewReply reply;
     EXPECT_CALL(reply, register_layout(_));
     EXPECT_CALL(reply, push(Matcher<PreviewWidgetList const&>(ElementsAre(
-        PreviewWidgetType("image"),
-        PreviewWidgetType("header"),
-        PreviewWidgetType("actions"),
-        PreviewWidgetType("audio")))));
+        AllOf(
+            Property(&PreviewWidget::id, "art"),
+            Property(&PreviewWidget::widget_type, "image"),
+            Truly([](const PreviewWidget &w) -> bool {
+                    return w.attribute_mappings().at("source") == "art";
+                })
+            ),
+        AllOf(
+            Property(&PreviewWidget::id, "header"),
+            Property(&PreviewWidget::widget_type, "header"),
+            Truly([](const PreviewWidget &w) -> bool {
+                    return
+                        w.attribute_mappings().at("title") == "title" &&
+                        w.attribute_mappings().at("subtitle") == "artist";
+                })
+            ),
+        AllOf(
+            Property(&PreviewWidget::id, "actions"),
+            Property(&PreviewWidget::widget_type, "actions"),
+            Truly([](const PreviewWidget &w) -> bool {
+                    const auto actions = w.attribute_values().at("actions").get_array();
+                    if (actions.size() != 1) {
+                        return false;
+                    }
+                    const auto play = actions[0].get_dict();
+                    return
+                        play.at("id").get_string() == "play" &&
+                        play.at("uri").get_string() == "music:///xyz";
+                })
+            ),
+        AllOf(
+            Property(&PreviewWidget::id, "tracks"),
+            Property(&PreviewWidget::widget_type, "audio"),
+            Truly([](const PreviewWidget &w) -> bool {
+                    const auto tracks = w.attribute_values().at("tracks").get_array();
+                    if (tracks.size() != 1) {
+                        return false;
+                    }
+                    const auto track = tracks[0].get_dict();
+                    return
+                        track.at("title").get_string() == "Song title" &&
+                        track.at("source").get_string() == "file:///xyz" &&
+                        track.at("length").get_int() == 42;
+                })
+            )))));
 
     PreviewReplyProxy proxy(&reply, [](PreviewReply*){});
     previewer->run(proxy);
