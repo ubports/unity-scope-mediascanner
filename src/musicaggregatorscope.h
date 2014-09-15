@@ -33,6 +33,7 @@ public:
     static const std::string GROOVESHARKSCOPE;
     static const std::string SEVENDIGITAL;
     static const std::string SOUNDCLOUD;
+    static const std::string SONGKICK;
 
     virtual void start(std::string const&) override;
 
@@ -51,6 +52,7 @@ private:
     unity::scopes::ScopeProxy grooveshark_scope;
     unity::scopes::ScopeProxy soundcloud_scope;
     unity::scopes::ScopeProxy sevendigital_scope;
+    unity::scopes::ScopeProxy songkick_scope;
 };
 
 #endif

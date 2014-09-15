@@ -7,3 +7,8 @@ _displayName=Display results from Grooveshark
 type=boolean
 defaultValue=true
 _displayName=Display results from 7digital
+
+[com.canonical.scopes.songkick_songkick]
+type=boolean
+defaultValue=true
+_displayName=Display results from Songkick
