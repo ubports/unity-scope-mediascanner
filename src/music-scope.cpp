@@ -19,6 +19,7 @@
 #include <config.h>
 #include <iostream>
 #include <algorithm>
+#include <gio/gio.h>
 
 #include <mediascanner/MediaFile.hh>
 #include <mediascanner/Album.hh>
@@ -39,6 +40,9 @@
 
 #define MAX_RESULTS 100
 #define MAX_GENRES 100
+
+static const char THUMBNAILER_SCHEMA[] = "com.canonical.Unity.Thumbnailer";
+static const char THUMBNAILER_API_KEY[] = "dash-ubuntu-com-key";
 
 static const char MISSING_ALBUM_ART[] = "/usr/share/unity/icons/album_missing.png";
 static const char SONGS_CATEGORY_ICON[] = "/usr/share/icons/unity-icon-theme/places/svg/group-songs.svg";
@@ -132,6 +136,35 @@ void MusicScope::start(std::string const&) {
     setlocale(LC_ALL, "");
     store.reset(new MediaStore(MS_READ_ONLY));
     client = http::make_client();
+    set_api_key();
+}
+
+void MusicScope::set_api_key()
+{
+    // the API key is not expected to change, so don't monitor it
+    GSettingsSchemaSource *src = g_settings_schema_source_get_default();
+    GSettingsSchema *schema = g_settings_schema_source_lookup(src, THUMBNAILER_SCHEMA, true);
+
+    if (schema)
+    {
+        bool status = false;
+        g_settings_schema_unref(schema);
+        GSettings *settings = g_settings_new(THUMBNAILER_SCHEMA);
+        if (settings) {
+            gchar *akey = g_settings_get_string(settings, THUMBNAILER_API_KEY);
+            if (akey) {
+                api_key = std::string(akey);
+                status = true;
+                g_free(akey);
+            }
+            g_object_unref(settings);
+        }
+        if (!status) {
+            std::cerr << "Failed to get API key" << std::endl;
+        }
+    } else {
+        std::cerr << "The schema " << THUMBNAILER_SCHEMA << " is missing" << std::endl;
+    }
 }
 
 void MusicScope::stop() {
@@ -401,7 +434,7 @@ std::string MusicQuery::fetch_biography_sync(const std::string& artist, const st
     auto uri = core::net::make_uri(
             "https://dash.ubuntu.com",
             {"musicproxy", "v1", "artist-bio"},
-            {{"artist", artist}, {"album", album}});
+            {{"artist", artist}, {"album", album}, {"key", scope.api_key}});
     config.uri = scope.client->uri_to_string(uri);
     auto request = scope.client->get(config);
     http::Request::Handler handler;
