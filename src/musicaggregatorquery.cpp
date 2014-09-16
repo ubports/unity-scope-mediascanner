@@ -141,8 +141,7 @@ static const char SONGKICK_CATEGORY_DEFINITION[] = R"(
   "template": {
     "category-layout": "grid",
     "card-size": "large",
-    "card-layout": "horizontal",
-    "collapsed-rows": 0
+    "card-layout": "horizontal"
   },
   "components": {
     "title": "title",
@@ -154,13 +153,17 @@ static const char SONGKICK_CATEGORY_DEFINITION[] = R"(
 
 static const char SONGKICK_SEARCH_CATEGORY_DEFINITION[] = R"(
 {
-  "schema-version":1,
+  "schema-version": 1,
   "template": {
-    "category-layout":"grid"
+    "category-layout": "grid",
+    "card-size": "large",
+    "card-layout": "horizontal"
   },
   "components": {
-    "title":"title",
-    "art":"art"
+    "title": "title",
+    "mascot":  "art",
+    "subtitle": "address",
+    "attributes": "attributes"
   }
 }
 )";
