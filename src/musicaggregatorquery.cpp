@@ -32,6 +32,7 @@
 #include <unity/scopes/CategoryRenderer.h>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/CannedQuery.h>
+#include <unity/scopes/Location.h>
 #include <unity/scopes/SearchReply.h>
 #include <unity/scopes/SearchMetadata.h>
 
@@ -294,6 +295,20 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
                 metadata.set_cardinality(3);
             }
         }
+        else if (scopes[i] == songkick_scope)
+        {
+            if (empty_search)
+            {
+                metadata.set_cardinality(2);
+            }
+        }
+
+        // Don't send location data to scopes that don't need it.
+        if (scopes[i] != songkick_scope)
+        {
+            metadata.set_location(Location(0, 0));
+        }
+
         subsearch(scopes[i], query().query_string(), dept, FilterState(), metadata, replies[i]);
     }
 }
