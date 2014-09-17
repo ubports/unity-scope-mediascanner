@@ -1,3 +1,14 @@
+unity-scope-mediascanner (0.2+14.10.20140910-0ubuntu1) utopic; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ James Henstridge ]
+  * Fix in-preview song playback in previews for individual songs. Also,
+    flesh out the tests for music and video previews. (LP: #1367334)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 10 Sep 2014 10:32:24 +0000
+
 unity-scope-mediascanner (0.2+14.10.20140903-0ubuntu1) utopic; urgency=low
 
   [ James Henstridge ]
