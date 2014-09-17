@@ -186,10 +186,7 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
             break;
         }
 
-        std::string uri = media.getUri();
-        if (uri.find("file://") == 0) {
-            uri = "video://" + uri.substr(7); // replace file:// with video://
-        }
+        const std::string uri = media.getUri();
 
         CategorisedResult res(cat);
         res.set_uri(uri);
@@ -236,12 +233,17 @@ void VideoPreview::run(PreviewReplyProxy const& reply)
     video.add_attribute_mapping("source", "uri");
     video.add_attribute_mapping("screenshot", "art");
 
+    std::string uri = result().uri();
+    if (uri.find("file://") == 0) {
+        uri = "video://" + uri.substr(7); // replace file:// with video://
+    }
+
     PreviewWidget actions("actions", "actions");
     {
         VariantBuilder builder;
         builder.add_tuple({
                 {"id", Variant("play")},
-                {"uri", Variant(result().uri())}, // this is a video:// uri
+                {"uri", Variant(uri)},
                 {"label", Variant(_("Play"))}
             });
         actions.add_attribute_value("actions", builder.end());
