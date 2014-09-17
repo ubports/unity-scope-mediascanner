@@ -245,7 +245,7 @@ TEST_F(VideoScopeTest, PreviewVideo) {
             Property(&PreviewWidget::widget_type, "video"),
             Truly([](const PreviewWidget &w) -> bool {
                     return
-                        w.attribute_mappings().at("source") == "uri" &&
+                        w.attribute_values().at("source").get_string() == "video:///xyz" &&
                         w.attribute_mappings().at("screenshot") == "art";
                 })
             ),

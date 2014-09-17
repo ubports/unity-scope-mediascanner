@@ -229,14 +229,14 @@ void VideoPreview::run(PreviewReplyProxy const& reply)
     PreviewWidget header("header", "header");
     header.add_attribute_mapping("title", "title");
 
-    PreviewWidget video("video", "video");
-    video.add_attribute_mapping("source", "uri");
-    video.add_attribute_mapping("screenshot", "art");
-
     std::string uri = result().uri();
     if (uri.find("file://") == 0) {
         uri = "video://" + uri.substr(7); // replace file:// with video://
     }
+
+    PreviewWidget video("video", "video");
+    video.add_attribute_value("source", Variant(uri));
+    video.add_attribute_mapping("screenshot", "art");
 
     PreviewWidget actions("actions", "actions");
     {
