@@ -245,7 +245,7 @@ TEST_F(VideoScopeTest, PreviewVideo) {
             Property(&PreviewWidget::widget_type, "video"),
             Truly([](const PreviewWidget &w) -> bool {
                     return
-                        w.attribute_mappings().at("source") == "uri" &&
+                        w.attribute_values().at("source").get_string() == "video:///xyz" &&
                         w.attribute_mappings().at("screenshot") == "art";
                 })
             ),
@@ -267,7 +267,7 @@ TEST_F(VideoScopeTest, PreviewVideo) {
                     const auto play = actions[0].get_dict();
                     return
                         play.at("id").get_string() == "play" &&
-                        play.at("uri").get_string() == "file:///xyz";
+                        play.at("uri").get_string() == "video:///xyz";
                 })
             )))))
         .WillOnce(Return(true));

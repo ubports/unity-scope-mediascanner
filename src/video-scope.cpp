@@ -186,13 +186,7 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
             break;
         }
 
-        std::string uri = media.getUri();
-        /* FIXME: reenable once mediaplayer-app is fixed:
-             https://bugs.launchpad.net/mediaplayer-app/+bug/1340952
-        if (uri.find("file://") == 0) {
-            uri = "video://" + uri.substr(7); // replace file:// with video://
-        }
-        */
+        const std::string uri = media.getUri();
 
         CategorisedResult res(cat);
         res.set_uri(uri);
@@ -235,8 +229,13 @@ void VideoPreview::run(PreviewReplyProxy const& reply)
     PreviewWidget header("header", "header");
     header.add_attribute_mapping("title", "title");
 
+    std::string uri = result().uri();
+    if (uri.find("file://") == 0) {
+        uri = "video://" + uri.substr(7); // replace file:// with video://
+    }
+
     PreviewWidget video("video", "video");
-    video.add_attribute_mapping("source", "uri");
+    video.add_attribute_value("source", Variant(uri));
     video.add_attribute_mapping("screenshot", "art");
 
     PreviewWidget actions("actions", "actions");
@@ -244,7 +243,7 @@ void VideoPreview::run(PreviewReplyProxy const& reply)
         VariantBuilder builder;
         builder.add_tuple({
                 {"id", Variant("play")},
-                {"uri", Variant(result().uri())}, // this is a video:// uri
+                {"uri", Variant(uri)},
                 {"label", Variant(_("Play"))}
             });
         actions.add_attribute_value("actions", builder.end());
