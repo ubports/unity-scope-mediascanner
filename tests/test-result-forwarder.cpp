@@ -20,9 +20,9 @@
 #include <gtest/gtest.h>
 #include <unity/scopes/testing/MockSearchReply.h>
 #include <unity/scopes/testing/Category.h>
-#include "../src/bufferedresultforwarder.h"
-#include "../src/resultforwarder.h"
-#include "../src/notify-strategy.h"
+#include "../src/utils/bufferedresultforwarder.h"
+#include "../src/utils/resultforwarder.h"
+#include "../src/utils/notify-strategy.h"
 
 using namespace unity::scopes;
 using ::testing::Truly;

@@ -26,9 +26,6 @@ target_link_libraries(test-video-scope ${UNITY_LDFLAGS} ${gtest_libs} ${Boost_LI
 add_test(test-video-scope test-video-scope)
 
 add_executable(test-result-forwarder
-                test-result-forwarder.cpp
-                ../src/notify-strategy.cpp
-                ../src/resultforwarder.cpp
-                ../src/bufferedresultforwarder.cpp)
-target_link_libraries(test-result-forwarder ${UNITY_LDFLAGS} ${gtest_libs})
+                test-result-forwarder.cpp)
+target_link_libraries(test-result-forwarder aggregator-utils ${UNITY_LDFLAGS} ${gtest_libs})
 add_test(test-result-forwarder test-result-forwarder)

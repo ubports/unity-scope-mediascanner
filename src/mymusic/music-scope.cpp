@@ -35,7 +35,7 @@
 #include <unity/scopes/VariantBuilder.h>
 
 #include "music-scope.h"
-#include "../i18n.h"
+#include "../utils/i18n.h"
 
 #define MAX_RESULTS 100
 #define MAX_GENRES 100
