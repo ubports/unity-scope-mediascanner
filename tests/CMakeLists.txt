@@ -22,10 +22,12 @@ add_executable(test-video-scope
   test-video-scope.cpp
   ../src/myvideos/video-scope.cpp
 )
-target_link_libraries(test-video-scope ${UNITY_LDFLAGS} ${gtest_libs} ${Boost_LIBRARIES})
+target_link_libraries(test-video-scope
+  ${UNITY_LDFLAGS} ${gtest_libs} ${Boost_LIBRARIES})
 add_test(test-video-scope test-video-scope)
 
 add_executable(test-result-forwarder
-                test-result-forwarder.cpp)
-target_link_libraries(test-result-forwarder aggregator-utils ${UNITY_LDFLAGS} ${gtest_libs})
+  test-result-forwarder.cpp)
+target_link_libraries(test-result-forwarder
+  scope-utils ${UNITY_LDFLAGS} ${gtest_libs})
 add_test(test-result-forwarder test-result-forwarder)

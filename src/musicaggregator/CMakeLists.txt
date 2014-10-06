@@ -4,7 +4,7 @@ add_library(musicaggregator MODULE
   musicaggregatorscope.cpp
   musicaggregatorquery.cpp
   onlinemusicresultforwarder.cpp)
-target_link_libraries(musicaggregator aggregator-utils ${UNITY_SCOPES_LDFLAGS})
+target_link_libraries(musicaggregator scope-utils ${UNITY_SCOPES_LDFLAGS})
 
 configure_file(manifest.json.in manifest.json)
 intltool_merge(${CMAKE_CURRENT_SOURCE_DIR}/musicaggregator.ini.in musicaggregator.ini)

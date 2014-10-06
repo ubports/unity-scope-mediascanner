@@ -1,4 +1,4 @@
-include_directories(${UNITY_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
+include_directories(${UNITY_INCLUDE_DIRS})
 
 add_library(mediascanner-music MODULE music-scope.cpp)
 #set_target_properties(mediascanner-music PROPERTIES PREFIX "")
