@@ -9,12 +9,26 @@ configure_file(manifest.json.in manifest.json)
 intltool_merge(${CMAKE_CURRENT_SOURCE_DIR}/videoaggregator.ini.in videoaggregator.ini)
 intltool_merge(${CMAKE_CURRENT_SOURCE_DIR}/videoaggregator-settings.ini.in videoaggregator-settings.ini)
 
-click_build(com.ubuntu.scopes.video ${VERSION}
-  ${CMAKE_CURRENT_BINARY_DIR}/manifest.json apparmor.json)
-click_scope(com.ubuntu.scopes.video videoaggregator
-  videoaggregator
-  ${CMAKE_CURRENT_BINARY_DIR}/videoaggregator.ini
-  ${CMAKE_CURRENT_BINARY_DIR}/videoaggregator-settings.ini)
-click_scope_data(com.ubuntu.scopes.video videoaggregator
-  screenshot.jpg
-  icon.png)
+if(CLICK_MODE)
+  click_build(com.ubuntu.scopes.video ${VERSION}
+    ${CMAKE_CURRENT_BINARY_DIR}/manifest.json apparmor.json)
+  click_scope(com.ubuntu.scopes.video videoaggregator
+    videoaggregator
+    ${CMAKE_CURRENT_BINARY_DIR}/videoaggregator.ini
+    ${CMAKE_CURRENT_BINARY_DIR}/videoaggregator-settings.ini)
+  click_scope_data(com.ubuntu.scopes.video videoaggregator
+    screenshot.jpg
+    icon.png)
+else()
+  set(scopedir "${CMAKE_INSTALL_LIBDIR}/unity-scopes/videoaggregator")
+  install(
+    TARGETS videoaggregator
+    LIBRARY DESTINATION "${scopedir}")
+  install(
+    FILES
+      ${CMAKE_CURRENT_BINARY_DIR}/videoaggregator.ini
+      ${CMAKE_CURRENT_BINARY_DIR}/videoaggregator-settings.ini
+      screenshot.jpg
+      icon.png
+    DESTINATION "${scopedir}")
+endif(CLICK_MODE)
