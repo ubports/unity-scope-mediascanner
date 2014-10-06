@@ -14,7 +14,7 @@
 #include <unity/scopes/testing/Result.h>
 #include <unity/scopes/testing/TypedScopeFixture.h>
 
-#include "../src/video-scope.h"
+#include "../src/myvideos/video-scope.h"
 
 using namespace mediascanner;
 using namespace unity::scopes;

@@ -2,13 +2,10 @@
 _DisplayName=My Videos
 _Description=This is an Ubuntu search plugin that scans the device for videos and allows them to be searched and displayed in the Dash.
 Author=Canonical Ltd.
-Art=@SCOPES_DATADIR@/mediascanner-video/mediascanner-video-screenshot.jpg
-Icon=@SCOPES_DATADIR@/mediascanner-video/video-scope.png
+Art=./screenshot.jpg
+Icon=./icon.png
 _SearchHint=
 HotKey=
 
 [Appearance]
 LogoOverlayColor=#26000000
-
-[Desktop Entry]
-X-Ubuntu-Gettext-Domain=unity-scope-hollywood

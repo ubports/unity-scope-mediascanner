@@ -4,7 +4,6 @@ set(SCOPES_DATADIR "${CMAKE_INSTALL_FULL_DATADIR}/unity/scopes")
 set(SCOPES_LIBDIR "${CMAKE_INSTALL_FULL_LIBDIR}/unity-scopes")
 
 set(SCOPE_CONFIG_FILES
-  mediascanner-video.ini
   musicaggregator.ini
   musicaggregator-settings.ini
   videoaggregator.ini

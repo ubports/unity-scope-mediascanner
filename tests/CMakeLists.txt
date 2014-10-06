@@ -20,7 +20,7 @@ add_test(test-music-scope test-music-scope)
 
 add_executable(test-video-scope
   test-video-scope.cpp
-  ../src/video-scope.cpp
+  ../src/myvideos/video-scope.cpp
 )
 target_link_libraries(test-video-scope ${UNITY_LDFLAGS} ${gtest_libs} ${Boost_LIBRARIES})
 add_test(test-video-scope test-video-scope)

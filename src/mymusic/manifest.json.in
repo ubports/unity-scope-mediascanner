@@ -8,7 +8,7 @@
             "apparmor": "apparmor.json"
         }
     },
-    "icon": "youtube/icon.png",
+    "icon": "mymusic/icon.png",
     "maintainer": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
     "name": "com.ubuntu.scopes.mymusic",
     "title": "My Music scope",
