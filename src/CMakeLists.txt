@@ -1,15 +1,8 @@
-set(SCOPE_SOURCES
-  main.cpp
-  base-scope.cpp
-  music-scope.cpp
-  video-scope.cpp
-)
-
 include_directories(${UNITY_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 
-add_library(mediascanner-music MODULE music-scope.cpp)
-#set_target_properties(mediascanner-music PROPERTIES PREFIX "")
-target_link_libraries(mediascanner-music ${UNITY_LDFLAGS})
+#add_library(mediascanner-music MODULE music-scope.cpp)
+##set_target_properties(mediascanner-music PROPERTIES PREFIX "")
+#target_link_libraries(mediascanner-music ${UNITY_LDFLAGS})
 
 add_library(mediascanner-video MODULE video-scope.cpp)
 #set_target_properties(mediascanner-video PROPERTIES PREFIX "")
@@ -32,9 +25,9 @@ bufferedresultforwarder.cpp
 notify-strategy.cpp)
 target_link_libraries(videoaggregator ${UNITY_SCOPES_LDFLAGS})
 
-install(
-  TARGETS mediascanner-music
-  LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/unity-scopes/mediascanner-music")
+#install(
+#  TARGETS mediascanner-music
+#  LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/unity-scopes/mediascanner-music")
 
 install(
   TARGETS mediascanner-video
@@ -46,3 +39,4 @@ install(TARGETS musicaggregator
   install(TARGETS videoaggregator
   LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}/unity-scopes/videoaggregator")
   
+add_subdirectory(mymusic)

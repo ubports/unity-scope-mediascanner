@@ -1,5 +1,8 @@
 project(unity-scope-mediascanner C CXX)
 cmake_minimum_required(VERSION 2.8.9)
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" "${CMAKE_MODULE_PATH}")
+
+set(VERSION 0.3)
 
 find_package(PkgConfig REQUIRED)
 find_package(Threads REQUIRED)
@@ -14,14 +17,9 @@ pkg_check_modules(UNITY REQUIRED
 
 find_program(XGETTEXT_BIN xgettext)
 find_program(MSGFMT_BIN msgfmt)
-find_program(INTLTOOL_EXTRACT_BIN intltool-extract)
-find_program(INTLTOOL_MERGE_BIN intltool-merge)
 
 if(NOT MSGFMT_BIN)
   message(FATAL_ERROR "Gettext binaries not found.")
-endif()
-if(NOT INTLTOOL_MERGE_BIN)
-  message(FATAL_ERROR "Intltool binaries not found.")
 endif()
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wmissing-prototypes -pedantic -std=c99")
@@ -33,6 +31,9 @@ set(SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
 set(SOURCE_BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/src")
 
 include(GNUInstallDirs)
+include(ClickBuild)
+include(ClickScope)
+include(Intltool)
 
 set(GETTEXT_PACKAGE unity-scope-mediascanner)
 

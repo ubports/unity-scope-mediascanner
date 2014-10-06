@@ -13,7 +13,7 @@ include_directories(${UNITY_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 
 add_executable(test-music-scope
   test-music-scope.cpp
-  ../src/music-scope.cpp
+  ../src/mymusic/music-scope.cpp
 )
 target_link_libraries(test-music-scope ${UNITY_LDFLAGS} ${gtest_libs})
 add_test(test-music-scope test-music-scope)

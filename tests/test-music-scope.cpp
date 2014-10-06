@@ -14,7 +14,7 @@
 #include <unity/scopes/testing/Result.h>
 #include <unity/scopes/testing/TypedScopeFixture.h>
 
-#include "../src/music-scope.h"
+#include "../src/mymusic/music-scope.h"
 
 using namespace mediascanner;
 using namespace unity::scopes;
