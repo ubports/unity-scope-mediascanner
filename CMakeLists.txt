@@ -44,8 +44,11 @@ configure_file(
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 add_subdirectory("po")
-add_subdirectory("src")
-add_subdirectory("data")
+add_subdirectory("src/utils")
+add_subdirectory("src/musicaggregator")
+add_subdirectory("src/videoaggregator")
+add_subdirectory("src/mymusic")
+add_subdirectory("src/myvideos")
 
 enable_testing()
 add_subdirectory("tests")

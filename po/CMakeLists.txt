@@ -1,7 +1,7 @@
 file(GLOB_RECURSE CPPFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
-                   "${CMAKE_SOURCE_DIR}/src/*.cpp")
-file(GLOB INIFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
-                   "${CMAKE_SOURCE_DIR}/data/*.ini.in.in")
+                                    "${CMAKE_SOURCE_DIR}/src/*.cpp")
+file(GLOB_RECURSE INIFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
+                                    "${CMAKE_SOURCE_DIR}/src/*.ini.in")
 
 foreach(inifile ${INIFILES})
     get_filename_component(fname ${inifile} NAME)
