@@ -6,6 +6,7 @@ Art=@SCOPES_DATADIR@/musicaggregator/musicaggregator-screenshot.jpg
 Icon=@SCOPES_DATADIR@/mediascanner-music/music-scope.png
 _SearchHint=Search music
 HotKey=
+LocationDataNeeded=true
 
 [Appearance]
 LogoOverlayColor=#26000000

@@ -34,7 +34,8 @@ public:
             unity::scopes::ScopeProxy local_scope,
             unity::scopes::ScopeProxy const& grooveshark_scope,
             unity::scopes::ScopeProxy const& soundcloud_scope,
-            unity::scopes::ScopeProxy const& sevendigital_scope);
+            unity::scopes::ScopeProxy const& sevendigital_scope,
+            unity::scopes::ScopeProxy const& songkick_scope);
     ~MusicAggregatorQuery();
     virtual void cancelled() override;
 
@@ -45,6 +46,7 @@ private:
     unity::scopes::ScopeProxy grooveshark_scope;
     unity::scopes::ScopeProxy soundcloud_scope;
     unity::scopes::ScopeProxy sevendigital_scope;
+    unity::scopes::ScopeProxy songkick_scope;
     static const std::string grooveshark_songs_category_id;
 };
 
