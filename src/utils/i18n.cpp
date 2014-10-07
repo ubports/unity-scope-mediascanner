@@ -24,7 +24,7 @@ void init_gettext(const ScopeBase &scope) {
     setlocale(LC_ALL, "");
 
 #ifdef CLICK_MODE
-    std::string locale_dir = scope.scope_directory() + "/locale";
+    std::string locale_dir = scope.scope_directory() + "/../locale";
     bindtextdomain(GETTEXT_PACKAGE, locale_dir.c_str());
 #else
     bindtextdomain(GETTEXT_PACKAGE, LOCALE_DIR);
