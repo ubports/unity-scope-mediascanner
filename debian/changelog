@@ -1,3 +1,13 @@
+unity-scope-mediascanner (0.2+14.10.20141007-0ubuntu1) utopic; urgency=low
+
+  [ Chris Wayne ]
+  * New header, as per design (LP: #1377150)
+
+  [ James Henstridge ]
+  * Add results from the Songkick scope to the music aggregator scope.
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 07 Oct 2014 15:13:27 +0000
+
 unity-scope-mediascanner (0.2+14.10.20140930-0ubuntu1) utopic; urgency=low
 
   [ Pawel Stolowski ]
