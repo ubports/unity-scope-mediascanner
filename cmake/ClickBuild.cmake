@@ -23,7 +23,8 @@ macro(click_build _pkg _version _manifest _apparmor)
 
   add_custom_target(
     ${_pkg}.click
-    COMMAND ${click_bin} build ${_builddir})
+    COMMAND ${click_bin} build ${_builddir}
+    WORKING_DIRECTORY ${CMAKE_INSTALL_PREFIX})
   set_target_properties(${_pkg}.click PROPERTIES
     OUTPUT_NAME ${_pkg}_${_version}_${CLICK_ARCH}.click
     CLICK_DIR ${_builddir})
