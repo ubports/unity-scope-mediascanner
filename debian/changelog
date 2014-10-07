@@ -1,3 +1,17 @@
+unity-scope-mediascanner (0.2+14.10.20140930-0ubuntu1) utopic; urgency=low
+
+  [ Pawel Stolowski ]
+  * Enable video:// uris back. (LP: #1375349)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Tue, 30 Sep 2014 20:50:14 +0000
+
+unity-scope-mediascanner (0.2+14.10.20140925-0ubuntu1) utopic; urgency=low
+
+  [ Pawel Stolowski ]
+  * Pass API key with dash.ubuntu.com requests. (LP: #1362176)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 25 Sep 2014 10:32:14 +0000
+
 unity-scope-mediascanner (0.2+14.10.20140910-0ubuntu1) utopic; urgency=low
 
   [ CI bot ]

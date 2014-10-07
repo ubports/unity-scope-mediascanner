@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-31 16:02+0200\n"
-"PO-Revision-Date: 2014-08-21 11:00+0000\n"
+"PO-Revision-Date: 2014-09-20 11:10+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <is@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-22 07:39+0000\n"
-"X-Generator: Launchpad (build 17163)\n"
+"X-Launchpad-Export-Date: 2014-10-03 06:22+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
 #: ../src/video-scope.cpp:140
 msgid "Everything"
@@ -23,7 +23,7 @@ msgstr "Allt"
 
 #: ../src/video-scope.cpp:142
 msgid "My Roll"
-msgstr ""
+msgstr "Filman mín"
 
 #: ../src/video-scope.cpp:143
 msgid "Downloaded"
@@ -96,16 +96,22 @@ msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
+"Þetta er leitarviðbót fyrir Ubuntu sem skannar alla tónlist á tækinu og "
+"gerir þannig kleift að leita hratt og birta niðurstöður í skjáborðsleitinni "
+"(Dash)."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr ""
+msgstr "Leita í tónlist á tölvunni"
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
+"Þetta er leitarviðbót fyrir Ubuntu sem skannar öll myndskeið á tækinu og "
+"gerir þannig kleift að leita hratt og birta niðurstöður í skjáborðsleitinni "
+"(Dash)."
 
 #: tmp/musicaggregator-settings.ini.in.in.h:1
 msgid "Display results from Grooveshark"
@@ -123,6 +129,8 @@ msgstr "Tónlist"
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr ""
+"Þetta er leitarviðbót fyrir Ubuntu sem sameinar alla tiltæka tónlistarbrunna "
+"á einn stað."
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
@@ -140,6 +148,8 @@ msgstr "Myndskeið"
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr ""
+"Þetta er leitarviðbót fyrir Ubuntu sem sameinar alla tiltæka "
+"myndskeiðabrunna á einn stað."
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"

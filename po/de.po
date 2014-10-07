@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-07-31 16:02+0200\n"
-"PO-Revision-Date: 2014-08-26 10:23+0000\n"
+"PO-Revision-Date: 2014-09-22 09:35+0000\n"
 "Last-Translator: Martin Pitt <martin.pitt@ubuntu.com>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-27 07:46+0000\n"
-"X-Generator: Launchpad (build 17174)\n"
+"X-Launchpad-Export-Date: 2014-10-03 06:22+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
 #: ../src/video-scope.cpp:140
 msgid "Everything"
@@ -23,7 +23,7 @@ msgstr "Alles"
 
 #: ../src/video-scope.cpp:142
 msgid "My Roll"
-msgstr ""
+msgstr "Meine Liste"
 
 #: ../src/video-scope.cpp:143
 msgid "Downloaded"
@@ -113,7 +113,7 @@ msgstr ""
 
 #: tmp/musicaggregator-settings.ini.in.in.h:1
 msgid "Display results from Grooveshark"
-msgstr "Ergebnisse von Grooveshar anzeigen"
+msgstr "Ergebnisse von Grooveshark anzeigen"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:2
 msgid "Display results from 7digital"
