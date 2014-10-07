@@ -10,6 +10,7 @@ LocationDataNeeded=true
 
 [Appearance]
 LogoOverlayColor=#26000000
+PageHeader.Background=@SCOPES_DATADIR@/paper-white-bg-v2.png
 
 [Desktop Entry]
 X-Ubuntu-Gettext-Domain=unity-scope-musicaggregator
