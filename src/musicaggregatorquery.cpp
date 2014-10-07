@@ -198,9 +198,9 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     std::vector<unity::scopes::ScopeProxy> scopes({local_scope});
 
     const CannedQuery mymusic_query(MusicAggregatorScope::LOCALSCOPE, query().query_string(), "");
-    const CannedQuery grooveshark_query(MusicAggregatorScope::GROOVESHARKSCOPE, query().query_string(), "");
     const CannedQuery sevendigital_query(MusicAggregatorScope::SEVENDIGITAL, query().query_string(), "newreleases");
     const CannedQuery songkick_query(MusicAggregatorScope::SONGKICK, query().query_string(), "");
+    const CannedQuery grooveshark_query(MusicAggregatorScope::GROOVESHARKSCOPE, query().query_string(), "");
 
     const bool empty_search = query().query_string().empty();
 
@@ -209,15 +209,15 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     auto mymusic_cat = empty_search ? parent_reply->register_category("mymusic", _("My Music"), "",
             mymusic_query, CategoryRenderer(MYMUSIC_CATEGORY_DEFINITION))
         : parent_reply->register_category("mymusic", _("My Music"), "", CategoryRenderer(MYMUSIC_SEARCH_CATEGORY_DEFINITION));
-    auto grooveshark_cat = empty_search ? parent_reply->register_category("grooveshark", _("Popular tracks on Grooveshark"), "",
-            grooveshark_query, CategoryRenderer(GROOVESHARK_CATEGORY_DEFINITION))
-        : parent_reply->register_category("grooveshark", _("Grooveshark"), "", CategoryRenderer(GROOVESHARK_SEARCH_CATEGORY_DEFINITION));
     auto sevendigital_cat = empty_search ? parent_reply->register_category("7digital", _("New albums from 7digital"), "",
             sevendigital_query, CategoryRenderer(SEVENDIGITAL_CATEGORY_DEFINITION))
         : parent_reply->register_category("7digital", _("7digital"), "", CategoryRenderer(SEVENDIGITAL_SEARCH_CATEGORY_DEFINITION));
     auto songkick_cat = empty_search ? parent_reply->register_category("songkick", _("Nearby Events on Songkick"), "",
             songkick_query, CategoryRenderer(SONGKICK_CATEGORY_DEFINITION))
         : parent_reply->register_category("songkick", _("Songkick"), "", CategoryRenderer(SONGKICK_SEARCH_CATEGORY_DEFINITION));
+    auto grooveshark_cat = empty_search ? parent_reply->register_category("grooveshark", _("Popular tracks on Grooveshark"), "",
+            grooveshark_query, CategoryRenderer(GROOVESHARK_CATEGORY_DEFINITION))
+        : parent_reply->register_category("grooveshark", _("Grooveshark"), "", CategoryRenderer(GROOVESHARK_SEARCH_CATEGORY_DEFINITION));
 
     {
         auto local_reply = std::make_shared<ResultForwarder>(parent_reply, [this, mymusic_cat](CategorisedResult& res) -> bool {
@@ -227,25 +227,6 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
         replies.push_back(local_reply);
     }
 
-    if (grooveshark_scope)
-    {
-        scopes.push_back(grooveshark_scope);
-
-        auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, grooveshark_cat](CategorisedResult& res) -> bool {
-                    if (res.category()->id() == grooveshark_songs_category_id)
-                    {
-                        res.set_category(grooveshark_cat);
-                        return true;
-                    }
-                    return false;
-                });
-
-        replies.push_back(reply);
-    }
-    if (soundcloud_scope)
-    {
-        // TODO when available
-    }
     if (sevendigital_scope)
     {
         scopes.push_back(sevendigital_scope);
@@ -266,6 +247,25 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
                 return true;
             });
         replies.push_back(reply);
+    }
+    if (grooveshark_scope)
+    {
+        scopes.push_back(grooveshark_scope);
+
+        auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, grooveshark_cat](CategorisedResult& res) -> bool {
+                    if (res.category()->id() == grooveshark_songs_category_id)
+                    {
+                        res.set_category(grooveshark_cat);
+                        return true;
+                    }
+                    return false;
+                });
+
+        replies.push_back(reply);
+    }
+    if (soundcloud_scope)
+    {
+        // TODO when available
     }
 
     // create and chain result forwarders to enforce proper order of categories
