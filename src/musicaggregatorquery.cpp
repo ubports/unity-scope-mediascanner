@@ -259,6 +259,9 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     {
         scopes.push_back(songkick_scope);
         auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, songkick_cat](CategorisedResult& res) -> bool {
+                if (res.category()->id() == "noloc") {
+                    return false;
+                }
                 res.set_category(songkick_cat);
                 return true;
             });
