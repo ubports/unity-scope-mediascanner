@@ -2,7 +2,7 @@ include_directories(${UNITY_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 
 add_library(mediascanner-video MODULE video-scope.cpp)
 #set_target_properties(mediascanner-video PROPERTIES PREFIX "")
-target_link_libraries(mediascanner-video ${UNITY_LDFLAGS} ${Boost_LIBRARIES})
+target_link_libraries(mediascanner-video scope-utils ${UNITY_LDFLAGS} ${Boost_LIBRARIES})
 
 configure_file(manifest.json.in manifest.json)
 intltool_merge(${CMAKE_CURRENT_SOURCE_DIR}/mediascanner-video.ini.in mediascanner-video.ini)

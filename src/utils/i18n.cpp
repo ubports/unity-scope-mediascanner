@@ -14,19 +14,19 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SCOPE_I18N_H
-#define SCOPE_I18N_H
+#include <config.h>
+#include "i18n.h"
+#include <unity/scopes/ScopeBase.h>
 
-#include <libintl.h>
+using unity::scopes::ScopeBase;
 
-#define _(value) dgettext(GETTEXT_PACKAGE, value)
+void init_gettext(const ScopeBase &scope) {
+    setlocale(LC_ALL, "");
 
-namespace unity {
-namespace scopes {
-class ScopeBase;
-}
-}
-
-void init_gettext(const unity::scopes::ScopeBase &scope);
-
+#ifdef CLICK_MODE
+    std::string locale_dir = scope.scope_directory() + "/locale";
+    bindtextdomain(GETTEXT_PACKAGE, locale_dir.c_str());
+#else
+    bindtextdomain(GETTEXT_PACKAGE, LOCALE_DIR);
 #endif
+}

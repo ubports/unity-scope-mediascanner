@@ -24,6 +24,7 @@
 #include <unity/scopes/CategoryRenderer.h>
 #include <vector>
 #include <iostream>
+#include "../utils/i18n.h"
 
 using namespace unity::scopes;
 
@@ -33,7 +34,7 @@ const std::string MusicAggregatorScope::SEVENDIGITAL = "com.canonical.scopes.sev
 const std::string MusicAggregatorScope::SOUNDCLOUD = "com.canonical.scopes.soundcloud";
 
 void MusicAggregatorScope::start(std::string const&) {
-    setlocale(LC_ALL, "");
+    init_gettext(*this);
     CategoryRenderer basic;
     local_scope = registry()->get_metadata(LOCALSCOPE).proxy();
 }

@@ -101,7 +101,7 @@ enum class VideoType {
 };
 
 void VideoScope::start(std::string const&) {
-    setlocale(LC_ALL, "");
+    init_gettext(*this);
     store.reset(new MediaStore(MS_READ_ONLY));
 }
 
