@@ -18,7 +18,9 @@ if(CLICK_MODE)
     ${CMAKE_CURRENT_BINARY_DIR}/videoaggregator-settings.ini)
   click_scope_data(com.ubuntu.scopes.video videoaggregator
     screenshot.jpg
-    icon.png)
+    icon.png
+    paper-white-bg-v2.png
+    )
 else()
   set(scopedir "${CMAKE_INSTALL_LIBDIR}/unity-scopes/videoaggregator")
   install(
@@ -30,5 +32,6 @@ else()
       ${CMAKE_CURRENT_BINARY_DIR}/videoaggregator-settings.ini
       screenshot.jpg
       icon.png
+      paper-white-bg-v2.png
     DESTINATION "${scopedir}")
 endif(CLICK_MODE)

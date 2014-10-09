@@ -16,7 +16,7 @@ add_executable(test-music-scope
   ../src/mymusic/music-scope.cpp
 )
 target_link_libraries(test-music-scope
-  scope-utils ${UNITY_LDFLAGS} ${gtest_libs})
+  scope-utils ${UNITY_LDFLAGS} ${gtest_libs} ${GIO_DEPS_LDFLAGS})
 add_test(test-music-scope test-music-scope)
 
 add_executable(test-video-scope

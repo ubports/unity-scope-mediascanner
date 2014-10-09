@@ -35,3 +35,8 @@ install(
   FILES videoaggregator-screenshot.jpg
   DESTINATION "${SCOPES_DATADIR}/videoaggregator"
 )
+
+install(
+  FILES paper-white-bg-v2.png
+  DESTINATION "${SCOPES_DATADIR}"
+)

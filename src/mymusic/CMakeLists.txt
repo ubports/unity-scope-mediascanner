@@ -2,7 +2,7 @@ include_directories(${UNITY_INCLUDE_DIRS})
 
 add_library(mediascanner-music MODULE music-scope.cpp)
 #set_target_properties(mediascanner-music PROPERTIES PREFIX "")
-target_link_libraries(mediascanner-music scope-utils ${UNITY_LDFLAGS})
+target_link_libraries(mediascanner-music scope-utils ${UNITY_LDFLAGS} ${GIO_DEPS_LDFLAGS})
 
 configure_file(manifest.json.in manifest.json)
 intltool_merge(${CMAKE_CURRENT_SOURCE_DIR}/mediascanner-music.ini.in mediascanner-music.ini)

@@ -1,9 +1,14 @@
-[com.canonical.scopes.grooveshark]
-type=boolean
-defaultValue=true
-_displayName=Display results from Grooveshark
-
 [com.canonical.scopes.sevendigital]
 type=boolean
 defaultValue=true
 _displayName=Display results from 7digital
+
+[com.canonical.scopes.songkick_songkick]
+type=boolean
+defaultValue=true
+_displayName=Display results from Songkick
+
+[com.canonical.scopes.grooveshark]
+type=boolean
+defaultValue=true
+_displayName=Display results from Grooveshark

@@ -32,6 +32,7 @@
 #include <unity/scopes/CategoryRenderer.h>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/CannedQuery.h>
+#include <unity/scopes/Location.h>
 #include <unity/scopes/SearchReply.h>
 #include <unity/scopes/SearchMetadata.h>
 
@@ -134,19 +135,54 @@ static const char SEVENDIGITAL_SEARCH_CATEGORY_DEFINITION[] = R"(
 }
 )";
 
+static const char SONGKICK_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-size": "large",
+    "card-layout": "horizontal"
+  },
+  "components": {
+    "title": "title",
+    "art": "art",
+    "subtitle": "subtitle"
+  }
+}
+)";
+
+static const char SONGKICK_SEARCH_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-size": "large",
+    "card-layout": "horizontal"
+  },
+  "components": {
+    "title": "title",
+    "mascot":  "art",
+    "subtitle": "address",
+    "attributes": "attributes"
+  }
+}
+)";
+
 const std::string MusicAggregatorQuery::grooveshark_songs_category_id = "cat_0";
 
 MusicAggregatorQuery::MusicAggregatorQuery(CannedQuery const& query, SearchMetadata const& hints,
         ScopeProxy local_scope,
         ScopeProxy const& grooveshark_scope,
         ScopeProxy const& soundcloud_scope,
-        ScopeProxy const& sevendigital_scope
+        ScopeProxy const& sevendigital_scope,
+        ScopeProxy const& songkick_scope
         ) :
     SearchQueryBase(query, hints),
     local_scope(local_scope),
     grooveshark_scope(grooveshark_scope),
     soundcloud_scope(soundcloud_scope),
-    sevendigital_scope(sevendigital_scope)
+    sevendigital_scope(sevendigital_scope),
+    songkick_scope(songkick_scope)
 {
 }
 
@@ -162,8 +198,9 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     std::vector<unity::scopes::ScopeProxy> scopes({local_scope});
 
     const CannedQuery mymusic_query(MusicAggregatorScope::LOCALSCOPE, query().query_string(), "");
-    const CannedQuery grooveshark_query(MusicAggregatorScope::GROOVESHARKSCOPE, query().query_string(), "");
     const CannedQuery sevendigital_query(MusicAggregatorScope::SEVENDIGITAL, query().query_string(), "newreleases");
+    const CannedQuery songkick_query(MusicAggregatorScope::SONGKICK, query().query_string(), "");
+    const CannedQuery grooveshark_query(MusicAggregatorScope::GROOVESHARKSCOPE, query().query_string(), "");
 
     const bool empty_search = query().query_string().empty();
 
@@ -172,12 +209,15 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     auto mymusic_cat = empty_search ? parent_reply->register_category("mymusic", _("My Music"), "",
             mymusic_query, CategoryRenderer(MYMUSIC_CATEGORY_DEFINITION))
         : parent_reply->register_category("mymusic", _("My Music"), "", CategoryRenderer(MYMUSIC_SEARCH_CATEGORY_DEFINITION));
-    auto grooveshark_cat = empty_search ? parent_reply->register_category("grooveshark", _("Popular tracks on Grooveshark"), "",
-            grooveshark_query, CategoryRenderer(GROOVESHARK_CATEGORY_DEFINITION))
-        : parent_reply->register_category("grooveshark", _("Grooveshark"), "", CategoryRenderer(GROOVESHARK_SEARCH_CATEGORY_DEFINITION));
     auto sevendigital_cat = empty_search ? parent_reply->register_category("7digital", _("New albums from 7digital"), "",
             sevendigital_query, CategoryRenderer(SEVENDIGITAL_CATEGORY_DEFINITION))
         : parent_reply->register_category("7digital", _("7digital"), "", CategoryRenderer(SEVENDIGITAL_SEARCH_CATEGORY_DEFINITION));
+    auto songkick_cat = empty_search ? parent_reply->register_category("songkick", _("Nearby Events on Songkick"), "",
+            songkick_query, CategoryRenderer(SONGKICK_CATEGORY_DEFINITION))
+        : parent_reply->register_category("songkick", _("Songkick"), "", CategoryRenderer(SONGKICK_SEARCH_CATEGORY_DEFINITION));
+    auto grooveshark_cat = empty_search ? parent_reply->register_category("grooveshark", _("Popular tracks on Grooveshark"), "",
+            grooveshark_query, CategoryRenderer(GROOVESHARK_CATEGORY_DEFINITION))
+        : parent_reply->register_category("grooveshark", _("Grooveshark"), "", CategoryRenderer(GROOVESHARK_SEARCH_CATEGORY_DEFINITION));
 
     {
         auto local_reply = std::make_shared<ResultForwarder>(parent_reply, [this, mymusic_cat](CategorisedResult& res) -> bool {
@@ -187,6 +227,27 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
         replies.push_back(local_reply);
     }
 
+    if (sevendigital_scope)
+    {
+        scopes.push_back(sevendigital_scope);
+        auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, sevendigital_cat](CategorisedResult& res) -> bool {
+                res.set_category(sevendigital_cat);
+                return true;
+                });
+        replies.push_back(reply);
+    }
+    if (songkick_scope)
+    {
+        scopes.push_back(songkick_scope);
+        auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, songkick_cat](CategorisedResult& res) -> bool {
+                if (res.category()->id() == "noloc") {
+                    return false;
+                }
+                res.set_category(songkick_cat);
+                return true;
+            });
+        replies.push_back(reply);
+    }
     if (grooveshark_scope)
     {
         scopes.push_back(grooveshark_scope);
@@ -205,15 +266,6 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     if (soundcloud_scope)
     {
         // TODO when available
-    }
-    if (sevendigital_scope)
-    {
-        scopes.push_back(sevendigital_scope);
-        auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, sevendigital_cat](CategorisedResult& res) -> bool {
-                res.set_category(sevendigital_cat);
-                return true;
-                });
-        replies.push_back(reply);
     }
 
     // create and chain result forwarders to enforce proper order of categories
@@ -249,6 +301,20 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
                 metadata.set_cardinality(3);
             }
         }
+        else if (scopes[i] == songkick_scope)
+        {
+            if (empty_search)
+            {
+                metadata.set_cardinality(2);
+            }
+        }
+
+        // Don't send location data to scopes that don't need it.
+        if (scopes[i] != songkick_scope)
+        {
+            metadata.set_location(Location(0, 0));
+        }
+
         subsearch(scopes[i], query().query_string(), dept, FilterState(), metadata, replies[i]);
     }
 }
