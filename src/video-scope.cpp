@@ -130,7 +130,7 @@ void VideoQuery::cancelled() {
 }
 
 static bool from_camera(const std::string &filename) {
-    static const boost::regex pattern(R"(.*/video\d{8}_\d{4}\.mp4$)");
+    static const boost::regex pattern(R"(.*/video\d{8}_\d{4,}\.mp4$)");
     return boost::regex_match(filename, pattern);
 }
 
