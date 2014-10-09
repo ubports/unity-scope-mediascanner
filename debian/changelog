@@ -1,3 +1,11 @@
+unity-scope-mediascanner (0.2+14.10.20141009-0ubuntu1) utopic; urgency=low
+
+  [ Pawel Stolowski ]
+  * Adjusted the regular expression used to find videos captured by
+    camera app. (LP: #1379350)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 09 Oct 2014 15:01:01 +0000
+
 unity-scope-mediascanner (0.2+14.10.20141007-0ubuntu1) utopic; urgency=low
 
   [ Chris Wayne ]
