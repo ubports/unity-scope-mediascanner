@@ -17,6 +17,7 @@
  *
  */
 
+#include <config.h>
 #include "videoaggregatorscope.h"
 #include "videoaggregatorquery.h"
 #include <unity/scopes/Registry.h>
@@ -28,7 +29,11 @@
 using namespace unity::scopes;
 
 const std::vector<const char*> SUBSCOPE_NAMES{
+#ifdef CLICK_MODE
+    "com.ubuntu.scopes.myvideos_myvideos",
+#else
     "mediascanner-video",
+#endif
     "com.ubuntu.scopes.youtube_youtube",
 };
 

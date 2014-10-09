@@ -17,6 +17,7 @@
  *
  */
 
+#include <config.h>
 #include "musicaggregatorscope.h"
 #include "musicaggregatorquery.h"
 #include <unity/scopes/Registry.h>
@@ -28,7 +29,11 @@
 
 using namespace unity::scopes;
 
+#ifdef CLICK_MODE
+const std::string MusicAggregatorScope::LOCALSCOPE = "com.ubuntu.scopes.mymusic_mymusic";
+#else
 const std::string MusicAggregatorScope::LOCALSCOPE = "mediascanner-music";
+#endif
 const std::string MusicAggregatorScope::GROOVESHARKSCOPE = "com.canonical.scopes.grooveshark";
 const std::string MusicAggregatorScope::SEVENDIGITAL = "com.canonical.scopes.sevendigital";
 const std::string MusicAggregatorScope::SOUNDCLOUD = "com.canonical.scopes.soundcloud";
