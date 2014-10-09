@@ -7,57 +7,87 @@ msgid ""
 msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-07-31 16:02+0200\n"
+"POT-Creation-Date: 2014-09-16 13:50+0800\n"
 "PO-Revision-Date: 2014-08-05 00:24+0000\n"
 "Last-Translator: Ibai Oihanguren Sala <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-03 06:22+0000\n"
+"X-Launchpad-Export-Date: 2014-10-09 06:37+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
-#: ../src/video-scope.cpp:140
-msgid "Everything"
-msgstr "Guztia"
+#: ../src/music-scope.cpp:219 ../src/music-scope.cpp:280
+msgid "Artists"
+msgstr "Artistak"
 
-#: ../src/video-scope.cpp:142
-msgid "My Roll"
-msgstr "Nire argazki-filma"
+#: ../src/music-scope.cpp:220 ../src/music-scope.cpp:449
+#: ../src/music-scope.cpp:492
+msgid "Albums"
+msgstr "Albumak"
 
-#: ../src/video-scope.cpp:143
-msgid "Downloaded"
-msgstr "Deskargatuak"
+#: ../src/music-scope.cpp:221 ../src/music-scope.cpp:324
+#: ../src/music-scope.cpp:339
+msgid "Tracks"
+msgstr "Abestiak"
 
-#: ../src/video-scope.cpp:161 ../src/video-scope.cpp:166
-#: tmp/mediascanner-video.ini.in.in.h:1
-msgid "My Videos"
-msgstr "Nire bideoak"
+#: ../src/music-scope.cpp:222
+msgid "Genres"
+msgstr "Generoak"
 
-#: ../src/video-scope.cpp:234
-msgid "Play"
-msgstr "Erreproduzitu"
+#: ../src/music-scope.cpp:568 ../src/music-scope.cpp:600
+msgid "Play in music app"
+msgstr "Erreproduzitu musika-aplikazioan"
 
-#: ../src/musicaggregatorquery.cpp:173 ../src/musicaggregatorquery.cpp:175
+#: ../src/musicaggregatorquery.cpp:206 ../src/musicaggregatorquery.cpp:208
 #: tmp/mediascanner-music.ini.in.in.h:1
 msgid "My Music"
 msgstr "Nire musika"
 
-#: ../src/musicaggregatorquery.cpp:176
+#: ../src/musicaggregatorquery.cpp:209
 msgid "Popular tracks on Grooveshark"
 msgstr "Grooveshark-eko abesti arrakastatsuak"
 
-#: ../src/musicaggregatorquery.cpp:178
+#: ../src/musicaggregatorquery.cpp:211
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: ../src/musicaggregatorquery.cpp:179
+#: ../src/musicaggregatorquery.cpp:212
 msgid "New albums from 7digital"
 msgstr "7digital-eko album berriak"
 
-#: ../src/musicaggregatorquery.cpp:181
+#: ../src/musicaggregatorquery.cpp:214
 msgid "7digital"
 msgstr "7digital"
+
+#: ../src/musicaggregatorquery.cpp:215
+msgid "Nearby Events on Songkick"
+msgstr ""
+
+#: ../src/musicaggregatorquery.cpp:217
+msgid "Songkick"
+msgstr ""
+
+#: ../src/video-scope.cpp:141
+msgid "Everything"
+msgstr "Guztia"
+
+#: ../src/video-scope.cpp:143
+msgid "My Roll"
+msgstr "Nire argazki-filma"
+
+#: ../src/video-scope.cpp:144
+msgid "Downloaded"
+msgstr "Deskargatuak"
+
+#: ../src/video-scope.cpp:162 ../src/video-scope.cpp:167
+#: tmp/mediascanner-video.ini.in.in.h:1
+msgid "My Videos"
+msgstr "Nire bideoak"
+
+#: ../src/video-scope.cpp:248
+msgid "Play"
+msgstr "Erreproduzitu"
 
 #: ../src/videoaggregatorquery.cpp:130
 #, c-format
@@ -68,28 +98,6 @@ msgstr "%s(r)en eginbideak"
 #, c-format
 msgid "Results from %s"
 msgstr "%s(e)ko emaitzak"
-
-#: ../src/music-scope.cpp:182 ../src/music-scope.cpp:352
-#: ../src/music-scope.cpp:369
-msgid "Albums"
-msgstr "Albumak"
-
-#: ../src/music-scope.cpp:183 ../src/music-scope.cpp:266
-#: ../src/music-scope.cpp:279
-msgid "Tracks"
-msgstr "Abestiak"
-
-#: ../src/music-scope.cpp:184
-msgid "Genres"
-msgstr "Generoak"
-
-#: ../src/music-scope.cpp:242
-msgid "Artists"
-msgstr "Artistak"
-
-#: ../src/music-scope.cpp:451 ../src/music-scope.cpp:490
-msgid "Play in music app"
-msgstr "Erreproduzitu musika-aplikazioan"
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
@@ -118,6 +126,10 @@ msgstr "Erakutsi Grooveshark-eko emaitzak"
 #: tmp/musicaggregator-settings.ini.in.in.h:2
 msgid "Display results from 7digital"
 msgstr "Erakutsi 7digital-eko emaitzak"
+
+#: tmp/musicaggregator-settings.ini.in.in.h:3
+msgid "Display results from Songkick"
+msgstr ""
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"

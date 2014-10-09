@@ -7,57 +7,87 @@ msgid ""
 msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-07-31 16:02+0200\n"
+"POT-Creation-Date: 2014-09-16 13:50+0800\n"
 "PO-Revision-Date: 2014-08-25 09:09+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-03 06:22+0000\n"
+"X-Launchpad-Export-Date: 2014-10-09 06:37+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
-#: ../src/video-scope.cpp:140
-msgid "Everything"
-msgstr "הכול"
+#: ../src/music-scope.cpp:219 ../src/music-scope.cpp:280
+msgid "Artists"
+msgstr "אמנים"
 
-#: ../src/video-scope.cpp:142
-msgid "My Roll"
-msgstr "סרט הצילום שלי"
+#: ../src/music-scope.cpp:220 ../src/music-scope.cpp:449
+#: ../src/music-scope.cpp:492
+msgid "Albums"
+msgstr "אלבומים"
 
-#: ../src/video-scope.cpp:143
-msgid "Downloaded"
-msgstr "התקבל"
+#: ../src/music-scope.cpp:221 ../src/music-scope.cpp:324
+#: ../src/music-scope.cpp:339
+msgid "Tracks"
+msgstr "רצועות"
 
-#: ../src/video-scope.cpp:161 ../src/video-scope.cpp:166
-#: tmp/mediascanner-video.ini.in.in.h:1
-msgid "My Videos"
-msgstr "סרטוני הווידאו שלי"
+#: ../src/music-scope.cpp:222
+msgid "Genres"
+msgstr "סגנונות"
 
-#: ../src/video-scope.cpp:234
-msgid "Play"
-msgstr "נגינה"
+#: ../src/music-scope.cpp:568 ../src/music-scope.cpp:600
+msgid "Play in music app"
+msgstr "השמעה ביישום המוזיקה"
 
-#: ../src/musicaggregatorquery.cpp:173 ../src/musicaggregatorquery.cpp:175
+#: ../src/musicaggregatorquery.cpp:206 ../src/musicaggregatorquery.cpp:208
 #: tmp/mediascanner-music.ini.in.in.h:1
 msgid "My Music"
 msgstr "המוזיקה שלי"
 
-#: ../src/musicaggregatorquery.cpp:176
+#: ../src/musicaggregatorquery.cpp:209
 msgid "Popular tracks on Grooveshark"
 msgstr "רצועות נפוצות ב־Grooveshark"
 
-#: ../src/musicaggregatorquery.cpp:178
+#: ../src/musicaggregatorquery.cpp:211
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: ../src/musicaggregatorquery.cpp:179
+#: ../src/musicaggregatorquery.cpp:212
 msgid "New albums from 7digital"
 msgstr "אלבומים חדשים מאת 7digital"
 
-#: ../src/musicaggregatorquery.cpp:181
+#: ../src/musicaggregatorquery.cpp:214
 msgid "7digital"
 msgstr "7digital"
+
+#: ../src/musicaggregatorquery.cpp:215
+msgid "Nearby Events on Songkick"
+msgstr ""
+
+#: ../src/musicaggregatorquery.cpp:217
+msgid "Songkick"
+msgstr ""
+
+#: ../src/video-scope.cpp:141
+msgid "Everything"
+msgstr "הכול"
+
+#: ../src/video-scope.cpp:143
+msgid "My Roll"
+msgstr "סרט הצילום שלי"
+
+#: ../src/video-scope.cpp:144
+msgid "Downloaded"
+msgstr "התקבל"
+
+#: ../src/video-scope.cpp:162 ../src/video-scope.cpp:167
+#: tmp/mediascanner-video.ini.in.in.h:1
+msgid "My Videos"
+msgstr "סרטוני הווידאו שלי"
+
+#: ../src/video-scope.cpp:248
+msgid "Play"
+msgstr "נגינה"
 
 #: ../src/videoaggregatorquery.cpp:130
 #, c-format
@@ -68,28 +98,6 @@ msgstr "התכונות של %s"
 #, c-format
 msgid "Results from %s"
 msgstr "תוצאות מ־%s"
-
-#: ../src/music-scope.cpp:182 ../src/music-scope.cpp:352
-#: ../src/music-scope.cpp:369
-msgid "Albums"
-msgstr "אלבומים"
-
-#: ../src/music-scope.cpp:183 ../src/music-scope.cpp:266
-#: ../src/music-scope.cpp:279
-msgid "Tracks"
-msgstr "רצועות"
-
-#: ../src/music-scope.cpp:184
-msgid "Genres"
-msgstr "סגנונות"
-
-#: ../src/music-scope.cpp:242
-msgid "Artists"
-msgstr "אמנים"
-
-#: ../src/music-scope.cpp:451 ../src/music-scope.cpp:490
-msgid "Play in music app"
-msgstr "השמעה ביישום המוזיקה"
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
@@ -118,6 +126,10 @@ msgstr "הצגת תוצאות מ־Grooveshark"
 #: tmp/musicaggregator-settings.ini.in.in.h:2
 msgid "Display results from 7digital"
 msgstr "הצגת תוצאות מ־7digital"
+
+#: tmp/musicaggregator-settings.ini.in.in.h:3
+msgid "Display results from Songkick"
+msgstr ""
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
