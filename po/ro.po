@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-16 13:50+0800\n"
-"PO-Revision-Date: 2014-08-09 07:16+0000\n"
+"PO-Revision-Date: 2014-10-10 08:53+0000\n"
 "Last-Translator: Marian Vasile <marianvasile1972@gmail.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-09 06:37+0000\n"
+"X-Launchpad-Export-Date: 2014-10-11 05:13+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: ../src/music-scope.cpp:219 ../src/music-scope.cpp:280
@@ -62,11 +62,11 @@ msgstr "7digital"
 
 #: ../src/musicaggregatorquery.cpp:215
 msgid "Nearby Events on Songkick"
-msgstr ""
+msgstr "Evenimente apropiate pe Songkick"
 
 #: ../src/musicaggregatorquery.cpp:217
 msgid "Songkick"
-msgstr ""
+msgstr "Songkick"
 
 #: ../src/video-scope.cpp:141
 msgid "Everything"
@@ -130,7 +130,7 @@ msgstr "Afișează rezultate de la 7digital"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:3
 msgid "Display results from Songkick"
-msgstr ""
+msgstr "Afișează rezultate de la Songkick"
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
