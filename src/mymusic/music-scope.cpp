@@ -36,7 +36,7 @@
 #include <unity/scopes/VariantBuilder.h>
 
 #include "music-scope.h"
-#include "i18n.h"
+#include "../utils/i18n.h"
 
 #define MAX_RESULTS 100
 #define MAX_GENRES 100
@@ -133,7 +133,7 @@ using namespace core::net;
 namespace json = Json;
 
 void MusicScope::start(std::string const&) {
-    setlocale(LC_ALL, "");
+    init_gettext(*this);
     store.reset(new MediaStore(MS_READ_ONLY));
     client = http::make_client();
     set_api_key();

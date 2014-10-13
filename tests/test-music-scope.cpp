@@ -14,7 +14,7 @@
 #include <unity/scopes/testing/Result.h>
 #include <unity/scopes/testing/TypedScopeFixture.h>
 
-#include "../src/music-scope.h"
+#include "../src/mymusic/music-scope.h"
 
 using namespace mediascanner;
 using namespace unity::scopes;
@@ -37,6 +37,7 @@ protected:
         ASSERT_EQ(0, setenv("MEDIASCANNER_CACHEDIR", cachedir.c_str(), 1));
         store.reset(new MediaStore(MS_READ_WRITE));
 
+        set_scope_directory("/no/such/directory");
         unity::scopes::testing::TypedScopeFixture<MusicScope>::SetUp();
     }
 

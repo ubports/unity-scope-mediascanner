@@ -28,10 +28,10 @@
 #include <unity/scopes/CannedQuery.h>
 #include <unity/scopes/SearchReply.h>
 
-#include "i18n.h"
+#include "../utils/i18n.h"
 #include "videoaggregatorquery.h"
-#include "resultforwarder.h"
-#include "bufferedresultforwarder.h"
+#include "../utils/resultforwarder.h"
+#include "../utils/bufferedresultforwarder.h"
 
 using namespace unity::scopes;
 

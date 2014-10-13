@@ -2,5 +2,8 @@
 #define _CONFIG_H
 
 #define GETTEXT_PACKAGE "@GETTEXT_PACKAGE@"
+#cmakedefine CLICK_MODE
+
+#define LOCALE_DIR "@CMAKE_INSTALL_FULL_DATADIR@/locale"
 
 #endif

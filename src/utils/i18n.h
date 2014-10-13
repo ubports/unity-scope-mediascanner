@@ -21,4 +21,12 @@
 
 #define _(value) dgettext(GETTEXT_PACKAGE, value)
 
+namespace unity {
+namespace scopes {
+class ScopeBase;
+}
+}
+
+void init_gettext(const unity::scopes::ScopeBase &scope);
+
 #endif

@@ -32,7 +32,7 @@
 #include <unity/scopes/VariantBuilder.h>
 
 #include "video-scope.h"
-#include "i18n.h"
+#include "../utils/i18n.h"
 
 #define MAX_RESULTS 100
 
@@ -101,7 +101,7 @@ enum class VideoType {
 };
 
 void VideoScope::start(std::string const&) {
-    setlocale(LC_ALL, "");
+    init_gettext(*this);
     store.reset(new MediaStore(MS_READ_ONLY));
 }
 

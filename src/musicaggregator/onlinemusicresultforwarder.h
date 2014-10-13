@@ -20,7 +20,7 @@
 #ifndef ONLINEMUSICRESULTFORWARDER_H 
 #define ONLINEMUSICRESULTFORWARDER_H
 
-#include "bufferedresultforwarder.h"
+#include "../utils/bufferedresultforwarder.h"
 
 /*
    ResultForwarder that buffers results up until it gets

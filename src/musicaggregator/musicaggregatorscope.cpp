@@ -17,6 +17,7 @@
  *
  */
 
+#include <config.h>
 #include "musicaggregatorscope.h"
 #include "musicaggregatorquery.h"
 #include <unity/scopes/Registry.h>
@@ -24,17 +25,22 @@
 #include <unity/scopes/CategoryRenderer.h>
 #include <vector>
 #include <iostream>
+#include "../utils/i18n.h"
 
 using namespace unity::scopes;
 
+#ifdef CLICK_MODE
+const std::string MusicAggregatorScope::LOCALSCOPE = "com.ubuntu.scopes.mymusic_mymusic";
+#else
 const std::string MusicAggregatorScope::LOCALSCOPE = "mediascanner-music";
+#endif
 const std::string MusicAggregatorScope::GROOVESHARKSCOPE = "com.canonical.scopes.grooveshark";
 const std::string MusicAggregatorScope::SEVENDIGITAL = "com.canonical.scopes.sevendigital";
 const std::string MusicAggregatorScope::SOUNDCLOUD = "com.canonical.scopes.soundcloud";
 const std::string MusicAggregatorScope::SONGKICK = "com.canonical.scopes.songkick_songkick";
 
 void MusicAggregatorScope::start(std::string const&) {
-    setlocale(LC_ALL, "");
+    init_gettext(*this);
     CategoryRenderer basic;
     local_scope = registry()->get_metadata(LOCALSCOPE).proxy();
 }

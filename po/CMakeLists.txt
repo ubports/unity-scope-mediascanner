@@ -1,7 +1,7 @@
-file(GLOB CPPFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
-                   "${CMAKE_SOURCE_DIR}/src/*.cpp")
-file(GLOB INIFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
-                   "${CMAKE_SOURCE_DIR}/data/*.ini.in.in")
+file(GLOB_RECURSE CPPFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
+                                    "${CMAKE_SOURCE_DIR}/src/*.cpp")
+file(GLOB_RECURSE INIFILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
+                                    "${CMAKE_SOURCE_DIR}/src/*.ini.in")
 
 foreach(inifile ${INIFILES})
     get_filename_component(fname ${inifile} NAME)
@@ -29,9 +29,6 @@ add_custom_target(pot
     DEPENDS pot-ini
 )
 
-file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/locale)
-install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/locale DESTINATION share)
-
 file(GLOB pofiles *.po)
 foreach(f ${pofiles})
   get_filename_component(pofile ${f} NAME_WE)
@@ -44,8 +41,21 @@ foreach(i ${languages})
   DEPENDS ${i}.po
   )
   add_custom_target(${i}gen ALL DEPENDS ${i}.mo)
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${i}.mo 
-  DESTINATION share/locale/${i}/LC_MESSAGES
-  RENAME ${GETTEXT_PACKAGE}.mo)
+
+  if(CLICK_MODE)
+    foreach(clickpkg
+        com.ubuntu.scopes.mymusic
+        com.ubuntu.scopes.myvideos
+        com.ubuntu.scopes.music
+        com.ubuntu.scopes.video)
+      install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${i}.mo
+        DESTINATION ${clickpkg}/locale/${i}/LC_MESSAGES
+        RENAME ${GETTEXT_PACKAGE}.mo)
+    endforeach()
+  else()
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${i}.mo
+      DESTINATION share/locale/${i}/LC_MESSAGES
+      RENAME ${GETTEXT_PACKAGE}.mo)
+  endif(CLICK_MODE)
 endforeach()
 

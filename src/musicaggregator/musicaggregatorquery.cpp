@@ -21,10 +21,10 @@
 #include <config.h>
 #include "musicaggregatorquery.h"
 #include "musicaggregatorscope.h"
-#include "resultforwarder.h"
+#include "../utils/resultforwarder.h"
 #include "onlinemusicresultforwarder.h"
-#include "notify-strategy.h"
-#include "i18n.h"
+#include "../utils/notify-strategy.h"
+#include "../utils/i18n.h"
 #include <memory>
 
 #include <unity/scopes/Annotation.h>

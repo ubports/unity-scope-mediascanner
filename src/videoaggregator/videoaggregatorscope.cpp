@@ -17,22 +17,28 @@
  *
  */
 
+#include <config.h>
 #include "videoaggregatorscope.h"
 #include "videoaggregatorquery.h"
 #include <unity/scopes/Registry.h>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/CategoryRenderer.h>
 #include <iostream>
+#include "../utils/i18n.h"
 
 using namespace unity::scopes;
 
 const std::vector<const char*> SUBSCOPE_NAMES{
+#ifdef CLICK_MODE
+    "com.ubuntu.scopes.myvideos_myvideos",
+#else
     "mediascanner-video",
+#endif
     "com.ubuntu.scopes.youtube_youtube",
 };
 
 void VideoAggregatorScope::start(std::string const&) {
-    setlocale(LC_ALL, "");
+    init_gettext(*this);
     find_subscopes(true);
 }
 
