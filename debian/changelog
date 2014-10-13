@@ -1,3 +1,15 @@
+unity-scope-mediascanner (0.2+14.10.20141013-0ubuntu1) utopic; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ James Henstridge ]
+  * Reorganise package and update build rules to support building scopes
+    as click packages. Also update icons to the latest versions from
+    design. (LP: #1380586)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 13 Oct 2014 12:00:59 +0000
+
 unity-scope-mediascanner (0.2+14.10.20141009-0ubuntu1) utopic; urgency=low
 
   [ Pawel Stolowski ]
