@@ -1,4 +1,4 @@
-# German translation for unity-scope-mediascanner
+# Malay translation for unity-scope-mediascanner
 # Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
 # This file is distributed under the same license as the unity-scope-mediascanner package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-16 13:50+0800\n"
-"PO-Revision-Date: 2014-10-21 11:22+0000\n"
-"Last-Translator: Niklas Wenzel <nikwen.developer@gmail.com>\n"
-"Language-Team: German <de@li.org>\n"
+"PO-Revision-Date: 2014-10-21 11:32+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,34 +19,34 @@ msgstr ""
 
 #: ../src/music-scope.cpp:219 ../src/music-scope.cpp:280
 msgid "Artists"
-msgstr "Interpreten"
+msgstr "Artis"
 
 #: ../src/music-scope.cpp:220 ../src/music-scope.cpp:449
 #: ../src/music-scope.cpp:492
 msgid "Albums"
-msgstr "Alben"
+msgstr "Album"
 
 #: ../src/music-scope.cpp:221 ../src/music-scope.cpp:324
 #: ../src/music-scope.cpp:339
 msgid "Tracks"
-msgstr "Titel"
+msgstr "Trek"
 
 #: ../src/music-scope.cpp:222
 msgid "Genres"
-msgstr "Genres"
+msgstr "Genre"
 
 #: ../src/music-scope.cpp:568 ../src/music-scope.cpp:600
 msgid "Play in music app"
-msgstr "Zur Musik-App"
+msgstr "Main dalam apl muzik"
 
 #: ../src/musicaggregatorquery.cpp:206 ../src/musicaggregatorquery.cpp:208
 #: tmp/mediascanner-music.ini.in.in.h:1
 msgid "My Music"
-msgstr "Meine Musik"
+msgstr "Muzik Saya"
 
 #: ../src/musicaggregatorquery.cpp:209
 msgid "Popular tracks on Grooveshark"
-msgstr "Populäre Lieder auf Grooveshark"
+msgstr "Trek popular di Grooveshark"
 
 #: ../src/musicaggregatorquery.cpp:211
 msgid "Grooveshark"
@@ -54,7 +54,7 @@ msgstr "Grooveshark"
 
 #: ../src/musicaggregatorquery.cpp:212
 msgid "New albums from 7digital"
-msgstr "Neue Alben von 7digital"
+msgstr "Album baharu daripada 7digital"
 
 #: ../src/musicaggregatorquery.cpp:214
 msgid "7digital"
@@ -62,7 +62,7 @@ msgstr "7digital"
 
 #: ../src/musicaggregatorquery.cpp:215
 msgid "Nearby Events on Songkick"
-msgstr "Nahe Ereignisse auf Songkick"
+msgstr "Peristiwa Berhampiran pada Songkick"
 
 #: ../src/musicaggregatorquery.cpp:217
 msgid "Songkick"
@@ -70,85 +70,85 @@ msgstr "Songkick"
 
 #: ../src/video-scope.cpp:141
 msgid "Everything"
-msgstr "Alles"
+msgstr "Kesemuanya"
 
 #: ../src/video-scope.cpp:143
 msgid "My Roll"
-msgstr "Meine Liste"
+msgstr "Peranan Saya"
 
 #: ../src/video-scope.cpp:144
 msgid "Downloaded"
-msgstr "Heruntergeladen"
+msgstr "Dimuat Turun"
 
 #: ../src/video-scope.cpp:162 ../src/video-scope.cpp:167
 #: tmp/mediascanner-video.ini.in.in.h:1
 msgid "My Videos"
-msgstr "Meine Videos"
+msgstr "Video Saya"
 
 #: ../src/video-scope.cpp:248
 msgid "Play"
-msgstr "Wiedergeben"
+msgstr "Main"
 
 #: ../src/videoaggregatorquery.cpp:130
 #, c-format
 msgid "%s Features"
-msgstr "%s Features"
+msgstr "Fitur %s"
 
 #: ../src/videoaggregatorquery.cpp:137
 #, c-format
 msgid "Results from %s"
-msgstr "Ergebnisse von %s"
+msgstr "Keputusan dari %s"
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
-"Dies ist eine Ubuntu-Such-Erweiterung, die das Gerät nach Musik durchsucht "
-"und es ermöglicht diese in der Dash zu suchen und anzuzeigen."
+"Ini adalah pemalam gelintar Ubuntu yang mengimbas peranti jika ada muzik dan "
+"membenarkannya digelintar dan dipapar dalam Pemuka."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr "Lokale Musiksammlung durchsuchen"
+msgstr "Gelintar koleksi muzik setempat"
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
-"Dies ist eine Ubuntu-Such-Erweiterung, die das Gerät nach Videos durchsucht "
-"und es ermöglicht diese in der Dash zu suchen und anzuzeigen."
+"Ini ialah pemalam gelintar Ubuntu yang mengimbas peranti jika ada video dan "
+"membenarkannya digelintar dan dipapar dalam Pemuka."
 
 #: tmp/musicaggregator-settings.ini.in.in.h:1
 msgid "Display results from Grooveshark"
-msgstr "Ergebnisse von Grooveshark anzeigen"
+msgstr "Papar keputusan dari Grooveshark"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:2
 msgid "Display results from 7digital"
-msgstr "Ergebnisse von 7digital anzeigen"
+msgstr "Papar keputusan dari 7digital"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:3
 msgid "Display results from Songkick"
-msgstr "Ergebnisse von Songkick anzeigen"
+msgstr "Papar keputusan dari Songkick"
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
-msgstr "Musik"
+msgstr "Muzik"
 
 #: tmp/musicaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr ""
-"Dies ist eine Ubuntu-Such-Erweiterung, die alle Musikquellen in einer "
-"vereint."
+"Ini adalah pemalam gelintar Ubuntu yang menggabungkan semua sumber muzik "
+"menjadi satu."
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
-msgstr "Suche nach Musik"
+msgstr "Gelintar muzik"
 
 #: tmp/videoaggregator-settings.ini.in.in.h:1
 msgid "Display results from YouTube"
-msgstr "Ergebnisse von YouTube anzeigen"
+msgstr "Papar keputusan dari Youtube"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
@@ -158,9 +158,9 @@ msgstr "Video"
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr ""
-"Dies ist eine Ubuntu-Such-Erweiterung, die alle Videoquellen in einer "
-"vereint."
+"Ini ialah pemalam gelintar Ubuntu yang menggabungkan semua sumber video "
+"menjadi satu."
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
-msgstr "Suche nach Videos"
+msgstr "Gelintar video"
