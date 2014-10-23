@@ -10,7 +10,7 @@ find_package(Boost COMPONENTS regex REQUIRED)
 pkg_check_modules(GIO_DEPS REQUIRED gio-2.0 gio-unix-2.0)
 
 pkg_check_modules(UNITY REQUIRED
-  "libunity-scopes >= 0.6.0"
+  "libunity-scopes >= 0.6.8"
   net-cpp>=1.1.0
   jsoncpp
   mediascanner-2.0
