@@ -1,0 +1,158 @@
+# Czech translation for unity-scope-mediascanner
+# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
+# This file is distributed under the same license as the unity-scope-mediascanner package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: unity-scope-mediascanner\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-09-16 13:50+0800\n"
+"PO-Revision-Date: 2014-10-26 01:26+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Czech <cs@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2014-10-26 05:57+0000\n"
+"X-Generator: Launchpad (build 17203)\n"
+
+#: ../src/music-scope.cpp:219 ../src/music-scope.cpp:280
+msgid "Artists"
+msgstr ""
+
+#: ../src/music-scope.cpp:220 ../src/music-scope.cpp:449
+#: ../src/music-scope.cpp:492
+msgid "Albums"
+msgstr ""
+
+#: ../src/music-scope.cpp:221 ../src/music-scope.cpp:324
+#: ../src/music-scope.cpp:339
+msgid "Tracks"
+msgstr ""
+
+#: ../src/music-scope.cpp:222
+msgid "Genres"
+msgstr ""
+
+#: ../src/music-scope.cpp:568 ../src/music-scope.cpp:600
+msgid "Play in music app"
+msgstr ""
+
+#: ../src/musicaggregatorquery.cpp:206 ../src/musicaggregatorquery.cpp:208
+#: tmp/mediascanner-music.ini.in.in.h:1
+msgid "My Music"
+msgstr ""
+
+#: ../src/musicaggregatorquery.cpp:209
+msgid "Popular tracks on Grooveshark"
+msgstr ""
+
+#: ../src/musicaggregatorquery.cpp:211
+msgid "Grooveshark"
+msgstr ""
+
+#: ../src/musicaggregatorquery.cpp:212
+msgid "New albums from 7digital"
+msgstr ""
+
+#: ../src/musicaggregatorquery.cpp:214
+msgid "7digital"
+msgstr ""
+
+#: ../src/musicaggregatorquery.cpp:215
+msgid "Nearby Events on Songkick"
+msgstr ""
+
+#: ../src/musicaggregatorquery.cpp:217
+msgid "Songkick"
+msgstr ""
+
+#: ../src/video-scope.cpp:141
+msgid "Everything"
+msgstr ""
+
+#: ../src/video-scope.cpp:143
+msgid "My Roll"
+msgstr ""
+
+#: ../src/video-scope.cpp:144
+msgid "Downloaded"
+msgstr ""
+
+#: ../src/video-scope.cpp:162 ../src/video-scope.cpp:167
+#: tmp/mediascanner-video.ini.in.in.h:1
+msgid "My Videos"
+msgstr ""
+
+#: ../src/video-scope.cpp:248
+msgid "Play"
+msgstr ""
+
+#: ../src/videoaggregatorquery.cpp:130
+#, c-format
+msgid "%s Features"
+msgstr ""
+
+#: ../src/videoaggregatorquery.cpp:137
+#, c-format
+msgid "Results from %s"
+msgstr ""
+
+#: tmp/mediascanner-music.ini.in.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that scans the device for music and allows "
+"it to be searched and displayed in the Dash."
+msgstr ""
+
+#: tmp/mediascanner-music.ini.in.in.h:3
+msgid "Search local music collection"
+msgstr ""
+
+#: tmp/mediascanner-video.ini.in.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that scans the device for videos and allows "
+"them to be searched and displayed in the Dash."
+msgstr ""
+
+#: tmp/musicaggregator-settings.ini.in.in.h:1
+msgid "Display results from Grooveshark"
+msgstr ""
+
+#: tmp/musicaggregator-settings.ini.in.in.h:2
+msgid "Display results from 7digital"
+msgstr ""
+
+#: tmp/musicaggregator-settings.ini.in.in.h:3
+msgid "Display results from Songkick"
+msgstr ""
+
+#: tmp/musicaggregator.ini.in.in.h:1
+msgid "Music"
+msgstr ""
+
+#: tmp/musicaggregator.ini.in.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that merges all music sources into one."
+msgstr ""
+
+#: tmp/musicaggregator.ini.in.in.h:3
+msgid "Search music"
+msgstr ""
+
+#: tmp/videoaggregator-settings.ini.in.in.h:1
+msgid "Display results from YouTube"
+msgstr ""
+
+#: tmp/videoaggregator.ini.in.in.h:1
+msgid "Video"
+msgstr ""
+
+#: tmp/videoaggregator.ini.in.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that merges all video sources into one."
+msgstr ""
+
+#: tmp/videoaggregator.ini.in.in.h:3
+msgid "Search video"
+msgstr ""
