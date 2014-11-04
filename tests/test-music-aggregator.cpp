@@ -20,7 +20,7 @@ using ::testing::Return;
 
 TEST(TestMusicAgregator, TestSurfacingSearch) {
 
-    CannedQuery q("mediascanner-music", "", "aggregated:musicaggregator");
+    CannedQuery q("mediascanner-music", "", "");
     SearchMetadata hints("en_AU", "phone");
 
     std::shared_ptr<unity::scopes::testing::MockScope> grooveshark_scope(new unity::scopes::testing::MockScope());
@@ -75,7 +75,7 @@ TEST(TestMusicAgregator, TestSurfacingSearch) {
 
 TEST(TestMusicAgregator, TestSpecificSearch) {
 
-    CannedQuery q("mediascanner-music", "test", "aggregated:musicaggregator");
+    CannedQuery q("mediascanner-music", "test", "");
     SearchMetadata hints("en_AU", "phone");
 
     std::shared_ptr<unity::scopes::testing::MockScope> grooveshark_scope(new unity::scopes::testing::MockScope());

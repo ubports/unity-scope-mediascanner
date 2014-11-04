@@ -368,7 +368,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
             {
                 metadata.set_cardinality(2);
             }
-            dept=department_id;
+            dept = department_id;
         }
 
         // Don't send location data to scopes that don't need it.
