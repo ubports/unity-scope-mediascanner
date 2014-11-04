@@ -15,9 +15,25 @@ add_executable(test-music-scope
   test-music-scope.cpp
   ../src/mymusic/music-scope.cpp
 )
+
+add_executable(test-music-aggregator
+  test-music-aggregator.cpp
+  ../src/musicaggregator/musicaggregatorquery.cpp
+  ../src/musicaggregator/onlinemusicresultforwarder.cpp
+  ../src/musicaggregator/musicaggregatorscope.cpp
+)
+
+add_definitions(
+  -DTEST_SCOPE_DIRECTORY="${CMAKE_BINARY_DIR}/src"
+)
+
 target_link_libraries(test-music-scope
   scope-utils ${UNITY_LDFLAGS} ${gtest_libs} ${GIO_DEPS_LDFLAGS})
 add_test(test-music-scope test-music-scope)
+
+target_link_libraries(test-music-aggregator
+  scope-utils ${UNITY_LDFLAGS} ${gtest_libs} ${GIO_DEPS_LDFLAGS})
+add_test(test-music-aggregator test-music-aggregator)
 
 add_executable(test-video-scope
   test-video-scope.cpp
