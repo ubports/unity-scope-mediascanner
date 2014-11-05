@@ -317,7 +317,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
         scopes.push_back(youtube_scope);
         auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, youtube_cat](CategorisedResult& res) -> bool {
                 res.set_category(youtube_cat);
-                return true;
+                return !res["musicaggregation"].is_null();
                 });
         replies.push_back(reply);
     }
