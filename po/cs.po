@@ -1,4 +1,4 @@
-# German translation for unity-scope-mediascanner
+# Czech translation for unity-scope-mediascanner
 # Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
 # This file is distributed under the same license as the unity-scope-mediascanner package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
@@ -8,159 +8,151 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-16 13:50+0800\n"
-"PO-Revision-Date: 2014-10-21 11:22+0000\n"
-"Last-Translator: Niklas Wenzel <nikwen.developer@gmail.com>\n"
-"Language-Team: German <de@li.org>\n"
+"PO-Revision-Date: 2014-10-26 01:26+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-22 06:18+0000\n"
+"X-Launchpad-Export-Date: 2014-10-27 06:31+0000\n"
 "X-Generator: Launchpad (build 17203)\n"
 
 #: ../src/music-scope.cpp:219 ../src/music-scope.cpp:280
 msgid "Artists"
-msgstr "Interpreten"
+msgstr ""
 
 #: ../src/music-scope.cpp:220 ../src/music-scope.cpp:449
 #: ../src/music-scope.cpp:492
 msgid "Albums"
-msgstr "Alben"
+msgstr ""
 
 #: ../src/music-scope.cpp:221 ../src/music-scope.cpp:324
 #: ../src/music-scope.cpp:339
 msgid "Tracks"
-msgstr "Titel"
+msgstr ""
 
 #: ../src/music-scope.cpp:222
 msgid "Genres"
-msgstr "Genres"
+msgstr ""
 
 #: ../src/music-scope.cpp:568 ../src/music-scope.cpp:600
 msgid "Play in music app"
-msgstr "Zur Musik-App"
+msgstr ""
 
 #: ../src/musicaggregatorquery.cpp:206 ../src/musicaggregatorquery.cpp:208
 #: tmp/mediascanner-music.ini.in.in.h:1
 msgid "My Music"
-msgstr "Meine Musik"
+msgstr ""
 
 #: ../src/musicaggregatorquery.cpp:209
 msgid "Popular tracks on Grooveshark"
-msgstr "Populäre Lieder auf Grooveshark"
+msgstr ""
 
 #: ../src/musicaggregatorquery.cpp:211
 msgid "Grooveshark"
-msgstr "Grooveshark"
+msgstr ""
 
 #: ../src/musicaggregatorquery.cpp:212
 msgid "New albums from 7digital"
-msgstr "Neue Alben von 7digital"
+msgstr ""
 
 #: ../src/musicaggregatorquery.cpp:214
 msgid "7digital"
-msgstr "7digital"
+msgstr ""
 
 #: ../src/musicaggregatorquery.cpp:215
 msgid "Nearby Events on Songkick"
-msgstr "Nahe Ereignisse auf Songkick"
+msgstr ""
 
 #: ../src/musicaggregatorquery.cpp:217
 msgid "Songkick"
-msgstr "Songkick"
+msgstr ""
 
 #: ../src/video-scope.cpp:141
 msgid "Everything"
-msgstr "Alles"
+msgstr ""
 
 #: ../src/video-scope.cpp:143
 msgid "My Roll"
-msgstr "Meine Liste"
+msgstr ""
 
 #: ../src/video-scope.cpp:144
 msgid "Downloaded"
-msgstr "Heruntergeladen"
+msgstr ""
 
 #: ../src/video-scope.cpp:162 ../src/video-scope.cpp:167
 #: tmp/mediascanner-video.ini.in.in.h:1
 msgid "My Videos"
-msgstr "Meine Videos"
+msgstr ""
 
 #: ../src/video-scope.cpp:248
 msgid "Play"
-msgstr "Wiedergeben"
+msgstr ""
 
 #: ../src/videoaggregatorquery.cpp:130
 #, c-format
 msgid "%s Features"
-msgstr "%s Features"
+msgstr ""
 
 #: ../src/videoaggregatorquery.cpp:137
 #, c-format
 msgid "Results from %s"
-msgstr "Ergebnisse von %s"
+msgstr ""
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
-"Dies ist eine Ubuntu-Such-Erweiterung, die das Gerät nach Musik durchsucht "
-"und es ermöglicht diese in der Dash zu suchen und anzuzeigen."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr "Lokale Musiksammlung durchsuchen"
+msgstr ""
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
-"Dies ist eine Ubuntu-Such-Erweiterung, die das Gerät nach Videos durchsucht "
-"und es ermöglicht diese in der Dash zu suchen und anzuzeigen."
 
 #: tmp/musicaggregator-settings.ini.in.in.h:1
 msgid "Display results from Grooveshark"
-msgstr "Ergebnisse von Grooveshark anzeigen"
+msgstr ""
 
 #: tmp/musicaggregator-settings.ini.in.in.h:2
 msgid "Display results from 7digital"
-msgstr "Ergebnisse von 7digital anzeigen"
+msgstr ""
 
 #: tmp/musicaggregator-settings.ini.in.in.h:3
 msgid "Display results from Songkick"
-msgstr "Ergebnisse von Songkick anzeigen"
+msgstr ""
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
-msgstr "Musik"
+msgstr ""
 
 #: tmp/musicaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr ""
-"Dies ist eine Ubuntu-Such-Erweiterung, die alle Musikquellen in einer "
-"vereint."
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
-msgstr "Suche nach Musik"
+msgstr ""
 
 #: tmp/videoaggregator-settings.ini.in.in.h:1
 msgid "Display results from YouTube"
-msgstr "Ergebnisse von YouTube anzeigen"
+msgstr ""
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
-msgstr "Video"
+msgstr ""
 
 #: tmp/videoaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr ""
-"Dies ist eine Ubuntu-Such-Erweiterung, die alle Videoquellen in einer "
-"vereint."
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
-msgstr "Suche nach Videos"
+msgstr ""
