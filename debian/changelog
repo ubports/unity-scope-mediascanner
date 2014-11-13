@@ -1,3 +1,10 @@
+unity-scope-mediascanner (0.2+15.04.20141113-0ubuntu1) vivid; urgency=low
+
+  [ Pawel Stolowski ]
+  * Remove header background (cherry picked rev 197 of rtm-14.09).
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 13 Nov 2014 08:14:02 +0000
+
 unity-scope-mediascanner (0.2+15.04.20141110-0ubuntu1) vivid; urgency=low
 
   [ CI bot ]
