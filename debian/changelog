@@ -1,3 +1,11 @@
+unity-scope-mediascanner (0.2+15.04.20141114.2-0ubuntu1) vivid; urgency=low
+
+  [ Marcus Tomlinson ]
+  * Aggregate the Vimeo scope in the videoaggregator scope
+  * Aggregate the SoundCloud scope in the musicaggregator scope
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 14 Nov 2014 13:41:48 +0000
+
 unity-scope-mediascanner (0.2+15.04.20141113-0ubuntu1) vivid; urgency=low
 
   [ Pawel Stolowski ]
