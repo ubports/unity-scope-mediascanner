@@ -42,11 +42,13 @@ TEST(TestMusicAgregator, TestSurfacingSearch) {
     Category::SCPtr sevendigital_category = std::make_shared<unity::scopes::testing::Category>(
         "7digital", "Tracks", "icon", CategoryRenderer());
     Category::SCPtr songkick_category = std::make_shared<unity::scopes::testing::Category>(
-            "songkick", "Tracks", "icon", CategoryRenderer());
+        "songkick", "Tracks", "icon", CategoryRenderer());
     Category::SCPtr grooveshark_category = std::make_shared<unity::scopes::testing::Category>(
-                "grooveshark", "Tracks", "icon", CategoryRenderer());
+        "grooveshark", "Tracks", "icon", CategoryRenderer());
     Category::SCPtr youtube_category = std::make_shared<unity::scopes::testing::Category>(
-                    "youtube", "Tracks", "icon", CategoryRenderer());
+        "youtube", "Tracks", "icon", CategoryRenderer());
+    Category::SCPtr soundcloud_category = std::make_shared<unity::scopes::testing::Category>(
+        "soundcloud", "Tracks", "icon", CategoryRenderer());
 
 
     std::shared_ptr<unity::scopes::testing::MockQueryCtrl> queryctrl(new unity::scopes::testing::MockQueryCtrl());
@@ -58,9 +60,11 @@ TEST(TestMusicAgregator, TestSurfacingSearch) {
     EXPECT_CALL(reply, register_category("songkick", _, _, _,_))
         .WillOnce(Return(songkick_category));
     EXPECT_CALL(reply, register_category("grooveshark", _, _, _,_))
-            .WillOnce(Return(grooveshark_category));
+        .WillOnce(Return(grooveshark_category));
     EXPECT_CALL(reply, register_category("youtube", _, _, _,_))
-                .WillOnce(Return(youtube_category));
+        .WillOnce(Return(youtube_category));
+    EXPECT_CALL(reply, register_category("soundcloud", _, _, _,_))
+        .WillOnce(Return(soundcloud_category));
 
     // check that each scope calls search with the correct parameters...
     EXPECT_CALL(*sevendigital_scope.get(), search("","newreleases", _, _, _)).WillOnce(Return(queryctrl));
@@ -68,6 +72,7 @@ TEST(TestMusicAgregator, TestSurfacingSearch) {
     EXPECT_CALL(*songkick_scope.get(), search("","", _, _, _)).WillOnce(Return(queryctrl));
     EXPECT_CALL(*grooveshark_scope.get(), search("","", _, _, _)).WillOnce(Return(queryctrl));
     EXPECT_CALL(*youtube_scope.get(), search("","aggregated:musicaggregator", _, _, _)).WillOnce(Return(queryctrl));
+    EXPECT_CALL(*soundcloud_scope.get(), search("","", _, _, _)).WillOnce(Return(queryctrl));
 
     SearchReplyProxy proxy(&reply, [](SearchReply*){});
     query.run(proxy);
@@ -97,11 +102,13 @@ TEST(TestMusicAgregator, TestSpecificSearch) {
     Category::SCPtr sevendigital_category = std::make_shared<unity::scopes::testing::Category>(
         "7digital", "Tracks", "icon", CategoryRenderer());
     Category::SCPtr songkick_category = std::make_shared<unity::scopes::testing::Category>(
-            "songkick", "Tracks", "icon", CategoryRenderer());
+        "songkick", "Tracks", "icon", CategoryRenderer());
     Category::SCPtr grooveshark_category = std::make_shared<unity::scopes::testing::Category>(
-                "grooveshark", "Tracks", "icon", CategoryRenderer());
+        "grooveshark", "Tracks", "icon", CategoryRenderer());
     Category::SCPtr youtube_category = std::make_shared<unity::scopes::testing::Category>(
-                    "youtube", "Tracks", "icon", CategoryRenderer());
+        "youtube", "Tracks", "icon", CategoryRenderer());
+    Category::SCPtr soundcloud_category = std::make_shared<unity::scopes::testing::Category>(
+        "soundcloud", "Tracks", "icon", CategoryRenderer());
 
 
     std::shared_ptr<unity::scopes::testing::MockQueryCtrl> queryctrl(new unity::scopes::testing::MockQueryCtrl());
@@ -113,9 +120,11 @@ TEST(TestMusicAgregator, TestSpecificSearch) {
     EXPECT_CALL(reply, register_category("songkick", _, _,_))
         .WillOnce(Return(songkick_category));
     EXPECT_CALL(reply, register_category("grooveshark", _, _,_))
-            .WillOnce(Return(grooveshark_category));
+        .WillOnce(Return(grooveshark_category));
     EXPECT_CALL(reply, register_category("youtube", _, _, _,_))
-                .WillOnce(Return(youtube_category));
+        .WillOnce(Return(youtube_category));
+    EXPECT_CALL(reply, register_category("soundcloud", _, _,_))
+        .WillOnce(Return(soundcloud_category));
 
     // check that each scope calls search with the correct parameters...
     EXPECT_CALL(*sevendigital_scope.get(), search("test","", _, _, _)).WillOnce(Return(queryctrl));
@@ -123,6 +132,7 @@ TEST(TestMusicAgregator, TestSpecificSearch) {
     EXPECT_CALL(*songkick_scope.get(), search("test","", _, _, _)).WillOnce(Return(queryctrl));
     EXPECT_CALL(*grooveshark_scope.get(), search("test","", _, _, _)).WillOnce(Return(queryctrl));
     EXPECT_CALL(*youtube_scope.get(), search("test","aggregated:musicaggregator", _, _, _)).WillOnce(Return(queryctrl));
+    EXPECT_CALL(*soundcloud_scope.get(), search("test","", _, _, _)).WillOnce(Return(queryctrl));
 
     SearchReplyProxy proxy(&reply, [](SearchReply*){});
     query.run(proxy);
