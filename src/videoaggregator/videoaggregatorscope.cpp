@@ -35,6 +35,7 @@ const std::vector<const char*> SUBSCOPE_NAMES{
     "mediascanner-video",
 #endif
     "com.ubuntu.scopes.youtube_youtube",
+    "com.ubuntu.scopes.vimeo_vimeo",
 };
 
 void VideoAggregatorScope::start(std::string const&) {
