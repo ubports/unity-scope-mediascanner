@@ -1,3 +1,27 @@
+unity-scope-mediascanner (0.2+15.04.20141113-0ubuntu1) vivid; urgency=low
+
+  [ Pawel Stolowski ]
+  * Remove header background (cherry picked rev 197 of rtm-14.09).
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Thu, 13 Nov 2014 08:14:02 +0000
+
+unity-scope-mediascanner (0.2+15.04.20141110-0ubuntu1) vivid; urgency=low
+
+  [ CI bot ]
+  * Resync trunk
+
+  [ Xavi Garcia ]
+  * Added the youtube scope in the music aggregator to search only for
+    music entries.
+
+  [ Pawel Stolowski ]
+  * When searching albums of an artist via canned queries, pass artist
+    name via a fake department id rather than search string to
+    workaround shell plugin behavior that resets department under
+    certain conditions if search string is not empty. (LP: #1381971)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Mon, 10 Nov 2014 13:46:31 +0000
+
 unity-scope-mediascanner (0.2+14.10.20141013-0ubuntu1) utopic; urgency=low
 
   [ CI bot ]

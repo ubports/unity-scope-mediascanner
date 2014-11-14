@@ -226,9 +226,10 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
         auto const genre = current_department.substr(index + 1);
         query_albums_by_genre(reply, genre);
     }
-    else if (current_department == "albums_of_artist") // fake department that's not really displayed
+    else if (current_department.find("albums_of_artist:") == 0) // fake department that's not really displayed
     {
-        const std::string artist = query().query_string();
+        const int index = current_department.find(":");
+        const std::string artist = current_department.substr(index + 1);
         query_albums_by_artist(reply, artist);
         query_songs_by_artist(reply, artist);
     }
@@ -313,13 +314,13 @@ void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply) con
     auto cat = reply->register_category("artists", show_title ? _("Artists") : "", SONGS_CATEGORY_ICON, renderer); //FIXME: icon
 
     CannedQuery artist_search(query());
-    artist_search.set_department_id("albums_of_artist"); // virtual department
+    artist_search.set_query_string("");
 
     mediascanner::Filter filter;
     filter.setLimit(MAX_RESULTS);
     for (const auto &artist: scope.store->queryArtists(query().query_string(), filter))
     {
-        artist_search.set_query_string(artist);
+        artist_search.set_department_id("albums_of_artist:" + artist); // virtual department
 
         CategorisedResult res(cat);
         res.set_uri(artist_search.to_uri());
@@ -501,7 +502,8 @@ void MusicQuery::query_albums_by_artist(unity::scopes::SearchReplyProxy const &r
             }
 
             CannedQuery artist_search(query());
-            artist_search.set_department_id("albums_of_artist"); // virtual department
+            artist_search.set_query_string("");
+            artist_search.set_department_id("albums_of_artist:" + artist); // virtual department
 
             CategorisedResult artist_info(biocat);
             artist_info.set_uri(artist_search.to_uri());
