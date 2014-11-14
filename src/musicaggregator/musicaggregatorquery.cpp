@@ -286,6 +286,9 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     {
         scopes.push_back(soundcloud_scope);
         auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, soundcloud_cat](CategorisedResult& res) -> bool {
+                if (res.category()->id() == "soundcloud_login_nag") {
+                    return false;
+                }
                 res.set_category(soundcloud_cat);
                 return true;
             });
@@ -360,7 +363,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
         {
             if (empty_search)
             {
-                metadata.set_cardinality(2);
+                metadata.set_cardinality(3);
             }
         }
         else if (scopes[i] == songkick_scope)
