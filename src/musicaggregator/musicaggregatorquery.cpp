@@ -135,6 +135,48 @@ static const char SEVENDIGITAL_SEARCH_CATEGORY_DEFINITION[] = R"(
 }
 )";
 
+static const char SOUNDCLOUD_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-size": "large",
+    "overlay": true,
+    "card-background": "color:///#000000"
+  },
+  "components": {
+    "title": "title",
+    "art" : {
+      "field": "waveform",
+      "aspect-ratio": 4.0
+    },
+    "subtitle": "username",
+    "mascot": "art",
+    "attributes": {
+      "field": "attributes",
+      "max-count": 3
+    }
+  }
+}
+)";
+
+static const char SOUNDCLOUD_SEARCH_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-size": "large",
+    "card-layout": "horizontal"
+  },
+  "components": {
+    "title": "title",
+    "mascot":  "art",
+    "subtitle": "address",
+    "attributes": "attributes"
+  }
+}
+)";
+
 static const char SONGKICK_CATEGORY_DEFINITION[] = R"(
 {
   "schema-version": 1,
@@ -239,6 +281,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
 
     const CannedQuery mymusic_query(MusicAggregatorScope::LOCALSCOPE, query().query_string(), "");
     const CannedQuery sevendigital_query(MusicAggregatorScope::SEVENDIGITAL, query().query_string(), "newreleases");
+    const CannedQuery soundcloud_query(MusicAggregatorScope::SOUNDCLOUD, query().query_string(), "");
     const CannedQuery songkick_query(MusicAggregatorScope::SONGKICK, query().query_string(), "");
     const CannedQuery grooveshark_query(MusicAggregatorScope::GROOVESHARKSCOPE, query().query_string(), "");
     const CannedQuery youtube_query(MusicAggregatorScope::YOUTUBE, query().query_string(), department_id);
@@ -253,6 +296,9 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     auto sevendigital_cat = empty_search ? parent_reply->register_category("7digital", _("New albums from 7digital"), "",
             sevendigital_query, CategoryRenderer(SEVENDIGITAL_CATEGORY_DEFINITION))
         : parent_reply->register_category("7digital", _("7digital"), "", CategoryRenderer(SEVENDIGITAL_SEARCH_CATEGORY_DEFINITION));
+    auto soundcloud_cat = empty_search ? parent_reply->register_category("soundcloud", _("Popular tracks on SoundCloud"), "",
+            soundcloud_query, CategoryRenderer(SOUNDCLOUD_CATEGORY_DEFINITION))
+        : parent_reply->register_category("soundcloud", _("SoundCloud"), "", CategoryRenderer(SOUNDCLOUD_SEARCH_CATEGORY_DEFINITION));
     auto songkick_cat = empty_search ? parent_reply->register_category("songkick", _("Nearby Events on Songkick"), "",
             songkick_query, CategoryRenderer(SONGKICK_CATEGORY_DEFINITION))
         : parent_reply->register_category("songkick", _("Songkick"), "", CategoryRenderer(SONGKICK_SEARCH_CATEGORY_DEFINITION));
@@ -279,6 +325,18 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
                 res.set_category(sevendigital_cat);
                 return true;
                 });
+        replies.push_back(reply);
+    }
+    if (soundcloud_scope)
+    {
+        scopes.push_back(soundcloud_scope);
+        auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, soundcloud_cat](CategorisedResult& res) -> bool {
+                if (res.category()->id() == "soundcloud_login_nag") {
+                    return false;
+                }
+                res.set_category(soundcloud_cat);
+                return true;
+            });
         replies.push_back(reply);
     }
     if (songkick_scope)
@@ -349,6 +407,13 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
             dept = ""; // artists
         }
         else if (scopes[i] == grooveshark_scope)
+        {
+            if (empty_search)
+            {
+                metadata.set_cardinality(3);
+            }
+        }
+        else if (scopes[i] == soundcloud_scope)
         {
             if (empty_search)
             {
