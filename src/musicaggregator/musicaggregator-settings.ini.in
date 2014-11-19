@@ -17,3 +17,8 @@ _displayName=Display results from Grooveshark
 type=boolean
 defaultValue=true
 _displayName=Display results from SoundCloud
+
+[com.ubuntu.scopes.youtube_youtube]
+type=boolean
+defaultValue=true
+_displayName=Display results from Youtube
