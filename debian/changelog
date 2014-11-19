@@ -1,3 +1,10 @@
+unity-scope-mediascanner (0.2+15.04.20141119-0ubuntu1) vivid; urgency=low
+
+  [ Xavi Garcia ]
+  * Added youtube settings for music aggregator
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Wed, 19 Nov 2014 08:16:58 +0000
+
 unity-scope-mediascanner (0.2+15.04.20141114.2-0ubuntu1) vivid; urgency=low
 
   [ Marcus Tomlinson ]
