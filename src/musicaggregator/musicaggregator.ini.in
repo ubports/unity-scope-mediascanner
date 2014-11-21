@@ -11,4 +11,3 @@ ChildScopes=mediascanner-music;com.canonical.scopes.grooveshark;com.canonical.sc
 
 [Appearance]
 LogoOverlayColor=#26000000
-PageHeader.Background=./paper-white-bg-v2.png

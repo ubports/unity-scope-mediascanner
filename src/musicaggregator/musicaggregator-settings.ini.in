@@ -12,3 +12,8 @@ _displayName=Display results from Songkick
 type=boolean
 defaultValue=true
 _displayName=Display results from Grooveshark
+
+[com.ubuntu.scopes.soundcloud_soundcloud]
+type=boolean
+defaultValue=true
+_displayName=Display results from SoundCloud

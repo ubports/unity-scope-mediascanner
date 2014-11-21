@@ -181,7 +181,7 @@ TEST_F(MusicScopeTest, QueryResult) {
         .WillOnce(Return(albums_category));
 
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
-            ResultUriMatchesCannedQuery(CannedQuery("mediascanner-music", "The John Butler Trio", "albums_of_artist")),
+            ResultUriMatchesCannedQuery(CannedQuery("mediascanner-music", "", "albums_of_artist:The John Butler Trio")),
             ResultProp("title", "The John Butler Trio")))))
         .WillOnce(Return(true));
 
@@ -229,7 +229,7 @@ TEST_F(MusicScopeTest, ShortQuery) {
     EXPECT_CALL(reply, register_category("albums", _, _, _))
         .WillOnce(Return(albums_category));
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
-            ResultUriMatchesCannedQuery(CannedQuery("mediascanner-music", "The John Butler Trio", "albums_of_artist")),
+            ResultUriMatchesCannedQuery(CannedQuery("mediascanner-music", "", "albums_of_artist:The John Butler Trio")),
             ResultProp("title", "The John Butler Trio")))))
         .WillOnce(Return(true));
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(ResultProp("title", "One Way Road"))))
@@ -264,13 +264,13 @@ TEST_F(MusicScopeTest, SurfacingQuery) {
         .WillOnce(Return(albums_category));
 
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
-                        ResultUriMatchesCannedQuery(CannedQuery("mediascanner-music", "Spiderbait", "albums_of_artist")),
+                        ResultUriMatchesCannedQuery(CannedQuery("mediascanner-music", "", "albums_of_artist:Spiderbait")),
                         ResultProp("title", "Spiderbait")
                         ))))
         .WillOnce(Return(true));
 
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
-                        ResultUriMatchesCannedQuery(CannedQuery("mediascanner-music", "The John Butler Trio", "albums_of_artist")),
+                        ResultUriMatchesCannedQuery(CannedQuery("mediascanner-music", "", "albums_of_artist:The John Butler Trio")),
                         ResultProp("title", "The John Butler Trio"))
             )))
         .WillOnce(Return(true));

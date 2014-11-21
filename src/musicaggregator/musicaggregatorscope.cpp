@@ -36,8 +36,9 @@ const std::string MusicAggregatorScope::LOCALSCOPE = "mediascanner-music";
 #endif
 const std::string MusicAggregatorScope::GROOVESHARKSCOPE = "com.canonical.scopes.grooveshark";
 const std::string MusicAggregatorScope::SEVENDIGITAL = "com.canonical.scopes.sevendigital";
-const std::string MusicAggregatorScope::SOUNDCLOUD = "com.canonical.scopes.soundcloud";
+const std::string MusicAggregatorScope::SOUNDCLOUD = "com.ubuntu.scopes.soundcloud_soundcloud";
 const std::string MusicAggregatorScope::SONGKICK = "com.canonical.scopes.songkick_songkick";
+const std::string MusicAggregatorScope::YOUTUBE = "com.ubuntu.scopes.youtube_youtube";
 
 void MusicAggregatorScope::start(std::string const&) {
     init_gettext(*this);
@@ -53,7 +54,7 @@ SearchQueryBase::UPtr MusicAggregatorScope::search(CannedQuery const& q,
     // FIXME: workaround for problem with no remote scopes on first run
     // until network becomes available
     init_scope_proxies();
-    SearchQueryBase::UPtr query(new MusicAggregatorQuery(q, hints, local_scope, grooveshark_scope, soundcloud_scope, sevendigital_scope, songkick_scope));
+    SearchQueryBase::UPtr query(new MusicAggregatorQuery(q, hints, local_scope, grooveshark_scope, soundcloud_scope, sevendigital_scope, songkick_scope, youtube_scope));
     return query;
 }
 
@@ -89,8 +90,9 @@ void MusicAggregatorScope::init_scope_proxies()
     const auto config = settings();
     init_scope_proxy(GROOVESHARKSCOPE, grooveshark_scope, config);
     init_scope_proxy(SEVENDIGITAL, sevendigital_scope, config);
-    //init_scope_proxy(SOUNDCLOUD, soundcloud_scope, config);
+    init_scope_proxy(SOUNDCLOUD, soundcloud_scope, config);
     init_scope_proxy(SONGKICK, songkick_scope, config);
+    init_scope_proxy(YOUTUBE, youtube_scope, config);
 }
 
 PreviewQueryBase::UPtr MusicAggregatorScope::preview(Result const& /*result*/, ActionMetadata const& /*hints*/) {
