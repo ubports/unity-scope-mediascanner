@@ -6,7 +6,7 @@ Art=./screenshot.jpg
 Icon=./icon.png
 _SearchHint=Search video
 HotKey=
-ChildScopes=mediascanner-video;com.ubuntu.scopes.youtube_youtube
+ChildScopes=mediascanner-video;com.ubuntu.scopes.myvideos_myvideos;com.ubuntu.scopes.youtube_youtube
 
 [Appearance]
 LogoOverlayColor=#26000000
