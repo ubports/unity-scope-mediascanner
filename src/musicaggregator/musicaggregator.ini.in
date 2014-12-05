@@ -7,6 +7,7 @@ Icon=./icon.png
 _SearchHint=Search music
 HotKey=
 LocationDataNeeded=true
+ChildScopes=mediascanner-music;com.ubuntu.scopes.mymusic_mymusic;com.canonical.scopes.grooveshark;com.canonical.scopes.sevendigital;com.ubuntu.scopes.soundcloud_soundcloud;com.canonical.scopes.songkick_songkick;com.ubuntu.scopes.youtube_youtube
 
 [Appearance]
 LogoOverlayColor=#26000000
