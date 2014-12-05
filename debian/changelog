@@ -1,3 +1,11 @@
+unity-scope-mediascanner (0.2+15.04.20141205-0ubuntu1) vivid; urgency=low
+
+  [ Pawel Stolowski ]
+  * Set ids of aggreated scopes via ChildScopes ini option. (LP:
+    #1368670)
+
+ -- Ubuntu daily release <ps-jenkins@lists.canonical.com>  Fri, 05 Dec 2014 11:05:21 +0000
+
 unity-scope-mediascanner (0.2+15.04.20141119-0ubuntu1) vivid; urgency=low
 
   [ Xavi Garcia ]
