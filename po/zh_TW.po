@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-16 13:50+0800\n"
-"PO-Revision-Date: 2014-08-30 00:06+0000\n"
-"Last-Translator: Walter Cheuk <wwycheuk@gmail.com>\n"
+"PO-Revision-Date: 2015-03-03 12:56+0000\n"
+"Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-13 07:12+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
+"X-Launchpad-Export-Date: 2015-03-04 05:57+0000\n"
+"X-Generator: Launchpad (build 17361)\n"
 
 #: ../src/music-scope.cpp:219 ../src/music-scope.cpp:280
 msgid "Artists"
@@ -33,7 +33,7 @@ msgstr "曲目"
 
 #: ../src/music-scope.cpp:222
 msgid "Genres"
-msgstr "曲風"
+msgstr "風格"
 
 #: ../src/music-scope.cpp:568 ../src/music-scope.cpp:600
 msgid "Play in music app"
@@ -46,7 +46,7 @@ msgstr "我的音樂"
 
 #: ../src/musicaggregatorquery.cpp:209
 msgid "Popular tracks on Grooveshark"
-msgstr "Grooveshark 的最熱歌曲"
+msgstr "Grooveshark 的熱門歌曲"
 
 #: ../src/musicaggregatorquery.cpp:211
 msgid "Grooveshark"
@@ -62,15 +62,15 @@ msgstr "7digital"
 
 #: ../src/musicaggregatorquery.cpp:215
 msgid "Nearby Events on Songkick"
-msgstr ""
+msgstr "近期的 Songkick 行程"
 
 #: ../src/musicaggregatorquery.cpp:217
 msgid "Songkick"
-msgstr ""
+msgstr "Songkick"
 
 #: ../src/video-scope.cpp:141
 msgid "Everything"
-msgstr "所有東西"
+msgstr "所有"
 
 #: ../src/video-scope.cpp:143
 msgid "My Roll"
@@ -78,7 +78,7 @@ msgstr ""
 
 #: ../src/video-scope.cpp:144
 msgid "Downloaded"
-msgstr "下載的"
+msgstr "已下載"
 
 #: ../src/video-scope.cpp:162 ../src/video-scope.cpp:167
 #: tmp/mediascanner-video.ini.in.in.h:1
@@ -125,7 +125,7 @@ msgstr "顯示 7digital 的結果"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:3
 msgid "Display results from Songkick"
-msgstr ""
+msgstr "顯示 Songkick 的結果"
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
