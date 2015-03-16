@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-16 13:50+0800\n"
-"PO-Revision-Date: 2015-03-14 09:09+0000\n"
+"PO-Revision-Date: 2015-03-15 22:31+0000\n"
 "Last-Translator: Constantinos Koniaris <kostas291@yahoo.com>\n"
 "Language-Team: Greek <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-03-15 05:32+0000\n"
+"X-Launchpad-Export-Date: 2015-03-16 06:02+0000\n"
 "X-Generator: Launchpad (build 17389)\n"
 
 #: ../src/music-scope.cpp:219 ../src/music-scope.cpp:280
@@ -24,16 +24,16 @@ msgstr "Καλλιτέχνες"
 #: ../src/music-scope.cpp:220 ../src/music-scope.cpp:449
 #: ../src/music-scope.cpp:492
 msgid "Albums"
-msgstr ""
+msgstr "Άλμπουμ"
 
 #: ../src/music-scope.cpp:221 ../src/music-scope.cpp:324
 #: ../src/music-scope.cpp:339
 msgid "Tracks"
-msgstr ""
+msgstr "Κομμάτια"
 
 #: ../src/music-scope.cpp:222
 msgid "Genres"
-msgstr ""
+msgstr "Είδη"
 
 #: ../src/music-scope.cpp:568 ../src/music-scope.cpp:600
 msgid "Play in music app"
@@ -54,7 +54,7 @@ msgstr "Grooveshark"
 
 #: ../src/musicaggregatorquery.cpp:212
 msgid "New albums from 7digital"
-msgstr ""
+msgstr "Νέα άλμπουμ στο 7digital"
 
 #: ../src/musicaggregatorquery.cpp:214
 msgid "7digital"
@@ -66,7 +66,7 @@ msgstr "Κοντινά συμβάντα στο Songkick"
 
 #: ../src/musicaggregatorquery.cpp:217
 msgid "Songkick"
-msgstr ""
+msgstr "Songkick"
 
 #: ../src/video-scope.cpp:141
 msgid "Everything"
@@ -104,16 +104,20 @@ msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
+"Αυτό είναι ένα πρόσθετο αναζήτησης του Ubuntu που σαρώνει τη συσκευή για "
+"μουσική και επιτρέπει την αναζήτηση και την προβολή της στο Dash."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr ""
+msgstr "Αναζήτηση στην τοπική μουσική συλλογή"
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
+"Αυτό είναι ένα πρόσθετο αναζήτησης του Ubuntu που σαρώνει τη συσκευή για "
+"βίντεο και επιτρέπει την αναζήτηση τους και την προβολή τους στο Dash."
 
 #: tmp/musicaggregator-settings.ini.in.in.h:1
 msgid "Display results from Grooveshark"
@@ -135,6 +139,8 @@ msgstr "Μουσική"
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr ""
+"Αυτό είναι ένα πρόσθετο αναζήτησης του Ubuntu που συγχωνεύει όλες τις πηγές "
+"μουσικής σε μία."
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
@@ -155,4 +161,4 @@ msgstr ""
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
-msgstr ""
+msgstr "Αναζήτηση βίντεο"
