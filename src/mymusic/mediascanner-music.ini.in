@@ -5,6 +5,7 @@ Author=Canonical Ltd.
 Art=./screenshot.jpg
 Icon=./icon.png
 _SearchHint=Search local music collection
+Keywords=music
 
 [Appearance]
 LogoOverlayColor=#26000000
