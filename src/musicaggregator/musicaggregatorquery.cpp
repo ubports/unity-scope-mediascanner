@@ -35,6 +35,7 @@
 #include <unity/scopes/Location.h>
 #include <unity/scopes/SearchReply.h>
 #include <unity/scopes/SearchMetadata.h>
+#include <unity/scopes/ChildScope.h>
 
 using namespace unity::scopes;
 
