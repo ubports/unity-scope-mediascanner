@@ -68,6 +68,10 @@ ChildScopeList MusicAggregatorScope::find_child_scopes() const
 
     auto music_scopes = registry()->list_if([kw](ScopeMetadata const& item)
     {
+        if (item.scope_id() == "musicaggregator")
+        {
+            return false;
+        }
         auto keywords = item.keywords();
         return keywords.find(kw) != keywords.end() || predefined_scopes.find(item.scope_id()) != predefined_scopes.end();
     });
