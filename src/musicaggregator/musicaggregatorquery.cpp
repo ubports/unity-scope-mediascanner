@@ -26,6 +26,7 @@
 #include "../utils/notify-strategy.h"
 #include "../utils/i18n.h"
 #include <memory>
+#include <iostream>
 
 #include <unity/scopes/Annotation.h>
 #include <unity/scopes/CategorisedResult.h>
@@ -302,6 +303,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
 
     for (auto const& child : child_scopes)
     {
+        std::cout << "Child scope:" << child.id << " " << child.enabled;
         if (child.enabled)
         {
             scopes.push_back(child);
@@ -311,7 +313,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
                 auto local_reply = std::make_shared<ResultForwarder>(parent_reply, [this, mymusic_cat](CategorisedResult& res) -> bool {
                         res.set_category(mymusic_cat);
                         return true;
-                        });
+                    });
                 replies.push_back(local_reply);
             }
             else if (child.id == MusicAggregatorScope::SEVENDIGITAL)
@@ -319,29 +321,29 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
                 auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, sevendigital_cat](CategorisedResult& res) -> bool {
                         res.set_category(sevendigital_cat);
                         return true;
-                        });
+                    });
                 replies.push_back(reply);
             }
             else if (child.id == MusicAggregatorScope::SOUNDCLOUD)
             {
                 auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, soundcloud_cat](CategorisedResult& res) -> bool {
                         if (res.category()->id() == "soundcloud_login_nag") {
-                        return false;
+                            return false;
                         }
                         res.set_category(soundcloud_cat);
                         return true;
-                        });
+                    });
                 replies.push_back(reply);
             }
             else if (child.id == MusicAggregatorScope::SONGKICK)
             {
                 auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, songkick_cat](CategorisedResult& res) -> bool {
                         if (res.category()->id() == "noloc") {
-                        return false;
+                            return false;
                         }
                         res.set_category(songkick_cat);
                         return true;
-                        });
+                    });
                 replies.push_back(reply);
             }
             else if (child.id == MusicAggregatorScope::GROOVESHARKSCOPE)
@@ -349,11 +351,11 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
                 auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, grooveshark_cat](CategorisedResult& res) -> bool {
                         if (res.category()->id() == grooveshark_songs_category_id)
                         {
-                        res.set_category(grooveshark_cat);
-                        return true;
+                            res.set_category(grooveshark_cat);
+                            return true;
                         }
                         return false;
-                        });
+                    });
 
                 replies.push_back(reply);
             }
@@ -362,14 +364,14 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
                 auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, youtube_cat](CategorisedResult& res) -> bool {
                         res.set_category(youtube_cat);
                         return !res["musicaggregation"].is_null();
-                        });
+                    });
                 replies.push_back(reply);
             }
             else // dynamically added scope (from keywords)
             {
                 auto reply = std::make_shared<BufferedResultForwarder>(parent_reply, [this](CategorisedResult& res) -> bool {
                         return true;
-                        });
+                    });
                 replies.push_back(reply);
             }
         }
