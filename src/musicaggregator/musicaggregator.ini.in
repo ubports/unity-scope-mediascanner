@@ -8,6 +8,7 @@ _SearchHint=Search music
 HotKey=
 LocationDataNeeded=true
 Keywords=music
+IsAggregator=true
 
 [Appearance]
 LogoOverlayColor=#26000000
