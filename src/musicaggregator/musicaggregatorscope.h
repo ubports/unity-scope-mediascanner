@@ -46,15 +46,7 @@ public:
     virtual unity::scopes::SearchQueryBase::UPtr search(unity::scopes::CannedQuery const& q,
             unity::scopes::SearchMetadata const& hints) override;
 
-private:
-    void init_scope_proxies();
-    void init_scope_proxy(std::string const& scope, unity::scopes::ScopeProxy& proxy, unity::scopes::VariantMap const& config);
-    unity::scopes::ScopeProxy local_scope;
-    unity::scopes::ScopeProxy grooveshark_scope;
-    unity::scopes::ScopeProxy soundcloud_scope;
-    unity::scopes::ScopeProxy sevendigital_scope;
-    unity::scopes::ScopeProxy songkick_scope;
-    unity::scopes::ScopeProxy youtube_scope;
+    virtual unity::scopes::ChildScopeList find_child_scopes() const override;
 };
 
 #endif
