@@ -25,6 +25,7 @@
 #include <unity/scopes/CategoryRenderer.h>
 #include <vector>
 #include <iostream>
+#include <algorithm>
 #include "../utils/i18n.h"
 
 using namespace unity::scopes;
@@ -40,7 +41,7 @@ const std::string MusicAggregatorScope::SOUNDCLOUD = "com.ubuntu.scopes.soundclo
 const std::string MusicAggregatorScope::SONGKICK = "com.canonical.scopes.songkick_songkick";
 const std::string MusicAggregatorScope::YOUTUBE = "com.ubuntu.scopes.youtube_youtube";
 
-const std::set<std::string> predefined_scopes {
+const std::vector<std::string> predefined_scopes {
     MusicAggregatorScope::LOCALSCOPE,
     MusicAggregatorScope::GROOVESHARKSCOPE,
     MusicAggregatorScope::SEVENDIGITAL,
@@ -73,7 +74,7 @@ ChildScopeList MusicAggregatorScope::find_child_scopes() const
             return false;
         }
         auto keywords = item.keywords();
-        return keywords.find(kw) != keywords.end() || predefined_scopes.find(item.scope_id()) != predefined_scopes.end();
+        return keywords.find(kw) != keywords.end() || std::find(predefined_scopes.begin(), predefined_scopes.end(), item.scope_id()) != predefined_scopes.end();
     });
 
     ChildScopeList list;
