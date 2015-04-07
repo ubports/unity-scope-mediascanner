@@ -24,7 +24,6 @@
 #include "../utils/notify-strategy.h"
 #include "../utils/i18n.h"
 #include <memory>
-#include <iostream>
 
 #include <unity/scopes/Annotation.h>
 #include <unity/scopes/CategorisedResult.h>
@@ -326,7 +325,6 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
 
     for (auto const& child : child_scopes)
     {
-        std::cout << "Child scope:" << child.id << " " << child.enabled;
         if (child.enabled)
         {
             scopes.push_back(child);
@@ -384,15 +382,15 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
             }
             else if (child.id == MusicAggregatorScope::YOUTUBE)
             {
-                auto reply = std::make_shared<BRF>(parent_reply, next_forwarder, [this, youtube_cat](CategorisedResult& res) -> bool {
+                next_forwarder = std::make_shared<BRF>(parent_reply, next_forwarder, [this, youtube_cat](CategorisedResult& res) -> bool {
                         res.set_category(youtube_cat);
                         return !res["musicaggregation"].is_null();
                     });
-                replies.push_back(reply);
+                replies.push_back(next_forwarder);
             }
             else // dynamically added scope (from keywords)
             {
-                auto reply = std::make_shared<BRF>(parent_reply, next_forwarder, [this](CategorisedResult& res) -> bool {
+                next_forwarder = std::make_shared<BRF>(parent_reply, next_forwarder, [this](CategorisedResult& res) -> bool {
                         return true;
                     });
                 replies.push_back(next_forwarder);
