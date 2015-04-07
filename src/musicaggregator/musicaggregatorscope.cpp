@@ -41,13 +41,14 @@ const std::string MusicAggregatorScope::SOUNDCLOUD = "com.ubuntu.scopes.soundclo
 const std::string MusicAggregatorScope::SONGKICK = "com.canonical.scopes.songkick_songkick";
 const std::string MusicAggregatorScope::YOUTUBE = "com.ubuntu.scopes.youtube_youtube";
 
+// note: the order of predefined scopes, *reversed* for BufferedResultForwarder
 const std::vector<std::string> predefined_scopes {
-    MusicAggregatorScope::LOCALSCOPE,
-    MusicAggregatorScope::GROOVESHARKSCOPE,
-    MusicAggregatorScope::SEVENDIGITAL,
-    MusicAggregatorScope::SOUNDCLOUD,
-    MusicAggregatorScope::SONGKICK,
     MusicAggregatorScope::YOUTUBE
+    MusicAggregatorScope::SONGKICK,
+    MusicAggregatorScope::SOUNDCLOUD,
+    MusicAggregatorScope::SEVENDIGITAL,
+    MusicAggregatorScope::GROOVESHARKSCOPE,
+    MusicAggregatorScope::LOCALSCOPE,
 };
 
 void MusicAggregatorScope::start(std::string const&) {
