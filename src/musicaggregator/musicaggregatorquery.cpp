@@ -40,6 +40,8 @@
 
 using namespace unity::scopes;
 
+// FIXME: once child scopes are updated to handle is_aggregated flag, they should provide
+// own renderer for aggregator and these definitions should be removed
 static const char MYMUSIC_CATEGORY_DEFINITION[] = R"(
 {
   "schema-version": 1,
@@ -391,11 +393,10 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
                         char title[500];
                         if (empty_search) {
                             snprintf(title, sizeof(title), _("%s Features"), child_name.c_str());
-                            category = parent_reply->register_category(child_id, title, "" /* icon */, category_query, renderer);
                         } else {
                             snprintf(title, sizeof(title), _("Results from %s"), child_name.c_str());
-                            category = parent_reply->register_category(child_id, title, "" /* icon */, category_query, renderer);
                         }
+                        category = parent_reply->register_category(child_id, title, "" /* icon */, category_query, renderer);
 
                         // remember the first encountered category for this child
                         {

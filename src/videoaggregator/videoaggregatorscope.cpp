@@ -29,7 +29,7 @@
 using namespace unity::scopes;
 
 // the order of predefined scopes
-const std::vector<std::string> predefined_scopes {
+const std::vector<std::string> VideoAggregatorScope::predefined_scopes {
 #ifdef CLICK_MODE
     "com.ubuntu.scopes.myvideos_myvideos",
 #else

@@ -40,6 +40,8 @@ public:
             unity::scopes::SearchMetadata const& hints) override;
 
     virtual unity::scopes::ChildScopeList find_child_scopes() const override;
+
+    static const std::vector<std::string> predefined_scopes;
 };
 
 #endif
