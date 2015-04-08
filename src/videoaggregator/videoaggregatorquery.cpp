@@ -113,11 +113,11 @@ void VideoAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
                         child.id, title, "" /* icon */, category_query,
                         CategoryRenderer(SEARCH_CATEGORY_DEFINITION));
             }
-            auto subscope_reply = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [category](CategorisedResult& res) -> bool {
+            next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [category](CategorisedResult& res) -> bool {
                     res.set_category(category);
                     return true;
                 });
-            subsearch(child, query_string, department_id, filter_state, subscope_reply);
+            subsearch(child, query_string, department_id, filter_state, next_forwarder);
         }
     }
 }

@@ -27,7 +27,7 @@ unity::scopes::ChildScopeList find_child_scopes_by_keywords(
         std::vector<std::string> const& predefined_scopes,
         std::string const& keyword)
 {
-    auto music_scopes = registry->list_if([keyword, aggregator_scope_id, predefined_scopes](unity::scopes::ScopeMetadata const& item)
+    auto scopes = registry->list_if([keyword, aggregator_scope_id, predefined_scopes](unity::scopes::ScopeMetadata const& item)
     {
         if (item.scope_id() == aggregator_scope_id)
         {
@@ -42,16 +42,16 @@ unity::scopes::ChildScopeList find_child_scopes_by_keywords(
     // ensure predefined scopes are first in the resulting child scopes list
     for (auto const& scope_id: predefined_scopes)
     {
-        auto it = music_scopes.find(scope_id);
-        if (it != music_scopes.end())
+        auto it = scopes.find(scope_id);
+        if (it != scopes.end())
         {
             list.emplace_back(unity::scopes::ChildScope{it->first, it->second, true, {keyword}});
-            music_scopes.erase(it);
+            scopes.erase(it);
         }
     }
 
     // append any remaining music scopes
-    for (auto const& scope : music_scopes)
+    for (auto const& scope : scopes)
     {
         list.emplace_back(unity::scopes::ChildScope{scope.first, scope.second, true, {keyword}});
     }
