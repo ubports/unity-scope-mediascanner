@@ -1,9 +1,0 @@
-[com.ubuntu.scopes.youtube_youtube]
-type=boolean
-defaultValue=true
-_displayName=Display results from YouTube
-
-[com.ubuntu.scopes.vimeo_vimeo]
-type=boolean
-defaultValue=true
-_displayName=Display results from Vimeo
