@@ -24,6 +24,8 @@
 #include "../utils/i18n.h"
 #include "../utils/bufferedresultforwarder.h"
 #include <memory>
+#include <map>
+#include <mutex>
 #include <algorithm>
 
 #include <unity/scopes/Annotation.h>
@@ -247,39 +249,6 @@ static char YOUTUBE_SEARCH_CATEGORY_DEFINITION[] = R"(
 }
 )";
 
-// for surfacing results of scopes other than the predefined scopes
-static const char SURFACING_CATEGORY_DEFINITION[] = R"(
-{
-  "schema-version": 1,
-  "template": {
-    "category-layout": "horizontal-list",
-    "card-size": "small"
-  },
-  "components": {
-    "title": "title",
-    "art":  "art",
-    "subtitle": "artist"
-  }
-}
-)";
-
-// for search results of scopes other than the predefined scopes
-static const char SEARCH_CATEGORY_DEFINITION[] = R"(
-{
-  "schema-version": 1,
-  "template": {
-    "category-layout": "grid",
-    "card-layout" : "horizontal",
-    "card-size": "large"
-  },
-  "components": {
-    "title": "title",
-    "art":  "art",
-    "subtitle": "artist"
-  }
-}
-)";
-
 const std::string MusicAggregatorQuery::grooveshark_songs_category_id = "cat_0";
 
 MusicAggregatorQuery::MusicAggregatorQuery(CannedQuery const& query, SearchMetadata const& hints,
@@ -334,6 +303,13 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
             : parent_reply->register_category("youtube", _("Youtube"), "", youtube_query, CategoryRenderer(YOUTUBE_SEARCH_CATEGORY_DEFINITION));
 
     unity::scopes::utility::BufferedResultForwarder::SPtr next_forwarder;
+
+    //
+    // maps scope id to category id of first received result from that scope.
+    // this is used to ignore results from different categories (i.e. child scope is
+    // misbehaving when aggregated).
+    std::map<std::string, std::string> child_id_to_category_id;
+    std::mutex child_id_map_mutex;
 
     for (auto const& child: child_scopes)
     {
@@ -402,27 +378,41 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
             }
             else // dynamically added scope (from keywords)
             {
-                Category::SCPtr category;
-                CannedQuery category_query(child.id, query().query_string(), "");
-                char title[500];
-                if (empty_search) {
-                    snprintf(title, sizeof(title), _("%s Features"),
-                            child.metadata.display_name().c_str());
-                    category = parent_reply->register_category(
-                            child.id, title, "" /* icon */, category_query,
-                            CategoryRenderer(SURFACING_CATEGORY_DEFINITION));
-                } else {
-                    snprintf(title, sizeof(title), _("Results from %s"),
-                            child.metadata.display_name().c_str());
-                    category = parent_reply->register_category(
-                            child.id, title, "" /* icon */, category_query,
-                            CategoryRenderer(SEARCH_CATEGORY_DEFINITION));
-                }
+                auto child_id = child.id;
+                auto const child_name = child.metadata.display_name();
+                next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [this, child_id, child_name, empty_search,
+                        parent_reply, &child_id_to_category_id, &child_id_map_mutex](CategorisedResult& res) -> bool {
+                    // register a single category for aggregated results of this child scope and update incoming results with this category;
+                    // the new category has custom id and title, but reuses the renderer of first incoming result
+                    Category::SCPtr category = parent_reply->lookup_category(child_id);
+                    if (!category) {
+                        CannedQuery category_query(child_id, query().query_string(), "");
+                        auto const renderer = res.category()->renderer_template();
+                        char title[500];
+                        if (empty_search) {
+                            snprintf(title, sizeof(title), _("%s Features"), child_name.c_str());
+                            category = parent_reply->register_category(child_id, title, "" /* icon */, category_query, renderer);
+                        } else {
+                            snprintf(title, sizeof(title), _("Results from %s"), child_name.c_str());
+                            category = parent_reply->register_category(child_id, title, "" /* icon */, category_query, renderer);
+                        }
 
-                next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [category](CategorisedResult& res) -> bool {
-                        res.set_category(category);
-                        return true;
-                        });
+                        // remember the first encountered category for this child
+                        {
+                            std::lock_guard<std::mutex> lock(child_id_map_mutex);
+                            child_id_to_category_id[child_id] = res.category()->id();
+                        }
+                    }
+
+                    {
+                        std::lock_guard<std::mutex> lock(child_id_map_mutex);
+                        if (child_id_to_category_id[child_id] == res.category()->id()) {
+                            res.set_category(category);
+                            return true;
+                        }
+                    }
+                    return false; // filter out results from other categories
+                });
                 replies.push_back(next_forwarder);
             }
         }
