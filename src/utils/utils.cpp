@@ -22,20 +22,19 @@
 #include <unity/scopes/ScopeMetadata.h>
 
 unity::scopes::ChildScopeList find_child_scopes_by_keywords(
-        const unity::scopes::RegistryProxy& registry,
-        const std::vector<std::string>& predefined_scopes,
-        const std::set<std::string>& keywords)
+        std::string const& aggregator_scope_id,
+        unity::scopes::RegistryProxy const& registry,
+        std::vector<std::string> const& predefined_scopes,
+        std::string const& keyword)
 {
-    const std::string kw = "music";
-
-    auto music_scopes = registry->list_if([kw, predefined_scopes](unity::scopes::ScopeMetadata const& item)
+    auto music_scopes = registry->list_if([keyword, aggregator_scope_id, predefined_scopes](unity::scopes::ScopeMetadata const& item)
     {
-        if (item.scope_id() == "musicaggregator")
+        if (item.scope_id() == aggregator_scope_id)
         {
             return false;
         }
         auto keywords = item.keywords();
-        return keywords.find(kw) != keywords.end() || std::find(predefined_scopes.begin(), predefined_scopes.end(), item.scope_id()) != predefined_scopes.end();
+        return keywords.find(keyword) != keywords.end() || std::find(predefined_scopes.begin(), predefined_scopes.end(), item.scope_id()) != predefined_scopes.end();
     });
 
     unity::scopes::ChildScopeList list;
@@ -46,7 +45,7 @@ unity::scopes::ChildScopeList find_child_scopes_by_keywords(
         auto it = music_scopes.find(scope_id);
         if (it != music_scopes.end())
         {
-            list.emplace_back(unity::scopes::ChildScope{it->first, it->second, true, {kw}});
+            list.emplace_back(unity::scopes::ChildScope{it->first, it->second, true, {keyword}});
             music_scopes.erase(it);
         }
     }
@@ -54,7 +53,7 @@ unity::scopes::ChildScopeList find_child_scopes_by_keywords(
     // append any remaining music scopes
     for (auto const& scope : music_scopes)
     {
-        list.emplace_back(unity::scopes::ChildScope{scope.first, scope.second, true, {kw}});
+        list.emplace_back(unity::scopes::ChildScope{scope.first, scope.second, true, {keyword}});
     }
     return list;
 }

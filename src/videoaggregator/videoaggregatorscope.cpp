@@ -28,15 +28,15 @@
 
 using namespace unity::scopes;
 
-// note: the order of predefined scopes, *reversed* for BufferedResultForwarder
+// the order of predefined scopes
 const std::vector<std::string> predefined_scopes {
-    "com.ubuntu.scopes.vimeo_vimeo",
-    "com.ubuntu.scopes.youtube_youtube",
 #ifdef CLICK_MODE
-    "com.ubuntu.scopes.myvideos_myvideos"
+    "com.ubuntu.scopes.myvideos_myvideos",
 #else
-    "mediascanner-video"
+    "mediascanner-video",
 #endif
+    "com.ubuntu.scopes.youtube_youtube",
+    "com.ubuntu.scopes.vimeo_vimeo"
 };
 
 void VideoAggregatorScope::start(std::string const&) {
@@ -45,8 +45,7 @@ void VideoAggregatorScope::start(std::string const&) {
 
 ChildScopeList VideoAggregatorScope::find_child_scopes() const
 {
-    const std::set<std::string> kw {"videos"};
-    return find_child_scopes_by_keywords(registry(), predefined_scopes, kw);
+    return find_child_scopes_by_keywords("videoaggregator", registry(), predefined_scopes, "videos");
 }
 
 void VideoAggregatorScope::stop() {

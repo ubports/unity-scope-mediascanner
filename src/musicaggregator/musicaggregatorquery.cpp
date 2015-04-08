@@ -24,6 +24,7 @@
 #include "../utils/i18n.h"
 #include "../utils/bufferedresultforwarder.h"
 #include <memory>
+#include <algorithm>
 
 #include <unity/scopes/Annotation.h>
 #include <unity/scopes/CategorisedResult.h>
@@ -287,6 +288,7 @@ MusicAggregatorQuery::MusicAggregatorQuery(CannedQuery const& query, SearchMetad
     SearchQueryBase(query, hints),
     child_scopes(scopes)
 {
+    std::reverse(child_scopes.begin(), child_scopes.end());
 }
 
 MusicAggregatorQuery::~MusicAggregatorQuery() {

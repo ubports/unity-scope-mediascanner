@@ -27,8 +27,9 @@
 #include <set>
 
 unity::scopes::ChildScopeList find_child_scopes_by_keywords(
-        const unity::scopes::RegistryProxy& registry,
-        const std::vector<std::string>& predefined_scopes,
-        const std::set<std::string>& keywords);
+        std::string const& aggregator_scope_id,
+        unity::scopes::RegistryProxy const& registry,
+        std::vector<std::string> const& predefined_scopes,
+        std::string const& keyword);
 
 #endif

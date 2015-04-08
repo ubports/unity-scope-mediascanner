@@ -39,14 +39,14 @@ const std::string MusicAggregatorScope::SOUNDCLOUD = "com.ubuntu.scopes.soundclo
 const std::string MusicAggregatorScope::SONGKICK = "com.canonical.scopes.songkick_songkick";
 const std::string MusicAggregatorScope::YOUTUBE = "com.ubuntu.scopes.youtube_youtube";
 
-// note: the order of predefined scopes, *reversed* for BufferedResultForwarder
+// the order of predefined scopes
 const std::vector<std::string> predefined_scopes {
-    MusicAggregatorScope::YOUTUBE,
-    MusicAggregatorScope::SONGKICK,
-    MusicAggregatorScope::SOUNDCLOUD,
-    MusicAggregatorScope::SEVENDIGITAL,
+    MusicAggregatorScope::LOCALSCOPE,
     MusicAggregatorScope::GROOVESHARKSCOPE,
-    MusicAggregatorScope::LOCALSCOPE
+    MusicAggregatorScope::SEVENDIGITAL,
+    MusicAggregatorScope::SOUNDCLOUD,
+    MusicAggregatorScope::SONGKICK,
+    MusicAggregatorScope::YOUTUBE
 };
 
 void MusicAggregatorScope::start(std::string const&) {
@@ -64,8 +64,7 @@ SearchQueryBase::UPtr MusicAggregatorScope::search(CannedQuery const& q,
 
 ChildScopeList MusicAggregatorScope::find_child_scopes() const
 {
-    const std::set<std::string> kw {"music"};
-    return find_child_scopes_by_keywords(registry(), predefined_scopes, kw);
+    return find_child_scopes_by_keywords("musicaggregator", registry(), predefined_scopes, "music");
 }
 
 PreviewQueryBase::UPtr MusicAggregatorScope::preview(Result const& /*result*/, ActionMetadata const& /*hints*/) {

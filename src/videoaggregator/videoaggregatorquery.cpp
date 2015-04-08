@@ -14,6 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authored by Jussi Pakkanen <jussi.pakkanen@canonical.com>
+ *             Pawel Stolowski <pawel.stolowski@canonical.com>
  *
  */
 
@@ -27,6 +28,7 @@
 #include <unity/scopes/Category.h>
 #include <unity/scopes/CannedQuery.h>
 #include <unity/scopes/SearchReply.h>
+#include <algorithm>
 
 #include "../utils/i18n.h"
 #include "videoaggregatorquery.h"
@@ -74,6 +76,7 @@ static char SEARCH_CATEGORY_DEFINITION[] = R"(
 VideoAggregatorQuery::VideoAggregatorQuery(CannedQuery const& query, SearchMetadata const& hints, ChildScopeList const& scopes) :
     SearchQueryBase(query, hints),
     child_scopes(scopes) {
+        std::reverse(child_scopes.begin(), child_scopes.end());
 }
 
 VideoAggregatorQuery::~VideoAggregatorQuery() {
