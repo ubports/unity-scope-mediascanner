@@ -30,7 +30,6 @@
 
 #include "../utils/i18n.h"
 #include "videoaggregatorquery.h"
-#include "../utils/resultforwarder.h"
 #include "../utils/bufferedresultforwarder.h"
 
 using namespace unity::scopes;
@@ -72,28 +71,9 @@ static char SEARCH_CATEGORY_DEFINITION[] = R"(
 }
 )";
 
-class VideoResultForwarder : public BufferedResultForwarder {
-public:
-    VideoResultForwarder(SearchReplyProxy const &upstream, Category::SCPtr const& category) :
-        BufferedResultForwarder(upstream), category(category) {
-    }
-
-    virtual void push(Category::SCPtr const &cat) override {
-        /* nothing: we replace the subscope categories */
-    }
-
-    virtual void push(CategorisedResult result) override {
-        result.set_category(category);
-        BufferedResultForwarder::push(std::move(result));
-    }
-
-private:
-    Category::SCPtr category;
-};
-
-VideoAggregatorQuery::VideoAggregatorQuery(CannedQuery const& query, SearchMetadata const& hints, std::vector<ScopeMetadata> subscopes) :
+VideoAggregatorQuery::VideoAggregatorQuery(CannedQuery const& query, SearchMetadata const& hints, ChildScopeList const& scopes) :
     SearchQueryBase(query, hints),
-    subscopes(subscopes) {
+    child_scopes(scopes) {
 }
 
 VideoAggregatorQuery::~VideoAggregatorQuery() {
@@ -107,44 +87,34 @@ void VideoAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     const bool surfacing = query_string.empty();
     const std::string department_id = "aggregated:videoaggregator";
     const FilterState filter_state;
-    const VariantMap config = settings();
 
-    auto first_reply = std::make_shared<ResultForwarder>(parent_reply);
+    unity::scopes::utility::BufferedResultForwarder::SPtr next_forwarder;
 
     // Create forwarders for the other sub-scopes
-    for (unsigned int i = 1; i < subscopes.size(); i++) {
-        const auto &metadata = subscopes[i];
-        const std::string scope_id = metadata.scope_id();
-        try {
-            if (!config.at(scope_id).get_bool()) {
-                continue;
+    for (auto const& child: child_scopes) {
+        if (child.enabled)
+        {
+            Category::SCPtr category;
+            CannedQuery category_query(child.id, query().query_string(), "");
+            char title[500];
+            if (surfacing) {
+                snprintf(title, sizeof(title), _("%s Features"),
+                        child.metadata.display_name().c_str());
+                category = parent_reply->register_category(
+                        child.id, title, "" /* icon */, category_query,
+                        CategoryRenderer(SURFACING_CATEGORY_DEFINITION));
+            } else {
+                snprintf(title, sizeof(title), _("Results from %s"),
+                        child.metadata.display_name().c_str());
+                category = parent_reply->register_category(
+                        child.id, title, "" /* icon */, category_query,
+                        CategoryRenderer(SEARCH_CATEGORY_DEFINITION));
             }
-        } catch (const std::exception &e) {
-            /* If the setting is missing, consider child enabled. */
+            auto subscope_reply = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [category](CategorisedResult& res) -> bool {
+                    res.set_category(category);
+                    return true;
+                });
+            subsearch(child, query_string, department_id, filter_state, subscope_reply);
         }
-
-        Category::SCPtr category;
-        CannedQuery category_query(scope_id, query().query_string(), "");
-        if (surfacing) {
-            char title[500];
-            snprintf(title, sizeof(title), _("%s Features"),
-                     metadata.display_name().c_str());
-            category = parent_reply->register_category(
-                scope_id, title, "" /* icon */, category_query,
-                CategoryRenderer(SURFACING_CATEGORY_DEFINITION));
-        } else {
-            char title[500];
-            snprintf(title, sizeof(title), _("Results from %s"),
-                     metadata.display_name().c_str());
-            category = parent_reply->register_category(
-                scope_id, title, "" /* icon */, category_query,
-                CategoryRenderer(SEARCH_CATEGORY_DEFINITION));
-        }
-        auto subscope_reply = std::make_shared<VideoResultForwarder>(parent_reply, category);
-        first_reply->add_observer(subscope_reply);
-        subsearch(metadata.proxy(), query_string, department_id, filter_state,
-                  subscope_reply);
     }
-    subsearch(subscopes[0].proxy(), query_string, department_id, filter_state,
-              first_reply);
 }

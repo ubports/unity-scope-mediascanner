@@ -23,37 +23,30 @@
 #include <unity/scopes/Registry.h>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/CategoryRenderer.h>
-#include <iostream>
+#include "../utils/utils.h"
 #include "../utils/i18n.h"
 
 using namespace unity::scopes;
 
-const std::vector<const char*> SUBSCOPE_NAMES{
-#ifdef CLICK_MODE
-    "com.ubuntu.scopes.myvideos_myvideos",
-#else
-    "mediascanner-video",
-#endif
-    "com.ubuntu.scopes.youtube_youtube",
+// note: the order of predefined scopes, *reversed* for BufferedResultForwarder
+const std::vector<std::string> predefined_scopes {
     "com.ubuntu.scopes.vimeo_vimeo",
+    "com.ubuntu.scopes.youtube_youtube",
+#ifdef CLICK_MODE
+    "com.ubuntu.scopes.myvideos_myvideos"
+#else
+    "mediascanner-video"
+#endif
 };
 
 void VideoAggregatorScope::start(std::string const&) {
     init_gettext(*this);
-    find_subscopes(true);
 }
 
-void VideoAggregatorScope::find_subscopes(bool warn_missing) {
-    subscopes.clear();
-    for (const auto &scope_name : SUBSCOPE_NAMES) {
-        try {
-            subscopes.emplace_back(registry()->get_metadata(scope_name));
-        } catch (const std::exception &e) {
-            if (warn_missing) {
-                std::cerr << "Could not find scope '" << scope_name << "': " << e.what() << std::endl;
-            }
-        }
-    }
+ChildScopeList VideoAggregatorScope::find_child_scopes() const
+{
+    const std::set<std::string> kw {"videos"};
+    return find_child_scopes_by_keywords(registry(), predefined_scopes, kw);
 }
 
 void VideoAggregatorScope::stop() {
@@ -61,12 +54,7 @@ void VideoAggregatorScope::stop() {
 
 SearchQueryBase::UPtr VideoAggregatorScope::search(CannedQuery const& q,
                                                    SearchMetadata const& hints) {
-    // FIXME: workaround for problem with no remote scopes on first run
-    // until network becomes available
-    if (subscopes.size() != SUBSCOPE_NAMES.size()) {
-        find_subscopes(false);
-    }
-    SearchQueryBase::UPtr query(new VideoAggregatorQuery(q, hints, subscopes));
+    SearchQueryBase::UPtr query(new VideoAggregatorQuery(q, hints, child_scopes()));
     return query;
 }
 

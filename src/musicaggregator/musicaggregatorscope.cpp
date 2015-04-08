@@ -23,9 +23,7 @@
 #include <unity/scopes/Registry.h>
 #include <unity/scopes/Category.h>
 #include <unity/scopes/CategoryRenderer.h>
-#include <vector>
-#include <iostream>
-#include <algorithm>
+#include "../utils/utils.h"
 #include "../utils/i18n.h"
 
 using namespace unity::scopes;
@@ -66,37 +64,8 @@ SearchQueryBase::UPtr MusicAggregatorScope::search(CannedQuery const& q,
 
 ChildScopeList MusicAggregatorScope::find_child_scopes() const
 {
-    const std::string kw = "music";
-
-    auto music_scopes = registry()->list_if([kw](ScopeMetadata const& item)
-    {
-        if (item.scope_id() == "musicaggregator")
-        {
-            return false;
-        }
-        auto keywords = item.keywords();
-        return keywords.find(kw) != keywords.end() || std::find(predefined_scopes.begin(), predefined_scopes.end(), item.scope_id()) != predefined_scopes.end();
-    });
-
-    ChildScopeList list;
-
-    // ensure predefined scopes are first in the resulting child scopes list
-    for (auto const& scope_id: predefined_scopes)
-    {
-        auto it = music_scopes.find(scope_id);
-        if (it != music_scopes.end())
-        {
-            list.emplace_back(ChildScope{it->first, it->second, true, {kw}});
-            music_scopes.erase(it);
-        }
-    }
-
-    // append any remaining music scopes
-    for (auto const& scope : music_scopes)
-    {
-        list.emplace_back(ChildScope{scope.first, scope.second, true, {kw}});
-    }
-    return list;
+    const std::set<std::string> kw {"music"};
+    return find_child_scopes_by_keywords(registry(), predefined_scopes, kw);
 }
 
 PreviewQueryBase::UPtr MusicAggregatorScope::preview(Result const& /*result*/, ActionMetadata const& /*hints*/) {

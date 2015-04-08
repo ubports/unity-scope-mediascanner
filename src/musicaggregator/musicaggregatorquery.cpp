@@ -21,8 +21,8 @@
 #include <config.h>
 #include "musicaggregatorquery.h"
 #include "musicaggregatorscope.h"
-#include "../utils/notify-strategy.h"
 #include "../utils/i18n.h"
+#include "../utils/bufferedresultforwarder.h"
 #include <memory>
 
 #include <unity/scopes/Annotation.h>
@@ -34,7 +34,6 @@
 #include <unity/scopes/SearchReply.h>
 #include <unity/scopes/SearchMetadata.h>
 #include <unity/scopes/ChildScope.h>
-#include <unity/scopes/utility/BufferedResultForwarder.h>
 
 using namespace unity::scopes;
 
@@ -247,29 +246,40 @@ static char YOUTUBE_SEARCH_CATEGORY_DEFINITION[] = R"(
 }
 )";
 
-const std::string MusicAggregatorQuery::grooveshark_songs_category_id = "cat_0";
-
-class BRF : public unity::scopes::utility::BufferedResultForwarder
+// for surfacing results of scopes other than the predefined scopes
+static const char SURFACING_CATEGORY_DEFINITION[] = R"(
 {
-    public:
-        BRF(unity::scopes::SearchReplyProxy const& upstream,
-                unity::scopes::utility::BufferedResultForwarder::SPtr const& next_forwarder,
-                std::function<bool(unity::scopes::CategorisedResult&)> const &result_filter = [](unity::scopes::CategorisedResult&) -> bool { return true; })
-            : unity::scopes::utility::BufferedResultForwarder(upstream, next_forwarder),
-            result_filter_(result_filter)
-        {
-        }
+  "schema-version": 1,
+  "template": {
+    "category-layout": "horizontal-list",
+    "card-size": "small"
+  },
+  "components": {
+    "title": "title",
+    "art":  "art",
+    "subtitle": "artist"
+  }
+}
+)";
 
-        void push(CategorisedResult result) override
-        {
-            if (result_filter_(result))
-            {
-                unity::scopes::utility::BufferedResultForwarder::push(result);
-            }
-        }
+// for search results of scopes other than the predefined scopes
+static const char SEARCH_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-layout" : "horizontal",
+    "card-size": "large"
+  },
+  "components": {
+    "title": "title",
+    "art":  "art",
+    "subtitle": "artist"
+  }
+}
+)";
 
-        const std::function<bool(unity::scopes::CategorisedResult&)> result_filter_;
-};
+const std::string MusicAggregatorQuery::grooveshark_songs_category_id = "cat_0";
 
 MusicAggregatorQuery::MusicAggregatorQuery(CannedQuery const& query, SearchMetadata const& hints,
         ChildScopeList const& scopes
@@ -323,7 +333,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
 
     unity::scopes::utility::BufferedResultForwarder::SPtr next_forwarder;
 
-    for (auto const& child : child_scopes)
+    for (auto const& child: child_scopes)
     {
         if (child.enabled)
         {
@@ -331,7 +341,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
 
             if (child.id == MusicAggregatorScope::LOCALSCOPE)
             {
-                next_forwarder = std::make_shared<BRF>(parent_reply, next_forwarder, [this, mymusic_cat](CategorisedResult& res) -> bool {
+                next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [this, mymusic_cat](CategorisedResult& res) -> bool {
                         res.set_category(mymusic_cat);
                         return true;
                     });
@@ -339,7 +349,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
             }
             else if (child.id == MusicAggregatorScope::SEVENDIGITAL)
             {
-                next_forwarder = std::make_shared<BRF>(parent_reply, next_forwarder, [this, sevendigital_cat](CategorisedResult& res) -> bool {
+                next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [this, sevendigital_cat](CategorisedResult& res) -> bool {
                         res.set_category(sevendigital_cat);
                         return true;
                     });
@@ -347,7 +357,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
             }
             else if (child.id == MusicAggregatorScope::SOUNDCLOUD)
             {
-                next_forwarder = std::make_shared<BRF>(parent_reply, next_forwarder, [this, soundcloud_cat](CategorisedResult& res) -> bool {
+                next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [this, soundcloud_cat](CategorisedResult& res) -> bool {
                         if (res.category()->id() == "soundcloud_login_nag") {
                             return false;
                         }
@@ -358,7 +368,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
             }
             else if (child.id == MusicAggregatorScope::SONGKICK)
             {
-                next_forwarder = std::make_shared<BRF>(parent_reply, next_forwarder, [this, songkick_cat](CategorisedResult& res) -> bool {
+                next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [this, songkick_cat](CategorisedResult& res) -> bool {
                         if (res.category()->id() == "noloc") {
                             return false;
                         }
@@ -369,7 +379,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
             }
             else if (child.id == MusicAggregatorScope::GROOVESHARKSCOPE)
             {
-                next_forwarder = std::make_shared<BRF>(parent_reply, next_forwarder, [this, grooveshark_cat](CategorisedResult& res) -> bool {
+                next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [this, grooveshark_cat](CategorisedResult& res) -> bool {
                         if (res.category()->id() == grooveshark_songs_category_id)
                         {
                             res.set_category(grooveshark_cat);
@@ -382,7 +392,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
             }
             else if (child.id == MusicAggregatorScope::YOUTUBE)
             {
-                next_forwarder = std::make_shared<BRF>(parent_reply, next_forwarder, [this, youtube_cat](CategorisedResult& res) -> bool {
+                next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [this, youtube_cat](CategorisedResult& res) -> bool {
                         res.set_category(youtube_cat);
                         return !res["musicaggregation"].is_null();
                     });
@@ -390,9 +400,27 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
             }
             else // dynamically added scope (from keywords)
             {
-                next_forwarder = std::make_shared<BRF>(parent_reply, next_forwarder, [this](CategorisedResult& res) -> bool {
+                Category::SCPtr category;
+                CannedQuery category_query(child.id, query().query_string(), "");
+                char title[500];
+                if (empty_search) {
+                    snprintf(title, sizeof(title), _("%s Features"),
+                            child.metadata.display_name().c_str());
+                    category = parent_reply->register_category(
+                            child.id, title, "" /* icon */, category_query,
+                            CategoryRenderer(SURFACING_CATEGORY_DEFINITION));
+                } else {
+                    snprintf(title, sizeof(title), _("Results from %s"),
+                            child.metadata.display_name().c_str());
+                    category = parent_reply->register_category(
+                            child.id, title, "" /* icon */, category_query,
+                            CategoryRenderer(SEARCH_CATEGORY_DEFINITION));
+                }
+
+                next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [category](CategorisedResult& res) -> bool {
+                        res.set_category(category);
                         return true;
-                    });
+                        });
                 replies.push_back(next_forwarder);
             }
         }

@@ -39,10 +39,7 @@ public:
     virtual unity::scopes::SearchQueryBase::UPtr search(unity::scopes::CannedQuery const& q,
             unity::scopes::SearchMetadata const& hints) override;
 
-private:
-    void find_subscopes(bool warn_missing);
-
-    std::vector<unity::scopes::ScopeMetadata> subscopes;
+    virtual unity::scopes::ChildScopeList find_child_scopes() const override;
 };
 
 #endif
