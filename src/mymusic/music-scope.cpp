@@ -201,8 +201,9 @@ void MusicQuery::cancelled() {
 
 void MusicQuery::run(SearchReplyProxy const&reply) {
     const bool empty_search_query = query().query_string().empty();
+    const bool is_aggregated = search_metadata().is_aggregated();
 
-    if (empty_search_query)
+    if (empty_search_query && !is_aggregated)
     {
         populate_departments(reply);
     }

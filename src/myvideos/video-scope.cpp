@@ -39,8 +39,6 @@
 using namespace mediascanner;
 using namespace unity::scopes;
 
-static const char AGGREGATOR_DEPT_ID[] = "aggregated:videoaggregator";
-
 static const char LOCAL_CATEGORY_ICON[] = "/usr/share/icons/unity-icon-theme/places/svg/group-videos.svg";
 static const char LOCAL_CATEGORY_DEFINITION[] = R"(
 {
@@ -135,19 +133,18 @@ static bool from_camera(const std::string &filename) {
 }
 
 void VideoQuery::run(SearchReplyProxy const&reply) {
-    bool surfacing = query().query_string() == "";
-    bool is_aggregated = query().department_id() == AGGREGATOR_DEPT_ID;
+    const bool surfacing = query().query_string() == "";
+    const bool is_aggregated = search_metadata().is_aggregated();
 
-    Department::SPtr root_dept = Department::create("", query(), _("Everything"));
-    root_dept->set_subdepartments({
-            Department::create("camera", query(), _("My Roll")),
-            Department::create("downloads", query(), _("Downloaded")),
-        });
-    if (is_aggregated) {
-        root_dept->add_subdepartment(
-            Department::create(AGGREGATOR_DEPT_ID, query(), "dummy"));
+    if (!is_aggregated) {
+        Department::SPtr root_dept = Department::create("", query(), _("Everything"));
+        root_dept->set_subdepartments({
+                Department::create("camera", query(), _("My Roll")),
+                Department::create("downloads", query(), _("Downloaded")),
+                });
+
+        reply->register_departments(root_dept);
     }
-    reply->register_departments(root_dept);
 
     VideoType department = VideoType::ALL;
     if (query().department_id() == "camera") {

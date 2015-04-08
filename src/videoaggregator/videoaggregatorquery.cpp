@@ -91,7 +91,7 @@ void VideoAggregatorQuery::cancelled() {
 void VideoAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_reply) {
     const std::string query_string = query().query_string();
     const bool surfacing = query_string.empty();
-    const std::string department_id = "aggregated:videoaggregator";
+    const std::string department_id = "aggregated:videoaggregator"; //FIXME: remove when child scopes handle is_aggregated
     const FilterState filter_state;
 
     unity::scopes::utility::BufferedResultForwarder::SPtr next_forwarder;
