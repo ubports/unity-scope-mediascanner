@@ -9,6 +9,8 @@
 #include <unity/scopes/testing/MockSearchReply.h>
 #include <unity/scopes/testing/MockScope.h>
 #include <unity/scopes/testing/MockQueryCtrl.h>
+#include <unity/scopes/ChildScope.h>
+#include <unity/scopes/testing/ScopeMetadataBuilder.h>
 
 #include "../src/musicaggregator/musicaggregatorscope.h"
 #include "../src/musicaggregator/musicaggregatorquery.h"
@@ -22,9 +24,47 @@ TEST(TestMusicAgregator, TestSurfacingSearch) {
     CannedQuery q("mediascanner-music", "", "");
     SearchMetadata hints("en_AU", "phone");
 
-    ChildScopeList child_scopes;
+    std::shared_ptr<unity::scopes::testing::MockScope> grooveshark_scope(new unity::scopes::testing::MockScope("1", "1"));
+    std::shared_ptr<unity::scopes::testing::MockScope> soundcloud_scope(new unity::scopes::testing::MockScope("2", "2"));
+    std::shared_ptr<unity::scopes::testing::MockScope> sevendigital_scope(new unity::scopes::testing::MockScope("3", "3"));
+    std::shared_ptr<unity::scopes::testing::MockScope> songkick_scope(new unity::scopes::testing::MockScope("4", "4"));
+    std::shared_ptr<unity::scopes::testing::MockScope> youtube_scope(new unity::scopes::testing::MockScope("5", "5"));
+    std::shared_ptr<unity::scopes::testing::MockScope> local_scope(new unity::scopes::testing::MockScope("6", "6"));
 
-    MusicAggregatorQuery query( q, hints, child_scopes);
+    unity::scopes::ChildScopeList child_scopes {
+        {"mediascanner-music", unity::scopes::testing::ScopeMetadataBuilder()
+            .scope_id("mediascanner-music")
+                .display_name(" ").description(" ")
+                .author(" ")
+                .proxy(unity::scopes::ScopeProxy(local_scope))()},
+        {"com.canonical.scopes.sevendigital", unity::scopes::testing::ScopeMetadataBuilder()
+            .scope_id("com.canonical.scopes.sevendigital")
+                .display_name(" ").description(" ")
+                .author(" ")
+                .proxy(unity::scopes::ScopeProxy(sevendigital_scope))()},
+        {"com.canonical.scopes.grooveshark", unity::scopes::testing::ScopeMetadataBuilder()
+            .scope_id("com.canonical.scopes.grooveshark")
+                .display_name(" ").description(" ")
+                .author(" ")
+                .proxy(unity::scopes::ScopeProxy(grooveshark_scope))()},
+        {"com.canonical.scopes.songkick_songkick", unity::scopes::testing::ScopeMetadataBuilder()
+            .scope_id("com.canonical.scopes.songkick_songkick")
+                .display_name(" ").description(" ")
+                .author(" ")
+                .proxy(unity::scopes::ScopeProxy(songkick_scope))()},
+        {"com.ubuntu.scopes.youtube_youtube", unity::scopes::testing::ScopeMetadataBuilder()
+            .scope_id("com.ubuntu.scopes.youtube_youtube")
+                .display_name(" ").description(" ")
+                .author(" ")
+                .proxy(unity::scopes::ScopeProxy(youtube_scope))()},
+        {"com.ubuntu.scopes.soundcloud_soundcloud", unity::scopes::testing::ScopeMetadataBuilder()
+            .scope_id("com.ubuntu.scopes.soundcloud_soundcloud")
+                .display_name(" ").description(" ")
+                .author(" ")
+                .proxy(unity::scopes::ScopeProxy(soundcloud_scope))()},
+    };
+
+    MusicAggregatorQuery query(q, hints, child_scopes);
 
     unity::scopes::testing::MockSearchReply reply;
 
@@ -56,6 +96,14 @@ TEST(TestMusicAgregator, TestSurfacingSearch) {
     EXPECT_CALL(reply, register_category("soundcloud", _, _, _,_))
         .WillOnce(Return(soundcloud_category));
 
+    // check that each scope calls search with the correct parameters...
+    EXPECT_CALL(*local_scope.get(), search("","", _, _, _)).WillOnce(Return(queryctrl));
+    EXPECT_CALL(*sevendigital_scope.get(), search("","newreleases", _, _, _)).WillOnce(Return(queryctrl));
+    EXPECT_CALL(*grooveshark_scope.get(), search("","", _, _, _)).WillOnce(Return(queryctrl));
+    EXPECT_CALL(*songkick_scope.get(), search("","", _, _, _)).WillOnce(Return(queryctrl));
+    EXPECT_CALL(*youtube_scope.get(), search("","aggregated:musicaggregator", _, _, _)).WillOnce(Return(queryctrl));
+    EXPECT_CALL(*soundcloud_scope.get(), search("","", _, _, _)).WillOnce(Return(queryctrl));
+
     SearchReplyProxy proxy(&reply, [](SearchReply*){});
     query.run(proxy);
 }
@@ -65,7 +113,45 @@ TEST(TestMusicAgregator, TestSpecificSearch) {
     CannedQuery q("mediascanner-music", "test", "");
     SearchMetadata hints("en_AU", "phone");
 
-    ChildScopeList child_scopes;
+    std::shared_ptr<unity::scopes::testing::MockScope> grooveshark_scope(new unity::scopes::testing::MockScope("1", "1"));
+    std::shared_ptr<unity::scopes::testing::MockScope> soundcloud_scope(new unity::scopes::testing::MockScope("2", "2"));
+    std::shared_ptr<unity::scopes::testing::MockScope> sevendigital_scope(new unity::scopes::testing::MockScope("3", "3"));
+    std::shared_ptr<unity::scopes::testing::MockScope> songkick_scope(new unity::scopes::testing::MockScope("4", "4"));
+    std::shared_ptr<unity::scopes::testing::MockScope> youtube_scope(new unity::scopes::testing::MockScope("5", "5"));
+    std::shared_ptr<unity::scopes::testing::MockScope> local_scope(new unity::scopes::testing::MockScope("6", "6"));
+
+    unity::scopes::ChildScopeList child_scopes {
+        {"mediascanner-music", unity::scopes::testing::ScopeMetadataBuilder()
+            .scope_id("mediascanner-music")
+                .display_name(" ").description(" ")
+                .author(" ")
+                .proxy(unity::scopes::ScopeProxy(local_scope))()},
+        {"com.canonical.scopes.sevendigital", unity::scopes::testing::ScopeMetadataBuilder()
+            .scope_id("com.canonical.scopes.sevendigital")
+                .display_name(" ").description(" ")
+                .author(" ")
+                .proxy(unity::scopes::ScopeProxy(sevendigital_scope))()},
+        {"com.canonical.scopes.grooveshark", unity::scopes::testing::ScopeMetadataBuilder()
+            .scope_id("com.canonical.scopes.grooveshark")
+                .display_name(" ").description(" ")
+                .author(" ")
+                .proxy(unity::scopes::ScopeProxy(grooveshark_scope))()},
+        {"com.canonical.scopes.songkick_songkick", unity::scopes::testing::ScopeMetadataBuilder()
+            .scope_id("com.canonical.scopes.songkick_songkick")
+                .display_name(" ").description(" ")
+                .author(" ")
+                .proxy(unity::scopes::ScopeProxy(songkick_scope))()},
+        {"com.ubuntu.scopes.youtube_youtube", unity::scopes::testing::ScopeMetadataBuilder()
+            .scope_id("com.ubuntu.scopes.youtube_youtube")
+                .display_name(" ").description(" ")
+                .author(" ")
+                .proxy(unity::scopes::ScopeProxy(youtube_scope))()},
+        {"com.ubuntu.scopes.soundcloud_soundcloud", unity::scopes::testing::ScopeMetadataBuilder()
+            .scope_id("com.ubuntu.scopes.soundcloud_soundcloud")
+                .display_name(" ").description(" ")
+                .author(" ")
+                .proxy(unity::scopes::ScopeProxy(soundcloud_scope))()},
+    };
 
     MusicAggregatorQuery query( q, hints, child_scopes);
 
@@ -99,6 +185,14 @@ TEST(TestMusicAgregator, TestSpecificSearch) {
         .WillOnce(Return(youtube_category));
     EXPECT_CALL(reply, register_category("soundcloud", _, _,_))
         .WillOnce(Return(soundcloud_category));
+
+    // check that each scope calls search with the correct parameters...
+    EXPECT_CALL(*sevendigital_scope.get(), search("test","", _, _, _)).WillOnce(Return(queryctrl));
+    EXPECT_CALL(*local_scope.get(), search("test","", _, _, _)).WillOnce(Return(queryctrl));
+    EXPECT_CALL(*songkick_scope.get(), search("test","", _, _, _)).WillOnce(Return(queryctrl));
+    EXPECT_CALL(*grooveshark_scope.get(), search("test","", _, _, _)).WillOnce(Return(queryctrl));
+    EXPECT_CALL(*youtube_scope.get(), search("test","aggregated:musicaggregator", _, _, _)).WillOnce(Return(queryctrl));
+    EXPECT_CALL(*soundcloud_scope.get(), search("test","", _, _, _)).WillOnce(Return(queryctrl));
 
     SearchReplyProxy proxy(&reply, [](SearchReply*){});
     query.run(proxy);
