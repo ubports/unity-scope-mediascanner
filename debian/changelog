@@ -1,3 +1,14 @@
+unity-scope-mediascanner (0.2+15.04.20150411-0ubuntu1) vivid; urgency=medium
+
+  [ CI Train Bot ]
+  * New rebuild forced.
+
+  [ Pawel Stolowski ]
+  * Support for keywords. Use BufferedResultForwarder from scopes API
+    instead of a custom implementation.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Sat, 11 Apr 2015 10:56:47 +0000
+
 unity-scope-mediascanner (0.2+15.04.20141205-0ubuntu1) vivid; urgency=low
 
   [ Pawel Stolowski ]
