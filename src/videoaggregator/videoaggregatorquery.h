@@ -14,15 +14,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Authored by Jussi Pakkanen <jussi.pakkanen@canonical.com>
+ *             Pawel Stolowski <pawel.stolowski@canonical.com>
  *
  */
 
 #ifndef VIDEOAGGREGATORQUERY_H_
 #define VIDEOAGGREGATORQUERY_H_
 
-#include <vector>
-
-#include <unity/scopes/ScopeMetadata.h>
 #include <unity/scopes/SearchQueryBase.h>
 #include <unity/scopes/ReplyProxyFwd.h>
 
@@ -31,14 +29,14 @@ class VideoAggregatorQuery : public unity::scopes::SearchQueryBase
 public:
     VideoAggregatorQuery(unity::scopes::CannedQuery const& query,
             unity::scopes::SearchMetadata const& hints,
-            std::vector<unity::scopes::ScopeMetadata> subscopes);
+            unity::scopes::ChildScopeList const& scopes);
     ~VideoAggregatorQuery();
     virtual void cancelled() override;
 
     virtual void run(unity::scopes::SearchReplyProxy const& reply) override;
 
 private:
-    std::vector<unity::scopes::ScopeMetadata> subscopes;
+    unity::scopes::ChildScopeList child_scopes;
 };
 
 #endif

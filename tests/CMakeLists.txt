@@ -19,8 +19,7 @@ add_executable(test-music-scope
 add_executable(test-music-aggregator
   test-music-aggregator.cpp
   ../src/musicaggregator/musicaggregatorquery.cpp
-  ../src/musicaggregator/onlinemusicresultforwarder.cpp
-  ../src/musicaggregator/musicaggregatorscope.cpp
+../src/musicaggregator/musicaggregatorscope.cpp
 )
 
 add_definitions(
@@ -42,9 +41,3 @@ add_executable(test-video-scope
 target_link_libraries(test-video-scope
   scope-utils ${UNITY_LDFLAGS} ${gtest_libs} ${Boost_LIBRARIES})
 add_test(test-video-scope test-video-scope)
-
-add_executable(test-result-forwarder
-  test-result-forwarder.cpp)
-target_link_libraries(test-result-forwarder
-  scope-utils ${UNITY_LDFLAGS} ${gtest_libs})
-add_test(test-result-forwarder test-result-forwarder)

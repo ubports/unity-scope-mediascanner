@@ -6,6 +6,7 @@ Art=./screenshot.jpg
 Icon=./icon.png
 _SearchHint=
 HotKey=
+Keywords=videos
 
 [Appearance]
 LogoOverlayColor=#26000000

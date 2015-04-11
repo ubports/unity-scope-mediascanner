@@ -17,21 +17,19 @@
  *
  */
 
-#include "onlinemusicresultforwarder.h"
-#include <unity/scopes/SearchReply.h>
+#ifndef MEDIASCANNER_SCOPE_UTILS_H
+#define MEDIASCANNER_SCOPE_UTILS_H
 
-OnlineMusicResultForwarder::OnlineMusicResultForwarder(unity::scopes::SearchReplyProxy const& upstream,
-        std::function<bool(unity::scopes::CategorisedResult&)> const& result_filter)
-    : BufferedResultForwarder(upstream, result_filter)
-{
-}
+#include <unity/scopes/ChildScope.h>
+#include <unity/scopes/Registry.h>
+#include <vector>
+#include <string>
+#include <set>
 
-void OnlineMusicResultForwarder::push(unity::scopes::CategorisedResult result)
-{
-    BufferedResultForwarder::push(std::move(result));
-}
+unity::scopes::ChildScopeList find_child_scopes_by_keywords(
+        std::string const& aggregator_scope_id,
+        unity::scopes::RegistryProxy const& registry,
+        std::vector<std::string> const& predefined_scopes,
+        std::string const& keyword);
 
-void OnlineMusicResultForwarder::push(unity::scopes::Category::SCPtr const& category)
-{
-    // do nothing
-}
+#endif

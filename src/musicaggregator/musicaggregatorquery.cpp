@@ -21,11 +21,12 @@
 #include <config.h>
 #include "musicaggregatorquery.h"
 #include "musicaggregatorscope.h"
-#include "../utils/resultforwarder.h"
-#include "onlinemusicresultforwarder.h"
-#include "../utils/notify-strategy.h"
 #include "../utils/i18n.h"
+#include "../utils/bufferedresultforwarder.h"
 #include <memory>
+#include <map>
+#include <mutex>
+#include <algorithm>
 
 #include <unity/scopes/Annotation.h>
 #include <unity/scopes/CategorisedResult.h>
@@ -35,9 +36,12 @@
 #include <unity/scopes/Location.h>
 #include <unity/scopes/SearchReply.h>
 #include <unity/scopes/SearchMetadata.h>
+#include <unity/scopes/ChildScope.h>
 
 using namespace unity::scopes;
 
+// FIXME: once child scopes are updated to handle is_aggregated flag, they should provide
+// own renderer for aggregator and these definitions should be removed
 static const char MYMUSIC_CATEGORY_DEFINITION[] = R"(
 {
   "schema-version": 1,
@@ -250,21 +254,12 @@ static char YOUTUBE_SEARCH_CATEGORY_DEFINITION[] = R"(
 const std::string MusicAggregatorQuery::grooveshark_songs_category_id = "cat_0";
 
 MusicAggregatorQuery::MusicAggregatorQuery(CannedQuery const& query, SearchMetadata const& hints,
-        ScopeProxy local_scope,
-        ScopeProxy const& grooveshark_scope,
-        ScopeProxy const& soundcloud_scope,
-        ScopeProxy const& sevendigital_scope,
-        ScopeProxy const& songkick_scope,
-        ScopeProxy const& youtube_scope
+        ChildScopeList const& scopes
         ) :
     SearchQueryBase(query, hints),
-    local_scope(local_scope),
-    grooveshark_scope(grooveshark_scope),
-    soundcloud_scope(soundcloud_scope),
-    sevendigital_scope(sevendigital_scope),
-    songkick_scope(songkick_scope),
-    youtube_scope(youtube_scope)
+    child_scopes(scopes)
 {
+    std::reverse(child_scopes.begin(), child_scopes.end());
 }
 
 MusicAggregatorQuery::~MusicAggregatorQuery() {
@@ -275,8 +270,8 @@ void MusicAggregatorQuery::cancelled() {
 
 void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_reply)
 {
-    std::vector<std::shared_ptr<ResultForwarder>> replies;
-    std::vector<unity::scopes::ScopeProxy> scopes({local_scope});
+    std::vector<unity::scopes::utility::BufferedResultForwarder::SPtr> replies;
+    ChildScopeList scopes;
     const std::string department_id = "aggregated:musicaggregator";
 
     const CannedQuery mymusic_query(MusicAggregatorScope::LOCALSCOPE, query().query_string(), "");
@@ -309,83 +304,118 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
                 youtube_query, CategoryRenderer(YOUTUBE_SURFACING_CATEGORY_DEFINITION))
             : parent_reply->register_category("youtube", _("Youtube"), "", youtube_query, CategoryRenderer(YOUTUBE_SEARCH_CATEGORY_DEFINITION));
 
+    unity::scopes::utility::BufferedResultForwarder::SPtr next_forwarder;
 
-    {
-        auto local_reply = std::make_shared<ResultForwarder>(parent_reply, [this, mymusic_cat](CategorisedResult& res) -> bool {
-                res.set_category(mymusic_cat);
-                return true;
-                });
-        replies.push_back(local_reply);
-    }
+    //
+    // maps scope id to category id of first received result from that scope.
+    // this is used to ignore results from different categories (i.e. child scope is
+    // misbehaving when aggregated).
+    std::map<std::string, std::string> child_id_to_category_id;
+    std::mutex child_id_map_mutex;
 
-    if (sevendigital_scope)
+    for (auto const& child: child_scopes)
     {
-        scopes.push_back(sevendigital_scope);
-        auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, sevendigital_cat](CategorisedResult& res) -> bool {
-                res.set_category(sevendigital_cat);
-                return true;
-                });
-        replies.push_back(reply);
-    }
-    if (soundcloud_scope)
-    {
-        scopes.push_back(soundcloud_scope);
-        auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, soundcloud_cat](CategorisedResult& res) -> bool {
-                if (res.category()->id() == "soundcloud_login_nag") {
-                    return false;
-                }
-                res.set_category(soundcloud_cat);
-                return true;
-            });
-        replies.push_back(reply);
-    }
-    if (songkick_scope)
-    {
-        scopes.push_back(songkick_scope);
-        auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, songkick_cat](CategorisedResult& res) -> bool {
-                if (res.category()->id() == "noloc") {
-                    return false;
-                }
-                res.set_category(songkick_cat);
-                return true;
-            });
-        replies.push_back(reply);
-    }
-    if (grooveshark_scope)
-    {
-        scopes.push_back(grooveshark_scope);
-
-        auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, grooveshark_cat](CategorisedResult& res) -> bool {
-                    if (res.category()->id() == grooveshark_songs_category_id)
-                    {
-                        res.set_category(grooveshark_cat);
-                        return true;
-                    }
-                    return false;
-                });
-
-        replies.push_back(reply);
-    }
-    if (soundcloud_scope)
-    {
-        // TODO when available
-    }
-    if (youtube_scope)
-    {
-        scopes.push_back(youtube_scope);
-        auto reply = std::make_shared<OnlineMusicResultForwarder>(parent_reply, [this, youtube_cat](CategorisedResult& res) -> bool {
-                res.set_category(youtube_cat);
-                return !res["musicaggregation"].is_null();
-                });
-        replies.push_back(reply);
-    }
-
-    // create and chain result forwarders to enforce proper order of categories
-    for (unsigned int i = 1; i < scopes.size(); ++i)
-    {
-        for (unsigned int j = 0; j<i; j++)
+        if (child.enabled)
         {
-            replies[j]->add_observer(replies[i]);
+            scopes.push_back(child);
+
+            if (child.id == MusicAggregatorScope::LOCALSCOPE)
+            {
+                next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [mymusic_cat](CategorisedResult& res) -> bool {
+                        res.set_category(mymusic_cat);
+                        return true;
+                    });
+                replies.push_back(next_forwarder);
+            }
+            else if (child.id == MusicAggregatorScope::SEVENDIGITAL)
+            {
+                next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [sevendigital_cat](CategorisedResult& res) -> bool {
+                        res.set_category(sevendigital_cat);
+                        return true;
+                    });
+                replies.push_back(next_forwarder);
+            }
+            else if (child.id == MusicAggregatorScope::SOUNDCLOUD)
+            {
+                next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [soundcloud_cat](CategorisedResult& res) -> bool {
+                        if (res.category()->id() == "soundcloud_login_nag") {
+                            return false;
+                        }
+                        res.set_category(soundcloud_cat);
+                        return true;
+                    });
+                replies.push_back(next_forwarder);
+            }
+            else if (child.id == MusicAggregatorScope::SONGKICK)
+            {
+                next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [songkick_cat](CategorisedResult& res) -> bool {
+                        if (res.category()->id() == "noloc") {
+                            return false;
+                        }
+                        res.set_category(songkick_cat);
+                        return true;
+                    });
+                replies.push_back(next_forwarder);
+            }
+            else if (child.id == MusicAggregatorScope::GROOVESHARKSCOPE)
+            {
+                next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [this, grooveshark_cat](CategorisedResult& res) -> bool {
+                        if (res.category()->id() == grooveshark_songs_category_id)
+                        {
+                            res.set_category(grooveshark_cat);
+                            return true;
+                        }
+                        return false;
+                    });
+
+                replies.push_back(next_forwarder);
+            }
+            else if (child.id == MusicAggregatorScope::YOUTUBE)
+            {
+                next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [youtube_cat](CategorisedResult& res) -> bool {
+                        res.set_category(youtube_cat);
+                        return !res["musicaggregation"].is_null();
+                    });
+                replies.push_back(next_forwarder);
+            }
+            else // dynamically added scope (from keywords)
+            {
+                auto const child_id = child.id;
+                auto const child_name = child.metadata.display_name();
+                next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [this, child_id, child_name, empty_search,
+                        parent_reply, &child_id_to_category_id, &child_id_map_mutex](CategorisedResult& res) -> bool {
+                    // register a single category for aggregated results of this child scope and update incoming results with this category;
+                    // the new category has custom id and title, but reuses the renderer of first incoming result
+                    Category::SCPtr category = parent_reply->lookup_category(child_id);
+                    if (!category) {
+                        CannedQuery category_query(child_id, query().query_string(), "");
+                        auto const renderer = res.category()->renderer_template();
+                        char title[500];
+                        if (empty_search) {
+                            snprintf(title, sizeof(title), _("%s Features"), child_name.c_str());
+                        } else {
+                            snprintf(title, sizeof(title), _("Results from %s"), child_name.c_str());
+                        }
+                        category = parent_reply->register_category(child_id, title, "" /* icon */, category_query, renderer);
+
+                        // remember the first encountered category for this child
+                        {
+                            std::lock_guard<std::mutex> lock(child_id_map_mutex);
+                            child_id_to_category_id[child_id] = res.category()->id();
+                        }
+                    }
+
+                    {
+                        std::lock_guard<std::mutex> lock(child_id_map_mutex);
+                        if (child_id_to_category_id[child_id] == res.category()->id()) {
+                            res.set_category(category);
+                            return true;
+                        }
+                    }
+                    return false; // filter out results from other categories
+                });
+                replies.push_back(next_forwarder);
+            }
         }
     }
 
@@ -394,7 +424,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     {
         std::string dept;
         SearchMetadata metadata(search_metadata());
-        if (scopes[i] == sevendigital_scope)
+        if (scopes[i].id == MusicAggregatorScope::SEVENDIGITAL)
         {
             if (empty_search)
             {
@@ -402,32 +432,32 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
             }
             metadata.set_cardinality(2);
         }
-        else if (scopes[i] == local_scope)
+        else if (scopes[i].id == MusicAggregatorScope::LOCALSCOPE)
         {
             dept = ""; // artists
         }
-        else if (scopes[i] == grooveshark_scope)
+        else if (scopes[i].id == MusicAggregatorScope::GROOVESHARKSCOPE)
         {
             if (empty_search)
             {
                 metadata.set_cardinality(3);
             }
         }
-        else if (scopes[i] == soundcloud_scope)
+        else if (scopes[i].id == MusicAggregatorScope::SOUNDCLOUD)
         {
             if (empty_search)
             {
                 metadata.set_cardinality(3);
             }
         }
-        else if (scopes[i] == songkick_scope)
+        else if (scopes[i].id == MusicAggregatorScope::SONGKICK)
         {
             if (empty_search)
             {
                 metadata.set_cardinality(2);
             }
         }
-        else if (scopes[i] == youtube_scope)
+        else if (scopes[i].id == MusicAggregatorScope::YOUTUBE)
         {
             if (empty_search)
             {
@@ -437,7 +467,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
         }
 
         // Don't send location data to scopes that don't need it.
-        if (scopes[i] != songkick_scope)
+        if (scopes[i].id != MusicAggregatorScope::SONGKICK || !scopes[i].metadata.location_data_needed())
         {
             metadata.set_location(Location(0, 0));
         }

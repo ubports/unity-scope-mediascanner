@@ -20,31 +20,25 @@
 #ifndef BUFFEREDRESULTFORWARDER_H_
 #define BUFFEREDRESULTFORWARDER_H_
 
-#include "resultforwarder.h"
-#include <list>
 #include <unity/scopes/CategorisedResult.h>
+#include <unity/scopes/utility/BufferedResultForwarder.h>
 
 /*
    ResultForwarder that buffers results up until it gets
    notified via on_forwarder_ready() by another ResultForwarder.
 */
-class BufferedResultForwarder : public ResultForwarder {
-
+class BufferedResultForwarder : public unity::scopes::utility::BufferedResultForwarder
+{
 public:
 
     BufferedResultForwarder(unity::scopes::SearchReplyProxy const& upstream,
+            unity::scopes::utility::BufferedResultForwarder::SPtr const& next_forwarder,
             std::function<bool(unity::scopes::CategorisedResult&)> const &result_filter = [](unity::scopes::CategorisedResult&) -> bool { return true; });
-    virtual ~BufferedResultForwarder() {}
 
     virtual void push(unity::scopes::CategorisedResult result) override;
-    void flush();
-
-protected:
-    void on_all_forwarders_ready() override;
 
 private:
-    bool buffer_;
-    std::list<unity::scopes::CategorisedResult> result_buffer_;
+    const std::function<bool(unity::scopes::CategorisedResult&)> result_filter_;
 };
 
 #endif

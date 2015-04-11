@@ -31,24 +31,14 @@ class MusicAggregatorQuery : public unity::scopes::SearchQueryBase
 public:
     MusicAggregatorQuery(unity::scopes::CannedQuery const& query,
             unity::scopes::SearchMetadata const& hints,
-            unity::scopes::ScopeProxy local_scope,
-            unity::scopes::ScopeProxy const& grooveshark_scope,
-            unity::scopes::ScopeProxy const& soundcloud_scope,
-            unity::scopes::ScopeProxy const& sevendigital_scope,
-            unity::scopes::ScopeProxy const& songkick_scope,
-            unity::scopes::ScopeProxy const& youtube_scope);
+            unity::scopes::ChildScopeList const& scopes);
     ~MusicAggregatorQuery();
     virtual void cancelled() override;
 
     virtual void run(unity::scopes::SearchReplyProxy const& reply) override;
 
 private:
-    unity::scopes::ScopeProxy local_scope;
-    unity::scopes::ScopeProxy grooveshark_scope;
-    unity::scopes::ScopeProxy soundcloud_scope;
-    unity::scopes::ScopeProxy sevendigital_scope;
-    unity::scopes::ScopeProxy songkick_scope;
-    unity::scopes::ScopeProxy youtube_scope;
+    unity::scopes::ChildScopeList child_scopes;
     static const std::string grooveshark_songs_category_id;
 };
 

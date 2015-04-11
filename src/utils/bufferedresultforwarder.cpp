@@ -20,35 +20,17 @@
 #include "bufferedresultforwarder.h"
 
 BufferedResultForwarder::BufferedResultForwarder(unity::scopes::SearchReplyProxy const& upstream,
+        unity::scopes::utility::BufferedResultForwarder::SPtr const& next_forwarder,
         std::function<bool(unity::scopes::CategorisedResult&)> const &result_filter)
-    : ResultForwarder(upstream, result_filter),
-      buffer_(true)
+    : unity::scopes::utility::BufferedResultForwarder(upstream, next_forwarder),
+      result_filter_(result_filter)
 {
 }
 
 void BufferedResultForwarder::push(unity::scopes::CategorisedResult result)
 {
-    if (buffer_)
+    if (result_filter_(result))
     {
-        result_buffer_.push_back(std::move(result));
+        unity::scopes::utility::BufferedResultForwarder::push(result);
     }
-    else
-    {
-        ResultForwarder::push(std::move(result));
-    }
-}
-
-void BufferedResultForwarder::flush()
-{
-    for (auto const& r: result_buffer_)
-    {
-        ResultForwarder::push(r);
-    }
-    result_buffer_.clear();
-}
-
-void BufferedResultForwarder::on_all_forwarders_ready()
-{
-    buffer_ = false;
-    flush();
 }
