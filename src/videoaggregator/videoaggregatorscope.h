@@ -41,6 +41,7 @@ public:
 
     virtual unity::scopes::ChildScopeList find_child_scopes() const override;
 
+    static const std::string local_videos_scope;
     static const std::vector<std::string> predefined_scopes;
 };
 

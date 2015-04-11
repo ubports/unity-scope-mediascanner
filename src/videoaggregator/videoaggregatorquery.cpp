@@ -114,40 +114,48 @@ void VideoAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
             auto const child_id = child.id;
             auto const child_name = child.metadata.display_name();
 
-            next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [this, parent_reply, is_predefined_scope, surfacing,
-                    child_id, child_name, &child_id_to_category_id, &child_id_map_mutex](CategorisedResult& res) -> bool {
-                    // register a single category for aggregated results of this child scope and update incoming results with this category;
-                    // the new category has custom id and title, but reuses the renderer of first incoming result (except for predefined scopes, which
-                    // for now use renderers hardcoded in the aggregator
-                    Category::SCPtr category = parent_reply->lookup_category(child_id);
-                    if (!category) {
-                        CannedQuery category_query(child_id, query().query_string(), "");
-                        auto const renderer = is_predefined_scope ? CategoryRenderer(surfacing ? SURFACING_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION)
-                                                    : res.category()->renderer_template();
-                        char title[500];
-                        if (surfacing) {
-                            snprintf(title, sizeof(title), _("%s Features"), child_name.c_str());
-                        } else {
-                            snprintf(title, sizeof(title), _("Results from %s"), child_name.c_str());
-                        }
-                        category = parent_reply->register_category(child_id, title, "" /* icon */, category_query, renderer);
+            if (child_id == VideoAggregatorScope::local_videos_scope)
+            {
+                // preserve category of local videos
+                next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder);
+            }
+            else
+            {
+                next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [this, parent_reply, is_predefined_scope, surfacing,
+                        child_id, child_name, &child_id_to_category_id, &child_id_map_mutex](CategorisedResult& res) -> bool {
+                        // register a single category for aggregated results of this child scope and update incoming results with this category;
+                        // the new category has custom id and title, but reuses the renderer of first incoming result (except for predefined scopes, which
+                        // for now use renderers hardcoded in the aggregator
+                        Category::SCPtr category = parent_reply->lookup_category(child_id);
+                        if (!category) {
+                            CannedQuery category_query(child_id, query().query_string(), "");
+                            auto const renderer = is_predefined_scope ? CategoryRenderer(surfacing ? SURFACING_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION)
+                                                        : res.category()->renderer_template();
+                            char title[500];
+                            if (surfacing) {
+                                snprintf(title, sizeof(title), _("%s Features"), child_name.c_str());
+                            } else {
+                                snprintf(title, sizeof(title), _("Results from %s"), child_name.c_str());
+                            }
+                            category = parent_reply->register_category(child_id, title, "" /* icon */, category_query, renderer);
 
-                        // remember the first encountered category for this child
+                            // remember the first encountered category for this child
+                            {
+                                std::lock_guard<std::mutex> lock(child_id_map_mutex);
+                                child_id_to_category_id[child_id] = res.category()->id();
+                            }
+                        }
+
                         {
                             std::lock_guard<std::mutex> lock(child_id_map_mutex);
-                            child_id_to_category_id[child_id] = res.category()->id();
+                            if (child_id_to_category_id[child_id] == res.category()->id()) {
+                                res.set_category(category);
+                                return true;
+                            }
                         }
-                    }
-
-                    {
-                        std::lock_guard<std::mutex> lock(child_id_map_mutex);
-                        if (child_id_to_category_id[child_id] == res.category()->id()) {
-                            res.set_category(category);
-                            return true;
-                        }
-                    }
-                    return false; // filter out results from other categories
-                });
+                        return false; // filter out results from other categories
+                    });
+            }
             subsearch(child, query_string, department_id, filter_state, next_forwarder);
         }
     }

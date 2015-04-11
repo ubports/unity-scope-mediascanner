@@ -28,13 +28,16 @@
 
 using namespace unity::scopes;
 
+const std::string VideoAggregatorScope::local_videos_scope =
+#ifdef CLICK_MODE
+    "com.ubuntu.scopes.myvideos_myvideos";
+#else
+    "mediascanner-video";
+#endif
+
 // the order of predefined scopes
 const std::vector<std::string> VideoAggregatorScope::predefined_scopes {
-#ifdef CLICK_MODE
-    "com.ubuntu.scopes.myvideos_myvideos",
-#else
-    "mediascanner-video",
-#endif
+    VideoAggregatorScope::local_videos_scope,
     "com.ubuntu.scopes.youtube_youtube",
     "com.ubuntu.scopes.vimeo_vimeo"
 };
