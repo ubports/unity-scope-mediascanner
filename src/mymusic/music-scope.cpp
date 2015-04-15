@@ -227,11 +227,6 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
     const bool is_aggregated = search_metadata().is_aggregated();
     const bool empty_db = is_database_empty(scope.store, mediascanner::MediaType::AudioMedia);
 
-    if (empty_search_query && !is_aggregated && !empty_db)
-    {
-        populate_departments(reply);
-    }
-
     if (empty_db)
     {
         const CategoryRenderer renderer(GET_STARTED_CATEGORY_DEFINITION);
@@ -243,6 +238,11 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
         res.set_art("file://" + scope_dir + "/" + "getstarted.svg");
         reply->push(res);
         return;
+    }
+
+    if (empty_search_query && !is_aggregated)
+    {
+        populate_departments(reply);
     }
 
     auto const current_department = query().department_id();

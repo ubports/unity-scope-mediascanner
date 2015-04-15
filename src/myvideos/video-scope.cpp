@@ -33,11 +33,32 @@
 
 #include "video-scope.h"
 #include "../utils/i18n.h"
+#include "../utils/utils.h"
 
 #define MAX_RESULTS 100
 
 using namespace mediascanner;
 using namespace unity::scopes;
+
+static const char GET_STARTED_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-size": "large",
+    "card-layout" : "vertical",
+    "collapsed-rows" : 0,
+    "non-interactive": "true"
+  },
+  "components": {
+    "title": "title",
+    "art":  {
+        "field": "art",
+        "aspect-ratio": 2.4
+    },
+    "summary" : "summary"
+  }
+)";
 
 static const char LOCAL_CATEGORY_ICON[] = "/usr/share/icons/unity-icon-theme/places/svg/group-videos.svg";
 static const char LOCAL_CATEGORY_DEFINITION[] = R"(
@@ -109,7 +130,7 @@ void VideoScope::stop() {
 
 SearchQueryBase::UPtr VideoScope::search(CannedQuery const &q,
                                          SearchMetadata const& hints) {
-    SearchQueryBase::UPtr query(new VideoQuery(*this, q, hints));
+    SearchQueryBase::UPtr query(new VideoQuery(*this, q, hints, scope_directory()));
     return query;
 }
 
@@ -119,9 +140,10 @@ PreviewQueryBase::UPtr VideoScope::preview(Result const& result,
     return previewer;
 }
 
-VideoQuery::VideoQuery(VideoScope &scope, CannedQuery const& query, SearchMetadata const& hints)
+VideoQuery::VideoQuery(VideoScope &scope, CannedQuery const& query, SearchMetadata const& hints, std::string const& scope_dir)
     : SearchQueryBase(query, hints),
-      scope(scope) {
+      scope(scope),
+      scope_dir(scope_dir) {
 }
 
 void VideoQuery::cancelled() {
@@ -135,6 +157,21 @@ static bool from_camera(const std::string &filename) {
 void VideoQuery::run(SearchReplyProxy const&reply) {
     const bool surfacing = query().query_string() == "";
     const bool is_aggregated = search_metadata().is_aggregated();
+
+    const bool empty_db = is_database_empty(scope.store, mediascanner::MediaType::VideoMedia);
+
+    if (empty_db)
+    {
+        const CategoryRenderer renderer(GET_STARTED_CATEGORY_DEFINITION);
+        auto cat = reply->register_category("myvideos-getstarted", "", "", renderer);
+        CategorisedResult res(cat);
+        res.set_uri(query().to_uri());
+        res.set_title(_("Get started!"));
+        res["summary"] = _("Drag and drop items from another devices. Alternatively, load your files onto a SD card.");
+        res.set_art("file://" + scope_dir + "/" + "getstarted.svg");
+        reply->push(res);
+        return;
+    }
 
     if (!is_aggregated) {
         Department::SPtr root_dept = Department::create("", query(), _("Everything"));
