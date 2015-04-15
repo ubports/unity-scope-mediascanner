@@ -35,12 +35,13 @@ private:
 class MusicQuery : public unity::scopes::SearchQueryBase
 {
 public:
-    MusicQuery(MusicScope &scope, unity::scopes::CannedQuery const& query, unity::scopes::SearchMetadata const& hints);
+    MusicQuery(MusicScope &scope, unity::scopes::CannedQuery const& query, unity::scopes::SearchMetadata const& hints, std::string const& scope_dir);
     virtual void cancelled() override;
     virtual void run(unity::scopes::SearchReplyProxy const&reply) override;
 
 private:
     const MusicScope &scope;
+    std::string scope_dir;
     std::atomic<bool> query_cancelled;
 
     void populate_departments(unity::scopes::SearchReplyProxy const &reply) const;
@@ -55,6 +56,8 @@ private:
 
     unity::scopes::CategorisedResult create_album_result(unity::scopes::Category::SCPtr const& category, mediascanner::Album const& album) const;
     unity::scopes::CategorisedResult create_song_result(unity::scopes::Category::SCPtr const& category, mediascanner::MediaFile const& media) const;
+
+    bool is_database_empty() const;
 };
 
 class MusicPreview : public unity::scopes::PreviewQueryBase
