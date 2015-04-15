@@ -66,6 +66,7 @@ static const char GET_STARTED_CATEGORY_DEFINITION[] = R"(
     },
     "summary" : "summary"
   }
+}
 )";
 
 static const char SONGS_CATEGORY_DEFINITION[] = R"(

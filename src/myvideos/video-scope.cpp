@@ -58,6 +58,7 @@ static const char GET_STARTED_CATEGORY_DEFINITION[] = R"(
     },
     "summary" : "summary"
   }
+}
 )";
 
 static const char LOCAL_CATEGORY_ICON[] = "/usr/share/icons/unity-icon-theme/places/svg/group-videos.svg";
