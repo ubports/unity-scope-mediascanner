@@ -233,7 +233,7 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
         const CategoryRenderer renderer(GET_STARTED_CATEGORY_DEFINITION);
         auto cat = reply->register_category("mymusic-getstarted", "", "", renderer);
         CategorisedResult res(cat);
-        res.set_uri("");
+        res.set_uri(query().to_uri());
         res.set_title(_("Get started!"));
         res["subtitle"] = _("Drag and drop items from another devices. Alternatively, load your files onto a SD card.");
         res.set_art("file://" + scope_dir + "/" + "getstarted.svg");
