@@ -20,6 +20,8 @@
 #include "utils.h"
 #include <algorithm>
 #include <unity/scopes/ScopeMetadata.h>
+#include <mediascanner/Filter.hh>
+#include <mediascanner/MediaFile.hh>
 
 unity::scopes::ChildScopeList find_child_scopes_by_keywords(
         std::string const& aggregator_scope_id,
@@ -56,4 +58,11 @@ unity::scopes::ChildScopeList find_child_scopes_by_keywords(
         list.emplace_back(unity::scopes::ChildScope{scope.first, scope.second, true, {keyword}});
     }
     return list;
+}
+
+bool is_database_empty(std::unique_ptr<mediascanner::MediaStore> const& db, mediascanner::MediaType media_type)
+{
+    mediascanner::Filter filter;
+    filter.setLimit(1);
+    return db->query("", media_type, filter).size() == 0;
 }

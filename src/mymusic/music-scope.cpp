@@ -37,6 +37,7 @@
 
 #include "music-scope.h"
 #include "../utils/i18n.h"
+#include "../utils/utils.h"
 
 #define MAX_RESULTS 100
 #define MAX_GENRES 100
@@ -224,7 +225,7 @@ void MusicQuery::cancelled() {
 void MusicQuery::run(SearchReplyProxy const&reply) {
     const bool empty_search_query = query().query_string().empty();
     const bool is_aggregated = search_metadata().is_aggregated();
-    const bool empty_db = is_database_empty();
+    const bool empty_db = is_database_empty(scope.store, mediascanner::MediaType::AudioMedia);
 
     if (empty_search_query && !is_aggregated && !empty_db)
     {
@@ -571,13 +572,6 @@ void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply) const
             return;
         }
     }
-}
-
-bool MusicQuery::is_database_empty() const
-{
-    mediascanner::Filter filter;
-    filter.setLimit(1);
-    return scope.store->queryAlbums("", filter).size() == 0;
 }
 
 MusicPreview::MusicPreview(MusicScope &scope, Result const& result, ActionMetadata const& hints)

@@ -25,11 +25,14 @@
 #include <vector>
 #include <string>
 #include <set>
+#include <mediascanner/MediaStore.hh>
 
 unity::scopes::ChildScopeList find_child_scopes_by_keywords(
         std::string const& aggregator_scope_id,
         unity::scopes::RegistryProxy const& registry,
         std::vector<std::string> const& predefined_scopes,
         std::string const& keyword);
+
+bool is_database_empty(std::unique_ptr<mediascanner::MediaStore> const& db, mediascanner::MediaType media_type);
 
 #endif
