@@ -54,14 +54,17 @@ static const char GET_STARTED_CATEGORY_DEFINITION[] = R"(
     "category-layout": "grid",
     "card-size": "large",
     "card-layout" : "vertical",
+    "collapsed-rows" : 0,
     "non-interactive": "true"
   },
   "components": {
     "title": "title",
-    "art":  "art",
-    "subtitle": "subtitle"
+    "art":  {
+        "field": "art",
+        "aspect-ratio": 2.4
+    },
+    "summary" : "summary"
   }
-}
 )";
 
 static const char SONGS_CATEGORY_DEFINITION[] = R"(
@@ -235,7 +238,7 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
         CategorisedResult res(cat);
         res.set_uri(query().to_uri());
         res.set_title(_("Get started!"));
-        res["subtitle"] = _("Drag and drop items from another devices. Alternatively, load your files onto a SD card.");
+        res["summary"] = _("Drag and drop items from another devices. Alternatively, load your files onto a SD card.");
         res.set_art("file://" + scope_dir + "/" + "getstarted.svg");
         reply->push(res);
         return;
