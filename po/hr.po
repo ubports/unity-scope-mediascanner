@@ -14,26 +14,26 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-13 07:12+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
+"X-Launchpad-Export-Date: 2015-04-19 05:56+0000\n"
+"X-Generator: Launchpad (build 17430)\n"
 
 #: ../src/music-scope.cpp:219 ../src/music-scope.cpp:280
 msgid "Artists"
-msgstr ""
+msgstr "Izvođači"
 
 #: ../src/music-scope.cpp:220 ../src/music-scope.cpp:449
 #: ../src/music-scope.cpp:492
 msgid "Albums"
-msgstr ""
+msgstr "Albumi"
 
 #: ../src/music-scope.cpp:221 ../src/music-scope.cpp:324
 #: ../src/music-scope.cpp:339
 msgid "Tracks"
-msgstr ""
+msgstr "Pjesme"
 
 #: ../src/music-scope.cpp:222
 msgid "Genres"
-msgstr ""
+msgstr "Žanrovi"
 
 #: ../src/music-scope.cpp:568 ../src/music-scope.cpp:600
 msgid "Play in music app"
@@ -42,7 +42,7 @@ msgstr ""
 #: ../src/musicaggregatorquery.cpp:206 ../src/musicaggregatorquery.cpp:208
 #: tmp/mediascanner-music.ini.in.in.h:1
 msgid "My Music"
-msgstr ""
+msgstr "Moja glazba"
 
 #: ../src/musicaggregatorquery.cpp:209
 msgid "Popular tracks on Grooveshark"
@@ -50,7 +50,7 @@ msgstr ""
 
 #: ../src/musicaggregatorquery.cpp:211
 msgid "Grooveshark"
-msgstr ""
+msgstr "Grooveshark"
 
 #: ../src/musicaggregatorquery.cpp:212
 msgid "New albums from 7digital"
@@ -58,7 +58,7 @@ msgstr ""
 
 #: ../src/musicaggregatorquery.cpp:214
 msgid "7digital"
-msgstr ""
+msgstr "7digital"
 
 #: ../src/musicaggregatorquery.cpp:215
 msgid "Nearby Events on Songkick"
@@ -78,7 +78,7 @@ msgstr ""
 
 #: ../src/video-scope.cpp:144
 msgid "Downloaded"
-msgstr ""
+msgstr "Preuzeto"
 
 #: ../src/video-scope.cpp:162 ../src/video-scope.cpp:167
 #: tmp/mediascanner-video.ini.in.in.h:1
@@ -129,7 +129,7 @@ msgstr ""
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
-msgstr ""
+msgstr "Glazba"
 
 #: tmp/musicaggregator.ini.in.in.h:2
 msgid ""
@@ -138,7 +138,7 @@ msgstr ""
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
-msgstr ""
+msgstr "Pretraži glazbu"
 
 #: tmp/videoaggregator-settings.ini.in.in.h:1
 msgid "Display results from YouTube"
