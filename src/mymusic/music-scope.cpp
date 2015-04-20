@@ -226,19 +226,23 @@ void MusicQuery::cancelled() {
 void MusicQuery::run(SearchReplyProxy const&reply) {
     const bool empty_search_query = query().query_string().empty();
     const bool is_aggregated = search_metadata().is_aggregated();
-    const bool empty_db = is_database_empty(scope.store, mediascanner::MediaType::AudioMedia);
 
-    if (empty_db)
+    if (!is_aggregated) //TODO: 'get started..' card tbd for aggregator
     {
-        const CategoryRenderer renderer(GET_STARTED_CATEGORY_DEFINITION);
-        auto cat = reply->register_category("mymusic-getstarted", "", "", renderer);
-        CategorisedResult res(cat);
-        res.set_uri(query().to_uri());
-        res.set_title(_("Get started!"));
-        res["summary"] = _("Drag and drop items from another devices. Alternatively, load your files onto a SD card.");
-        res.set_art("file://" + scope_dir + "/" + "getstarted.svg");
-        reply->push(res);
-        return;
+        const bool empty_db = is_database_empty(scope.store, mediascanner::MediaType::AudioMedia);
+
+        if (empty_db)
+        {
+            const CategoryRenderer renderer(GET_STARTED_CATEGORY_DEFINITION);
+            auto cat = reply->register_category("mymusic-getstarted", "", "", renderer);
+            CategorisedResult res(cat);
+            res.set_uri(query().to_uri());
+            res.set_title(_("Get started!"));
+            res["summary"] = _("Drag and drop items from another devices. Alternatively, load your files onto a SD card.");
+            res.set_art("file://" + scope_dir + "/" + "getstarted.svg");
+            reply->push(res);
+            return;
+        }
     }
 
     if (empty_search_query && !is_aggregated)
