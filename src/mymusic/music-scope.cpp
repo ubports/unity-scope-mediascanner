@@ -60,10 +60,7 @@ static const char GET_STARTED_CATEGORY_DEFINITION[] = R"(
   },
   "components": {
     "title": "title",
-    "art":  {
-        "field": "art",
-        "aspect-ratio": 2.4
-    },
+    "art":  "art",
     "summary" : "summary"
   }
 }
