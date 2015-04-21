@@ -33,7 +33,6 @@
 
 #include "video-scope.h"
 #include "../utils/i18n.h"
-#include "../utils/utils.h"
 
 #define MAX_RESULTS 100
 
@@ -158,7 +157,7 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
 
     if (!is_aggregated) //TODO: 'get started..' card tbd for aggregator
     {
-        const bool empty_db = is_database_empty(scope.store, mediascanner::MediaType::VideoMedia);
+        const bool empty_db = is_database_empty();
 
         if (empty_db)
         {
