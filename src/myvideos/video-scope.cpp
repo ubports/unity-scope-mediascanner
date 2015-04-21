@@ -240,6 +240,13 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
     }
 }
 
+bool VideoQuery::is_database_empty() const
+{
+    mediascanner::Filter filter;
+    filter.setLimit(1);
+    return scope.store->query("", VideoMedia, filter).size() == 0;
+}
+
 VideoPreview::VideoPreview(VideoScope &scope, Result const& result, ActionMetadata const& hints)
     : PreviewQueryBase(result, hints),
       scope(scope) {

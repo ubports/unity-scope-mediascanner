@@ -56,6 +56,8 @@ private:
 
     unity::scopes::CategorisedResult create_album_result(unity::scopes::Category::SCPtr const& category, mediascanner::Album const& album) const;
     unity::scopes::CategorisedResult create_song_result(unity::scopes::Category::SCPtr const& category, mediascanner::MediaFile const& media) const;
+
+    bool is_database_empty() const;
 };
 
 class MusicPreview : public unity::scopes::PreviewQueryBase
