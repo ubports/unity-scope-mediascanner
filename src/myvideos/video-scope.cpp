@@ -60,6 +60,22 @@ static const char GET_STARTED_CATEGORY_DEFINITION[] = R"(
 }
 )";
 
+static const char GET_STARTED_AGG_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+      "category-layout": "grid",
+      "card-size": "large",
+      "card-layout" : "horizontal"
+  },
+  "components": {
+    "title": "title",
+    "art": "art",
+    "summary" : "summary"
+  }
+}
+)";
+
 static const char LOCAL_CATEGORY_ICON[] = "/usr/share/icons/unity-icon-theme/places/svg/group-videos.svg";
 static const char LOCAL_CATEGORY_DEFINITION[] = R"(
 {
@@ -158,12 +174,11 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
     const bool surfacing = query().query_string() == "";
     const bool is_aggregated = search_metadata().is_aggregated();
 
-    if (!is_aggregated) //TODO: 'get started..' card tbd for aggregator
-    {
-        const bool empty_db = is_database_empty();
+    const bool empty_db = is_database_empty();
 
-        if (empty_db)
-        {
+    if (empty_db)
+    {
+        if (!is_aggregated) {
             const CategoryRenderer renderer(GET_STARTED_CATEGORY_DEFINITION);
             auto cat = reply->register_category("myvideos-getstarted", "", "", renderer);
             CategorisedResult res(cat);
@@ -172,8 +187,18 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
             res["summary"] = _("Drag and drop items from another devices. Alternatively, load your files onto a SD card.");
             res.set_art("file://" + scope_dir + "/" + "getstarted.svg");
             reply->push(res);
-            return;
+        } else {
+            const CategoryRenderer renderer(GET_STARTED_AGG_CATEGORY_DEFINITION);
+            auto cat = reply->register_category("myvideos-getstarted", "", "", renderer);
+            CategorisedResult res(cat);
+            res.set_uri("appid://com.ubuntu.camera/camera/current-user-version");
+            res.set_art("/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.camera/share/icons/camera-app.svg");
+            res.set_title(_("Nothing here yet..."));
+            res["summary"] = _("Make a video!");
+            res.set_art("file://" + scope_dir + "/" + "getstarted.svg");
+            reply->push(res);
         }
+        return;
     }
 
     if (!is_aggregated) {
