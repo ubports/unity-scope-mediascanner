@@ -70,8 +70,7 @@ static const char GET_STARTED_AGG_CATEGORY_DEFINITION[] = R"(
   },
   "components": {
     "title": "title",
-    "art": "art",
-    "summary" : "summary"
+    "art": "art"
   }
 }
 )";
@@ -193,8 +192,7 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
             CategorisedResult res(cat);
             res.set_uri("appid://com.ubuntu.camera/camera/current-user-version");
             res.set_art("/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.camera/share/icons/camera-app.svg");
-            res.set_title(_("Nothing here yet..."));
-            res["summary"] = _("Make a video!");
+            res.set_title(std::string(_("Nothing here yet...")) + "\n" + _("Make a video!"));
             reply->push(res);
         }
         return;
