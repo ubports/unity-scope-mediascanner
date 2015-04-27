@@ -59,7 +59,10 @@ static const char GET_STARTED_CATEGORY_DEFINITION[] = R"(
   },
   "components": {
     "title": "title",
-    "art":  "art",
+    "art":  {
+        "field": "art",
+        "noartsummaryshape": true
+    },
     "summary" : "summary"
   }
 }
