@@ -195,7 +195,6 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
             res.set_art("/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.camera/share/icons/camera-app.svg");
             res.set_title(_("Nothing here yet..."));
             res["summary"] = _("Make a video!");
-            res.set_art("file://" + scope_dir + "/" + "getstarted.svg");
             reply->push(res);
         }
         return;
