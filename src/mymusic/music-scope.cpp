@@ -243,7 +243,7 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
         }
     }
 
-    if (empty_search_query && !is_aggregated)
+    if (!is_aggregated)
     {
         populate_departments(reply);
     }
@@ -267,10 +267,9 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
         auto const genre = current_department.substr(index + 1);
         query_albums_by_genre(reply, genre);
     }
-    else if (current_department.find("albums_of_artist:") == 0) // fake department that's not really displayed
+    else if (query().has_user_data())
     {
-        const int index = current_department.find(":");
-        const std::string artist = current_department.substr(index + 1);
+        const std::string artist = query().user_data().get_string();
         query_albums_by_artist(reply, artist);
         query_songs_by_artist(reply, artist);
     }
@@ -361,7 +360,7 @@ void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply) con
     filter.setLimit(MAX_RESULTS);
     for (const auto &artist: scope.store->queryArtists(query().query_string(), filter))
     {
-        artist_search.set_department_id("albums_of_artist:" + artist); // virtual department
+        artist_search.set_user_data(Variant(artist));
 
         CategorisedResult res(cat);
         res.set_uri(artist_search.to_uri());
@@ -544,7 +543,7 @@ void MusicQuery::query_albums_by_artist(unity::scopes::SearchReplyProxy const &r
 
             CannedQuery artist_search(query());
             artist_search.set_query_string("");
-            artist_search.set_department_id("albums_of_artist:" + artist); // virtual department
+            artist_search.set_user_data(Variant(artist));
 
             CategorisedResult artist_info(biocat);
             artist_info.set_uri(artist_search.to_uri());
