@@ -354,6 +354,7 @@ void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply) con
     auto cat = reply->register_category("artists", show_title ? _("Artists") : "", SONGS_CATEGORY_ICON, renderer); //FIXME: icon
 
     CannedQuery artist_search(query());
+    artist_search.set_department_id("");
     artist_search.set_query_string("");
 
     mediascanner::Filter filter;
@@ -543,6 +544,7 @@ void MusicQuery::query_albums_by_artist(unity::scopes::SearchReplyProxy const &r
             }
 
             CannedQuery artist_search(query());
+            artist_search.set_department_id("");
             artist_search.set_query_string(artist);
             artist_search.set_user_data(Variant(true));
 
