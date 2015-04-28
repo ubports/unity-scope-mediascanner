@@ -15,7 +15,8 @@ if(CLICK_MODE)
   click_scope_data(com.ubuntu.scopes.myvideos myvideos
     screenshot.jpg
     icon.png
-    getstarted.svg)
+    getstarted.svg
+    camera-app.svg)
 else()
   set(scopedir "${CMAKE_INSTALL_LIBDIR}/unity-scopes/mediascanner-video")
   install(
@@ -27,5 +28,6 @@ else()
       screenshot.jpg
       icon.png
       getstarted.svg
+      camera-app.svg
     DESTINATION "${scopedir}")
 endif(CLICK_MODE)

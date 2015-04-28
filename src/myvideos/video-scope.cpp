@@ -184,15 +184,15 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
             res.set_uri(query().to_uri());
             res.set_title(_("Get started!"));
             res["summary"] = _("Drag and drop items from another devices. Alternatively, load your files onto a SD card.");
-            res.set_art("file://" + scope_dir + "/" + "getstarted.svg");
+            res.set_art(scope_dir + "/" + "getstarted.svg");
             reply->push(res);
         } else {
             const CategoryRenderer renderer(GET_STARTED_AGG_CATEGORY_DEFINITION);
             auto cat = reply->register_category("myvideos-getstarted", "", "", renderer);
             CategorisedResult res(cat);
             res.set_uri("appid://com.ubuntu.camera/camera/current-user-version");
-            res.set_art("/usr/share/click/preinstalled/.click/users/@all/com.ubuntu.camera/share/icons/camera-app.svg");
-            res.set_title(std::string(_("Nothing here yet...")) + "\n" + _("Make a video!"));
+            res.set_art(scope_dir + "/camera-app.svg");
+            res.set_title(_("Nothing here yet...\nMake a video!"));
             reply->push(res);
         }
         return;
