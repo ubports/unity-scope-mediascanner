@@ -226,7 +226,7 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
     const bool empty_search_query = query().query_string().empty();
     const bool is_aggregated = search_metadata().is_aggregated();
 
-    if (!is_aggregated) //TODO: 'get started..' card tbd for aggregator
+    if (!is_aggregated)
     {
         const bool empty_db = is_database_empty();
 
