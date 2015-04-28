@@ -360,7 +360,8 @@ void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply) con
     filter.setLimit(MAX_RESULTS);
     for (const auto &artist: scope.store->queryArtists(query().query_string(), filter))
     {
-        artist_search.set_user_data(Variant(artist));
+        artist_search.set_query_string(artist);
+        artist_search.set_user_data(Variant(true));
 
         CategorisedResult res(cat);
         res.set_uri(artist_search.to_uri());
@@ -542,8 +543,8 @@ void MusicQuery::query_albums_by_artist(unity::scopes::SearchReplyProxy const &r
             }
 
             CannedQuery artist_search(query());
-            artist_search.set_query_string("");
-            artist_search.set_user_data(Variant(artist));
+            artist_search.set_query_string(artist);
+            artist_search.set_user_data(Variant(true));
 
             CategorisedResult artist_info(biocat);
             artist_info.set_uri(artist_search.to_uri());
