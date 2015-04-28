@@ -35,13 +35,12 @@ private:
 class MusicQuery : public unity::scopes::SearchQueryBase
 {
 public:
-    MusicQuery(MusicScope &scope, unity::scopes::CannedQuery const& query, unity::scopes::SearchMetadata const& hints, std::string const& scope_dir);
+    MusicQuery(MusicScope &scope, unity::scopes::CannedQuery const& query, unity::scopes::SearchMetadata const& hints);
     virtual void cancelled() override;
     virtual void run(unity::scopes::SearchReplyProxy const&reply) override;
 
 private:
     const MusicScope &scope;
-    std::string scope_dir;
     std::atomic<bool> query_cancelled;
 
     void populate_departments(unity::scopes::SearchReplyProxy const &reply) const;

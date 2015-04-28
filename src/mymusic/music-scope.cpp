@@ -195,7 +195,7 @@ void MusicScope::stop() {
 
 SearchQueryBase::UPtr MusicScope::search(CannedQuery const &q,
                                          SearchMetadata const& hints) {
-    SearchQueryBase::UPtr query(new MusicQuery(*this, q, hints, scope_directory()));
+    SearchQueryBase::UPtr query(new MusicQuery(*this, q, hints));
     return query;
 }
 
@@ -211,10 +211,9 @@ std::string MusicScope::make_artist_art_uri(const std::string &artist, const std
     return client->uri_to_string(uri);
 }
 
-MusicQuery::MusicQuery(MusicScope &scope, CannedQuery const& query, SearchMetadata const& hints, std::string const& scope_dir)
+MusicQuery::MusicQuery(MusicScope &scope, CannedQuery const& query, SearchMetadata const& hints)
     : SearchQueryBase(query, hints),
       scope(scope),
-      scope_dir(scope_dir),
       query_cancelled(false) {
 }
 
@@ -238,7 +237,7 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
             res.set_uri(query().to_uri());
             res.set_title(_("Get started!"));
             res["summary"] = _("Drag and drop items from another devices. Alternatively, load your files onto a SD card.");
-            res.set_art(scope_dir + "/" + "getstarted.svg");
+            res.set_art(scope.scope_directory() + "/" + "getstarted.svg");
             reply->push(res);
             return;
         }
@@ -582,7 +581,7 @@ bool MusicQuery::is_database_empty() const
 {
     mediascanner::Filter filter;
     filter.setLimit(1);
-    return scope.store->queryAlbums("", filter).size() == 0;
+    return scope.store->query("", AudioMedia, filter).size() == 0;
 }
 
 MusicPreview::MusicPreview(MusicScope &scope, Result const& result, ActionMetadata const& hints)

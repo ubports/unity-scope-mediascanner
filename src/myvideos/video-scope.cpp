@@ -145,7 +145,7 @@ void VideoScope::stop() {
 
 SearchQueryBase::UPtr VideoScope::search(CannedQuery const &q,
                                          SearchMetadata const& hints) {
-    SearchQueryBase::UPtr query(new VideoQuery(*this, q, hints, scope_directory()));
+    SearchQueryBase::UPtr query(new VideoQuery(*this, q, hints));
     return query;
 }
 
@@ -155,10 +155,9 @@ PreviewQueryBase::UPtr VideoScope::preview(Result const& result,
     return previewer;
 }
 
-VideoQuery::VideoQuery(VideoScope &scope, CannedQuery const& query, SearchMetadata const& hints, std::string const& scope_dir)
+VideoQuery::VideoQuery(VideoScope &scope, CannedQuery const& query, SearchMetadata const& hints)
     : SearchQueryBase(query, hints),
-      scope(scope),
-      scope_dir(scope_dir) {
+      scope(scope) {
 }
 
 void VideoQuery::cancelled() {
@@ -184,14 +183,14 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
             res.set_uri(query().to_uri());
             res.set_title(_("Get started!"));
             res["summary"] = _("Drag and drop items from another devices. Alternatively, load your files onto a SD card.");
-            res.set_art(scope_dir + "/" + "getstarted.svg");
+            res.set_art(scope.scope_directory() + "/" + "getstarted.svg");
             reply->push(res);
         } else if (surfacing) {
             const CategoryRenderer renderer(GET_STARTED_AGG_CATEGORY_DEFINITION);
             auto cat = reply->register_category("myvideos-getstarted", "", "", renderer);
             CategorisedResult res(cat);
             res.set_uri("appid://com.ubuntu.camera/camera/current-user-version");
-            res.set_art(scope_dir + "/camera-app.svg");
+            res.set_art(scope.scope_directory() + "/camera-app.svg");
             res.set_title(_("Nothing here yet...\nMake a video!"));
             reply->push(res);
         }
