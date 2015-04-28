@@ -186,7 +186,7 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
             res["summary"] = _("Drag and drop items from another devices. Alternatively, load your files onto a SD card.");
             res.set_art(scope_dir + "/" + "getstarted.svg");
             reply->push(res);
-        } else {
+        } else if (surfacing) {
             const CategoryRenderer renderer(GET_STARTED_AGG_CATEGORY_DEFINITION);
             auto cat = reply->register_category("myvideos-getstarted", "", "", renderer);
             CategorisedResult res(cat);
