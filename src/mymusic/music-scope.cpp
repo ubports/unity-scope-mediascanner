@@ -267,7 +267,7 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
         auto const genre = current_department.substr(index + 1);
         query_albums_by_genre(reply, genre);
     }
-    else if (query().has_user_data())
+    else if (query().has_user_data() && query().user_data().get_string() == "albums_of_artist")
     {
         const std::string artist = query().query_string();
         query_albums_by_artist(reply, artist);
@@ -362,7 +362,7 @@ void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply) con
     for (const auto &artist: scope.store->queryArtists(query().query_string(), filter))
     {
         artist_search.set_query_string(artist);
-        artist_search.set_user_data(Variant(true));
+        artist_search.set_user_data(Variant("albums_of_artist"));
 
         CategorisedResult res(cat);
         res.set_uri(artist_search.to_uri());
@@ -546,7 +546,7 @@ void MusicQuery::query_albums_by_artist(unity::scopes::SearchReplyProxy const &r
             CannedQuery artist_search(query());
             artist_search.set_department_id("");
             artist_search.set_query_string(artist);
-            artist_search.set_user_data(Variant(true));
+            artist_search.set_user_data(Variant("albums_of_artist"));
 
             CategorisedResult artist_info(biocat);
             artist_info.set_uri(artist_search.to_uri());
