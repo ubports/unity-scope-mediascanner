@@ -53,7 +53,7 @@ static const char GET_STARTED_CATEGORY_DEFINITION[] = R"(
     "title": "title",
     "art": {
         "field": "art",
-        "noartsummaryshape": true
+        "conciergeMode": true
     },
     "summary" : "summary"
   }
