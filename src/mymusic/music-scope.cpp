@@ -269,7 +269,7 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
     }
     else if (query().has_user_data())
     {
-        const std::string artist = query().user_data().get_string();
+        const std::string artist = query().query_string();
         query_albums_by_artist(reply, artist);
         query_songs_by_artist(reply, artist);
     }
