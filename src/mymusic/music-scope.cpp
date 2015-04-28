@@ -238,7 +238,7 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
             res.set_uri(query().to_uri());
             res.set_title(_("Get started!"));
             res["summary"] = _("Drag and drop items from another devices. Alternatively, load your files onto a SD card.");
-            res.set_art("file://" + scope_dir + "/" + "getstarted.svg");
+            res.set_art(scope_dir + "/" + "getstarted.svg");
             reply->push(res);
             return;
         }
