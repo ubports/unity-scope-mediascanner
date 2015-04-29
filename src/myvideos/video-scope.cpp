@@ -39,6 +39,42 @@
 using namespace mediascanner;
 using namespace unity::scopes;
 
+static const char GET_STARTED_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-size": "large",
+    "card-layout" : "vertical",
+    "collapsed-rows" : 0,
+    "non-interactive": "true"
+  },
+  "components": {
+    "title": "title",
+    "art": {
+        "field": "art",
+        "conciergeMode": true
+    },
+    "summary" : "summary"
+  }
+}
+)";
+
+static const char GET_STARTED_AGG_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+      "category-layout": "grid",
+      "card-size": "large",
+      "card-layout" : "horizontal"
+  },
+  "components": {
+    "title": "title",
+    "art": "art"
+  }
+}
+)";
+
 static const char LOCAL_CATEGORY_ICON[] = "/usr/share/icons/unity-icon-theme/places/svg/group-videos.svg";
 static const char LOCAL_CATEGORY_DEFINITION[] = R"(
 {
@@ -136,6 +172,31 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
     const bool surfacing = query().query_string() == "";
     const bool is_aggregated = search_metadata().is_aggregated();
 
+    const bool empty_db = is_database_empty();
+
+    if (empty_db)
+    {
+        if (!is_aggregated) {
+            const CategoryRenderer renderer(GET_STARTED_CATEGORY_DEFINITION);
+            auto cat = reply->register_category("myvideos-getstarted", "", "", renderer);
+            CategorisedResult res(cat);
+            res.set_uri(query().to_uri());
+            res.set_title(_("Get started!"));
+            res["summary"] = _("Drag and drop items from another devices. Alternatively, load your files onto a SD card.");
+            res.set_art(scope.scope_directory() + "/" + "getstarted.svg");
+            reply->push(res);
+        } else if (surfacing) {
+            const CategoryRenderer renderer(GET_STARTED_AGG_CATEGORY_DEFINITION);
+            auto cat = reply->register_category("myvideos-getstarted", "", "", renderer);
+            CategorisedResult res(cat);
+            res.set_uri("appid://com.ubuntu.camera/camera/current-user-version");
+            res.set_art(scope.scope_directory() + "/camera-app.svg");
+            res.set_title(_("Nothing here yet...\nMake a video!"));
+            reply->push(res);
+        }
+        return;
+    }
+
     if (!is_aggregated) {
         Department::SPtr root_dept = Department::create("", query(), _("Everything"));
         root_dept->set_subdepartments({
@@ -200,6 +261,13 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
             return;
         }
     }
+}
+
+bool VideoQuery::is_database_empty() const
+{
+    mediascanner::Filter filter;
+    filter.setLimit(1);
+    return scope.store->query("", VideoMedia, filter).size() == 0;
 }
 
 VideoPreview::VideoPreview(VideoScope &scope, Result const& result, ActionMetadata const& hints)

@@ -28,6 +28,7 @@ public:
     VideoQuery(VideoScope &scope, unity::scopes::CannedQuery const& query, unity::scopes::SearchMetadata const& hints);
     virtual void cancelled() override;
     virtual void run(unity::scopes::SearchReplyProxy const&reply) override;
+    bool is_database_empty() const;
 
 private:
     const VideoScope &scope;

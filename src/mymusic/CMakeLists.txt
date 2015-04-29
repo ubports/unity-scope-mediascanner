@@ -14,7 +14,8 @@ if(CLICK_MODE)
     mediascanner-music ${CMAKE_CURRENT_BINARY_DIR}/mediascanner-music.ini)
   click_scope_data(com.ubuntu.scopes.mymusic mymusic
     screenshot.jpg
-    icon.png)
+    icon.png
+    getstarted.svg)
 else()
   set(scopedir "${CMAKE_INSTALL_LIBDIR}/unity-scopes/mediascanner-music")
   install(
@@ -25,5 +26,6 @@ else()
       ${CMAKE_CURRENT_BINARY_DIR}/mediascanner-music.ini
       screenshot.jpg
       icon.png
+      getstarted.svg
     DESTINATION "${scopedir}")
 endif(CLICK_MODE)

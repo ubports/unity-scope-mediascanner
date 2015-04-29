@@ -46,6 +46,28 @@ static const char THUMBNAILER_API_KEY[] = "dash-ubuntu-com-key";
 
 static const char MISSING_ALBUM_ART[] = "/usr/share/unity/icons/album_missing.png";
 static const char SONGS_CATEGORY_ICON[] = "/usr/share/icons/unity-icon-theme/places/svg/group-songs.svg";
+
+static const char GET_STARTED_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-size": "large",
+    "card-layout" : "vertical",
+    "collapsed-rows" : 0,
+    "non-interactive": "true"
+  },
+  "components": {
+    "title": "title",
+    "art":  {
+        "field": "art",
+        "conciergeMode": true
+    },
+    "summary" : "summary"
+  }
+}
+)";
+
 static const char SONGS_CATEGORY_DEFINITION[] = R"(
 {
   "schema-version": 1,
@@ -202,6 +224,24 @@ void MusicQuery::cancelled() {
 void MusicQuery::run(SearchReplyProxy const&reply) {
     const bool empty_search_query = query().query_string().empty();
     const bool is_aggregated = search_metadata().is_aggregated();
+
+    if (!is_aggregated)
+    {
+        const bool empty_db = is_database_empty();
+
+        if (empty_db)
+        {
+            const CategoryRenderer renderer(GET_STARTED_CATEGORY_DEFINITION);
+            auto cat = reply->register_category("mymusic-getstarted", "", "", renderer);
+            CategorisedResult res(cat);
+            res.set_uri(query().to_uri());
+            res.set_title(_("Get started!"));
+            res["summary"] = _("Drag and drop items from another devices. Alternatively, load your files onto a SD card.");
+            res.set_art(scope.scope_directory() + "/" + "getstarted.svg");
+            reply->push(res);
+            return;
+        }
+    }
 
     if (empty_search_query && !is_aggregated)
     {
@@ -535,6 +575,13 @@ void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply) const
             return;
         }
     }
+}
+
+bool MusicQuery::is_database_empty() const
+{
+    mediascanner::Filter filter;
+    filter.setLimit(1);
+    return scope.store->query("", AudioMedia, filter).size() == 0;
 }
 
 MusicPreview::MusicPreview(MusicScope &scope, Result const& result, ActionMetadata const& hints)
