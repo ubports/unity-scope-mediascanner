@@ -8,151 +8,159 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-16 13:50+0800\n"
-"PO-Revision-Date: 2014-10-26 01:26+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2015-05-06 19:52+0000\n"
+"Last-Translator: Zdeněk Kopš <zdenekkops@gmail.com>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-19 05:56+0000\n"
-"X-Generator: Launchpad (build 17430)\n"
+"X-Launchpad-Export-Date: 2015-05-07 05:35+0000\n"
+"X-Generator: Launchpad (build 17474)\n"
 
 #: ../src/music-scope.cpp:219 ../src/music-scope.cpp:280
 msgid "Artists"
-msgstr ""
+msgstr "Umělci"
 
 #: ../src/music-scope.cpp:220 ../src/music-scope.cpp:449
 #: ../src/music-scope.cpp:492
 msgid "Albums"
-msgstr ""
+msgstr "Alba"
 
 #: ../src/music-scope.cpp:221 ../src/music-scope.cpp:324
 #: ../src/music-scope.cpp:339
 msgid "Tracks"
-msgstr ""
+msgstr "Skladby"
 
 #: ../src/music-scope.cpp:222
 msgid "Genres"
-msgstr ""
+msgstr "Žánry"
 
 #: ../src/music-scope.cpp:568 ../src/music-scope.cpp:600
 msgid "Play in music app"
-msgstr ""
+msgstr "Přehrát v hudební aplikaci"
 
 #: ../src/musicaggregatorquery.cpp:206 ../src/musicaggregatorquery.cpp:208
 #: tmp/mediascanner-music.ini.in.in.h:1
 msgid "My Music"
-msgstr ""
+msgstr "Moje hudba"
 
 #: ../src/musicaggregatorquery.cpp:209
 msgid "Popular tracks on Grooveshark"
-msgstr ""
+msgstr "Populární písně na Grooveshark"
 
 #: ../src/musicaggregatorquery.cpp:211
 msgid "Grooveshark"
-msgstr ""
+msgstr "Grooveshark"
 
 #: ../src/musicaggregatorquery.cpp:212
 msgid "New albums from 7digital"
-msgstr ""
+msgstr "Nová alba z 7digital"
 
 #: ../src/musicaggregatorquery.cpp:214
 msgid "7digital"
-msgstr ""
+msgstr "7digital"
 
 #: ../src/musicaggregatorquery.cpp:215
 msgid "Nearby Events on Songkick"
-msgstr ""
+msgstr "Blízké události na Songkicku"
 
 #: ../src/musicaggregatorquery.cpp:217
 msgid "Songkick"
-msgstr ""
+msgstr "Songkick"
 
 #: ../src/video-scope.cpp:141
 msgid "Everything"
-msgstr ""
+msgstr "Všechno"
 
 #: ../src/video-scope.cpp:143
 msgid "My Roll"
-msgstr ""
+msgstr "Můj výpis"
 
 #: ../src/video-scope.cpp:144
 msgid "Downloaded"
-msgstr ""
+msgstr "Staženo"
 
 #: ../src/video-scope.cpp:162 ../src/video-scope.cpp:167
 #: tmp/mediascanner-video.ini.in.in.h:1
 msgid "My Videos"
-msgstr ""
+msgstr "Moje videa"
 
 #: ../src/video-scope.cpp:248
 msgid "Play"
-msgstr ""
+msgstr "Přehrát"
 
 #: ../src/videoaggregatorquery.cpp:130
 #, c-format
 msgid "%s Features"
-msgstr ""
+msgstr "%s funkcí"
 
 #: ../src/videoaggregatorquery.cpp:137
 #, c-format
 msgid "Results from %s"
-msgstr ""
+msgstr "Výsledky z %s"
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
+"Toto je vyhledávací plugin Ubuntu, který skenuje zařízení pro poslech hudby "
+"a umožňuje, aby byly vyhledávány a zobrazeny v nabídce Dash."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr ""
+msgstr "Prohledat místní hudební kolekci"
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
+"Toto je vyhledávací plugin Ubuntu, který skenuje zařízení pro video a "
+"umožňuje, aby byly vyhledávány a zobrazeny v nabídce Dash."
 
 #: tmp/musicaggregator-settings.ini.in.in.h:1
 msgid "Display results from Grooveshark"
-msgstr ""
+msgstr "Zobrazit výsledky z Grooveshark"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:2
 msgid "Display results from 7digital"
-msgstr ""
+msgstr "Zobrazit výsledky z 7digital"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:3
 msgid "Display results from Songkick"
-msgstr ""
+msgstr "Zobrazit výsledky ze Songkick"
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
-msgstr ""
+msgstr "Hudba"
 
 #: tmp/musicaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr ""
+"Toto je vyhledávací plugin Ubuntu, který spojuje všechny zdroje hudby do "
+"jednoho."
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
-msgstr ""
+msgstr "Vyhledat hudbu"
 
 #: tmp/videoaggregator-settings.ini.in.in.h:1
 msgid "Display results from YouTube"
-msgstr ""
+msgstr "Zobrazit výsledky z YouTube"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
-msgstr ""
+msgstr "Video"
 
 #: tmp/videoaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr ""
+"Toto je vyhledávací plugin Ubuntu, který spojuje všechny zdroje videa do "
+"jednoho."
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
-msgstr ""
+msgstr "Vyhledat video"
