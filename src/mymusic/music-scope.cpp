@@ -74,12 +74,14 @@ static const char SONGS_CATEGORY_DEFINITION[] = R"(
   "template": {
     "category-layout": "grid",
     "card-size": "large",
-    "card-layout" : "horizontal"
+    "card-layout" : "horizontal",
+    "quick-preview-type" : "audio"
   },
   "components": {
     "title": "title",
     "art":  "art",
-    "subtitle": "artist"
+    "subtitle": "artist",
+    "quick-preview-data": "audio-data"
   }
 }
 )";
@@ -450,6 +452,11 @@ unity::scopes::CategorisedResult MusicQuery::create_song_result(unity::scopes::C
     res["album"] = media.getAlbum();
     res["artist"] = media.getAuthor();
     res["track-number"] = media.getTrackNumber();
+
+    VariantMap audio_data;
+    audio_data["uri"] = uri;
+    audio_data["duration"] = media.getDuration();
+    res["audio-data"] = audio_data;
 
     return res;
 }
