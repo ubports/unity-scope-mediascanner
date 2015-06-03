@@ -159,7 +159,8 @@ static const char SEARCH_SONGS_CATEGORY_DEFINITION[] = R"(
   "template": {
     "category-layout": "grid",
     "card-layout" : "horizontal",
-    "card-size": "large"
+    "card-size": "large",
+    "quick-preview-type" : "audio"
   },
   "components": {
     "title": "title",
