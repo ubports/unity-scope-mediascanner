@@ -151,6 +151,23 @@ static const char SEARCH_CATEGORY_DEFINITION[] = R"(
 }
 )";
 
+static const char SEARCH_SONGS_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-layout" : "horizontal",
+    "card-size": "large"
+  },
+  "components": {
+    "title": "title",
+    "art":  "art",
+    "subtitle": "artist",
+    "quick-preview-data": "audio-data"
+  }
+}
+)";
+
 using namespace mediascanner;
 using namespace unity::scopes;
 using namespace core::net;
@@ -398,7 +415,7 @@ void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply) con
 void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply) const {
     const bool show_title = !query().query_string().empty();
 
-    CategoryRenderer renderer(query().query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
+    CategoryRenderer renderer(query().query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_SONGS_CATEGORY_DEFINITION);
     auto cat = reply->register_category("songs", show_title ? _("Tracks") : "", SONGS_CATEGORY_ICON, renderer);
     mediascanner::Filter filter;
     filter.setLimit(MAX_RESULTS);
@@ -413,7 +430,7 @@ void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply) const 
 
 void MusicQuery::query_songs_by_artist(unity::scopes::SearchReplyProxy const &reply, const std::string& artist) const
 {
-    CategoryRenderer renderer(query().query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
+    CategoryRenderer renderer(query().query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_SONGS_CATEGORY_DEFINITION);
     auto cat = reply->register_category("songs", _("Tracks"), SONGS_CATEGORY_ICON, renderer);
 
     mediascanner::Filter filter;
