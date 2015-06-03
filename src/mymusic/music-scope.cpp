@@ -81,7 +81,9 @@ static const char SONGS_CATEGORY_DEFINITION[] = R"(
     "title": "title",
     "art":  "art",
     "subtitle": "artist",
-    "quick-preview-data": "audio-data"
+    "quick-preview-data": {
+        "field": "audio-data"
+    }
   }
 }
 )";
@@ -163,7 +165,9 @@ static const char SEARCH_SONGS_CATEGORY_DEFINITION[] = R"(
     "title": "title",
     "art":  "art",
     "subtitle": "artist",
-    "quick-preview-data": "audio-data"
+    "quick-preview-data": {
+        "field": "audio-data"
+    }
   }
 }
 )";
