@@ -47,12 +47,16 @@ static const char MYMUSIC_CATEGORY_DEFINITION[] = R"(
   "schema-version": 1,
   "template": {
     "category-layout": "horizontal-list",
-    "card-size": "small"
+    "card-size": "small",
+    "quick-preview-type" : "audio"
   },
   "components": {
     "title": "title",
     "art":  "art",
-    "subtitle": "artist"
+    "subtitle": "artist",
+    "quick-preview-data": {
+        "field": "audio-data"
+    }
   }
 }
 )";
