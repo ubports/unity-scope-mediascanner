@@ -438,7 +438,10 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
         }
         else if (scopes[i].id == MusicAggregatorScope::LOCALSCOPE)
         {
-            dept = ""; // artists
+            if (empty_search)
+            {
+                metadata.set_cardinality(4);
+            }
         }
         else if (scopes[i].id == MusicAggregatorScope::GROOVESHARKSCOPE)
         {
