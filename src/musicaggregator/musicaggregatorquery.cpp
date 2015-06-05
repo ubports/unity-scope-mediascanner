@@ -46,8 +46,9 @@ static const char MYMUSIC_CATEGORY_DEFINITION[] = R"(
 {
   "schema-version": 1,
   "template": {
-    "category-layout": "horizontal-list",
-    "card-size": "small",
+    "category-layout": "grid",
+    "card-size": "large",
+    "card-layout" : "horizontal",
     "quick-preview-type" : "audio"
   },
   "components": {
