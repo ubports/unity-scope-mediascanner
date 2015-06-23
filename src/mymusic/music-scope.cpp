@@ -159,16 +159,12 @@ static const char SEARCH_SONGS_CATEGORY_DEFINITION[] = R"(
   "template": {
     "category-layout": "grid",
     "card-layout" : "horizontal",
-    "card-size": "large",
-    "quick-preview-type" : "audio"
+    "card-size": "large"
   },
   "components": {
     "title": "title",
     "art":  "art",
-    "subtitle": "artist",
-    "quick-preview-data": {
-        "field": "audio-data"
-    }
+    "subtitle": "artist"
   }
 }
 )";
