@@ -445,7 +445,7 @@ void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply) const 
             }
             album_songs = scope.store->listSongs(album_songs_filter);
         }
-        if(!reply->push(create_song_result(cat, media, album_songs)))
+        if(!reply->push(create_song_result(cat, media, surfacing, album_songs)))
         {
             return;
         }
@@ -482,7 +482,7 @@ unity::scopes::CategorisedResult MusicQuery::create_album_result(unity::scopes::
 }
 
 unity::scopes::CategorisedResult MusicQuery::create_song_result(unity::scopes::Category::SCPtr const& category, mediascanner::MediaFile const& media,
-        std::vector<mediascanner::MediaFile> const& album_songs) const
+        bool audio_data, std::vector<mediascanner::MediaFile> const& album_songs) const
 {
     std::string uri = media.getUri();
     CategorisedResult res(category);
@@ -496,19 +496,22 @@ unity::scopes::CategorisedResult MusicQuery::create_song_result(unity::scopes::C
     res["artist"] = media.getAuthor();
     res["track-number"] = media.getTrackNumber();
 
-    VariantMap audio_data;
-    audio_data["uri"] = uri;
-    audio_data["duration"] = media.getDuration();
-    if (album_songs.size() > 0)
+    if (audio_data)
     {
-        VariantArray songsva;
-        for (auto const& song: album_songs)
+        VariantMap data;
+        data["uri"] = uri;
+        data["duration"] = media.getDuration();
+        if (album_songs.size() > 0)
         {
-            songsva.push_back(Variant(song.getUri()));
+            VariantArray songsva;
+            for (auto const& song: album_songs)
+            {
+                songsva.push_back(Variant(song.getUri()));
+            }
+            data["playlist"] = songsva;
         }
-        audio_data["playlist"] = songsva;
+        res["audio-data"] = data;
     }
-    res["audio-data"] = audio_data;
 
     return res;
 }
