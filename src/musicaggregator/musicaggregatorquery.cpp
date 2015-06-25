@@ -244,7 +244,6 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     ChildScopeList scopes;
     const std::string department_id = "aggregated:musicaggregator";
 
-    const CannedQuery mymusic_query(MusicAggregatorScope::LOCALSCOPE, query().query_string(), "");
     const CannedQuery sevendigital_query(MusicAggregatorScope::SEVENDIGITAL, query().query_string(), "newreleases");
     const CannedQuery soundcloud_query(MusicAggregatorScope::SOUNDCLOUD, query().query_string(), "");
     const CannedQuery songkick_query(MusicAggregatorScope::SONGKICK, query().query_string(), "");

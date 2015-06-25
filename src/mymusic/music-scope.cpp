@@ -262,13 +262,19 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
         if (empty_search_query) // surfacing
         {
             const CategoryRenderer renderer = make_renderer(AGGREGATED_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
-            auto cat = reply->register_category("mymusic", _("My Music"), "", renderer);
+            auto cat = reply->register_category(
+                "mymusic", _("My Music"), "",
+                CannedQuery(query().scope_id(), query().query_string(), ""),
+                renderer);
             query_artists(reply, cat);
         }
         else // non-empty search in albums and songs
         {
             const CategoryRenderer renderer = make_renderer(SEARCH_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
-            auto cat = reply->register_category("mymusic", _("My Music"), "", renderer);
+            auto cat = reply->register_category(
+                "mymusic", _("My Music"), "",
+                CannedQuery(query().scope_id(), query().query_string(), ""),
+                renderer);
             query_artists(reply, cat);
             query_albums(reply, cat);
             query_songs(reply, cat);
