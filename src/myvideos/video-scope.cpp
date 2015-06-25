@@ -39,6 +39,8 @@
 using namespace mediascanner;
 using namespace unity::scopes;
 
+static const char MISSING_VIDEO_ART[] = "video_missing.png";
+
 static const char GET_STARTED_CATEGORY_DEFINITION[] = R"(
 {
   "schema-version": 1,
@@ -88,6 +90,7 @@ static const char LOCAL_CATEGORY_DEFINITION[] = R"(
     "title": "title",
     "art":  {
       "field": "art",
+      "fallback": "@FALLBACK@",
       "aspect-ratio": 1.5
     }
   }
@@ -106,6 +109,7 @@ static const char AGGREGATOR_CATEGORY_DEFINITION[] = R"(
     "title": "title",
     "art":  {
       "field": "art",
+      "fallback": "@FALLBACK@",
       "aspect-ratio": 1.5
     }
   }
@@ -123,7 +127,10 @@ static const char SEARCH_CATEGORY_DEFINITION[] = R"(
   },
   "components": {
     "title": "title",
-    "art":  "art"
+    "art": {
+      "field": "art",
+      "fallback": "@FALLBACK@"
+    }
   }
 }
 )";
@@ -219,11 +226,11 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
         cat = reply->register_category(
             "local", _("My Videos"), LOCAL_CATEGORY_ICON,
             CannedQuery(query().scope_id(), query().query_string(), ""),
-            CategoryRenderer(surfacing ? AGGREGATOR_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION));
+            make_renderer(surfacing ? AGGREGATOR_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION, MISSING_VIDEO_ART));
     } else {
         cat = reply->register_category(
             "local", _("My Videos"), LOCAL_CATEGORY_ICON,
-            CategoryRenderer(surfacing ? LOCAL_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION));
+            make_renderer(surfacing ? LOCAL_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION, MISSING_VIDEO_ART));
     }
     mediascanner::Filter filter;
     filter.setLimit(MAX_RESULTS);
@@ -269,6 +276,18 @@ bool VideoQuery::is_database_empty() const
     filter.setLimit(1);
     return scope.store->query("", VideoMedia, filter).size() == 0;
 }
+
+CategoryRenderer VideoQuery::make_renderer(std::string json_text, std::string const& fallback) const
+{
+    static std::string const placeholder("@FALLBACK@");
+    size_t pos = json_text.find(placeholder);
+    if (pos != std::string::npos)
+    {
+        json_text.replace(pos, placeholder.size(), scope.scope_directory() + "/" + fallback);
+    }
+    return CategoryRenderer(json_text);
+}
+
 
 VideoPreview::VideoPreview(VideoScope &scope, Result const& result, ActionMetadata const& hints)
     : PreviewQueryBase(result, hints),
