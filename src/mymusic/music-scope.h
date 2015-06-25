@@ -43,6 +43,7 @@ private:
     const MusicScope &scope;
     std::atomic<bool> query_cancelled;
 
+    unity::scopes::CategoryRenderer make_renderer(std::string json_text, std::string const& fallback) const;
     void populate_departments(unity::scopes::SearchReplyProxy const &reply) const;
     void query_songs(unity::scopes::SearchReplyProxy const&reply) const;
     void query_albums(unity::scopes::SearchReplyProxy const&reply) const;
