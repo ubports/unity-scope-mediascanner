@@ -360,6 +360,69 @@ TEST_F(MusicScopeTest, GenresDepartmentSurfacing) {
     query->run(proxy);
 }
 
+TEST_F(MusicScopeTest, AggregatedSurfacingQuery) {
+    populateStore();
+
+    CannedQuery q("mediascanner-music", "", "");
+    SearchMetadata hints("en_AU", "phone");
+    hints.set_aggregated_keywords(std::set<std::string>());
+    auto query = scope->search(q, hints);
+
+    Category::SCPtr category = std::make_shared<unity::scopes::testing::Category>(
+        "mymusic", "My Music", "icon", CategoryRenderer());
+    unity::scopes::testing::MockSearchReply reply;
+
+    EXPECT_CALL(reply, register_category("mymusic", _, _, _))
+        .WillOnce(Return(category));
+
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(
+                        ResultProp("title", "Spiderbait")
+                        )))
+        .WillOnce(Return(true));
+
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(
+                        ResultProp("title", "The John Butler Trio"))
+            ))
+        .WillOnce(Return(true));
+
+    SearchReplyProxy proxy(&reply, [](SearchReply*){});
+    query->run(proxy);
+}
+
+TEST_F(MusicScopeTest, AggregatedSearchQuery) {
+    populateStore();
+
+    CannedQuery q("mediascanner-music", "road", "");
+    SearchMetadata hints("en_AU", "phone");
+    hints.set_aggregated_keywords(std::set<std::string>());
+    auto query = scope->search(q, hints);
+
+    Category::SCPtr category = std::make_shared<unity::scopes::testing::Category>(
+        "mymusic", "My Music", "icon", CategoryRenderer());
+    unity::scopes::testing::MockSearchReply reply;
+    EXPECT_CALL(reply, register_category("mymusic", _, _, _))
+        .WillOnce(Return(category));
+
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(
+            ResultProp("title", "The John Butler Trio"))))
+        .WillOnce(Return(true));
+
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
+            ResultProp("title", "One Way Road"),
+            ResultProp("album", "April Uprising"),
+            ResultProp("artist", "The John Butler Trio")))))
+        .WillOnce(Return(true));
+
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(AllOf(
+            ResultProp("title", "April Uprising"),
+            ResultProp("artist", "The John Butler Trio"),
+            ResultProp("isalbum", true)))))
+        .WillOnce(Return(true));
+
+    SearchReplyProxy proxy(&reply, [](SearchReply*){});
+    query->run(proxy);
+}
+
 TEST_F(MusicScopeTest, PreviewSong) {
     unity::scopes::testing::Result result;
     result.set_uri("file:///xyz");

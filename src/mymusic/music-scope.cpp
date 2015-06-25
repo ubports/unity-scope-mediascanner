@@ -143,6 +143,24 @@ static const char ARTIST_BIO_CATEGORY_DEFINITION[] = R"(
 }
 )";
 
+static const char AGGREGATED_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "horizontal-list",
+    "card-size": "small"
+  },
+  "components": {
+    "title": "title",
+    "art": {
+      "field": "art",
+      "fallback": "@FALLBACK@"
+    },
+    "subtitle": "artist"
+  }
+}
+)";
+
 // Category renderer to use when presenting search results
 static const char SEARCH_CATEGORY_DEFINITION[] = R"(
 {
@@ -239,28 +257,41 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
     const bool empty_search_query = query().query_string().empty();
     const bool is_aggregated = search_metadata().is_aggregated();
 
-    if (!is_aggregated)
+    if (is_aggregated)
     {
-        const bool empty_db = is_database_empty();
-
-        if (empty_db)
+        if (empty_search_query) // surfacing
         {
-            const CategoryRenderer renderer = make_renderer(GET_STARTED_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
-            auto cat = reply->register_category("mymusic-getstarted", "", "", renderer);
-            CategorisedResult res(cat);
-            res.set_uri(query().to_uri());
-            res.set_title(_("Get started!"));
-            res["summary"] = _("Drag and drop items from another devices. Alternatively, load your files onto a SD card.");
-            res.set_art(scope.scope_directory() + "/" + "getstarted.svg");
-            reply->push(res);
-            return;
+            const CategoryRenderer renderer = make_renderer(AGGREGATED_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
+            auto cat = reply->register_category("mymusic", _("My Music"), "", renderer);
+            query_artists(reply, cat);
         }
+        else // non-empty search in albums and songs
+        {
+            const CategoryRenderer renderer = make_renderer(SEARCH_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
+            auto cat = reply->register_category("mymusic", _("My Music"), "", renderer);
+            query_artists(reply, cat);
+            query_albums(reply, cat);
+            query_songs(reply, cat);
+        }
+        return;
     }
 
-    if (!is_aggregated)
+    const bool empty_db = is_database_empty();
+
+    if (empty_db)
     {
-        populate_departments(reply);
+        const CategoryRenderer renderer = make_renderer(GET_STARTED_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
+        auto cat = reply->register_category("mymusic-getstarted", "", "", renderer);
+        CategorisedResult res(cat);
+        res.set_uri(query().to_uri());
+        res.set_title(_("Get started!"));
+        res["summary"] = _("Drag and drop items from another devices. Alternatively, load your files onto a SD card.");
+        res.set_art(scope.scope_directory() + "/" + "getstarted.svg");
+        reply->push(res);
+        return;
     }
+
+    populate_departments(reply);
 
     auto const current_department = query().department_id();
     if (current_department == "tracks")
@@ -371,12 +402,15 @@ void MusicQuery::query_genres(unity::scopes::SearchReplyProxy const&reply) const
     }
 }
 
-void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply) const
+void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply, Category::SCPtr const& override_category) const
 {
     const bool show_title = !query().query_string().empty();
 
-    CategoryRenderer renderer = make_renderer(query().query_string() == "" ? ARTISTS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
-    auto cat = reply->register_category("artists", show_title ? _("Artists") : "", SONGS_CATEGORY_ICON, renderer); //FIXME: icon
+    auto cat = override_category;
+    if (!cat) {
+        CategoryRenderer renderer = make_renderer(query().query_string() == "" ? ARTISTS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
+        cat = reply->register_category("artists", show_title ? _("Artists") : "", SONGS_CATEGORY_ICON, renderer); //FIXME: icon
+    }
 
     CannedQuery artist_search(query());
     artist_search.set_department_id("");
@@ -418,11 +452,16 @@ void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply) con
     }
 }
 
-void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply) const {
+void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply, Category::SCPtr const& override_category) const {
     const bool show_title = !query().query_string().empty();
 
-    CategoryRenderer renderer = make_renderer(query().query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
-    auto cat = reply->register_category("songs", show_title ? _("Tracks") : "", SONGS_CATEGORY_ICON, renderer);
+    auto cat = override_category;
+    if (!cat)
+    {
+        CategoryRenderer renderer = make_renderer(query().query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
+        cat = reply->register_category("songs", show_title ? _("Tracks") : "", SONGS_CATEGORY_ICON, renderer);
+    }
+
     mediascanner::Filter filter;
     filter.setLimit(MAX_RESULTS);
     for (const auto &media : scope.store->query(query().query_string(), AudioMedia, filter)) {
@@ -588,11 +627,15 @@ void MusicQuery::query_albums_by_artist(unity::scopes::SearchReplyProxy const &r
     }
 }
 
-void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply) const {
+void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply, Category::SCPtr const& override_category) const {
     const bool show_title = !query().query_string().empty();
 
-    CategoryRenderer renderer(query().query_string() == "" ? ALBUMS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
-    auto cat = reply->register_category("albums", show_title ? _("Albums") : "", SONGS_CATEGORY_ICON, renderer);
+    auto cat = override_category;
+    if (!cat)
+    {
+        CategoryRenderer renderer(query().query_string() == "" ? ALBUMS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
+        cat = reply->register_category("albums", show_title ? _("Albums") : "", SONGS_CATEGORY_ICON, renderer);
+    }
 
     mediascanner::Filter filter;
     filter.setLimit(MAX_RESULTS);
