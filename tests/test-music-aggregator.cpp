@@ -68,8 +68,6 @@ TEST(TestMusicAgregator, TestSurfacingSearch) {
 
     unity::scopes::testing::MockSearchReply reply;
 
-    Category::SCPtr mymusic_category = std::make_shared<unity::scopes::testing::Category>(
-        "mymusic", "Tracks", "icon", CategoryRenderer());
     Category::SCPtr sevendigital_category = std::make_shared<unity::scopes::testing::Category>(
         "7digital", "Tracks", "icon", CategoryRenderer());
     Category::SCPtr songkick_category = std::make_shared<unity::scopes::testing::Category>(
@@ -83,8 +81,6 @@ TEST(TestMusicAgregator, TestSurfacingSearch) {
 
     std::shared_ptr<unity::scopes::testing::MockQueryCtrl> queryctrl(new unity::scopes::testing::MockQueryCtrl());
 
-    EXPECT_CALL(reply, register_category("mymusic", _, _, _,_))
-        .WillOnce(Return(mymusic_category));
     EXPECT_CALL(reply, register_category("7digital", _, _, _,_))
         .WillOnce(Return(sevendigital_category));
     EXPECT_CALL(reply, register_category("songkick", _, _, _,_))
@@ -157,8 +153,6 @@ TEST(TestMusicAgregator, TestSpecificSearch) {
 
     unity::scopes::testing::MockSearchReply reply;
 
-    Category::SCPtr mymusic_category = std::make_shared<unity::scopes::testing::Category>(
-        "mymusic", "Tracks", "icon", CategoryRenderer());
     Category::SCPtr sevendigital_category = std::make_shared<unity::scopes::testing::Category>(
         "7digital", "Tracks", "icon", CategoryRenderer());
     Category::SCPtr songkick_category = std::make_shared<unity::scopes::testing::Category>(
@@ -173,8 +167,6 @@ TEST(TestMusicAgregator, TestSpecificSearch) {
 
     std::shared_ptr<unity::scopes::testing::MockQueryCtrl> queryctrl(new unity::scopes::testing::MockQueryCtrl());
 
-    EXPECT_CALL(reply, register_category("mymusic", _, _, _))
-        .WillOnce(Return(mymusic_category));
     EXPECT_CALL(reply, register_category("7digital", _, _,_))
         .WillOnce(Return(sevendigital_category));
     EXPECT_CALL(reply, register_category("songkick", _, _,_))
