@@ -372,7 +372,7 @@ TEST_F(MusicScopeTest, AggregatedSurfacingQuery) {
         "mymusic", "My Music", "icon", CategoryRenderer());
     unity::scopes::testing::MockSearchReply reply;
 
-    EXPECT_CALL(reply, register_category("mymusic", _, _, _))
+    EXPECT_CALL(reply, register_category("mymusic", _, _, _, _))
         .WillOnce(Return(category));
 
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(
@@ -400,7 +400,7 @@ TEST_F(MusicScopeTest, AggregatedSearchQuery) {
     Category::SCPtr category = std::make_shared<unity::scopes::testing::Category>(
         "mymusic", "My Music", "icon", CategoryRenderer());
     unity::scopes::testing::MockSearchReply reply;
-    EXPECT_CALL(reply, register_category("mymusic", _, _, _))
+    EXPECT_CALL(reply, register_category("mymusic", _, _, _, _))
         .WillOnce(Return(category));
 
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(
