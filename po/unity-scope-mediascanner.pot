@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-16 13:50+0800\n"
+"POT-Creation-Date: 2015-07-07 12:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,140 +17,163 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/music-scope.cpp:219 ../src/music-scope.cpp:280
-msgid "Artists"
+#: ../src/myvideos/video-scope.cpp:184 ../src/mymusic/music-scope.cpp:238
+msgid "Get started!"
 msgstr ""
 
-#: ../src/music-scope.cpp:220 ../src/music-scope.cpp:449
-#: ../src/music-scope.cpp:492
-msgid "Albums"
+#: ../src/myvideos/video-scope.cpp:185 ../src/mymusic/music-scope.cpp:239
+msgid ""
+"Drag and drop items from another devices. Alternatively, load your files "
+"onto a SD card."
 msgstr ""
 
-#: ../src/music-scope.cpp:221 ../src/music-scope.cpp:324
-#: ../src/music-scope.cpp:339
-msgid "Tracks"
+#: ../src/myvideos/video-scope.cpp:194
+msgid ""
+"Nothing here yet...\n"
+"Make a video!"
 msgstr ""
 
-#: ../src/music-scope.cpp:222
-msgid "Genres"
-msgstr ""
-
-#: ../src/music-scope.cpp:568 ../src/music-scope.cpp:600
-msgid "Play in music app"
-msgstr ""
-
-#: ../src/musicaggregatorquery.cpp:206 ../src/musicaggregatorquery.cpp:208
-#: tmp/mediascanner-music.ini.in.in.h:1
-msgid "My Music"
-msgstr ""
-
-#: ../src/musicaggregatorquery.cpp:209
-msgid "Popular tracks on Grooveshark"
-msgstr ""
-
-#: ../src/musicaggregatorquery.cpp:211
-msgid "Grooveshark"
-msgstr ""
-
-#: ../src/musicaggregatorquery.cpp:212
-msgid "New albums from 7digital"
-msgstr ""
-
-#: ../src/musicaggregatorquery.cpp:214
-msgid "7digital"
-msgstr ""
-
-#: ../src/musicaggregatorquery.cpp:215
-msgid "Nearby Events on Songkick"
-msgstr ""
-
-#: ../src/musicaggregatorquery.cpp:217
-msgid "Songkick"
-msgstr ""
-
-#: ../src/video-scope.cpp:141
+#: ../src/myvideos/video-scope.cpp:201
 msgid "Everything"
 msgstr ""
 
-#: ../src/video-scope.cpp:143
+#: ../src/myvideos/video-scope.cpp:203
 msgid "My Roll"
 msgstr ""
 
-#: ../src/video-scope.cpp:144
+#: ../src/myvideos/video-scope.cpp:204
 msgid "Downloaded"
 msgstr ""
 
-#: ../src/video-scope.cpp:162 ../src/video-scope.cpp:167
-#: tmp/mediascanner-video.ini.in.in.h:1
+#: ../src/myvideos/video-scope.cpp:220 ../src/myvideos/video-scope.cpp:225
+#: tmp/mediascanner-video.ini.in.h:1
 msgid "My Videos"
 msgstr ""
 
-#: ../src/video-scope.cpp:248
+#: ../src/myvideos/video-scope.cpp:312
 msgid "Play"
 msgstr ""
 
-#: ../src/videoaggregatorquery.cpp:130
+#: ../src/mymusic/music-scope.cpp:293 ../src/mymusic/music-scope.cpp:354
+msgid "Artists"
+msgstr ""
+
+#: ../src/mymusic/music-scope.cpp:294 ../src/mymusic/music-scope.cpp:525
+#: ../src/mymusic/music-scope.cpp:570
+msgid "Albums"
+msgstr ""
+
+#: ../src/mymusic/music-scope.cpp:295 ../src/mymusic/music-scope.cpp:400
+#: ../src/mymusic/music-scope.cpp:415
+msgid "Tracks"
+msgstr ""
+
+#: ../src/mymusic/music-scope.cpp:296
+msgid "Genres"
+msgstr ""
+
+#: ../src/mymusic/music-scope.cpp:653 ../src/mymusic/music-scope.cpp:685
+msgid "Play in music app"
+msgstr ""
+
+#: ../src/videoaggregator/videoaggregatorquery.cpp:136
+#: ../src/musicaggregator/musicaggregatorquery.cpp:395
 #, c-format
 msgid "%s Features"
 msgstr ""
 
-#: ../src/videoaggregatorquery.cpp:137
+#: ../src/videoaggregator/videoaggregatorquery.cpp:138
+#: ../src/musicaggregator/musicaggregatorquery.cpp:397
 #, c-format
 msgid "Results from %s"
 msgstr ""
 
-#: tmp/mediascanner-music.ini.in.in.h:2
+#: ../src/musicaggregator/musicaggregatorquery.cpp:288
+#: ../src/musicaggregator/musicaggregatorquery.cpp:290
+#: tmp/mediascanner-music.ini.in.h:1
+msgid "My Music"
+msgstr ""
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:291
+msgid "New albums from 7digital"
+msgstr ""
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:293
+msgid "7digital"
+msgstr ""
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:294
+msgid "Popular tracks on SoundCloud"
+msgstr ""
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:296
+msgid "SoundCloud"
+msgstr ""
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:297
+msgid "Nearby Events on Songkick"
+msgstr ""
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:299
+msgid "Songkick"
+msgstr ""
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:300
+msgid "Popular tracks on Grooveshark"
+msgstr ""
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:302
+msgid "Grooveshark"
+msgstr ""
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:303
+msgid "Popular tracks on Youtube"
+msgstr ""
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:305
+msgid "Youtube"
+msgstr ""
+
+#: tmp/mediascanner-music.ini.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
 
-#: tmp/mediascanner-music.ini.in.in.h:3
+#: tmp/mediascanner-music.ini.in.h:3
 msgid "Search local music collection"
 msgstr ""
 
-#: tmp/mediascanner-video.ini.in.in.h:2
+#: tmp/mediascanner-video.ini.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
 
-#: tmp/musicaggregator-settings.ini.in.in.h:1
-msgid "Display results from Grooveshark"
+#: tmp/mediascanner-video.ini.in.h:3
+msgid "HotKey="
 msgstr ""
 
-#: tmp/musicaggregator-settings.ini.in.in.h:2
-msgid "Display results from 7digital"
-msgstr ""
-
-#: tmp/musicaggregator-settings.ini.in.in.h:3
-msgid "Display results from Songkick"
-msgstr ""
-
-#: tmp/musicaggregator.ini.in.in.h:1
+#: tmp/musicaggregator.ini.in.h:1
 msgid "Music"
 msgstr ""
 
-#: tmp/musicaggregator.ini.in.in.h:2
+#: tmp/musicaggregator.ini.in.h:2
 msgid "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr ""
 
-#: tmp/musicaggregator.ini.in.in.h:3
+#: tmp/musicaggregator.ini.in.h:3
 msgid "Search music"
 msgstr ""
 
-#: tmp/videoaggregator-settings.ini.in.in.h:1
-msgid "Display results from YouTube"
-msgstr ""
-
-#: tmp/videoaggregator.ini.in.in.h:1
+#: tmp/videoaggregator.ini.in.h:1
 msgid "Video"
 msgstr ""
 
-#: tmp/videoaggregator.ini.in.in.h:2
+#: tmp/videoaggregator.ini.in.h:2
 msgid "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr ""
 
-#: tmp/videoaggregator.ini.in.in.h:3
+#: tmp/videoaggregator.ini.in.h:3
 msgid "Search video"
 msgstr ""
