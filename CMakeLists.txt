@@ -13,7 +13,7 @@ pkg_check_modules(UNITY REQUIRED
   "libunity-scopes >= 0.6.16"
   net-cpp>=1.1.0
   jsoncpp
-  mediascanner-2.0
+  mediascanner-2.0>=0.106
 )
 
 find_program(XGETTEXT_BIN xgettext)
