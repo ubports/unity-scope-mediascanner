@@ -1,3 +1,10 @@
+unity-scope-mediascanner (0.2+15.10.20150721-0ubuntu1) wily; urgency=medium
+
+  [ Pawel Stolowski ]
+  * Drop explicit g++4.9 dependency (LP: #1452344)
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Tue, 21 Jul 2015 05:13:39 +0000
+
 unity-scope-mediascanner (0.2+15.10.20150706-0ubuntu1) wily; urgency=medium
 
   [ CI Train Bot ]
