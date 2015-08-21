@@ -14,145 +14,151 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-13 05:31+0000\n"
-"X-Generator: Launchpad (build 17493)\n"
+"X-Launchpad-Export-Date: 2015-07-14 05:39+0000\n"
+"X-Generator: Launchpad (build 17628)\n"
 
 #: ../src/music-scope.cpp:219 ../src/music-scope.cpp:280
 msgid "Artists"
-msgstr ""
+msgstr "Izvođači"
 
 #: ../src/music-scope.cpp:220 ../src/music-scope.cpp:449
 #: ../src/music-scope.cpp:492
 msgid "Albums"
-msgstr ""
+msgstr "Albumi"
 
 #: ../src/music-scope.cpp:221 ../src/music-scope.cpp:324
 #: ../src/music-scope.cpp:339
 msgid "Tracks"
-msgstr ""
+msgstr "Numere"
 
 #: ../src/music-scope.cpp:222
 msgid "Genres"
-msgstr ""
+msgstr "Žanrovi"
 
 #: ../src/music-scope.cpp:568 ../src/music-scope.cpp:600
 msgid "Play in music app"
-msgstr ""
+msgstr "Pusti u muzičkoj app"
 
 #: ../src/musicaggregatorquery.cpp:206 ../src/musicaggregatorquery.cpp:208
 #: tmp/mediascanner-music.ini.in.in.h:1
 msgid "My Music"
-msgstr ""
+msgstr "Moja muzika"
 
 #: ../src/musicaggregatorquery.cpp:209
 msgid "Popular tracks on Grooveshark"
-msgstr ""
+msgstr "Popularne numere na Grooveshark"
 
 #: ../src/musicaggregatorquery.cpp:211
 msgid "Grooveshark"
-msgstr ""
+msgstr "Grooveshark"
 
 #: ../src/musicaggregatorquery.cpp:212
 msgid "New albums from 7digital"
-msgstr ""
+msgstr "Novi albumi od 7digital"
 
 #: ../src/musicaggregatorquery.cpp:214
 msgid "7digital"
-msgstr ""
+msgstr "7digital"
 
 #: ../src/musicaggregatorquery.cpp:215
 msgid "Nearby Events on Songkick"
-msgstr ""
+msgstr "Obližnji događaji na  Songkick"
 
 #: ../src/musicaggregatorquery.cpp:217
 msgid "Songkick"
-msgstr ""
+msgstr "Songkick"
 
 #: ../src/video-scope.cpp:141
 msgid "Everything"
-msgstr ""
+msgstr "Sve"
 
 #: ../src/video-scope.cpp:143
 msgid "My Roll"
-msgstr ""
+msgstr "Moja rolna"
 
 #: ../src/video-scope.cpp:144
 msgid "Downloaded"
-msgstr ""
+msgstr "Preuzeto"
 
 #: ../src/video-scope.cpp:162 ../src/video-scope.cpp:167
 #: tmp/mediascanner-video.ini.in.in.h:1
 msgid "My Videos"
-msgstr ""
+msgstr "Moj video"
 
 #: ../src/video-scope.cpp:248
 msgid "Play"
-msgstr ""
+msgstr "Pusti"
 
 #: ../src/videoaggregatorquery.cpp:130
 #, c-format
 msgid "%s Features"
-msgstr ""
+msgstr "%s Odlike"
 
 #: ../src/videoaggregatorquery.cpp:137
 #, c-format
 msgid "Results from %s"
-msgstr ""
+msgstr "Rezultati od %s"
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
+"Ovo je Ubuntu pretraživački plugin koji skenira muzičke uređaje i omogućava "
+"njihovo pretraživanje i prikaz u Dash."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr ""
+msgstr "Pretraži lokalnu muzičku kolekciju"
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
+"Ovo je Ubuntu plugin za pretraživanje videa na uređajuj i omogućuje da se "
+"mogu pretraživati i prikazivatu u Dash."
 
 #: tmp/musicaggregator-settings.ini.in.in.h:1
 msgid "Display results from Grooveshark"
-msgstr ""
+msgstr "Prikaži Grooveshark rezultate"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:2
 msgid "Display results from 7digital"
-msgstr ""
+msgstr "Prikaži 7digital rezultate"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:3
 msgid "Display results from Songkick"
-msgstr ""
+msgstr "Prikaži Songkick rezultate"
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
-msgstr ""
+msgstr "Muzika"
 
 #: tmp/musicaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr ""
+"Ovo je Ubuntu plugin za pretraživanje koji spaja sve muzičke izvore u jedan."
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
-msgstr ""
+msgstr "Pretraži muziku"
 
 #: tmp/videoaggregator-settings.ini.in.in.h:1
 msgid "Display results from YouTube"
-msgstr ""
+msgstr "Prikaži rezultate sa YouTube"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
-msgstr ""
+msgstr "Video"
 
 #: tmp/videoaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr ""
+"Ovo je Ubuntu plugin za pretraživanje koji spaja sve izvore videa u jedan."
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
-msgstr ""
+msgstr "Traži video"
