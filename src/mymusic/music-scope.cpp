@@ -491,7 +491,7 @@ void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply, Catego
     if (!cat)
     {
         CategoryRenderer renderer = make_renderer(surfacing ? SONGS_CATEGORY_DEFINITION : SEARCH_SONGS_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
-        auto cat = reply->register_category("songs", surfacing ? "" : _("Tracks"), SONGS_CATEGORY_ICON, renderer);
+        cat = reply->register_category("songs", surfacing ? "" : _("Tracks"), SONGS_CATEGORY_ICON, renderer);
     }
     mediascanner::Filter filter;
     filter.setLimit(MAX_RESULTS);
