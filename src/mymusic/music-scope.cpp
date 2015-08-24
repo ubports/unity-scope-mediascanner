@@ -75,7 +75,8 @@ static const char SONGS_CATEGORY_DEFINITION[] = R"(
   "template": {
     "category-layout": "grid",
     "card-size": "large",
-    "card-layout" : "horizontal"
+    "card-layout" : "horizontal",
+    "quick-preview-type" : "audio"
   },
   "components": {
     "title": "title",
@@ -83,7 +84,10 @@ static const char SONGS_CATEGORY_DEFINITION[] = R"(
       "field": "art",
       "fallback": "@FALLBACK@"
     },
-    "subtitle": "artist"
+    "subtitle": "artist",
+    "quick-preview-data": {
+        "field": "audio-data"
+    }
   }
 }
 )";
@@ -176,6 +180,22 @@ static const char SEARCH_CATEGORY_DEFINITION[] = R"(
       "field": "art",
       "fallback": "@FALLBACK@"
     },
+    "subtitle": "artist"
+  }
+}
+)";
+
+static const char SEARCH_SONGS_CATEGORY_DEFINITION[] = R"(
+{
+  "schema-version": 1,
+  "template": {
+    "category-layout": "grid",
+    "card-layout" : "horizontal",
+    "card-size": "large"
+  },
+  "components": {
+    "title": "title",
+    "art":  "art",
     "subtitle": "artist"
   }
 }
@@ -328,7 +348,14 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
     {
         if (empty_search_query) // surfacing
         {
-            query_artists(reply);
+            if (is_aggregated)
+            {
+                query_songs(reply);
+            }
+            else
+            {
+                query_artists(reply);
+            }
         }
         else // non-empty search in albums and songs
         {
@@ -459,19 +486,33 @@ void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply, Cat
 }
 
 void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply, Category::SCPtr const& override_category) const {
-    const bool show_title = !query().query_string().empty();
-
+    const bool surfacing = query().query_string().empty();
     auto cat = override_category;
     if (!cat)
     {
-        CategoryRenderer renderer = make_renderer(query().query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
-        cat = reply->register_category("songs", show_title ? _("Tracks") : "", SONGS_CATEGORY_ICON, renderer);
+        CategoryRenderer renderer = make_renderer(surfacing ? SONGS_CATEGORY_DEFINITION : SEARCH_SONGS_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
+        auto cat = reply->register_category("songs", surfacing ? "" : _("Tracks"), SONGS_CATEGORY_ICON, renderer);
     }
-
     mediascanner::Filter filter;
     filter.setLimit(MAX_RESULTS);
     for (const auto &media : scope.store->query(query().query_string(), AudioMedia, filter)) {
-        if(!reply->push(create_song_result(cat, media)))
+        std::vector<mediascanner::MediaFile> album_songs;
+        if (surfacing && media.getAlbum().size() > 0)
+        {
+            // query for all songs from same album as current song; for use in playlist
+            mediascanner::Filter album_songs_filter;
+            album_songs_filter.setAlbum(media.getAlbum());
+            if (media.getAlbumArtist().size() > 0)
+            {
+                album_songs_filter.setAlbumArtist(media.getAlbumArtist());
+            }
+            else
+            {
+                album_songs_filter.setArtist(media.getAuthor());
+            }
+            album_songs = scope.store->listSongs(album_songs_filter);
+        }
+        if(!reply->push(create_song_result(cat, media, surfacing, album_songs)))
         {
             return;
         }
@@ -481,7 +522,7 @@ void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply, Catego
 
 void MusicQuery::query_songs_by_artist(unity::scopes::SearchReplyProxy const &reply, const std::string& artist) const
 {
-    CategoryRenderer renderer = make_renderer(query().query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
+    CategoryRenderer renderer = make_renderer(query().query_string() == "" ? SONGS_CATEGORY_DEFINITION : SEARCH_SONGS_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
     auto cat = reply->register_category("songs", _("Tracks"), SONGS_CATEGORY_ICON, renderer);
 
     mediascanner::Filter filter;
@@ -507,7 +548,8 @@ unity::scopes::CategorisedResult MusicQuery::create_album_result(unity::scopes::
     return res;
 }
 
-unity::scopes::CategorisedResult MusicQuery::create_song_result(unity::scopes::Category::SCPtr const& category, mediascanner::MediaFile const& media) const
+unity::scopes::CategorisedResult MusicQuery::create_song_result(unity::scopes::Category::SCPtr const& category, mediascanner::MediaFile const& media,
+        bool audio_data, std::vector<mediascanner::MediaFile> const& album_songs) const
 {
     std::string uri = media.getUri();
     CategorisedResult res(category);
@@ -520,6 +562,23 @@ unity::scopes::CategorisedResult MusicQuery::create_song_result(unity::scopes::C
     res["album"] = media.getAlbum();
     res["artist"] = media.getAuthor();
     res["track-number"] = media.getTrackNumber();
+
+    if (audio_data)
+    {
+        VariantMap data;
+        data["uri"] = uri;
+        data["duration"] = media.getDuration();
+        if (album_songs.size() > 0)
+        {
+            VariantArray songsva;
+            for (auto const& song: album_songs)
+            {
+                songsva.push_back(Variant(song.getUri()));
+            }
+            data["playlist"] = songsva;
+        }
+        res["audio-data"] = data;
+    }
 
     return res;
 }
