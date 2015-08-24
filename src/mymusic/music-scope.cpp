@@ -151,8 +151,10 @@ static const char AGGREGATED_CATEGORY_DEFINITION[] = R"(
 {
   "schema-version": 1,
   "template": {
-    "category-layout": "horizontal-list",
-    "card-size": "small"
+    "category-layout": "grid",
+    "card-size": "large",
+    "card-layout": "horizontal",
+    "quick-preview-type" : "audio"
   },
   "components": {
     "title": "title",
@@ -160,7 +162,10 @@ static const char AGGREGATED_CATEGORY_DEFINITION[] = R"(
       "field": "art",
       "fallback": "@FALLBACK@"
     },
-    "subtitle": "artist"
+    "subtitle": "artist",
+    "quick-preview-data": {
+        "field": "audio-data"
+    }
   }
 }
 )";
