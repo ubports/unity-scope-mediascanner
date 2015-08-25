@@ -291,7 +291,7 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
                 "mymusic", _("My Music"), "",
                 CannedQuery(query().scope_id(), query().query_string(), ""),
                 renderer);
-            query_artists(reply, cat);
+            query_songs(reply, cat);
         }
         else // non-empty search in albums and songs
         {
@@ -353,14 +353,7 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
     {
         if (empty_search_query) // surfacing
         {
-            if (is_aggregated)
-            {
-                query_songs(reply);
-            }
-            else
-            {
-                query_artists(reply);
-            }
+            query_artists(reply);
         }
         else // non-empty search in albums and songs
         {
