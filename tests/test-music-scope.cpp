@@ -376,13 +376,32 @@ TEST_F(MusicScopeTest, AggregatedSurfacingQuery) {
         .WillOnce(Return(category));
 
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(
-                        ResultProp("title", "Spiderbait")
+                        ResultProp("title", "Straight Through The Sun")
                         )))
         .WillOnce(Return(true));
-
     EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(
-                        ResultProp("title", "The John Butler Trio"))
-            ))
+                        ResultProp("title", "It's Beautiful")
+                        )))
+        .WillOnce(Return(true));
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(
+                        ResultProp("title", "Buy Me a Pony")
+                        )))
+        .WillOnce(Return(true));
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(
+                        ResultProp("title", "Peaches & Cream")
+                        )))
+        .WillOnce(Return(true));
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(
+                        ResultProp("title", "Zebra")
+                        )))
+        .WillOnce(Return(true));
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(
+                        ResultProp("title", "Revolution")
+                        )))
+        .WillOnce(Return(true));
+    EXPECT_CALL(reply, push(Matcher<CategorisedResult const&>(
+                        ResultProp("title", "One Way Road")
+                        )))
         .WillOnce(Return(true));
 
     SearchReplyProxy proxy(&reply, [](SearchReply*){});
