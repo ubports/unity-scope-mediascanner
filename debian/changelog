@@ -1,3 +1,11 @@
+unity-scope-mediascanner (0.2+15.10.20150922.1-0ubuntu1) wily; urgency=medium
+
+  * Set the NO_SONAME option for the scope modules so they aren't
+    detected as shared libraries.  Fix a few Lintian warnings in
+    packaging.
+
+ -- James Henstridge <james.henstridge@canonical.com>  Tue, 22 Sep 2015 13:57:27 +0000
+
 unity-scope-mediascanner (0.2+15.10.20150721-0ubuntu2~gcc5.2) wily; urgency=medium
 
   * Rebuild for unity-scopes-api 1.0.
