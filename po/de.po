@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-14 05:39+0000\n"
-"X-Generator: Launchpad (build 17628)\n"
+"X-Launchpad-Export-Date: 2015-09-30 05:44+0000\n"
+"X-Generator: Launchpad (build 17768)\n"
 
 #: ../src/music-scope.cpp:219 ../src/music-scope.cpp:280
 msgid "Artists"
@@ -104,8 +104,6 @@ msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
-"Dies ist eine Ubuntu-Such-Erweiterung, die das Gerät nach Musik durchsucht "
-"und es ermöglicht diese in der Dash zu suchen und anzuzeigen."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
@@ -116,8 +114,6 @@ msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
-"Dies ist eine Ubuntu-Such-Erweiterung, die das Gerät nach Videos durchsucht "
-"und es ermöglicht diese in der Dash zu suchen und anzuzeigen."
 
 #: tmp/musicaggregator-settings.ini.in.in.h:1
 msgid "Display results from Grooveshark"
