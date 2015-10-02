@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-08-28 05:49+0000\n"
-"X-Generator: Launchpad (build 17690)\n"
+"X-Launchpad-Export-Date: 2015-09-30 05:44+0000\n"
+"X-Generator: Launchpad (build 17768)\n"
 
 #: ../src/music-scope.cpp:219 ../src/music-scope.cpp:280
 msgid "Artists"
@@ -74,7 +74,7 @@ msgstr "Wszystko"
 
 #: ../src/video-scope.cpp:143
 msgid "My Roll"
-msgstr ""
+msgstr "Moja lista"
 
 #: ../src/video-scope.cpp:144
 msgid "Downloaded"
@@ -104,8 +104,6 @@ msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
-"Ta wtyczka wyszukiwania Ubuntu skanuje urządzenie w poszukiwaniu muzyki, "
-"pozwalając na odnajdywanie oraz wyświetlanie jej w panelu uruchamiania."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
