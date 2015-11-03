@@ -491,6 +491,11 @@ void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply, Catego
     }
     mediascanner::Filter filter;
     filter.setLimit(MAX_RESULTS);
+    if (sortByMtime) {
+        filter.setOrder(MediaOrder::Modified);
+        filter.setReverse(true);
+    }
+
     for (const auto &media : scope.store->query(query().query_string(), AudioMedia, filter)) {
         std::vector<mediascanner::MediaFile> album_songs;
         if (surfacing && media.getAlbum().size() > 0)
