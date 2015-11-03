@@ -291,7 +291,7 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
                 "mymusic", _("My Music"), "",
                 CannedQuery(query().scope_id(), query().query_string(), ""),
                 renderer);
-            query_songs(reply, cat);
+            query_songs(reply, cat, true);
         }
         else // non-empty search in albums and songs
         {
@@ -307,9 +307,7 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
         return;
     }
 
-    const bool empty_db = is_database_empty();
-
-    if (empty_db)
+    if (!scope.store->hasMedia(AudioMedia))
     {
         const CategoryRenderer renderer = make_renderer(GET_STARTED_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
         auto cat = reply->register_category("mymusic-getstarted", "", "", renderer);
@@ -483,7 +481,7 @@ void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply, Cat
     }
 }
 
-void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply, Category::SCPtr const& override_category) const {
+void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply, Category::SCPtr const& override_category, bool sortByMtime) const {
     const bool surfacing = query().query_string().empty();
     auto cat = override_category;
     if (!cat)
@@ -708,13 +706,6 @@ void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply, Categ
             return;
         }
     }
-}
-
-bool MusicQuery::is_database_empty() const
-{
-    mediascanner::Filter filter;
-    filter.setLimit(1);
-    return scope.store->query("", AudioMedia, filter).size() == 0;
 }
 
 MusicPreview::MusicPreview(MusicScope &scope, Result const& result, ActionMetadata const& hints)
