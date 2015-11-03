@@ -1,4 +1,24 @@
-unity-scope-mediascanner (0.2+15.04.20150721-0ubuntu1) vivid; urgency=medium
+unity-scope-mediascanner (0.2+15.10.20150922.1-0ubuntu1) wily; urgency=medium
+
+  * Set the NO_SONAME option for the scope modules so they aren't
+    detected as shared libraries.  Fix a few Lintian warnings in
+    packaging.
+
+ -- James Henstridge <james.henstridge@canonical.com>  Tue, 22 Sep 2015 13:57:27 +0000
+
+unity-scope-mediascanner (0.2+15.10.20150721-0ubuntu2~gcc5.2) wily; urgency=medium
+
+  * Rebuild for unity-scopes-api 1.0.
+
+ -- Matthias Klose <doko@ubuntu.com>  Tue, 28 Jul 2015 13:32:30 +0200
+
+unity-scope-mediascanner (0.2+15.10.20150721-0ubuntu2~gcc5.1) wily; urgency=medium
+
+  * No-change test rebuild for g++5 ABI transition
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Wed, 22 Jul 2015 23:33:33 +0000
+
+unity-scope-mediascanner (0.2+15.10.20150721-0ubuntu1) wily; urgency=medium
 
   [ Pawel Stolowski ]
   * Drop explicit g++4.9 dependency (LP: #1452344)
