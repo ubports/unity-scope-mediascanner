@@ -3,6 +3,8 @@ include_directories(${UNITY_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 add_library(videoaggregator MODULE
   videoaggregatorscope.cpp
   videoaggregatorquery.cpp)
+set_target_properties(videoaggregator PROPERTIES
+  NO_SONAME TRUE)
 target_link_libraries(videoaggregator scope-utils ${UNITY_SCOPES_LDFLAGS})
 
 configure_file(manifest.json.in manifest.json)

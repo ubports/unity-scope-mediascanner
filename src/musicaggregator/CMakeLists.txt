@@ -3,6 +3,8 @@ include_directories(${UNITY_INCLUDE_DIRS})
 add_library(musicaggregator MODULE
   musicaggregatorscope.cpp
   musicaggregatorquery.cpp)
+set_target_properties(musicaggregator PROPERTIES
+  NO_SONAME TRUE)
 target_link_libraries(musicaggregator scope-utils ${UNITY_SCOPES_LDFLAGS})
 
 configure_file(manifest.json.in manifest.json)
