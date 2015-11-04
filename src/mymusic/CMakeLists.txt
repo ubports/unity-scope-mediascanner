@@ -1,7 +1,9 @@
 include_directories(${UNITY_INCLUDE_DIRS})
 
 add_library(mediascanner-music MODULE music-scope.cpp)
-#set_target_properties(mediascanner-music PROPERTIES PREFIX "")
+set_target_properties(mediascanner-music PROPERTIES
+#  PREFIX ""
+  NO_SONAME TRUE)
 target_link_libraries(mediascanner-music scope-utils ${UNITY_LDFLAGS} ${GIO_DEPS_LDFLAGS})
 
 configure_file(manifest.json.in manifest.json)
