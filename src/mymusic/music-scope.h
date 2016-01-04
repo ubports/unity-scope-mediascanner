@@ -43,14 +43,15 @@ private:
     const MusicScope &scope;
     std::atomic<bool> query_cancelled;
 
+    unity::scopes::CategoryRenderer make_renderer(std::string json_text, std::string const& fallback) const;
     void populate_departments(unity::scopes::SearchReplyProxy const &reply) const;
-    void query_songs(unity::scopes::SearchReplyProxy const&reply) const;
-    void query_albums(unity::scopes::SearchReplyProxy const&reply) const;
+    void query_songs(unity::scopes::SearchReplyProxy const&reply, unity::scopes::Category::SCPtr const& override_category = unity::scopes::Category::SCPtr()) const;
+    void query_albums(unity::scopes::SearchReplyProxy const&reply, unity::scopes::Category::SCPtr const& override_category = unity::scopes::Category::SCPtr()) const;
     void query_genres(unity::scopes::SearchReplyProxy const&reply) const;
     void query_albums_by_genre(unity::scopes::SearchReplyProxy const &reply, const std::string& genre) const;
     void query_albums_by_artist(unity::scopes::SearchReplyProxy const &reply, const std::string& artist) const;
     void query_songs_by_artist(unity::scopes::SearchReplyProxy const &reply, const std::string& artist) const;
-    void query_artists(unity::scopes::SearchReplyProxy const& reply) const;
+    void query_artists(unity::scopes::SearchReplyProxy const& reply, unity::scopes::Category::SCPtr const& override_category = unity::scopes::Category::SCPtr()) const;
     std::string fetch_biography_sync(const std::string& artist, const std::string &album) const;
 
     unity::scopes::CategorisedResult create_album_result(unity::scopes::Category::SCPtr const& category, mediascanner::Album const& album) const;

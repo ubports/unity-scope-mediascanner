@@ -17,6 +17,7 @@ if(CLICK_MODE)
   click_scope_data(com.ubuntu.scopes.myvideos myvideos
     screenshot.jpg
     icon.png
+    video_missing.png
     getstarted.svg
     camera-app.svg)
 else()
@@ -29,6 +30,7 @@ else()
       ${CMAKE_CURRENT_BINARY_DIR}/mediascanner-video.ini
       screenshot.jpg
       icon.png
+      video_missing.png
       getstarted.svg
       camera-app.svg
     DESTINATION "${scopedir}")
