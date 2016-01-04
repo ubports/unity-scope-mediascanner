@@ -45,7 +45,8 @@ private:
 
     unity::scopes::CategoryRenderer make_renderer(std::string json_text, std::string const& fallback) const;
     void populate_departments(unity::scopes::SearchReplyProxy const &reply) const;
-    void query_songs(unity::scopes::SearchReplyProxy const&reply, unity::scopes::Category::SCPtr const& override_category = unity::scopes::Category::SCPtr()) const;
+    void query_songs(unity::scopes::SearchReplyProxy const&reply, unity::scopes::Category::SCPtr const& override_category = unity::scopes::Category::SCPtr(),
+            bool sortByMtime = false) const;
     void query_albums(unity::scopes::SearchReplyProxy const&reply, unity::scopes::Category::SCPtr const& override_category = unity::scopes::Category::SCPtr()) const;
     void query_genres(unity::scopes::SearchReplyProxy const&reply) const;
     void query_albums_by_genre(unity::scopes::SearchReplyProxy const &reply, const std::string& genre) const;
@@ -57,8 +58,6 @@ private:
     unity::scopes::CategorisedResult create_album_result(unity::scopes::Category::SCPtr const& category, mediascanner::Album const& album) const;
     unity::scopes::CategorisedResult create_song_result(unity::scopes::Category::SCPtr const& category, mediascanner::MediaFile const& media, bool audio_data =
             false, std::vector<mediascanner::MediaFile> const& album_songs = std::vector<mediascanner::MediaFile>()) const;
-
-    bool is_database_empty() const;
 };
 
 class MusicPreview : public unity::scopes::PreviewQueryBase
