@@ -54,7 +54,8 @@ private:
     std::string fetch_biography_sync(const std::string& artist, const std::string &album) const;
 
     unity::scopes::CategorisedResult create_album_result(unity::scopes::Category::SCPtr const& category, mediascanner::Album const& album) const;
-    unity::scopes::CategorisedResult create_song_result(unity::scopes::Category::SCPtr const& category, mediascanner::MediaFile const& media) const;
+    unity::scopes::CategorisedResult create_song_result(unity::scopes::Category::SCPtr const& category, mediascanner::MediaFile const& media, bool audio_data =
+            false, std::vector<mediascanner::MediaFile> const& album_songs = std::vector<mediascanner::MediaFile>()) const;
 
     bool is_database_empty() const;
 };

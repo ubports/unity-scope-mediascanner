@@ -46,13 +46,18 @@ static const char MYMUSIC_CATEGORY_DEFINITION[] = R"(
 {
   "schema-version": 1,
   "template": {
-    "category-layout": "horizontal-list",
-    "card-size": "small"
+    "category-layout": "grid",
+    "card-size": "large",
+    "card-layout" : "horizontal",
+    "quick-preview-type" : "audio"
   },
   "components": {
     "title": "title",
     "art":  "art",
-    "subtitle": "artist"
+    "subtitle": "artist",
+    "quick-preview-data": {
+        "field": "audio-data"
+    }
   }
 }
 )";
@@ -434,7 +439,10 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
         }
         else if (scopes[i].id == MusicAggregatorScope::LOCALSCOPE)
         {
-            dept = ""; // artists
+            if (empty_search)
+            {
+                metadata.set_cardinality(4);
+            }
         }
         else if (scopes[i].id == MusicAggregatorScope::GROOVESHARKSCOPE)
         {
