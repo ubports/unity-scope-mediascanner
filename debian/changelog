@@ -1,3 +1,20 @@
+unity-scope-mediascanner (0.2+16.04.20160104-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ James Henstridge ]
+  * Add fallback art to the category renderer templates for the local
+    music and video scopes, and make the music aggregator scope pass
+    local music scope's categories through unchanged. added:
+    src/mymusic/album_missing.png src/myvideos/video_missing.png
+
+  [ Pawel Stolowski ]
+  * Use hasMedia() to check if db is empty instead of a custom check.
+    Sort songs by mtime when aggregated in surfacing mode.
+
+ -- CI Train Bot <ci-train-bot@canonical.com>  Mon, 04 Jan 2016 15:10:25 +0000
+
 unity-scope-mediascanner (0.2+15.10.20150922.1-0ubuntu1) wily; urgency=medium
 
   * Set the NO_SONAME option for the scope modules so they aren't
