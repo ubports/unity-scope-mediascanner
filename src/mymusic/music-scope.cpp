@@ -755,6 +755,8 @@ void MusicPreview::song_preview(unity::scopes::PreviewReplyProxy const &reply) c
 
     PreviewWidget artwork("art", "image");
     artwork.add_attribute_mapping("source", "art");
+    artwork.add_attribute_value("fallback", Variant(
+            scope.scope_directory() + "/" + MISSING_ALBUM_ART));
 
     PreviewWidget tracks("tracks", "audio");
     {
@@ -800,6 +802,8 @@ void MusicPreview::album_preview(unity::scopes::PreviewReplyProxy const &reply) 
 
     PreviewWidget artwork("art", "image");
     artwork.add_attribute_mapping("source", "art");
+    artwork.add_attribute_value("fallback", Variant(
+            scope.scope_directory() + "/" + MISSING_ALBUM_ART));
 
     PreviewWidget header("header", "header");
     header.add_attribute_mapping("title", "title");
