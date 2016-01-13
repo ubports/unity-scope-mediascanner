@@ -19,7 +19,7 @@ if(CLICK_MODE)
     icon.png
     video_missing.png
     getstarted.svg
-    camera-app.svg)
+    camera-app.png)
 else()
   set(scopedir "${CMAKE_INSTALL_LIBDIR}/unity-scopes/mediascanner-video")
   install(
