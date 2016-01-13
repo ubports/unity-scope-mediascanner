@@ -32,6 +32,6 @@ else()
       icon.png
       video_missing.png
       getstarted.svg
-      camera-app.svg
+      camera-app.png
     DESTINATION "${scopedir}")
 endif(CLICK_MODE)
