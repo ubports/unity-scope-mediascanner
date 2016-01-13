@@ -200,7 +200,10 @@ static const char SEARCH_SONGS_CATEGORY_DEFINITION[] = R"(
   },
   "components": {
     "title": "title",
-    "art":  "art",
+    "art":  {
+      "field": "art",
+      "fallback": "@FALLBACK@"
+    },
     "subtitle": "artist"
   }
 }
@@ -648,8 +651,8 @@ std::string MusicQuery::fetch_biography_sync(const std::string& artist, const st
 
 void MusicQuery::query_albums_by_artist(unity::scopes::SearchReplyProxy const &reply, const std::string& artist) const
 {
-    CategoryRenderer bio_renderer(ARTIST_BIO_CATEGORY_DEFINITION);
-    CategoryRenderer renderer(ALBUMS_CATEGORY_DEFINITION);
+    CategoryRenderer bio_renderer = make_renderer(ARTIST_BIO_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
+    CategoryRenderer renderer = make_renderer(ALBUMS_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
 
     auto biocat = reply->register_category("bio", "", "", bio_renderer);
     auto albumcat = reply->register_category("albums", _("Albums"), SONGS_CATEGORY_ICON, renderer);
@@ -699,7 +702,7 @@ void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply, Categ
     auto cat = override_category;
     if (!cat)
     {
-        CategoryRenderer renderer(query().query_string() == "" ? ALBUMS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
+        CategoryRenderer renderer = make_renderer(query().query_string() == "" ? ALBUMS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
         cat = reply->register_category("albums", show_title ? _("Albums") : "", SONGS_CATEGORY_ICON, renderer);
     }
 
