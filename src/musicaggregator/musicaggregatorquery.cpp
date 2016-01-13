@@ -42,38 +42,6 @@ using namespace unity::scopes;
 
 // FIXME: once child scopes are updated to handle is_aggregated flag, they should provide
 // own renderer for aggregator and these definitions should be removed
-static const char GROOVESHARK_CATEGORY_DEFINITION[] = R"(
-{
-    "schema-version": 1,
-    "components": {
-        "subtitle": "artist",
-        "art": "art",
-        "title": "title"
-    },
-    "template": {
-        "category-layout": "grid",
-        "card-size": "large",
-        "card-layout" : "horizontal"
-    }
-}
-)";
-
-static const char GROOVESHARK_SEARCH_CATEGORY_DEFINITION[] = R"(
-{
-  "schema-version": 1,
-  "template": {
-    "category-layout": "grid",
-    "card-layout" : "horizontal",
-    "card-size": "large"
-  },
-  "components": {
-    "title": "title",
-    "art":  "art",
-    "subtitle": "artist"
-  }
-}
-)";
-
 static const char SEVENDIGITAL_CATEGORY_DEFINITION[] = R"(
 {
     "schema-version": 1,
@@ -221,8 +189,6 @@ static char YOUTUBE_SEARCH_CATEGORY_DEFINITION[] = R"(
 }
 )";
 
-const std::string MusicAggregatorQuery::grooveshark_songs_category_id = "cat_0";
-
 MusicAggregatorQuery::MusicAggregatorQuery(CannedQuery const& query, SearchMetadata const& hints,
         ChildScopeList const& scopes
         ) :
@@ -247,7 +213,6 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     const CannedQuery sevendigital_query(MusicAggregatorScope::SEVENDIGITAL, query().query_string(), "newreleases");
     const CannedQuery soundcloud_query(MusicAggregatorScope::SOUNDCLOUD, query().query_string(), "");
     const CannedQuery songkick_query(MusicAggregatorScope::SONGKICK, query().query_string(), "");
-    const CannedQuery grooveshark_query(MusicAggregatorScope::GROOVESHARKSCOPE, query().query_string(), "");
     const CannedQuery youtube_query(MusicAggregatorScope::YOUTUBE, query().query_string(), department_id);
 
     const bool empty_search = query().query_string().empty();
@@ -263,9 +228,6 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     auto songkick_cat = empty_search ? parent_reply->register_category("songkick", _("Nearby Events on Songkick"), "",
             songkick_query, CategoryRenderer(SONGKICK_CATEGORY_DEFINITION))
         : parent_reply->register_category("songkick", _("Songkick"), "", CategoryRenderer(SONGKICK_SEARCH_CATEGORY_DEFINITION));
-    auto grooveshark_cat = empty_search ? parent_reply->register_category("grooveshark", _("Popular tracks on Grooveshark"), "",
-            grooveshark_query, CategoryRenderer(GROOVESHARK_CATEGORY_DEFINITION))
-        : parent_reply->register_category("grooveshark", _("Grooveshark"), "", CategoryRenderer(GROOVESHARK_SEARCH_CATEGORY_DEFINITION));
     auto youtube_cat = empty_search ? parent_reply->register_category("youtube", _("Popular tracks on Youtube"), "",
                 youtube_query, CategoryRenderer(YOUTUBE_SURFACING_CATEGORY_DEFINITION))
             : parent_reply->register_category("youtube", _("Youtube"), "", youtube_query, CategoryRenderer(YOUTUBE_SEARCH_CATEGORY_DEFINITION));
@@ -318,19 +280,6 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
                         res.set_category(songkick_cat);
                         return true;
                     });
-                replies.push_back(next_forwarder);
-            }
-            else if (child.id == MusicAggregatorScope::GROOVESHARKSCOPE)
-            {
-                next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [this, grooveshark_cat](CategorisedResult& res) -> bool {
-                        if (res.category()->id() == grooveshark_songs_category_id)
-                        {
-                            res.set_category(grooveshark_cat);
-                            return true;
-                        }
-                        return false;
-                    });
-
                 replies.push_back(next_forwarder);
             }
             else if (child.id == MusicAggregatorScope::YOUTUBE)
@@ -400,13 +349,6 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
             if (empty_search)
             {
                 metadata.set_cardinality(4);
-            }
-        }
-        else if (scopes[i].id == MusicAggregatorScope::GROOVESHARKSCOPE)
-        {
-            if (empty_search)
-            {
-                metadata.set_cardinality(3);
             }
         }
         else if (scopes[i].id == MusicAggregatorScope::SOUNDCLOUD)
