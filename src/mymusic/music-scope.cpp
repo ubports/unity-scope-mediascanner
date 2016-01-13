@@ -62,7 +62,6 @@ static const char GET_STARTED_CATEGORY_DEFINITION[] = R"(
     "art": {
         "field": "art",
         "conciergeMode": true,
-        "fallback": "@FALLBACK@"
     },
     "summary" : "summary"
   }
@@ -312,7 +311,7 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
 
     if (!scope.store->hasMedia(AudioMedia))
     {
-        const CategoryRenderer renderer = make_renderer(GET_STARTED_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
+        const CategoryRenderer renderer(GET_STARTED_CATEGORY_DEFINITION);
         auto cat = reply->register_category("mymusic-getstarted", "", "", renderer);
         CategorisedResult res(cat);
         res.set_uri(query().to_uri());
