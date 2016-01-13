@@ -4,25 +4,24 @@ Priority: optional
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 Build-Depends: cmake (>= 2.8),
 # To avoid GCC 4.8/4.9 ABI break issues.
-               g++-4.9,
                debhelper (>= 9),
                google-mock,
                intltool,
                libboost-regex-dev,
-               libmediascanner-2.0-dev (>= 0.105),
+               libmediascanner-2.0-dev (>= 0.106),
                libunity-scopes-dev (>= 0.6.16),
                libglib2.0-dev,
                libsqlite3-dev,
-               mediascanner2.0,
+               mediascanner2.0 (>= 0.106),
                libjsoncpp-dev,
                libnet-cpp-dev (>= 1.1.0),
                pkg-config,
-Standards-Version: 3.9.4
+Standards-Version: 3.9.6
 Homepage: https://launchpad.net/unity-scope-mediascanner
 # If you aren't a member of ~unity-team but need to upload packaging
 # changes, just go ahead. ~unity-team will notice and sync up the code
 # again.
-Vcs-Bzr: bzr+ssh://bazaar.launchpad.net/~unity-team/unity-scope-mediascanner/trunk
+Vcs-Bzr: lp:unity-scope-mediascanner
 Vcs-Browser: http://bazaar.launchpad.net/~unity-team/unity-scope-mediascanner/trunk/files
 X-Ubuntu-Use-Langpack: yes
 
@@ -30,7 +29,7 @@ Package: unity-scope-mediascanner2
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
-         mediascanner2.0,
+         mediascanner2.0 (>= 0.106),
          thumbnailer-service (>= 1.3),
 Description: Media scanner scope for Unity
  This package contains muisc and video scopes for Unity that can be

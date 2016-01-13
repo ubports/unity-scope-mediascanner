@@ -31,6 +31,7 @@ public:
     bool is_database_empty() const;
 
 private:
+    unity::scopes::CategoryRenderer make_renderer(std::string json_text, std::string const& fallback) const;
     const VideoScope &scope;
 };
 

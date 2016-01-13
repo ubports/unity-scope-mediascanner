@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-13 05:31+0000\n"
-"X-Generator: Launchpad (build 17493)\n"
+"X-Launchpad-Export-Date: 2016-01-12 05:39+0000\n"
+"X-Generator: Launchpad (build 17881)\n"
 
 #: ../src/music-scope.cpp:219 ../src/music-scope.cpp:280
 msgid "Artists"
@@ -37,7 +37,7 @@ msgstr "Žanrovi"
 
 #: ../src/music-scope.cpp:568 ../src/music-scope.cpp:600
 msgid "Play in music app"
-msgstr ""
+msgstr "Reproduciraj u aplikaciji za glazbu"
 
 #: ../src/musicaggregatorquery.cpp:206 ../src/musicaggregatorquery.cpp:208
 #: tmp/mediascanner-music.ini.in.in.h:1
@@ -46,7 +46,7 @@ msgstr "Moja glazba"
 
 #: ../src/musicaggregatorquery.cpp:209
 msgid "Popular tracks on Grooveshark"
-msgstr ""
+msgstr "Popularne pjesme na Groovesharku"
 
 #: ../src/musicaggregatorquery.cpp:211
 msgid "Grooveshark"
@@ -54,7 +54,7 @@ msgstr "Grooveshark"
 
 #: ../src/musicaggregatorquery.cpp:212
 msgid "New albums from 7digital"
-msgstr ""
+msgstr "Novi albumi sa 7digitala"
 
 #: ../src/musicaggregatorquery.cpp:214
 msgid "7digital"
@@ -62,19 +62,19 @@ msgstr "7digital"
 
 #: ../src/musicaggregatorquery.cpp:215
 msgid "Nearby Events on Songkick"
-msgstr ""
+msgstr "Događaji u blizini na Songkicku"
 
 #: ../src/musicaggregatorquery.cpp:217
 msgid "Songkick"
-msgstr ""
+msgstr "Songkick"
 
 #: ../src/video-scope.cpp:141
 msgid "Everything"
-msgstr ""
+msgstr "Sve"
 
 #: ../src/video-scope.cpp:143
 msgid "My Roll"
-msgstr ""
+msgstr "Moje osobne snimke"
 
 #: ../src/video-scope.cpp:144
 msgid "Downloaded"
@@ -83,49 +83,53 @@ msgstr "Preuzeto"
 #: ../src/video-scope.cpp:162 ../src/video-scope.cpp:167
 #: tmp/mediascanner-video.ini.in.in.h:1
 msgid "My Videos"
-msgstr ""
+msgstr "Moje snimke"
 
 #: ../src/video-scope.cpp:248
 msgid "Play"
-msgstr ""
+msgstr "Reproduciraj"
 
 #: ../src/videoaggregatorquery.cpp:130
 #, c-format
 msgid "%s Features"
-msgstr ""
+msgstr "%s značajka"
 
 #: ../src/videoaggregatorquery.cpp:137
 #, c-format
 msgid "Results from %s"
-msgstr ""
+msgstr "Rezultati s %s"
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
+"Ovo je Ubuntuov priključak pretraživanja koji omogućuje pretraživanje i "
+"prikaz glazbe na Dashu."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr ""
+msgstr "Pretraži lokalnu glazbenu kolekciju"
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
+"Ovo je Ubuntuov priključak pretraživanja koji omogućuje pretraživanje i "
+"prikaz video snimaka na Dashu."
 
 #: tmp/musicaggregator-settings.ini.in.in.h:1
 msgid "Display results from Grooveshark"
-msgstr ""
+msgstr "Prikaži rezultate s Groovesharka"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:2
 msgid "Display results from 7digital"
-msgstr ""
+msgstr "Prikaži rezultate sa 7digitala"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:3
 msgid "Display results from Songkick"
-msgstr ""
+msgstr "Prikaži rezultate sa Songkicka"
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
@@ -135,6 +139,8 @@ msgstr "Glazba"
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr ""
+"Ovo je Ubuntuov priključak pretraživanja koji spaja sve izvore glazbe u "
+"jedan izvor."
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
@@ -142,17 +148,19 @@ msgstr "Pretraži glazbu"
 
 #: tmp/videoaggregator-settings.ini.in.in.h:1
 msgid "Display results from YouTube"
-msgstr ""
+msgstr "Prikaži rezultate s YouTuba"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
-msgstr ""
+msgstr "Snimka"
 
 #: tmp/videoaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr ""
+"Ovo je Ubuntuov priključak pretraživanja koji spaja sve video izvore u jedan "
+"izvor."
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
-msgstr ""
+msgstr "Pretraži snimke"

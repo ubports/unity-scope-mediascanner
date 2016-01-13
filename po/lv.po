@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-16 13:50+0800\n"
-"PO-Revision-Date: 2014-08-12 18:50+0000\n"
-"Last-Translator: Jānis Marks Gailis <jm-gailis@fai-vianet.fr>\n"
+"PO-Revision-Date: 2015-11-22 12:09+0000\n"
+"Last-Translator: Rūdolfs Mazurs <Unknown>\n"
 "Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-13 05:31+0000\n"
-"X-Generator: Launchpad (build 17493)\n"
+"X-Launchpad-Export-Date: 2016-01-12 05:39+0000\n"
+"X-Generator: Launchpad (build 17881)\n"
 
 #: ../src/music-scope.cpp:219 ../src/music-scope.cpp:280
 msgid "Artists"
@@ -62,11 +62,11 @@ msgstr "7digital"
 
 #: ../src/musicaggregatorquery.cpp:215
 msgid "Nearby Events on Songkick"
-msgstr ""
+msgstr "Netālie Songkick notikumi"
 
 #: ../src/musicaggregatorquery.cpp:217
 msgid "Songkick"
-msgstr ""
+msgstr "Songkick"
 
 #: ../src/video-scope.cpp:141
 msgid "Everything"
@@ -74,7 +74,7 @@ msgstr "Viss"
 
 #: ../src/video-scope.cpp:143
 msgid "My Roll"
-msgstr ""
+msgstr "Mans rullis"
 
 #: ../src/video-scope.cpp:144
 msgid "Downloaded"
@@ -92,7 +92,7 @@ msgstr "Atskaņot"
 #: ../src/videoaggregatorquery.cpp:130
 #, c-format
 msgid "%s Features"
-msgstr ""
+msgstr "%s iespējas"
 
 #: ../src/videoaggregatorquery.cpp:137
 #, c-format
@@ -104,6 +104,8 @@ msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
+"Šis ir Ubuntu meklēšanas spraudnis, kas skenē meklē mūziku un ļauj to meklēt "
+"un attēlot panelī."
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
@@ -114,6 +116,8 @@ msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
+"Šis ir Ubuntu meklēšanas spraudnis, kas skenē meklē video un ļauj to meklēt "
+"un attēlot panelī."
 
 #: tmp/musicaggregator-settings.ini.in.in.h:1
 msgid "Display results from Grooveshark"
@@ -125,7 +129,7 @@ msgstr "Attēlot rezultātus no 7digital"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:3
 msgid "Display results from Songkick"
-msgstr ""
+msgstr "Rādīt rezultātus no Songkick"
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"

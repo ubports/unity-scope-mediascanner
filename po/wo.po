@@ -1,16 +1,16 @@
-# Persian translation for unity-scope-mediascanner
-# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
+# Wolof translation for unity-scope-mediascanner
+# Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
 # This file is distributed under the same license as the unity-scope-mediascanner package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-16 13:50+0800\n"
-"PO-Revision-Date: 2014-10-11 23:42+0000\n"
-"Last-Translator: Danial Behzadi <dani.behzi@gmail.com>\n"
-"Language-Team: Persian <fa@li.org>\n"
+"PO-Revision-Date: 2015-10-29 13:48+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Wolof <wo@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,148 +19,146 @@ msgstr ""
 
 #: ../src/music-scope.cpp:219 ../src/music-scope.cpp:280
 msgid "Artists"
-msgstr "هنرمندان"
+msgstr "Ndaanaan"
 
 #: ../src/music-scope.cpp:220 ../src/music-scope.cpp:449
 #: ../src/music-scope.cpp:492
 msgid "Albums"
-msgstr "آلبوم‌ها"
+msgstr "Album"
 
 #: ../src/music-scope.cpp:221 ../src/music-scope.cpp:324
 #: ../src/music-scope.cpp:339
 msgid "Tracks"
-msgstr "قطعه‌ها"
+msgstr "Woy"
 
 #: ../src/music-scope.cpp:222
 msgid "Genres"
-msgstr "سبک‌ها"
+msgstr "Xeet"
 
 #: ../src/music-scope.cpp:568 ../src/music-scope.cpp:600
 msgid "Play in music app"
-msgstr "اجرا در اپ آهنگ‌ها"
+msgstr "Teg ko ci jëfekaayu woy bi"
 
 #: ../src/musicaggregatorquery.cpp:206 ../src/musicaggregatorquery.cpp:208
 #: tmp/mediascanner-music.ini.in.in.h:1
 msgid "My Music"
-msgstr "آهنگ‌های من"
+msgstr "Samay Woy"
 
 #: ../src/musicaggregatorquery.cpp:209
 msgid "Popular tracks on Grooveshark"
-msgstr "قطعه‌های محبوب روی گروشارک"
+msgstr "Woy yu siiw ci Grooveshark"
 
 #: ../src/musicaggregatorquery.cpp:211
 msgid "Grooveshark"
-msgstr "گروشارک"
+msgstr "Grooveshark"
 
 #: ../src/musicaggregatorquery.cpp:212
 msgid "New albums from 7digital"
-msgstr "آلبوم‌های جدید از ۷دیجیتال"
+msgstr "Albums yu bees ci 7digital"
 
 #: ../src/musicaggregatorquery.cpp:214
 msgid "7digital"
-msgstr "۷دیجیتال"
+msgstr "7digital"
 
 #: ../src/musicaggregatorquery.cpp:215
 msgid "Nearby Events on Songkick"
-msgstr "رویدادهای نزدیک روی سانگ‌کیک"
+msgstr "Xew-xew yu la jege ci Songkick"
 
 #: ../src/musicaggregatorquery.cpp:217
 msgid "Songkick"
-msgstr "سانگ‌کیک"
+msgstr "Songkick"
 
 #: ../src/video-scope.cpp:141
 msgid "Everything"
-msgstr "همه چیز"
+msgstr "Lépp"
 
 #: ../src/video-scope.cpp:143
 msgid "My Roll"
-msgstr "طومار من"
+msgstr "Sama Lim"
 
 #: ../src/video-scope.cpp:144
 msgid "Downloaded"
-msgstr "بارگیری‌شده"
+msgstr "Yebbees"
 
 #: ../src/video-scope.cpp:162 ../src/video-scope.cpp:167
 #: tmp/mediascanner-video.ini.in.in.h:1
 msgid "My Videos"
-msgstr "ویدیوهای من"
+msgstr "Samay wideo"
 
 #: ../src/video-scope.cpp:248
 msgid "Play"
-msgstr "اجرا"
+msgstr "Taal"
 
 #: ../src/videoaggregatorquery.cpp:130
 #, c-format
 msgid "%s Features"
-msgstr "%s معرَفی می‌کند"
+msgstr "Soloy %s"
 
 #: ../src/videoaggregatorquery.cpp:137
 #, c-format
 msgid "Results from %s"
-msgstr "یافته‌ها از %s"
+msgstr "Njureefi %s"
 
 #: tmp/mediascanner-music.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
-"این یک پلاگین جست‌وجوی اوبونتو است که دستگاه را برای آهنگ‌ها پویش کرده و "
-"اجازه می‌دهد آن‌ها جست‌وجو شده و در دش نمایش داده شوند."
+"Lii lawal gu Ubuntu la ngir seet, dafay wër ci jumtukaau bépp ay woy te it "
+"tax ñu man leen seet ak wone ci Dash bi"
 
 #: tmp/mediascanner-music.ini.in.in.h:3
 msgid "Search local music collection"
-msgstr "جست‌وجوی مجموعه‌ آهنگ‌های محلّی"
+msgstr "Seeti woy ci kàggub jumtukaay bi"
 
 #: tmp/mediascanner-video.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
-"این یک پلاگین جست‌وجوی اوبونتو است که دستگاه را برای ویدیوها پویش کرده و "
-"اجازه می‌دهد آن‌ها جست‌وجو شده و در دش نمایش داده شوند."
+"Lii lawal gu Ubuntu la ngir seet, dafay wër ci jumtukaau bépp ay wideo te it "
+"tax ñu man leen seet ak wone ci Dash bi"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:1
 msgid "Display results from Grooveshark"
-msgstr "نمایش سافته‌ها از گروشارک"
+msgstr "Wone njureefi Grooveshark"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:2
 msgid "Display results from 7digital"
-msgstr "نمایش سافته‌ها از ۷دیجیتال"
+msgstr "Wone njureefi 7digital"
 
 #: tmp/musicaggregator-settings.ini.in.in.h:3
 msgid "Display results from Songkick"
-msgstr "نمایش نتایج از سانگ‌کیک"
+msgstr "Wone njureefi Songkick"
 
 #: tmp/musicaggregator.ini.in.in.h:1
 msgid "Music"
-msgstr "آهنگ‌ها"
+msgstr "Woy"
 
 #: tmp/musicaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr ""
-"این یک پلاگین جست‌وجوی اوبونتو است که همه‌ی منبع‌های آهنگ را در یکی ادغام "
-"می‌کند."
+"Lii lawal gu Ubuntu la ngir seet guy boole gongikuwaayu woy yépp ci benn."
 
 #: tmp/musicaggregator.ini.in.in.h:3
 msgid "Search music"
-msgstr "جست‌وجوی آهنگ"
+msgstr "Seet Woy"
 
 #: tmp/videoaggregator-settings.ini.in.in.h:1
 msgid "Display results from YouTube"
-msgstr "نمایش یافته‌ها از یوتوب"
+msgstr "Wone njureefi Youtube"
 
 #: tmp/videoaggregator.ini.in.in.h:1
 msgid "Video"
-msgstr "ویدیو"
+msgstr "Wideo"
 
 #: tmp/videoaggregator.ini.in.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr ""
-"این یک پلاگین جست‌وجوی اوبونتو است که همه‌ی منبع‌های ویدیو را در یکی ادغام "
-"می‌کند."
+"Lii lawal gu Ubuntu la ngir seet guy boole gongikuwaayu wideo yépp ci benn."
 
 #: tmp/videoaggregator.ini.in.in.h:3
 msgid "Search video"
-msgstr "جست‌وجوی ویدیو"
+msgstr "Seet wideo"

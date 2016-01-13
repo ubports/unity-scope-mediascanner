@@ -1,7 +1,9 @@
 include_directories(${UNITY_INCLUDE_DIRS})
 
 add_library(mediascanner-music MODULE music-scope.cpp)
-#set_target_properties(mediascanner-music PROPERTIES PREFIX "")
+set_target_properties(mediascanner-music PROPERTIES
+#  PREFIX ""
+  NO_SONAME TRUE)
 target_link_libraries(mediascanner-music scope-utils ${UNITY_LDFLAGS} ${GIO_DEPS_LDFLAGS})
 
 configure_file(manifest.json.in manifest.json)
@@ -15,6 +17,7 @@ if(CLICK_MODE)
   click_scope_data(com.ubuntu.scopes.mymusic mymusic
     screenshot.jpg
     icon.png
+    album_missing.png
     getstarted.svg)
 else()
   set(scopedir "${CMAKE_INSTALL_LIBDIR}/unity-scopes/mediascanner-music")
@@ -26,6 +29,7 @@ else()
       ${CMAKE_CURRENT_BINARY_DIR}/mediascanner-music.ini
       screenshot.jpg
       icon.png
+      album_missing.png
       getstarted.svg
     DESTINATION "${scopedir}")
 endif(CLICK_MODE)

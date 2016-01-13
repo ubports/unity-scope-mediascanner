@@ -42,37 +42,6 @@ using namespace unity::scopes;
 
 // FIXME: once child scopes are updated to handle is_aggregated flag, they should provide
 // own renderer for aggregator and these definitions should be removed
-static const char MYMUSIC_CATEGORY_DEFINITION[] = R"(
-{
-  "schema-version": 1,
-  "template": {
-    "category-layout": "horizontal-list",
-    "card-size": "small"
-  },
-  "components": {
-    "title": "title",
-    "art":  "art",
-    "subtitle": "artist"
-  }
-}
-)";
-
-static const char MYMUSIC_SEARCH_CATEGORY_DEFINITION[] = R"(
-{
-  "schema-version": 1,
-  "template": {
-    "category-layout": "grid",
-    "card-layout" : "horizontal",
-    "card-size": "large"
-  },
-  "components": {
-    "title": "title",
-    "art":  "art",
-    "subtitle": "artist"
-  }
-}
-)";
-
 static const char GROOVESHARK_CATEGORY_DEFINITION[] = R"(
 {
     "schema-version": 1,
@@ -163,6 +132,7 @@ static const char SOUNDCLOUD_CATEGORY_DEFINITION[] = R"(
   }
 }
 )";
+// unconfuse emacs: "
 
 static const char SOUNDCLOUD_SEARCH_CATEGORY_DEFINITION[] = R"(
 {
@@ -274,7 +244,6 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
     ChildScopeList scopes;
     const std::string department_id = "aggregated:musicaggregator";
 
-    const CannedQuery mymusic_query(MusicAggregatorScope::LOCALSCOPE, query().query_string(), "");
     const CannedQuery sevendigital_query(MusicAggregatorScope::SEVENDIGITAL, query().query_string(), "newreleases");
     const CannedQuery soundcloud_query(MusicAggregatorScope::SOUNDCLOUD, query().query_string(), "");
     const CannedQuery songkick_query(MusicAggregatorScope::SONGKICK, query().query_string(), "");
@@ -285,9 +254,6 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
 
     //
     // register categories
-    auto mymusic_cat = empty_search ? parent_reply->register_category("mymusic", _("My Music"), "",
-            mymusic_query, CategoryRenderer(MYMUSIC_CATEGORY_DEFINITION))
-        : parent_reply->register_category("mymusic", _("My Music"), "", CategoryRenderer(MYMUSIC_SEARCH_CATEGORY_DEFINITION));
     auto sevendigital_cat = empty_search ? parent_reply->register_category("7digital", _("New albums from 7digital"), "",
             sevendigital_query, CategoryRenderer(SEVENDIGITAL_CATEGORY_DEFINITION))
         : parent_reply->register_category("7digital", _("7digital"), "", CategoryRenderer(SEVENDIGITAL_SEARCH_CATEGORY_DEFINITION));
@@ -321,10 +287,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
 
             if (child.id == MusicAggregatorScope::LOCALSCOPE)
             {
-                next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder, [mymusic_cat](CategorisedResult& res) -> bool {
-                        res.set_category(mymusic_cat);
-                        return true;
-                    });
+                next_forwarder = std::make_shared<BufferedResultForwarder>(parent_reply, next_forwarder);
                 replies.push_back(next_forwarder);
             }
             else if (child.id == MusicAggregatorScope::SEVENDIGITAL)
@@ -434,7 +397,10 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
         }
         else if (scopes[i].id == MusicAggregatorScope::LOCALSCOPE)
         {
-            dept = ""; // artists
+            if (empty_search)
+            {
+                metadata.set_cardinality(4);
+            }
         }
         else if (scopes[i].id == MusicAggregatorScope::GROOVESHARKSCOPE)
         {

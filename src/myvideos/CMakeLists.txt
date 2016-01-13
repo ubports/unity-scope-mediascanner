@@ -1,7 +1,9 @@
 include_directories(${UNITY_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 
 add_library(mediascanner-video MODULE video-scope.cpp)
-#set_target_properties(mediascanner-video PROPERTIES PREFIX "")
+set_target_properties(mediascanner-video PROPERTIES
+#  PREFIX ""
+  NO_SONAME TRUE)
 target_link_libraries(mediascanner-video scope-utils ${UNITY_LDFLAGS} ${Boost_LIBRARIES})
 
 configure_file(manifest.json.in manifest.json)
@@ -15,6 +17,7 @@ if(CLICK_MODE)
   click_scope_data(com.ubuntu.scopes.myvideos myvideos
     screenshot.jpg
     icon.png
+    video_missing.png
     getstarted.svg
     camera-app.svg)
 else()
@@ -27,6 +30,7 @@ else()
       ${CMAKE_CURRENT_BINARY_DIR}/mediascanner-video.ini
       screenshot.jpg
       icon.png
+      video_missing.png
       getstarted.svg
       camera-app.svg
     DESTINATION "${scopedir}")
