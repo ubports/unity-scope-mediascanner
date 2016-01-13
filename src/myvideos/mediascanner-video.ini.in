@@ -4,7 +4,6 @@ _Description=This is an Ubuntu search plugin that scans the device for videos an
 Author=Canonical Ltd.
 Art=./screenshot.jpg
 Icon=./icon.png
-_SearchHint=
 HotKey=
 Keywords=videos
 
