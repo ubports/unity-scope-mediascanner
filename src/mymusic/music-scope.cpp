@@ -62,7 +62,6 @@ static const char GET_STARTED_CATEGORY_DEFINITION[] = R"(
     "art": {
         "field": "art",
         "conciergeMode": true,
-        "fallback": "@FALLBACK@"
     },
     "summary" : "summary"
   }
@@ -200,7 +199,10 @@ static const char SEARCH_SONGS_CATEGORY_DEFINITION[] = R"(
   },
   "components": {
     "title": "title",
-    "art":  "art",
+    "art":  {
+      "field": "art",
+      "fallback": "@FALLBACK@"
+    },
     "subtitle": "artist"
   }
 }
@@ -309,7 +311,7 @@ void MusicQuery::run(SearchReplyProxy const&reply) {
 
     if (!scope.store->hasMedia(AudioMedia))
     {
-        const CategoryRenderer renderer = make_renderer(GET_STARTED_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
+        const CategoryRenderer renderer(GET_STARTED_CATEGORY_DEFINITION);
         auto cat = reply->register_category("mymusic-getstarted", "", "", renderer);
         CategorisedResult res(cat);
         res.set_uri(query().to_uri());
@@ -648,8 +650,8 @@ std::string MusicQuery::fetch_biography_sync(const std::string& artist, const st
 
 void MusicQuery::query_albums_by_artist(unity::scopes::SearchReplyProxy const &reply, const std::string& artist) const
 {
-    CategoryRenderer bio_renderer(ARTIST_BIO_CATEGORY_DEFINITION);
-    CategoryRenderer renderer(ALBUMS_CATEGORY_DEFINITION);
+    CategoryRenderer bio_renderer = make_renderer(ARTIST_BIO_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
+    CategoryRenderer renderer = make_renderer(ALBUMS_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
 
     auto biocat = reply->register_category("bio", "", "", bio_renderer);
     auto albumcat = reply->register_category("albums", _("Albums"), SONGS_CATEGORY_ICON, renderer);
@@ -699,7 +701,7 @@ void MusicQuery::query_albums(unity::scopes::SearchReplyProxy const&reply, Categ
     auto cat = override_category;
     if (!cat)
     {
-        CategoryRenderer renderer(query().query_string() == "" ? ALBUMS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION);
+        CategoryRenderer renderer = make_renderer(query().query_string() == "" ? ALBUMS_CATEGORY_DEFINITION : SEARCH_CATEGORY_DEFINITION, MISSING_ALBUM_ART);
         cat = reply->register_category("albums", show_title ? _("Albums") : "", SONGS_CATEGORY_ICON, renderer);
     }
 
@@ -753,6 +755,8 @@ void MusicPreview::song_preview(unity::scopes::PreviewReplyProxy const &reply) c
 
     PreviewWidget artwork("art", "image");
     artwork.add_attribute_mapping("source", "art");
+    artwork.add_attribute_value("fallback", Variant(
+            scope.scope_directory() + "/" + MISSING_ALBUM_ART));
 
     PreviewWidget tracks("tracks", "audio");
     {
@@ -798,6 +802,8 @@ void MusicPreview::album_preview(unity::scopes::PreviewReplyProxy const &reply) 
 
     PreviewWidget artwork("art", "image");
     artwork.add_attribute_mapping("source", "art");
+    artwork.add_attribute_value("fallback", Variant(
+            scope.scope_directory() + "/" + MISSING_ALBUM_ART));
 
     PreviewWidget header("header", "header");
     header.add_attribute_mapping("title", "title");
