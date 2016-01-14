@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-13 08:27+0000\n"
+"POT-Creation-Date: 2016-01-13 16:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,53 +54,45 @@ msgstr ""
 msgid "Play in music app"
 msgstr ""
 
-#: ../src/musicaggregator/musicaggregatorquery.cpp:257
+#: ../src/musicaggregator/musicaggregatorquery.cpp:222
 msgid "New albums from 7digital"
 msgstr ""
 
-#: ../src/musicaggregator/musicaggregatorquery.cpp:259
+#: ../src/musicaggregator/musicaggregatorquery.cpp:224
 msgid "7digital"
 msgstr ""
 
-#: ../src/musicaggregator/musicaggregatorquery.cpp:260
+#: ../src/musicaggregator/musicaggregatorquery.cpp:225
 msgid "Popular tracks on SoundCloud"
 msgstr ""
 
-#: ../src/musicaggregator/musicaggregatorquery.cpp:262
+#: ../src/musicaggregator/musicaggregatorquery.cpp:227
 msgid "SoundCloud"
 msgstr ""
 
-#: ../src/musicaggregator/musicaggregatorquery.cpp:263
+#: ../src/musicaggregator/musicaggregatorquery.cpp:228
 msgid "Nearby Events on Songkick"
 msgstr ""
 
-#: ../src/musicaggregator/musicaggregatorquery.cpp:265
+#: ../src/musicaggregator/musicaggregatorquery.cpp:230
 msgid "Songkick"
 msgstr ""
 
-#: ../src/musicaggregator/musicaggregatorquery.cpp:266
-msgid "Popular tracks on Grooveshark"
-msgstr ""
-
-#: ../src/musicaggregator/musicaggregatorquery.cpp:268
-msgid "Grooveshark"
-msgstr ""
-
-#: ../src/musicaggregator/musicaggregatorquery.cpp:269
+#: ../src/musicaggregator/musicaggregatorquery.cpp:231
 msgid "Popular tracks on Youtube"
 msgstr ""
 
-#: ../src/musicaggregator/musicaggregatorquery.cpp:271
+#: ../src/musicaggregator/musicaggregatorquery.cpp:233
 msgid "Youtube"
 msgstr ""
 
-#: ../src/musicaggregator/musicaggregatorquery.cpp:358
+#: ../src/musicaggregator/musicaggregatorquery.cpp:307
 #: ../src/videoaggregator/videoaggregatorquery.cpp:136
 #, c-format
 msgid "%s Features"
 msgstr ""
 
-#: ../src/musicaggregator/musicaggregatorquery.cpp:360
+#: ../src/musicaggregator/musicaggregatorquery.cpp:309
 #: ../src/videoaggregator/videoaggregatorquery.cpp:138
 #, c-format
 msgid "Results from %s"

@@ -24,7 +24,6 @@ TEST(TestMusicAgregator, TestSurfacingSearch) {
     CannedQuery q("mediascanner-music", "", "");
     SearchMetadata hints("en_AU", "phone");
 
-    std::shared_ptr<unity::scopes::testing::MockScope> grooveshark_scope(new unity::scopes::testing::MockScope("1", "1"));
     std::shared_ptr<unity::scopes::testing::MockScope> soundcloud_scope(new unity::scopes::testing::MockScope("2", "2"));
     std::shared_ptr<unity::scopes::testing::MockScope> sevendigital_scope(new unity::scopes::testing::MockScope("3", "3"));
     std::shared_ptr<unity::scopes::testing::MockScope> songkick_scope(new unity::scopes::testing::MockScope("4", "4"));
@@ -42,11 +41,6 @@ TEST(TestMusicAgregator, TestSurfacingSearch) {
                 .display_name(" ").description(" ")
                 .author(" ")
                 .proxy(unity::scopes::ScopeProxy(sevendigital_scope))()},
-        {"com.canonical.scopes.grooveshark", unity::scopes::testing::ScopeMetadataBuilder()
-            .scope_id("com.canonical.scopes.grooveshark")
-                .display_name(" ").description(" ")
-                .author(" ")
-                .proxy(unity::scopes::ScopeProxy(grooveshark_scope))()},
         {"com.canonical.scopes.songkick_songkick", unity::scopes::testing::ScopeMetadataBuilder()
             .scope_id("com.canonical.scopes.songkick_songkick")
                 .display_name(" ").description(" ")
@@ -72,8 +66,6 @@ TEST(TestMusicAgregator, TestSurfacingSearch) {
         "7digital", "Tracks", "icon", CategoryRenderer());
     Category::SCPtr songkick_category = std::make_shared<unity::scopes::testing::Category>(
         "songkick", "Tracks", "icon", CategoryRenderer());
-    Category::SCPtr grooveshark_category = std::make_shared<unity::scopes::testing::Category>(
-        "grooveshark", "Tracks", "icon", CategoryRenderer());
     Category::SCPtr youtube_category = std::make_shared<unity::scopes::testing::Category>(
         "youtube", "Tracks", "icon", CategoryRenderer());
     Category::SCPtr soundcloud_category = std::make_shared<unity::scopes::testing::Category>(
@@ -85,8 +77,6 @@ TEST(TestMusicAgregator, TestSurfacingSearch) {
         .WillOnce(Return(sevendigital_category));
     EXPECT_CALL(reply, register_category("songkick", _, _, _,_))
         .WillOnce(Return(songkick_category));
-    EXPECT_CALL(reply, register_category("grooveshark", _, _, _,_))
-        .WillOnce(Return(grooveshark_category));
     EXPECT_CALL(reply, register_category("youtube", _, _, _,_))
         .WillOnce(Return(youtube_category));
     EXPECT_CALL(reply, register_category("soundcloud", _, _, _,_))
@@ -95,7 +85,6 @@ TEST(TestMusicAgregator, TestSurfacingSearch) {
     // check that each scope calls search with the correct parameters...
     EXPECT_CALL(*local_scope.get(), search("","", _, _, _)).WillOnce(Return(queryctrl));
     EXPECT_CALL(*sevendigital_scope.get(), search("","newreleases", _, _, _)).WillOnce(Return(queryctrl));
-    EXPECT_CALL(*grooveshark_scope.get(), search("","", _, _, _)).WillOnce(Return(queryctrl));
     EXPECT_CALL(*songkick_scope.get(), search("","", _, _, _)).WillOnce(Return(queryctrl));
     EXPECT_CALL(*youtube_scope.get(), search("","aggregated:musicaggregator", _, _, _)).WillOnce(Return(queryctrl));
     EXPECT_CALL(*soundcloud_scope.get(), search("","", _, _, _)).WillOnce(Return(queryctrl));
@@ -109,7 +98,6 @@ TEST(TestMusicAgregator, TestSpecificSearch) {
     CannedQuery q("mediascanner-music", "test", "");
     SearchMetadata hints("en_AU", "phone");
 
-    std::shared_ptr<unity::scopes::testing::MockScope> grooveshark_scope(new unity::scopes::testing::MockScope("1", "1"));
     std::shared_ptr<unity::scopes::testing::MockScope> soundcloud_scope(new unity::scopes::testing::MockScope("2", "2"));
     std::shared_ptr<unity::scopes::testing::MockScope> sevendigital_scope(new unity::scopes::testing::MockScope("3", "3"));
     std::shared_ptr<unity::scopes::testing::MockScope> songkick_scope(new unity::scopes::testing::MockScope("4", "4"));
@@ -127,11 +115,6 @@ TEST(TestMusicAgregator, TestSpecificSearch) {
                 .display_name(" ").description(" ")
                 .author(" ")
                 .proxy(unity::scopes::ScopeProxy(sevendigital_scope))()},
-        {"com.canonical.scopes.grooveshark", unity::scopes::testing::ScopeMetadataBuilder()
-            .scope_id("com.canonical.scopes.grooveshark")
-                .display_name(" ").description(" ")
-                .author(" ")
-                .proxy(unity::scopes::ScopeProxy(grooveshark_scope))()},
         {"com.canonical.scopes.songkick_songkick", unity::scopes::testing::ScopeMetadataBuilder()
             .scope_id("com.canonical.scopes.songkick_songkick")
                 .display_name(" ").description(" ")
@@ -157,8 +140,6 @@ TEST(TestMusicAgregator, TestSpecificSearch) {
         "7digital", "Tracks", "icon", CategoryRenderer());
     Category::SCPtr songkick_category = std::make_shared<unity::scopes::testing::Category>(
         "songkick", "Tracks", "icon", CategoryRenderer());
-    Category::SCPtr grooveshark_category = std::make_shared<unity::scopes::testing::Category>(
-        "grooveshark", "Tracks", "icon", CategoryRenderer());
     Category::SCPtr youtube_category = std::make_shared<unity::scopes::testing::Category>(
         "youtube", "Tracks", "icon", CategoryRenderer());
     Category::SCPtr soundcloud_category = std::make_shared<unity::scopes::testing::Category>(
@@ -171,8 +152,6 @@ TEST(TestMusicAgregator, TestSpecificSearch) {
         .WillOnce(Return(sevendigital_category));
     EXPECT_CALL(reply, register_category("songkick", _, _,_))
         .WillOnce(Return(songkick_category));
-    EXPECT_CALL(reply, register_category("grooveshark", _, _,_))
-        .WillOnce(Return(grooveshark_category));
     EXPECT_CALL(reply, register_category("youtube", _, _, _,_))
         .WillOnce(Return(youtube_category));
     EXPECT_CALL(reply, register_category("soundcloud", _, _,_))
@@ -182,7 +161,6 @@ TEST(TestMusicAgregator, TestSpecificSearch) {
     EXPECT_CALL(*sevendigital_scope.get(), search("test","", _, _, _)).WillOnce(Return(queryctrl));
     EXPECT_CALL(*local_scope.get(), search("test","", _, _, _)).WillOnce(Return(queryctrl));
     EXPECT_CALL(*songkick_scope.get(), search("test","", _, _, _)).WillOnce(Return(queryctrl));
-    EXPECT_CALL(*grooveshark_scope.get(), search("test","", _, _, _)).WillOnce(Return(queryctrl));
     EXPECT_CALL(*youtube_scope.get(), search("test","aggregated:musicaggregator", _, _, _)).WillOnce(Return(queryctrl));
     EXPECT_CALL(*soundcloud_scope.get(), search("test","", _, _, _)).WillOnce(Return(queryctrl));
 

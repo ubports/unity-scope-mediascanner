@@ -30,7 +30,6 @@ class MusicAggregatorScope : public unity::scopes::ScopeBase
 {
 public:
     static const std::string LOCALSCOPE;
-    static const std::string GROOVESHARKSCOPE;
     static const std::string SEVENDIGITAL;
     static const std::string SOUNDCLOUD;
     static const std::string SONGKICK;
