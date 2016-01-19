@@ -33,7 +33,6 @@ const std::string MusicAggregatorScope::LOCALSCOPE = "com.ubuntu.scopes.mymusic_
  #else
 const std::string MusicAggregatorScope::LOCALSCOPE = "mediascanner-music";
  #endif
-const std::string MusicAggregatorScope::GROOVESHARKSCOPE = "com.canonical.scopes.grooveshark";
 const std::string MusicAggregatorScope::SEVENDIGITAL = "com.canonical.scopes.sevendigital";
 const std::string MusicAggregatorScope::SOUNDCLOUD = "com.ubuntu.scopes.soundcloud_soundcloud";
 const std::string MusicAggregatorScope::SONGKICK = "com.canonical.scopes.songkick_songkick";
@@ -42,7 +41,6 @@ const std::string MusicAggregatorScope::YOUTUBE = "com.ubuntu.scopes.youtube_you
 // the order of predefined scopes
 const std::vector<std::string> predefined_scopes {
     MusicAggregatorScope::LOCALSCOPE,
-    MusicAggregatorScope::GROOVESHARKSCOPE,
     MusicAggregatorScope::SEVENDIGITAL,
     MusicAggregatorScope::SOUNDCLOUD,
     MusicAggregatorScope::SONGKICK,

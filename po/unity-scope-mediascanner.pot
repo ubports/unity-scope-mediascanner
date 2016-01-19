@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-20 02:19+1000\n"
+"POT-Creation-Date: 2016-01-20 02:34+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,22 +19,22 @@ msgstr ""
 
 #. TRANSLATORS: Featured on YouTube, Featured on Grooveshark, etc.
 #: ../src/videoaggregator/videoaggregatorquery.cpp:137
-#: ../src/musicaggregator/musicaggregatorquery.cpp:359
+#: ../src/musicaggregator/musicaggregatorquery.cpp:308
 #, c-format
 msgid "Featured on %s"
 msgstr ""
 
 #: ../src/videoaggregator/videoaggregatorquery.cpp:139
-#: ../src/musicaggregator/musicaggregatorquery.cpp:361
+#: ../src/musicaggregator/musicaggregatorquery.cpp:310
 #, c-format
 msgid "Results from %s"
 msgstr ""
 
-#: ../src/myvideos/video-scope.cpp:191 ../src/mymusic/music-scope.cpp:316
+#: ../src/myvideos/video-scope.cpp:191 ../src/mymusic/music-scope.cpp:318
 msgid "Get started!"
 msgstr ""
 
-#: ../src/myvideos/video-scope.cpp:192 ../src/mymusic/music-scope.cpp:317
+#: ../src/myvideos/video-scope.cpp:192 ../src/mymusic/music-scope.cpp:319
 msgid ""
 "Drag and drop items from another devices. Alternatively, load your files "
 "onto a SD card."
@@ -67,70 +67,62 @@ msgstr ""
 msgid "Play"
 msgstr ""
 
-#: ../src/mymusic/music-scope.cpp:291 ../src/mymusic/music-scope.cpp:300
+#: ../src/mymusic/music-scope.cpp:293 ../src/mymusic/music-scope.cpp:302
 #: tmp/mediascanner-music.ini.in.h:1
 msgid "My Music"
 msgstr ""
 
-#: ../src/mymusic/music-scope.cpp:378 ../src/mymusic/music-scope.cpp:441
+#: ../src/mymusic/music-scope.cpp:380 ../src/mymusic/music-scope.cpp:443
 msgid "Artists"
 msgstr ""
 
-#: ../src/mymusic/music-scope.cpp:379 ../src/mymusic/music-scope.cpp:655
-#: ../src/mymusic/music-scope.cpp:703
+#: ../src/mymusic/music-scope.cpp:381 ../src/mymusic/music-scope.cpp:657
+#: ../src/mymusic/music-scope.cpp:705
 msgid "Albums"
 msgstr ""
 
-#: ../src/mymusic/music-scope.cpp:380 ../src/mymusic/music-scope.cpp:490
-#: ../src/mymusic/music-scope.cpp:527
+#: ../src/mymusic/music-scope.cpp:382 ../src/mymusic/music-scope.cpp:492
+#: ../src/mymusic/music-scope.cpp:529
 msgid "Tracks"
 msgstr ""
 
-#: ../src/mymusic/music-scope.cpp:381
+#: ../src/mymusic/music-scope.cpp:383
 msgid "Genres"
 msgstr ""
 
-#: ../src/mymusic/music-scope.cpp:780 ../src/mymusic/music-scope.cpp:812
+#: ../src/mymusic/music-scope.cpp:784 ../src/mymusic/music-scope.cpp:818
 msgid "Play in music app"
 msgstr ""
 
-#: ../src/musicaggregator/musicaggregatorquery.cpp:257
+#: ../src/musicaggregator/musicaggregatorquery.cpp:222
 msgid "New albums from 7digital"
 msgstr ""
 
-#: ../src/musicaggregator/musicaggregatorquery.cpp:259
+#: ../src/musicaggregator/musicaggregatorquery.cpp:224
 msgid "7digital"
 msgstr ""
 
-#: ../src/musicaggregator/musicaggregatorquery.cpp:260
+#: ../src/musicaggregator/musicaggregatorquery.cpp:225
 msgid "Popular tracks on SoundCloud"
 msgstr ""
 
-#: ../src/musicaggregator/musicaggregatorquery.cpp:262
+#: ../src/musicaggregator/musicaggregatorquery.cpp:227
 msgid "SoundCloud"
 msgstr ""
 
-#: ../src/musicaggregator/musicaggregatorquery.cpp:263
+#: ../src/musicaggregator/musicaggregatorquery.cpp:228
 msgid "Nearby Events on Songkick"
 msgstr ""
 
-#: ../src/musicaggregator/musicaggregatorquery.cpp:265
+#: ../src/musicaggregator/musicaggregatorquery.cpp:230
 msgid "Songkick"
 msgstr ""
 
-#: ../src/musicaggregator/musicaggregatorquery.cpp:266
-msgid "Popular tracks on Grooveshark"
-msgstr ""
-
-#: ../src/musicaggregator/musicaggregatorquery.cpp:268
-msgid "Grooveshark"
-msgstr ""
-
-#: ../src/musicaggregator/musicaggregatorquery.cpp:269
+#: ../src/musicaggregator/musicaggregatorquery.cpp:231
 msgid "Popular tracks on Youtube"
 msgstr ""
 
-#: ../src/musicaggregator/musicaggregatorquery.cpp:271
+#: ../src/musicaggregator/musicaggregatorquery.cpp:233
 msgid "Youtube"
 msgstr ""
 
@@ -148,10 +140,6 @@ msgstr ""
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
-msgstr ""
-
-#: tmp/mediascanner-video.ini.in.h:3
-msgid "HotKey="
 msgstr ""
 
 #: tmp/musicaggregator.ini.in.h:1

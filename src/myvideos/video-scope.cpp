@@ -197,7 +197,7 @@ void VideoQuery::run(SearchReplyProxy const&reply) {
             auto cat = reply->register_category("myvideos-getstarted", "", "", renderer);
             CategorisedResult res(cat);
             res.set_uri("appid://com.ubuntu.camera/camera/current-user-version");
-            res.set_art(scope.scope_directory() + "/camera-app.svg");
+            res.set_art(scope.scope_directory() + "/camera-app.png");
             res.set_title(_("Nothing here yet...\nMake a video!"));
             reply->push(res);
         }

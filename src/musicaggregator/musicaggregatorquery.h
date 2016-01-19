@@ -39,7 +39,6 @@ public:
 
 private:
     unity::scopes::ChildScopeList child_scopes;
-    static const std::string grooveshark_songs_category_id;
 };
 
 #endif
