@@ -7,152 +7,177 @@ msgid ""
 msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-16 13:50+0800\n"
+"POT-Creation-Date: 2016-01-13 16:37+0000\n"
 "PO-Revision-Date: 2014-08-18 16:10+0000\n"
 "Last-Translator: Mitsuya Shibata <mty.shibata@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-12 05:39+0000\n"
-"X-Generator: Launchpad (build 17881)\n"
+"X-Launchpad-Export-Date: 2016-01-21 05:54+0000\n"
+"X-Generator: Launchpad (build 17886)\n"
 
-#: ../src/music-scope.cpp:219 ../src/music-scope.cpp:280
-msgid "Artists"
-msgstr "アーティスト"
-
-#: ../src/music-scope.cpp:220 ../src/music-scope.cpp:449
-#: ../src/music-scope.cpp:492
-msgid "Albums"
-msgstr "アルバム"
-
-#: ../src/music-scope.cpp:221 ../src/music-scope.cpp:324
-#: ../src/music-scope.cpp:339
-msgid "Tracks"
-msgstr "トラック"
-
-#: ../src/music-scope.cpp:222
-msgid "Genres"
-msgstr "ジャンル"
-
-#: ../src/music-scope.cpp:568 ../src/music-scope.cpp:600
-msgid "Play in music app"
-msgstr "音楽アプリで再生"
-
-#: ../src/musicaggregatorquery.cpp:206 ../src/musicaggregatorquery.cpp:208
-#: tmp/mediascanner-music.ini.in.in.h:1
+#: ../src/mymusic/music-scope.cpp:291 ../src/mymusic/music-scope.cpp:300
+#: tmp/mediascanner-music.ini.in.h:1
 msgid "My Music"
 msgstr "マイミュージック"
 
-#: ../src/musicaggregatorquery.cpp:209
-msgid "Popular tracks on Grooveshark"
-msgstr "Groovesharkの人気トラック"
+#: ../src/mymusic/music-scope.cpp:316 ../src/myvideos/video-scope.cpp:191
+msgid "Get started!"
+msgstr ""
 
-#: ../src/musicaggregatorquery.cpp:211
-msgid "Grooveshark"
-msgstr "Grooveshark"
+#: ../src/mymusic/music-scope.cpp:317 ../src/myvideos/video-scope.cpp:192
+msgid ""
+"Drag and drop items from another devices. Alternatively, load your files "
+"onto a SD card."
+msgstr ""
 
-#: ../src/musicaggregatorquery.cpp:212
+#: ../src/mymusic/music-scope.cpp:378 ../src/mymusic/music-scope.cpp:441
+msgid "Artists"
+msgstr "アーティスト"
+
+#: ../src/mymusic/music-scope.cpp:379 ../src/mymusic/music-scope.cpp:655
+#: ../src/mymusic/music-scope.cpp:703
+msgid "Albums"
+msgstr "アルバム"
+
+#: ../src/mymusic/music-scope.cpp:380 ../src/mymusic/music-scope.cpp:490
+#: ../src/mymusic/music-scope.cpp:527
+msgid "Tracks"
+msgstr "トラック"
+
+#: ../src/mymusic/music-scope.cpp:381
+msgid "Genres"
+msgstr "ジャンル"
+
+#: ../src/mymusic/music-scope.cpp:780 ../src/mymusic/music-scope.cpp:812
+msgid "Play in music app"
+msgstr "音楽アプリで再生"
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:222
 msgid "New albums from 7digital"
 msgstr "7digitalの最新アルバム"
 
-#: ../src/musicaggregatorquery.cpp:214
+#: ../src/musicaggregator/musicaggregatorquery.cpp:224
 msgid "7digital"
 msgstr "7digital"
 
-#: ../src/musicaggregatorquery.cpp:215
+#: ../src/musicaggregator/musicaggregatorquery.cpp:225
+msgid "Popular tracks on SoundCloud"
+msgstr ""
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:227
+msgid "SoundCloud"
+msgstr ""
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:228
 msgid "Nearby Events on Songkick"
 msgstr ""
 
-#: ../src/musicaggregatorquery.cpp:217
+#: ../src/musicaggregator/musicaggregatorquery.cpp:230
 msgid "Songkick"
 msgstr "Songkick"
 
-#: ../src/video-scope.cpp:141
-msgid "Everything"
-msgstr "すべて"
+#: ../src/musicaggregator/musicaggregatorquery.cpp:231
+msgid "Popular tracks on Youtube"
+msgstr ""
 
-#: ../src/video-scope.cpp:143
-msgid "My Roll"
-msgstr "撮影した動画"
+#: ../src/musicaggregator/musicaggregatorquery.cpp:233
+msgid "Youtube"
+msgstr ""
 
-#: ../src/video-scope.cpp:144
-msgid "Downloaded"
-msgstr "ダウンロードした動画"
-
-#: ../src/video-scope.cpp:162 ../src/video-scope.cpp:167
-#: tmp/mediascanner-video.ini.in.in.h:1
-msgid "My Videos"
-msgstr "マイビデオ"
-
-#: ../src/video-scope.cpp:248
-msgid "Play"
-msgstr "再生"
-
-#: ../src/videoaggregatorquery.cpp:130
+#: ../src/musicaggregator/musicaggregatorquery.cpp:307
+#: ../src/videoaggregator/videoaggregatorquery.cpp:136
 #, c-format
 msgid "%s Features"
 msgstr "%s特集"
 
-#: ../src/videoaggregatorquery.cpp:137
+#: ../src/musicaggregator/musicaggregatorquery.cpp:309
+#: ../src/videoaggregator/videoaggregatorquery.cpp:138
 #, c-format
 msgid "Results from %s"
 msgstr "%sの結果"
 
-#: tmp/mediascanner-music.ini.in.in.h:2
+#: ../src/myvideos/video-scope.cpp:201
+msgid ""
+"Nothing here yet...\n"
+"Make a video!"
+msgstr ""
+
+#: ../src/myvideos/video-scope.cpp:208
+msgid "Everything"
+msgstr "すべて"
+
+#: ../src/myvideos/video-scope.cpp:210
+msgid "My Roll"
+msgstr "撮影した動画"
+
+#: ../src/myvideos/video-scope.cpp:211
+msgid "Downloaded"
+msgstr "ダウンロードした動画"
+
+#: ../src/myvideos/video-scope.cpp:227 ../src/myvideos/video-scope.cpp:232
+#: tmp/mediascanner-video.ini.in.h:1
+msgid "My Videos"
+msgstr "マイビデオ"
+
+#: ../src/myvideos/video-scope.cpp:331
+msgid "Play"
+msgstr "再生"
+
+#: tmp/mediascanner-music.ini.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr "これはデバイスにある楽曲をスキャンしDash上で検索・表示するための検索プラグインです。"
 
-#: tmp/mediascanner-music.ini.in.in.h:3
+#: tmp/mediascanner-music.ini.in.h:3
 msgid "Search local music collection"
 msgstr "ローカルにある楽曲集の検索"
 
-#: tmp/mediascanner-video.ini.in.in.h:2
+#: tmp/mediascanner-video.ini.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr "これはデバイスにある動画をスキャンしDash上で検索・表示するための検索プラグインです。"
 
-#: tmp/musicaggregator-settings.ini.in.in.h:1
-msgid "Display results from Grooveshark"
-msgstr "Groovesharの検索結果を表示する"
-
-#: tmp/musicaggregator-settings.ini.in.in.h:2
-msgid "Display results from 7digital"
-msgstr "7digitalの検索結果を表示する"
-
-#: tmp/musicaggregator-settings.ini.in.in.h:3
-msgid "Display results from Songkick"
-msgstr ""
-
-#: tmp/musicaggregator.ini.in.in.h:1
+#: tmp/musicaggregator.ini.in.h:1
 msgid "Music"
 msgstr "ミュージック"
 
-#: tmp/musicaggregator.ini.in.in.h:2
+#: tmp/musicaggregator.ini.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr "すべての音楽を結果を一括して探させる検索プラグインです。"
 
-#: tmp/musicaggregator.ini.in.in.h:3
+#: tmp/musicaggregator.ini.in.h:3
 msgid "Search music"
 msgstr "音楽を検索"
 
-#: tmp/videoaggregator-settings.ini.in.in.h:1
-msgid "Display results from YouTube"
-msgstr "YouTubeの検索結果を表示する"
-
-#: tmp/videoaggregator.ini.in.in.h:1
+#: tmp/videoaggregator.ini.in.h:1
 msgid "Video"
 msgstr "ビデオ"
 
-#: tmp/videoaggregator.ini.in.in.h:2
+#: tmp/videoaggregator.ini.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr "すべての動画を結果を一括して探させる検索プラグインです。"
 
-#: tmp/videoaggregator.ini.in.in.h:3
+#: tmp/videoaggregator.ini.in.h:3
 msgid "Search video"
 msgstr "動画を検索"
+
+#~ msgid "Popular tracks on Grooveshark"
+#~ msgstr "Groovesharkの人気トラック"
+
+#~ msgid "Grooveshark"
+#~ msgstr "Grooveshark"
+
+#~ msgid "Display results from 7digital"
+#~ msgstr "7digitalの検索結果を表示する"
+
+#~ msgid "Display results from Grooveshark"
+#~ msgstr "Groovesharの検索結果を表示する"
+
+#~ msgid "Display results from YouTube"
+#~ msgstr "YouTubeの検索結果を表示する"

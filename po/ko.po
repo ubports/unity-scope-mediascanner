@@ -7,152 +7,180 @@ msgid ""
 msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-09-16 13:50+0800\n"
+"POT-Creation-Date: 2016-01-13 16:37+0000\n"
 "PO-Revision-Date: 2014-08-20 03:58+0000\n"
 "Last-Translator: MinSik CHO <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-12 05:39+0000\n"
-"X-Generator: Launchpad (build 17881)\n"
+"X-Launchpad-Export-Date: 2016-01-21 05:54+0000\n"
+"X-Generator: Launchpad (build 17886)\n"
 
-#: ../src/music-scope.cpp:219 ../src/music-scope.cpp:280
-msgid "Artists"
-msgstr "음악가"
-
-#: ../src/music-scope.cpp:220 ../src/music-scope.cpp:449
-#: ../src/music-scope.cpp:492
-msgid "Albums"
-msgstr "앨범"
-
-#: ../src/music-scope.cpp:221 ../src/music-scope.cpp:324
-#: ../src/music-scope.cpp:339
-msgid "Tracks"
-msgstr "트랙"
-
-#: ../src/music-scope.cpp:222
-msgid "Genres"
-msgstr "장르"
-
-#: ../src/music-scope.cpp:568 ../src/music-scope.cpp:600
-msgid "Play in music app"
-msgstr "음악 프로그램으로 재생하기"
-
-#: ../src/musicaggregatorquery.cpp:206 ../src/musicaggregatorquery.cpp:208
-#: tmp/mediascanner-music.ini.in.in.h:1
+#: ../src/mymusic/music-scope.cpp:291 ../src/mymusic/music-scope.cpp:300
+#: tmp/mediascanner-music.ini.in.h:1
 msgid "My Music"
 msgstr "내 음악"
 
-#: ../src/musicaggregatorquery.cpp:209
-msgid "Popular tracks on Grooveshark"
-msgstr "그루브샤크의 인기 음악"
+#: ../src/mymusic/music-scope.cpp:316 ../src/myvideos/video-scope.cpp:191
+msgid "Get started!"
+msgstr ""
 
-#: ../src/musicaggregatorquery.cpp:211
-msgid "Grooveshark"
-msgstr "그루브샤크"
+#: ../src/mymusic/music-scope.cpp:317 ../src/myvideos/video-scope.cpp:192
+msgid ""
+"Drag and drop items from another devices. Alternatively, load your files "
+"onto a SD card."
+msgstr ""
 
-#: ../src/musicaggregatorquery.cpp:212
+#: ../src/mymusic/music-scope.cpp:378 ../src/mymusic/music-scope.cpp:441
+msgid "Artists"
+msgstr "음악가"
+
+#: ../src/mymusic/music-scope.cpp:379 ../src/mymusic/music-scope.cpp:655
+#: ../src/mymusic/music-scope.cpp:703
+msgid "Albums"
+msgstr "앨범"
+
+#: ../src/mymusic/music-scope.cpp:380 ../src/mymusic/music-scope.cpp:490
+#: ../src/mymusic/music-scope.cpp:527
+msgid "Tracks"
+msgstr "트랙"
+
+#: ../src/mymusic/music-scope.cpp:381
+msgid "Genres"
+msgstr "장르"
+
+#: ../src/mymusic/music-scope.cpp:780 ../src/mymusic/music-scope.cpp:812
+msgid "Play in music app"
+msgstr "음악 프로그램으로 재생하기"
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:222
 msgid "New albums from 7digital"
 msgstr "7digital의 새 앨범"
 
-#: ../src/musicaggregatorquery.cpp:214
+#: ../src/musicaggregator/musicaggregatorquery.cpp:224
 msgid "7digital"
 msgstr "7digital"
 
-#: ../src/musicaggregatorquery.cpp:215
+#: ../src/musicaggregator/musicaggregatorquery.cpp:225
+msgid "Popular tracks on SoundCloud"
+msgstr ""
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:227
+msgid "SoundCloud"
+msgstr ""
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:228
 msgid "Nearby Events on Songkick"
 msgstr "송킥에 다가오는 입벤트가 있습니다."
 
-#: ../src/musicaggregatorquery.cpp:217
+#: ../src/musicaggregator/musicaggregatorquery.cpp:230
 msgid "Songkick"
 msgstr "송킥"
 
-#: ../src/video-scope.cpp:141
-msgid "Everything"
-msgstr "모두"
+#: ../src/musicaggregator/musicaggregatorquery.cpp:231
+msgid "Popular tracks on Youtube"
+msgstr ""
 
-#: ../src/video-scope.cpp:143
-msgid "My Roll"
-msgstr "나의 롤"
+#: ../src/musicaggregator/musicaggregatorquery.cpp:233
+msgid "Youtube"
+msgstr ""
 
-#: ../src/video-scope.cpp:144
-msgid "Downloaded"
-msgstr "다운로드함"
-
-#: ../src/video-scope.cpp:162 ../src/video-scope.cpp:167
-#: tmp/mediascanner-video.ini.in.in.h:1
-msgid "My Videos"
-msgstr "내 동영상"
-
-#: ../src/video-scope.cpp:248
-msgid "Play"
-msgstr "재생"
-
-#: ../src/videoaggregatorquery.cpp:130
+#: ../src/musicaggregator/musicaggregatorquery.cpp:307
+#: ../src/videoaggregator/videoaggregatorquery.cpp:136
 #, c-format
 msgid "%s Features"
 msgstr "%s 기능"
 
-#: ../src/videoaggregatorquery.cpp:137
+#: ../src/musicaggregator/musicaggregatorquery.cpp:309
+#: ../src/videoaggregator/videoaggregatorquery.cpp:138
 #, c-format
 msgid "Results from %s"
 msgstr "%s에서 검색한 결과"
 
-#: tmp/mediascanner-music.ini.in.in.h:2
+#: ../src/myvideos/video-scope.cpp:201
+msgid ""
+"Nothing here yet...\n"
+"Make a video!"
+msgstr ""
+
+#: ../src/myvideos/video-scope.cpp:208
+msgid "Everything"
+msgstr "모두"
+
+#: ../src/myvideos/video-scope.cpp:210
+msgid "My Roll"
+msgstr "나의 롤"
+
+#: ../src/myvideos/video-scope.cpp:211
+msgid "Downloaded"
+msgstr "다운로드함"
+
+#: ../src/myvideos/video-scope.cpp:227 ../src/myvideos/video-scope.cpp:232
+#: tmp/mediascanner-video.ini.in.h:1
+msgid "My Videos"
+msgstr "내 동영상"
+
+#: ../src/myvideos/video-scope.cpp:331
+msgid "Play"
+msgstr "재생"
+
+#: tmp/mediascanner-music.ini.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr "이 우분투 플러그인은 장치에서 음악을 찾고, 대시에서 검색하여 볼 수 있도록 합니다."
 
-#: tmp/mediascanner-music.ini.in.in.h:3
+#: tmp/mediascanner-music.ini.in.h:3
 msgid "Search local music collection"
 msgstr "장치에 있는 음악 찾기"
 
-#: tmp/mediascanner-video.ini.in.in.h:2
+#: tmp/mediascanner-video.ini.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr "이 우분투 플러그인은 장치에서 동영상을 찾고, 대시에서 검색하여 볼 수 있도록 합니다."
 
-#: tmp/musicaggregator-settings.ini.in.in.h:1
-msgid "Display results from Grooveshark"
-msgstr "그루브샤크에서 검색한 결과 표시"
-
-#: tmp/musicaggregator-settings.ini.in.in.h:2
-msgid "Display results from 7digital"
-msgstr "7digital에서 결과 표시하기"
-
-#: tmp/musicaggregator-settings.ini.in.in.h:3
-msgid "Display results from Songkick"
-msgstr "송킥 결과 표시"
-
-#: tmp/musicaggregator.ini.in.in.h:1
+#: tmp/musicaggregator.ini.in.h:1
 msgid "Music"
 msgstr "음악"
 
-#: tmp/musicaggregator.ini.in.in.h:2
+#: tmp/musicaggregator.ini.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr "이 우분투 플러그인은 모든 음악 소스를 하나로 합치는 플러그인입니다."
 
-#: tmp/musicaggregator.ini.in.in.h:3
+#: tmp/musicaggregator.ini.in.h:3
 msgid "Search music"
 msgstr "음악 검색"
 
-#: tmp/videoaggregator-settings.ini.in.in.h:1
-msgid "Display results from YouTube"
-msgstr "유튜브에서 검색한 결과 표시"
-
-#: tmp/videoaggregator.ini.in.in.h:1
+#: tmp/videoaggregator.ini.in.h:1
 msgid "Video"
 msgstr "동영상"
 
-#: tmp/videoaggregator.ini.in.in.h:2
+#: tmp/videoaggregator.ini.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr "이 우분투 플러그인은 모든 동영상 소스를 하나로 합치는 플러그인입니다."
 
-#: tmp/videoaggregator.ini.in.in.h:3
+#: tmp/videoaggregator.ini.in.h:3
 msgid "Search video"
 msgstr "동영상 검색"
+
+#~ msgid "Grooveshark"
+#~ msgstr "그루브샤크"
+
+#~ msgid "Popular tracks on Grooveshark"
+#~ msgstr "그루브샤크의 인기 음악"
+
+#~ msgid "Display results from 7digital"
+#~ msgstr "7digital에서 결과 표시하기"
+
+#~ msgid "Display results from Grooveshark"
+#~ msgstr "그루브샤크에서 검색한 결과 표시"
+
+#~ msgid "Display results from YouTube"
+#~ msgstr "유튜브에서 검색한 결과 표시"
+
+#~ msgid "Display results from Songkick"
+#~ msgstr "송킥 결과 표시"
