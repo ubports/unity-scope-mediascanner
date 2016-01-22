@@ -472,7 +472,7 @@ void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply, Cat
                 }
             }
             if (art.empty())
-                art = scope.scope_directory() + "/" + MISSING_ALBUM_ART;
+                art = scope.make_artist_art_uri(artist, "");  // 7digital allows album to be empty.
             res["art"] = art;
         }
 
