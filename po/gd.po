@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-01-13 16:37+0000\n"
-"PO-Revision-Date: 2014-10-09 18:09+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2016-01-27 18:26+0000\n"
+"Last-Translator: Akerbeltz <fios@akerbeltz.org>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-21 05:54+0000\n"
-"X-Generator: Launchpad (build 17886)\n"
+"X-Launchpad-Export-Date: 2016-01-28 05:52+0000\n"
+"X-Generator: Launchpad (build 17902)\n"
 "Language: gd\n"
 
 #: ../src/mymusic/music-scope.cpp:291 ../src/mymusic/music-scope.cpp:300
@@ -25,13 +25,15 @@ msgstr "An ceòl agam"
 
 #: ../src/mymusic/music-scope.cpp:316 ../src/myvideos/video-scope.cpp:191
 msgid "Get started!"
-msgstr ""
+msgstr "Dèan toiseach-tòiseachaidh!"
 
 #: ../src/mymusic/music-scope.cpp:317 ../src/myvideos/video-scope.cpp:192
 msgid ""
 "Drag and drop items from another devices. Alternatively, load your files "
 "onto a SD card."
 msgstr ""
+"Slaod is leig às nithean o uidheam eile. Air neo, luchdaich na faidhlichean "
+"agad gu cairt SD."
 
 #: ../src/mymusic/music-scope.cpp:378 ../src/mymusic/music-scope.cpp:441
 msgid "Artists"
@@ -65,11 +67,11 @@ msgstr "7digital"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:225
 msgid "Popular tracks on SoundCloud"
-msgstr ""
+msgstr "Ceòl fèillmhor air SoundCloud"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:227
 msgid "SoundCloud"
-msgstr ""
+msgstr "SoundCloud"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:228
 msgid "Nearby Events on Songkick"
@@ -81,11 +83,11 @@ msgstr "Songkick"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:231
 msgid "Popular tracks on Youtube"
-msgstr ""
+msgstr "Ceòl fèillmhor air YouTube"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:233
 msgid "Youtube"
-msgstr ""
+msgstr "YouTube"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:307
 #: ../src/videoaggregator/videoaggregatorquery.cpp:136
@@ -104,6 +106,8 @@ msgid ""
 "Nothing here yet...\n"
 "Make a video!"
 msgstr ""
+"Chan eil dad an-seo fhathast...\n"
+"Dèan video!"
 
 #: ../src/myvideos/video-scope.cpp:208
 msgid "Everything"
