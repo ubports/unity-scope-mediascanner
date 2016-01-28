@@ -419,16 +419,23 @@ void MusicQuery::query_genres(unity::scopes::SearchReplyProxy const&reply) const
 
     auto const genres = scope.store->listGenres(filter);
     auto const genre_limit = std::min(static_cast<int>(genres.size()), 10);
+    int limit = MAX_RESULTS;
 
     for (int i = 0; i < genre_limit; i++)
     {
         auto cat = reply->register_category("genre:" + genres[i], genres[i], "", renderer); //FIXME: how to make genre i18n-friendly?
 
         filter.setGenre(genres[i]);
+        filter.setLimit(limit);
         for (const auto &album: scope.store->listAlbums(filter))
         {
+            limit--;
             if (!reply->push(create_album_result(cat, album)))
                 return;
+        }
+        if (limit <= 0)
+        {
+            break;
         }
     }
 }
@@ -528,6 +535,7 @@ void MusicQuery::query_songs_by_artist(unity::scopes::SearchReplyProxy const &re
 
     mediascanner::Filter filter;
     filter.setArtist(artist);
+    filter.setLimit(MAX_RESULTS);
 
     for (const auto &media : scope.store->listSongs(filter)) {
         if(!reply->push(create_song_result(cat, media)))
@@ -591,6 +599,7 @@ void MusicQuery::query_albums_by_genre(unity::scopes::SearchReplyProxy const&rep
 
     mediascanner::Filter filter;
     filter.setGenre(genre);
+    filter.setLimit(MAX_RESULTS);
     for (const auto &album: scope.store->listAlbums(filter))
     {
         if (!reply->push(create_album_result(cat, album)))
@@ -659,6 +668,7 @@ void MusicQuery::query_albums_by_artist(unity::scopes::SearchReplyProxy const &r
 
     mediascanner::Filter filter;
     filter.setArtist(artist);
+    filter.setLimit(MAX_RESULTS);
     auto const albums = scope.store->listAlbums(filter);
 
     for (const auto &album: albums)
