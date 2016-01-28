@@ -152,6 +152,7 @@ static const char AGGREGATED_CATEGORY_DEFINITION[] = R"(
   "template": {
     "category-layout": "grid",
     "card-size": "large",
+    "collapsed-rows": 3,
     "card-layout": "horizontal",
     "quick-preview-type" : "audio"
   },
