@@ -61,7 +61,7 @@ static const char GET_STARTED_CATEGORY_DEFINITION[] = R"(
     "title": "title",
     "art": {
         "field": "art",
-        "conciergeMode": true,
+        "conciergeMode": true
     },
     "summary" : "summary"
   }
@@ -152,6 +152,7 @@ static const char AGGREGATED_CATEGORY_DEFINITION[] = R"(
   "template": {
     "category-layout": "grid",
     "card-size": "large",
+    "collapsed-rows": 3,
     "card-layout": "horizontal",
     "quick-preview-type" : "audio"
   },

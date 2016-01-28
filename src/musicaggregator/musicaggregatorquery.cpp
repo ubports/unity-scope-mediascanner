@@ -349,7 +349,7 @@ void MusicAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
         {
             if (empty_search)
             {
-                metadata.set_cardinality(4);
+                metadata.set_cardinality(3);
             }
         }
         else if (scopes[i].id == MusicAggregatorScope::SOUNDCLOUD)
