@@ -460,20 +460,18 @@ void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply, Cat
 
         // find first non-empty album of this artist, needed to get artist-art
         {
-            std::string art;
+            std::string album_name;
             mediascanner::Filter filter;
             filter.setArtist(artist);
-            for (auto const album: scope.store->listAlbums(filter))
+            for (auto const& album: scope.store->listAlbums(filter))
             {
-                if (!album.getTitle().empty())
+                album_name = album.getTitle();
+                if (!album_name.empty())
                 {
-                    art = scope.make_artist_art_uri(artist, album.getTitle());
                     break;
                 }
             }
-            if (art.empty())
-                art = scope.scope_directory() + "/" + MISSING_ALBUM_ART;
-            res["art"] = art;
+            res.set_art(scope.make_artist_art_uri(artist, album_name));
         }
 
         if(!reply->push(res))

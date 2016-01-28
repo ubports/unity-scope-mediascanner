@@ -1,3 +1,10 @@
+unity-scope-mediascanner (0.2+16.04.20160114-0ubuntu2) UNRELEASED; urgency=medium
+
+  [ Michi Henning ]
+  * Try to retrieve artist image even if all songs for an artist have an empty album tag (LP:1378278).
+
+ -- Michi Henning <michi.henning@canonical.com>  Sat, 23 Jan 2016 06:45:13 +1000
+
 unity-scope-mediascanner (0.2+16.04.20160114-0ubuntu1) xenial; urgency=medium
 
   [ Michi Henning ]
