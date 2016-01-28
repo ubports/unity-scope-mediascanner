@@ -133,7 +133,8 @@ void VideoAggregatorQuery::run(unity::scopes::SearchReplyProxy const& parent_rep
                                                         : res.category()->renderer_template();
                             char title[500];
                             if (surfacing) {
-                                snprintf(title, sizeof(title), _("%s Features"), child_name.c_str());
+                                /* TRANSLATORS: Featured on YouTube, Featured on Grooveshark, etc. */
+                                snprintf(title, sizeof(title), _("Featured on %s"), child_name.c_str());
                             } else {
                                 snprintf(title, sizeof(title), _("Results from %s"), child_name.c_str());
                             }
