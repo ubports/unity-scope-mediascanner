@@ -7,102 +7,48 @@ msgid ""
 msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-01-13 16:37+0000\n"
-"PO-Revision-Date: 2014-10-10 16:24+0000\n"
+"POT-Creation-Date: 2016-01-20 02:34+1000\n"
+"PO-Revision-Date: 2016-01-29 18:44+0000\n"
 "Last-Translator: Víctor R. Ruiz <Unknown>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-21 05:54+0000\n"
-"X-Generator: Launchpad (build 17886)\n"
+"X-Launchpad-Export-Date: 2016-02-03 05:58+0000\n"
+"X-Generator: Launchpad (build 17908)\n"
 
-#: ../src/mymusic/music-scope.cpp:291 ../src/mymusic/music-scope.cpp:300
-#: tmp/mediascanner-music.ini.in.h:1
-msgid "My Music"
-msgstr "Mi música"
-
-#: ../src/mymusic/music-scope.cpp:316 ../src/myvideos/video-scope.cpp:191
-msgid "Get started!"
+#. TRANSLATORS: Featured on YouTube, Featured on Grooveshark, etc.
+#: ../src/videoaggregator/videoaggregatorquery.cpp:137
+#: ../src/musicaggregator/musicaggregatorquery.cpp:308
+#, c-format
+msgid "Featured on %s"
 msgstr ""
 
-#: ../src/mymusic/music-scope.cpp:317 ../src/myvideos/video-scope.cpp:192
+#: ../src/videoaggregator/videoaggregatorquery.cpp:139
+#: ../src/musicaggregator/musicaggregatorquery.cpp:310
+#, c-format
+msgid "Results from %s"
+msgstr "Resultados de %s"
+
+#: ../src/myvideos/video-scope.cpp:191 ../src/mymusic/music-scope.cpp:318
+msgid "Get started!"
+msgstr "¡Comience!"
+
+#: ../src/myvideos/video-scope.cpp:192 ../src/mymusic/music-scope.cpp:319
 msgid ""
 "Drag and drop items from another devices. Alternatively, load your files "
 "onto a SD card."
 msgstr ""
-
-#: ../src/mymusic/music-scope.cpp:378 ../src/mymusic/music-scope.cpp:441
-msgid "Artists"
-msgstr "Artistas"
-
-#: ../src/mymusic/music-scope.cpp:379 ../src/mymusic/music-scope.cpp:655
-#: ../src/mymusic/music-scope.cpp:703
-msgid "Albums"
-msgstr "Álbumes"
-
-#: ../src/mymusic/music-scope.cpp:380 ../src/mymusic/music-scope.cpp:490
-#: ../src/mymusic/music-scope.cpp:527
-msgid "Tracks"
-msgstr "Canciones"
-
-#: ../src/mymusic/music-scope.cpp:381
-msgid "Genres"
-msgstr "Géneros"
-
-#: ../src/mymusic/music-scope.cpp:780 ../src/mymusic/music-scope.cpp:812
-msgid "Play in music app"
-msgstr ""
-
-#: ../src/musicaggregator/musicaggregatorquery.cpp:222
-msgid "New albums from 7digital"
-msgstr "Álbumes nuevos de 7digital"
-
-#: ../src/musicaggregator/musicaggregatorquery.cpp:224
-msgid "7digital"
-msgstr "7digital"
-
-#: ../src/musicaggregator/musicaggregatorquery.cpp:225
-msgid "Popular tracks on SoundCloud"
-msgstr ""
-
-#: ../src/musicaggregator/musicaggregatorquery.cpp:227
-msgid "SoundCloud"
-msgstr ""
-
-#: ../src/musicaggregator/musicaggregatorquery.cpp:228
-msgid "Nearby Events on Songkick"
-msgstr "Eventos cercanos en Songkick"
-
-#: ../src/musicaggregator/musicaggregatorquery.cpp:230
-msgid "Songkick"
-msgstr "Songkick"
-
-#: ../src/musicaggregator/musicaggregatorquery.cpp:231
-msgid "Popular tracks on Youtube"
-msgstr ""
-
-#: ../src/musicaggregator/musicaggregatorquery.cpp:233
-msgid "Youtube"
-msgstr ""
-
-#: ../src/musicaggregator/musicaggregatorquery.cpp:307
-#: ../src/videoaggregator/videoaggregatorquery.cpp:136
-#, c-format
-msgid "%s Features"
-msgstr "Destacados de %s"
-
-#: ../src/musicaggregator/musicaggregatorquery.cpp:309
-#: ../src/videoaggregator/videoaggregatorquery.cpp:138
-#, c-format
-msgid "Results from %s"
-msgstr "Resultados de %s"
+"Arrastre elementos desde otros dispositivos. O bien, copie los ficheros en "
+"una memoria externa."
 
 #: ../src/myvideos/video-scope.cpp:201
 msgid ""
 "Nothing here yet...\n"
 "Make a video!"
 msgstr ""
+"No hay nada aquí aún...\n"
+"¡Grabe un vídeo!"
 
 #: ../src/myvideos/video-scope.cpp:208
 msgid "Everything"
@@ -124,6 +70,65 @@ msgstr "Mis vídeos"
 #: ../src/myvideos/video-scope.cpp:331
 msgid "Play"
 msgstr "Reproducir"
+
+#: ../src/mymusic/music-scope.cpp:293 ../src/mymusic/music-scope.cpp:302
+#: tmp/mediascanner-music.ini.in.h:1
+msgid "My Music"
+msgstr "Mi música"
+
+#: ../src/mymusic/music-scope.cpp:380 ../src/mymusic/music-scope.cpp:443
+msgid "Artists"
+msgstr "Artistas"
+
+#: ../src/mymusic/music-scope.cpp:381 ../src/mymusic/music-scope.cpp:657
+#: ../src/mymusic/music-scope.cpp:705
+msgid "Albums"
+msgstr "Álbumes"
+
+#: ../src/mymusic/music-scope.cpp:382 ../src/mymusic/music-scope.cpp:492
+#: ../src/mymusic/music-scope.cpp:529
+msgid "Tracks"
+msgstr "Canciones"
+
+#: ../src/mymusic/music-scope.cpp:383
+msgid "Genres"
+msgstr "Géneros"
+
+#: ../src/mymusic/music-scope.cpp:784 ../src/mymusic/music-scope.cpp:818
+msgid "Play in music app"
+msgstr "Reproducir"
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:222
+msgid "New albums from 7digital"
+msgstr "Álbumes nuevos de 7digital"
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:224
+msgid "7digital"
+msgstr "7digital"
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:225
+msgid "Popular tracks on SoundCloud"
+msgstr "Temas populares en SoundCloud"
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:227
+msgid "SoundCloud"
+msgstr "SoundCloud"
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:228
+msgid "Nearby Events on Songkick"
+msgstr "Eventos cercanos en Songkick"
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:230
+msgid "Songkick"
+msgstr "Songkick"
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:231
+msgid "Popular tracks on Youtube"
+msgstr "Temas populares en Youtube"
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:233
+msgid "Youtube"
+msgstr "Youtube"
 
 #: tmp/mediascanner-music.ini.in.h:2
 msgid ""
@@ -189,6 +194,10 @@ msgstr "Buscar vídeos"
 
 #~ msgid "Display results from YouTube"
 #~ msgstr "Mostrar resultados de YouTube"
+
+#, c-format
+#~ msgid "%s Features"
+#~ msgstr "Destacados de %s"
 
 #~ msgid "Display results from Songkick"
 #~ msgstr "Mostrar resultados de Songkick"

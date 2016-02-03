@@ -1,3 +1,24 @@
+unity-scope-mediascanner (0.2+16.04.20160128-0ubuntu1) xenial; urgency=medium
+
+  [ Michi Henning ]
+  * Try to retrieve artist image even if all songs for an artist have an empty album tag (LP:1378278).
+  * Fixed ambiguous string: "%s Features" -> "Featured on %s". (LP:
+    #1351696)
+
+  [ CI Train Bot ]
+  * Resync trunk. added: po/eo.po
+
+  [ James Henstridge ]
+  * Limit the number of results returns for the genres departments, and
+    for albums/songs of artists results.
+
+  [ Marcus Tomlinson ]
+  * Fix My Music "concierge" card and render 3 results in the "My Music"
+    category of the Music aggregator (as per design) (LP: #1539068,
+    #1539070)
+
+ -- James Henstridge <james.henstridge@canonical.com>  Thu, 28 Jan 2016 14:14:58 +0000
+
 unity-scope-mediascanner (0.2+16.04.20160114-0ubuntu1) xenial; urgency=medium
 
   [ Michi Henning ]

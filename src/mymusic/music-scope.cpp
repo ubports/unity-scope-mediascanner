@@ -61,7 +61,7 @@ static const char GET_STARTED_CATEGORY_DEFINITION[] = R"(
     "title": "title",
     "art": {
         "field": "art",
-        "conciergeMode": true,
+        "conciergeMode": true
     },
     "summary" : "summary"
   }
@@ -152,6 +152,7 @@ static const char AGGREGATED_CATEGORY_DEFINITION[] = R"(
   "template": {
     "category-layout": "grid",
     "card-size": "large",
+    "collapsed-rows": 3,
     "card-layout": "horizontal",
     "quick-preview-type" : "audio"
   },
@@ -419,16 +420,23 @@ void MusicQuery::query_genres(unity::scopes::SearchReplyProxy const&reply) const
 
     auto const genres = scope.store->listGenres(filter);
     auto const genre_limit = std::min(static_cast<int>(genres.size()), 10);
+    int limit = MAX_RESULTS;
 
     for (int i = 0; i < genre_limit; i++)
     {
         auto cat = reply->register_category("genre:" + genres[i], genres[i], "", renderer); //FIXME: how to make genre i18n-friendly?
 
         filter.setGenre(genres[i]);
+        filter.setLimit(limit);
         for (const auto &album: scope.store->listAlbums(filter))
         {
+            limit--;
             if (!reply->push(create_album_result(cat, album)))
                 return;
+        }
+        if (limit <= 0)
+        {
+            break;
         }
     }
 }
@@ -460,20 +468,18 @@ void MusicQuery::query_artists(unity::scopes::SearchReplyProxy const& reply, Cat
 
         // find first non-empty album of this artist, needed to get artist-art
         {
-            std::string art;
+            std::string album_name;
             mediascanner::Filter filter;
             filter.setArtist(artist);
-            for (auto const album: scope.store->listAlbums(filter))
+            for (auto const& album: scope.store->listAlbums(filter))
             {
-                if (!album.getTitle().empty())
+                album_name = album.getTitle();
+                if (!album_name.empty())
                 {
-                    art = scope.make_artist_art_uri(artist, album.getTitle());
                     break;
                 }
             }
-            if (art.empty())
-                art = scope.scope_directory() + "/" + MISSING_ALBUM_ART;
-            res["art"] = art;
+            res.set_art(scope.make_artist_art_uri(artist, album_name));
         }
 
         if(!reply->push(res))
@@ -519,6 +525,7 @@ void MusicQuery::query_songs_by_artist(unity::scopes::SearchReplyProxy const &re
 
     mediascanner::Filter filter;
     filter.setArtist(artist);
+    filter.setLimit(MAX_RESULTS);
 
     for (const auto &media : scope.store->listSongs(filter)) {
         if(!reply->push(create_song_result(cat, media)))
@@ -582,6 +589,7 @@ void MusicQuery::query_albums_by_genre(unity::scopes::SearchReplyProxy const&rep
 
     mediascanner::Filter filter;
     filter.setGenre(genre);
+    filter.setLimit(MAX_RESULTS);
     for (const auto &album: scope.store->listAlbums(filter))
     {
         if (!reply->push(create_album_result(cat, album)))
@@ -650,6 +658,7 @@ void MusicQuery::query_albums_by_artist(unity::scopes::SearchReplyProxy const &r
 
     mediascanner::Filter filter;
     filter.setArtist(artist);
+    filter.setLimit(MAX_RESULTS);
     auto const albums = scope.store->listAlbums(filter);
 
     for (const auto &album: albums)
