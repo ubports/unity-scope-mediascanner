@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-01-20 02:34+1000\n"
-"PO-Revision-Date: 2016-01-27 18:26+0000\n"
-"Last-Translator: Akerbeltz <fios@akerbeltz.org>\n"
+"PO-Revision-Date: 2016-02-04 10:13+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-02-03 05:58+0000\n"
+"X-Launchpad-Export-Date: 2016-02-05 06:28+0000\n"
 "X-Generator: Launchpad (build 17908)\n"
 "Language: gd\n"
 
@@ -23,7 +23,7 @@ msgstr ""
 #: ../src/musicaggregator/musicaggregatorquery.cpp:308
 #, c-format
 msgid "Featured on %s"
-msgstr ""
+msgstr "Brosnaichte air %s"
 
 #: ../src/videoaggregator/videoaggregatorquery.cpp:139
 #: ../src/musicaggregator/musicaggregatorquery.cpp:310
