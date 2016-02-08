@@ -44,7 +44,7 @@
 static const char THUMBNAILER_SCHEMA[] = "com.canonical.Unity.Thumbnailer";
 static const char THUMBNAILER_API_KEY[] = "dash-ubuntu-com-key";
 
-static const char MISSING_ALBUM_ART[] = "album_missing.png";
+static const char MISSING_ALBUM_ART[] = "album_missing.svg";
 static const char SONGS_CATEGORY_ICON[] = "/usr/share/icons/unity-icon-theme/places/svg/group-songs.svg";
 
 static const char GET_STARTED_CATEGORY_DEFINITION[] = R"(
