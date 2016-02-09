@@ -1,3 +1,13 @@
+unity-scope-mediascanner (0.2+16.04.20160209.1-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ Rodney Dawes ]
+  * No change rebuild for new jsoncpp.
+
+ -- Rodney Dawes <ci-train-bot@canonical.com>  Tue, 09 Feb 2016 16:42:21 +0000
+
 unity-scope-mediascanner (0.2+16.04.20160128-0ubuntu1) xenial; urgency=medium
 
   [ Michi Henning ]
