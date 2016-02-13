@@ -8,21 +8,21 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-01-20 02:34+1000\n"
-"PO-Revision-Date: 2014-10-12 09:37+0000\n"
+"PO-Revision-Date: 2016-02-12 23:19+0000\n"
 "Last-Translator: Jared Norris <jarednorris@ubuntu.com>\n"
 "Language-Team: English (Australia) <en_AU@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-02-03 05:58+0000\n"
-"X-Generator: Launchpad (build 17908)\n"
+"X-Launchpad-Export-Date: 2016-02-13 05:38+0000\n"
+"X-Generator: Launchpad (build 17925)\n"
 
 #. TRANSLATORS: Featured on YouTube, Featured on Grooveshark, etc.
 #: ../src/videoaggregator/videoaggregatorquery.cpp:137
 #: ../src/musicaggregator/musicaggregatorquery.cpp:308
 #, c-format
 msgid "Featured on %s"
-msgstr ""
+msgstr "Featured on %s"
 
 #: ../src/videoaggregator/videoaggregatorquery.cpp:139
 #: ../src/musicaggregator/musicaggregatorquery.cpp:310
@@ -32,19 +32,23 @@ msgstr "Results from %s"
 
 #: ../src/myvideos/video-scope.cpp:191 ../src/mymusic/music-scope.cpp:318
 msgid "Get started!"
-msgstr ""
+msgstr "Get started!"
 
 #: ../src/myvideos/video-scope.cpp:192 ../src/mymusic/music-scope.cpp:319
 msgid ""
 "Drag and drop items from another devices. Alternatively, load your files "
 "onto a SD card."
 msgstr ""
+"Drag and drop items from another devices. Alternatively, load your files "
+"onto a SD card."
 
 #: ../src/myvideos/video-scope.cpp:201
 msgid ""
 "Nothing here yet...\n"
 "Make a video!"
 msgstr ""
+"Nothing here yet...\n"
+"Make a video!"
 
 #: ../src/myvideos/video-scope.cpp:208
 msgid "Everything"
@@ -104,11 +108,11 @@ msgstr "7digital"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:225
 msgid "Popular tracks on SoundCloud"
-msgstr ""
+msgstr "Popular tracks on SoundCloud"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:227
 msgid "SoundCloud"
-msgstr ""
+msgstr "SoundCloud"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:228
 msgid "Nearby Events on Songkick"
@@ -120,11 +124,11 @@ msgstr "Songkick"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:231
 msgid "Popular tracks on Youtube"
-msgstr ""
+msgstr "Popular tracks on Youtube"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:233
 msgid "Youtube"
-msgstr ""
+msgstr "Youtube"
 
 #: tmp/mediascanner-music.ini.in.h:2
 msgid ""
