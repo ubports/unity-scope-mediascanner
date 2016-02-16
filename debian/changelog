@@ -1,3 +1,15 @@
+unity-scope-mediascanner (0.2+16.04.20160216-0ubuntu1) xenial; urgency=medium
+
+  [ CI Train Bot ]
+  * Resync trunk.
+
+  [ Pawel Stolowski ]
+  * Attach all songs from the category to the playlists of each card,
+    instead of all songs from card's album. (LP: #1539661)
+  * New fallback icon.
+
+ -- Pawel Stolowski <ci-train-bot@canonical.com>  Tue, 16 Feb 2016 10:04:31 +0000
+
 unity-scope-mediascanner (0.2+16.04.20160209.1-0ubuntu1) xenial; urgency=medium
 
   [ CI Train Bot ]
