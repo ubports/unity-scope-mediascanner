@@ -504,24 +504,13 @@ void MusicQuery::query_songs(unity::scopes::SearchReplyProxy const&reply, Catego
         filter.setReverse(true);
     }
 
-    for (const auto &media : scope.store->query(query().query_string(), AudioMedia, filter)) {
-        std::vector<mediascanner::MediaFile> album_songs;
-        if (surfacing && media.getAlbum().size() > 0)
-        {
-            // query for all songs from same album as current song; for use in playlist
-            mediascanner::Filter album_songs_filter;
-            album_songs_filter.setAlbum(media.getAlbum());
-            if (media.getAlbumArtist().size() > 0)
-            {
-                album_songs_filter.setAlbumArtist(media.getAlbumArtist());
-            }
-            else
-            {
-                album_songs_filter.setArtist(media.getAuthor());
-            }
-            album_songs = scope.store->listSongs(album_songs_filter);
-        }
-        if(!reply->push(create_song_result(cat, media, surfacing, album_songs)))
+    auto const songs = scope.store->query(query().query_string(), AudioMedia, filter);
+    static const std::vector<mediascanner::MediaFile> empty_playlist;
+
+    for (const auto &media : songs) {
+        // Inline playback should only be used in surfacing mode.
+        // Attach the playlist with all songs to every card (same playlist for every card).
+        if(!reply->push(create_song_result(cat, media, surfacing, surfacing ? songs : empty_playlist)))
         {
             return;
         }
