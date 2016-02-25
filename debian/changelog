@@ -1,3 +1,10 @@
+unity-scope-mediascanner (0.2+16.04.20160225-0ubuntu1) xenial; urgency=medium
+
+  * Disable artist biography download, since the online service always
+    returns an empty biography. (LP: #1549616)
+
+ -- James Henstridge <james.henstridge@canonical.com>  Thu, 25 Feb 2016 05:41:04 +0000
+
 unity-scope-mediascanner (0.2+16.04.20160216-0ubuntu1) xenial; urgency=medium
 
   [ CI Train Bot ]
