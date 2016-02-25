@@ -602,6 +602,13 @@ void MusicQuery::query_albums_by_genre(unity::scopes::SearchReplyProxy const&rep
 std::string MusicQuery::fetch_biography_sync(const std::string& artist, const std::string &album) const
 {
     std::string bio_text;
+    /* Biography download is currently disabled because the
+     * dash.ubuntu.com API always returns an empty string (in turn
+     * because 7digital doesn't return any data).
+     *
+     * https://bugs.launchpad.net/bugs/1549616
+     */
+#ifdef ENABLE_ARTIST_BIO
     http::Request::Configuration config;
     auto uri = core::net::make_uri(
             "https://dash.ubuntu.com",
@@ -641,7 +648,7 @@ std::string MusicQuery::fetch_biography_sync(const std::string& artist, const st
     {
         std::cerr << "Failed to get artist info: " << e.what() << std::endl;
     }
-
+#endif
     return bio_text;
 }
 
