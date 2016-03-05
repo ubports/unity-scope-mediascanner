@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-01-20 02:34+1000\n"
-"PO-Revision-Date: 2016-02-10 20:59+0000\n"
-"Last-Translator: Bojan Bogdanović <Unknown>\n"
+"PO-Revision-Date: 2016-03-04 15:31+0000\n"
+"Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-03-03 06:13+0000\n"
-"X-Generator: Launchpad (build 17925)\n"
+"X-Launchpad-Export-Date: 2016-03-05 06:20+0000\n"
+"X-Generator: Launchpad (build 17936)\n"
 
 #. TRANSLATORS: Featured on YouTube, Featured on Grooveshark, etc.
 #: ../src/videoaggregator/videoaggregatorquery.cpp:137
@@ -39,12 +39,16 @@ msgid ""
 "Drag and drop items from another devices. Alternatively, load your files "
 "onto a SD card."
 msgstr ""
+"Превуците и убаците ставке са других уређаја. Или учитајте ваше датотеке на "
+"СД картицу."
 
 #: ../src/myvideos/video-scope.cpp:201
 msgid ""
 "Nothing here yet...\n"
 "Make a video!"
 msgstr ""
+"Овде још увек нема ничега...\n"
+"Направите видео!"
 
 #: ../src/myvideos/video-scope.cpp:208
 msgid "Everything"
@@ -96,23 +100,23 @@ msgstr "Пусти у програму за музику"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:222
 msgid "New albums from 7digital"
-msgstr ""
+msgstr "Нови албуми са 7дигитала"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:224
 msgid "7digital"
-msgstr ""
+msgstr "7дигитал"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:225
 msgid "Popular tracks on SoundCloud"
-msgstr ""
+msgstr "Популарне нумере на SoundCloud-у"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:227
 msgid "SoundCloud"
-msgstr ""
+msgstr "SoundCloud"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:228
 msgid "Nearby Events on Songkick"
-msgstr ""
+msgstr "Блиски догађаји на Сонгкику"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:230
 msgid "Songkick"
@@ -120,17 +124,19 @@ msgstr "Сонгкик"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:231
 msgid "Popular tracks on Youtube"
-msgstr ""
+msgstr "Популарне нумере на Јутубу"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:233
 msgid "Youtube"
-msgstr ""
+msgstr "Јутуб"
 
 #: tmp/mediascanner-music.ini.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
+"Ово је додатак за Убунтуову претрагу који проналази музику на уређају и "
+"омогућава да се може претраживати и приказивати у Полици."
 
 #: tmp/mediascanner-music.ini.in.h:3
 msgid "Search local music collection"
@@ -141,6 +147,8 @@ msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
+"Ово је додатак за Убунтуову претрагу који проналази видео снимке на уређају "
+"и омогућава да се могу претраживати и приказивати у Полици."
 
 #: tmp/musicaggregator.ini.in.h:1
 msgid "Music"
@@ -150,6 +158,7 @@ msgstr "Музика"
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr ""
+"Ово је додатак за Убунтуову претрагу који спаја све изворе музике у један."
 
 #: tmp/musicaggregator.ini.in.h:3
 msgid "Search music"
@@ -163,6 +172,8 @@ msgstr "Видео"
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr ""
+"Ово је додатак за Убунтуову претрагу који спаја све изворе видео снимака у "
+"један."
 
 #: tmp/videoaggregator.ini.in.h:3
 msgid "Search video"
