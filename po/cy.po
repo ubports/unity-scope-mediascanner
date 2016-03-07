@@ -1,0 +1,178 @@
+# Welsh translation for unity-scope-mediascanner
+# Copyright (c) 2016 Rosetta Contributors and Canonical Ltd 2016
+# This file is distributed under the same license as the unity-scope-mediascanner package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: unity-scope-mediascanner\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2016-01-20 02:34+1000\n"
+"PO-Revision-Date: 2016-03-06 20:34+0000\n"
+"Last-Translator: Owen Llywelyn <owen.llywelyn@gmail.com>\n"
+"Language-Team: Welsh <cy@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2016-03-07 05:58+0000\n"
+"X-Generator: Launchpad (build 17936)\n"
+
+#. TRANSLATORS: Featured on YouTube, Featured on Grooveshark, etc.
+#: ../src/videoaggregator/videoaggregatorquery.cpp:137
+#: ../src/musicaggregator/musicaggregatorquery.cpp:308
+#, c-format
+msgid "Featured on %s"
+msgstr "Amlygwyd ar %s"
+
+#: ../src/videoaggregator/videoaggregatorquery.cpp:139
+#: ../src/musicaggregator/musicaggregatorquery.cpp:310
+#, c-format
+msgid "Results from %s"
+msgstr "Canlyniadau o %s"
+
+#: ../src/myvideos/video-scope.cpp:191 ../src/mymusic/music-scope.cpp:318
+msgid "Get started!"
+msgstr "Cychwyn!"
+
+#: ../src/myvideos/video-scope.cpp:192 ../src/mymusic/music-scope.cpp:319
+msgid ""
+"Drag and drop items from another devices. Alternatively, load your files "
+"onto a SD card."
+msgstr ""
+"Cydio a gollwng eitemau o ddyfeisiau eraill. Neu llwythwch ffeiliau ar "
+"gerdyn SD."
+
+#: ../src/myvideos/video-scope.cpp:201
+msgid ""
+"Nothing here yet...\n"
+"Make a video!"
+msgstr ""
+"Dim byd yma eto...\n"
+"Crewch fideo!"
+
+#: ../src/myvideos/video-scope.cpp:208
+msgid "Everything"
+msgstr "Popeth"
+
+#: ../src/myvideos/video-scope.cpp:210
+msgid "My Roll"
+msgstr "Fy Rol"
+
+#: ../src/myvideos/video-scope.cpp:211
+msgid "Downloaded"
+msgstr "Llwythwyd i lawr"
+
+#: ../src/myvideos/video-scope.cpp:227 ../src/myvideos/video-scope.cpp:232
+#: tmp/mediascanner-video.ini.in.h:1
+msgid "My Videos"
+msgstr "Fy Fideos"
+
+#: ../src/myvideos/video-scope.cpp:331
+msgid "Play"
+msgstr "Chwarae"
+
+#: ../src/mymusic/music-scope.cpp:293 ../src/mymusic/music-scope.cpp:302
+#: tmp/mediascanner-music.ini.in.h:1
+msgid "My Music"
+msgstr "Fy Ngherddoriaeth"
+
+#: ../src/mymusic/music-scope.cpp:380 ../src/mymusic/music-scope.cpp:443
+msgid "Artists"
+msgstr "Artistiaid"
+
+#: ../src/mymusic/music-scope.cpp:381 ../src/mymusic/music-scope.cpp:657
+#: ../src/mymusic/music-scope.cpp:705
+msgid "Albums"
+msgstr "Albymau"
+
+#: ../src/mymusic/music-scope.cpp:382 ../src/mymusic/music-scope.cpp:492
+#: ../src/mymusic/music-scope.cpp:529
+msgid "Tracks"
+msgstr "Traciau"
+
+#: ../src/mymusic/music-scope.cpp:383
+msgid "Genres"
+msgstr "Mathau"
+
+#: ../src/mymusic/music-scope.cpp:784 ../src/mymusic/music-scope.cpp:818
+msgid "Play in music app"
+msgstr "Chwarae yn yr ap cerddoriaeth"
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:222
+msgid "New albums from 7digital"
+msgstr "Albymau newydd o 7digital"
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:224
+msgid "7digital"
+msgstr "7digital"
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:225
+msgid "Popular tracks on SoundCloud"
+msgstr "Traciau poblogaidd ar SoundCloud"
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:227
+msgid "SoundCloud"
+msgstr "SoundCloud"
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:228
+msgid "Nearby Events on Songkick"
+msgstr "Digwyddiadau Cyfagos ar Songkick"
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:230
+msgid "Songkick"
+msgstr "Songkick"
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:231
+msgid "Popular tracks on Youtube"
+msgstr "Traciau poblogaidd ar YouTube"
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:233
+msgid "Youtube"
+msgstr "Youtube"
+
+#: tmp/mediascanner-music.ini.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that scans the device for music and allows "
+"it to be searched and displayed in the Dash."
+msgstr ""
+"Ategyn chwilio Ubuntu yw hwn sy'n sganio eich dyfais am gerddoriaeth a'i "
+"arddangos yn y Dash."
+
+#: tmp/mediascanner-music.ini.in.h:3
+msgid "Search local music collection"
+msgstr "Chwilio casgliad cerddoriaeth lleol"
+
+#: tmp/mediascanner-video.ini.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that scans the device for videos and allows "
+"them to be searched and displayed in the Dash."
+msgstr ""
+"Ategyn chwilio Ubuntu yw hwn sy'n sganio eich dyfais am fideos a'i arddangos "
+"yn y Dash."
+
+#: tmp/musicaggregator.ini.in.h:1
+msgid "Music"
+msgstr "Cerddoriaeth"
+
+#: tmp/musicaggregator.ini.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that merges all music sources into one."
+msgstr ""
+"Ategyn chwilio Ubuntu yw hwn sy'n cyfuno ffynonellau cerddoriaeth yn un."
+
+#: tmp/musicaggregator.ini.in.h:3
+msgid "Search music"
+msgstr "Chwilio cerddoriaeth"
+
+#: tmp/videoaggregator.ini.in.h:1
+msgid "Video"
+msgstr "Fideo"
+
+#: tmp/videoaggregator.ini.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that merges all video sources into one."
+msgstr "Ategyn chwilio Ubuntu yw hwn sy'n cyfuno ffynonellau fideo yn un."
+
+#: tmp/videoaggregator.ini.in.h:3
+msgid "Search video"
+msgstr "Chwilio fideo"
