@@ -1,16 +1,16 @@
-# Asturian translation for unity-scope-mediascanner
-# Copyright (c) 2014 Rosetta Contributors and Canonical Ltd 2014
+# Slovak translation for unity-scope-mediascanner
+# Copyright (c) 2016 Rosetta Contributors and Canonical Ltd 2016
 # This file is distributed under the same license as the unity-scope-mediascanner package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: unity-scope-mediascanner\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-01-20 02:34+1000\n"
-"PO-Revision-Date: 2016-03-12 00:22+0000\n"
-"Last-Translator: enolp <enolp@softastur.org>\n"
-"Language-Team: Asturian <ast@li.org>\n"
+"PO-Revision-Date: 2016-03-11 12:29+0000\n"
+"Last-Translator: P_E_T_O <Unknown>\n"
+"Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,85 +22,85 @@ msgstr ""
 #: ../src/musicaggregator/musicaggregatorquery.cpp:308
 #, c-format
 msgid "Featured on %s"
-msgstr ""
+msgstr "Najlepšie na %s"
 
 #: ../src/videoaggregator/videoaggregatorquery.cpp:139
 #: ../src/musicaggregator/musicaggregatorquery.cpp:310
 #, c-format
 msgid "Results from %s"
-msgstr "Resultaos de %s"
+msgstr "Výsledky z %s"
 
 #: ../src/myvideos/video-scope.cpp:191 ../src/mymusic/music-scope.cpp:318
 msgid "Get started!"
-msgstr "¡Entamemos!"
+msgstr "Začíname!"
 
 #: ../src/myvideos/video-scope.cpp:192 ../src/mymusic/music-scope.cpp:319
 msgid ""
 "Drag and drop items from another devices. Alternatively, load your files "
 "onto a SD card."
 msgstr ""
-"Arrastra y suelta los elementos d'otros preseos. De mou alternativu, carga "
-"los tos preseos nun tarxeta SD."
+"Pretiahnite položky z iných zariadení. Prípadne nahrajte vaše súbory na SD "
+"kartu."
 
 #: ../src/myvideos/video-scope.cpp:201
 msgid ""
 "Nothing here yet...\n"
 "Make a video!"
 msgstr ""
-"Equí entá nun hai nada...\n"
-"¡Fai un videu!"
+"Zatiaľ tu nič nie je...\n"
+"Spravte si video!"
 
 #: ../src/myvideos/video-scope.cpp:208
 msgid "Everything"
-msgstr "Too"
+msgstr "Všetko"
 
 #: ../src/myvideos/video-scope.cpp:210
 msgid "My Roll"
-msgstr "My Roll"
+msgstr "Môj valec"
 
 #: ../src/myvideos/video-scope.cpp:211
 msgid "Downloaded"
-msgstr "Descargáu"
+msgstr "Stiahnuté"
 
 #: ../src/myvideos/video-scope.cpp:227 ../src/myvideos/video-scope.cpp:232
 #: tmp/mediascanner-video.ini.in.h:1
 msgid "My Videos"
-msgstr "Los mios vídeos"
+msgstr "Moje videá"
 
 #: ../src/myvideos/video-scope.cpp:331
 msgid "Play"
-msgstr "Reproducir"
+msgstr "Prehrať"
 
 #: ../src/mymusic/music-scope.cpp:293 ../src/mymusic/music-scope.cpp:302
 #: tmp/mediascanner-music.ini.in.h:1
 msgid "My Music"
-msgstr "La mio música"
+msgstr "Moja hudba"
 
 #: ../src/mymusic/music-scope.cpp:380 ../src/mymusic/music-scope.cpp:443
 msgid "Artists"
-msgstr "Artistes"
+msgstr "Umelci"
 
 #: ../src/mymusic/music-scope.cpp:381 ../src/mymusic/music-scope.cpp:657
 #: ../src/mymusic/music-scope.cpp:705
 msgid "Albums"
-msgstr "Álbumes"
+msgstr "Albumy"
 
 #: ../src/mymusic/music-scope.cpp:382 ../src/mymusic/music-scope.cpp:492
 #: ../src/mymusic/music-scope.cpp:529
 msgid "Tracks"
-msgstr "Pistes"
+msgstr "Skladby"
 
 #: ../src/mymusic/music-scope.cpp:383
 msgid "Genres"
-msgstr "Xéneros"
+msgstr "Žánre"
 
 #: ../src/mymusic/music-scope.cpp:784 ../src/mymusic/music-scope.cpp:818
 msgid "Play in music app"
-msgstr "Reproducir n'aplicación de música."
+msgstr "Prehrať v hudobnej aplikácii"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:222
 msgid "New albums from 7digital"
-msgstr "Álbumes nuevos de 7digital"
+msgstr "Nové albumy z 7digital"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:224
 msgid "7digital"
@@ -108,7 +108,7 @@ msgstr "7digital"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:225
 msgid "Popular tracks on SoundCloud"
-msgstr "Pistes populares en SoundCloud"
+msgstr "Populárne skladby na SoundCloud"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:227
 msgid "SoundCloud"
@@ -116,7 +116,7 @@ msgstr "SoundCloud"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:228
 msgid "Nearby Events on Songkick"
-msgstr "Eventos próximos en Songkick"
+msgstr "Udalosti v blízkosti na Songkick"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:230
 msgid "Songkick"
@@ -124,80 +124,58 @@ msgstr "Songkick"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:231
 msgid "Popular tracks on Youtube"
-msgstr "Pistes populares en YouTube"
+msgstr "Populárne skladby na Youtube"
 
 #: ../src/musicaggregator/musicaggregatorquery.cpp:233
 msgid "Youtube"
-msgstr "YouTube"
+msgstr "Youtube"
 
 #: tmp/mediascanner-music.ini.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for music and allows "
 "it to be searched and displayed in the Dash."
 msgstr ""
-"Esto ye un complementu d'Ubuntu qu'esplora nel preséu a la gueta de música "
-"p'amosala nel tableru"
+"Je to Ubuntu vyhľadávací plugin, ktorý skenuje hudbu na zariadení a "
+"umožňuje, aby bola vyhľadaná a zobrazená na Dash."
 
 #: tmp/mediascanner-music.ini.in.h:3
 msgid "Search local music collection"
-msgstr "Guetar en coleición musical llocal"
+msgstr "Vyhľadávať lokálnu zbierku hudby"
 
 #: tmp/mediascanner-video.ini.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that scans the device for videos and allows "
 "them to be searched and displayed in the Dash."
 msgstr ""
-"Esto ye un complementu d'Ubuntu qu'esplora nel preséu a la gueta de vídeos "
-"p'amosalos nel tableru"
+"Je to Ubuntu vyhľadávací plugin, ktorý skenuje videá na zariadení a "
+"umožňuje, aby boli vyhľadané a zobrazené na Dash."
 
 #: tmp/musicaggregator.ini.in.h:1
 msgid "Music"
-msgstr "Música"
+msgstr "Hudba"
 
 #: tmp/musicaggregator.ini.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all music sources into one."
 msgstr ""
-"Esto ye un complementu de gueta d'Ubuntu que combina toles fontes de música "
-"nuna."
+"Je to Ubuntu vyhľadávací plugin, ktorý zlučuje všetky zdroje hudby do "
+"jedného."
 
 #: tmp/musicaggregator.ini.in.h:3
 msgid "Search music"
-msgstr "Guetar música"
+msgstr "Hľadať hudbu"
 
 #: tmp/videoaggregator.ini.in.h:1
 msgid "Video"
-msgstr "Videu"
+msgstr "Video"
 
 #: tmp/videoaggregator.ini.in.h:2
 msgid ""
 "This is an Ubuntu search plugin that merges all video sources into one."
 msgstr ""
-"Esto ye un complementu de gueta d'Ubuntu que combina toles fontes de videu "
-"nuna."
+"Je to Ubuntu vyhľadávací plugin, ktorý zlučuje všetky zdroje videí do "
+"jedného."
 
 #: tmp/videoaggregator.ini.in.h:3
 msgid "Search video"
-msgstr "Guetar videu"
-
-#~ msgid "Grooveshark"
-#~ msgstr "Grooveshark"
-
-#~ msgid "Popular tracks on Grooveshark"
-#~ msgstr "Canciones populares en Grooveshark"
-
-#, c-format
-#~ msgid "%s Features"
-#~ msgstr "%s Carauterístiques"
-
-#~ msgid "Display results from 7digital"
-#~ msgstr "Amosar resultaos de 7digital"
-
-#~ msgid "Display results from Grooveshark"
-#~ msgstr "Amosar resultaos de Grooveshark"
-
-#~ msgid "Display results from YouTube"
-#~ msgstr "Amosar resultaos de YouTube"
-
-#~ msgid "Display results from Songkick"
-#~ msgstr "Amosar resultaos de Songkick"
+msgstr "Hľadať video"
