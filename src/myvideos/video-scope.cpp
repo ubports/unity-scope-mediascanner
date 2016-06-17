@@ -314,13 +314,20 @@ void VideoPreview::run(PreviewReplyProxy const& reply)
     header.add_attribute_mapping("title", "title");
 
     std::string uri = result().uri();
+    std::string path;
     if (uri.find("file://") == 0) {
-        uri = "video://" + uri.substr(7); // replace file:// with video://
+        path = uri.substr(7);
+        uri = "video://" + path; // replace file:// with video://
     }
+
+    VariantMap share_data;
+    share_data["uri"] = Variant(imagePath.toStdString());
+    share_data["content-type"] = Variant("videos");
 
     PreviewWidget video("video", "video");
     video.add_attribute_value("source", Variant(uri));
     video.add_attribute_mapping("screenshot", "art");
+    video.add_attribute_value("share-data", Variant(share_data));
 
     PreviewWidget actions("actions", "actions");
     {
