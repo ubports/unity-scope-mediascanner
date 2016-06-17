@@ -321,7 +321,7 @@ void VideoPreview::run(PreviewReplyProxy const& reply)
     }
 
     VariantMap share_data;
-    share_data["uri"] = Variant(imagePath.toStdString());
+    share_data["uri"] = Variant(path);
     share_data["content-type"] = Variant("videos");
 
     PreviewWidget video("video", "video");
