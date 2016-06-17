@@ -320,14 +320,16 @@ void VideoPreview::run(PreviewReplyProxy const& reply)
         uri = "video://" + path; // replace file:// with video://
     }
 
-    VariantMap share_data;
-    share_data["uri"] = Variant(path);
-    share_data["content-type"] = Variant("videos");
-
     PreviewWidget video("video", "video");
     video.add_attribute_value("source", Variant(uri));
     video.add_attribute_mapping("screenshot", "art");
-    video.add_attribute_value("share-data", Variant(share_data));
+
+    if (path.size() > 0) {
+        VariantMap share_data;
+        share_data["uri"] = Variant(path);
+        share_data["content-type"] = Variant("videos");
+        video.add_attribute_value("share-data", Variant(share_data));
+    }
 
     PreviewWidget actions("actions", "actions");
     {
