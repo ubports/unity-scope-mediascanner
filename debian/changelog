@@ -1,3 +1,9 @@
+unity-scope-mediascanner (0.2+16.04.20160225-0ubuntu2) yakkety; urgency=medium
+
+  * No-change rebuild for boost soname change.
+
+ -- Matthias Klose <doko@ubuntu.com>  Sat, 23 Apr 2016 18:50:49 +0000
+
 unity-scope-mediascanner (0.2+16.04.20160225-0ubuntu1) xenial; urgency=medium
 
   * Disable artist biography download, since the online service always
