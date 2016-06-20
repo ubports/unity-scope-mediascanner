@@ -1,3 +1,9 @@
+unity-scope-mediascanner (0.2+16.10.20160620.1-0ubuntu1) yakkety; urgency=medium
+
+  * Enable sharing via preview for local videos.
+
+ -- Pawel Stolowski <pawel.stolowski@canonical.com>  Mon, 20 Jun 2016 10:17:51 +0000
+
 unity-scope-mediascanner (0.2+16.04.20160225-0ubuntu2) yakkety; urgency=medium
 
   * No-change rebuild for boost soname change.
