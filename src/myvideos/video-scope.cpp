@@ -322,6 +322,11 @@ void VideoPreview::run(PreviewReplyProxy const& reply)
     video.add_attribute_value("source", Variant(uri));
     video.add_attribute_mapping("screenshot", "art");
 
+    VariantMap share_data;
+    share_data["uri"] = Variant(result().uri());
+    share_data["content-type"] = Variant("videos");
+    video.add_attribute_value("share-data", Variant(share_data));
+
     PreviewWidget actions("actions", "actions");
     {
         VariantBuilder builder;
