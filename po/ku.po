@@ -1,0 +1,169 @@
+# Kurdish translation for unity-scope-mediascanner
+# Copyright (c) 2017 Rosetta Contributors and Canonical Ltd 2017
+# This file is distributed under the same license as the unity-scope-mediascanner package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: unity-scope-mediascanner\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2016-01-20 02:34+1000\n"
+"PO-Revision-Date: 2017-07-09 20:10+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Kurdish <ku@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2017-07-10 06:06+0000\n"
+"X-Generator: Launchpad (build 18419)\n"
+
+#. TRANSLATORS: Featured on YouTube, Featured on Grooveshark, etc.
+#: ../src/videoaggregator/videoaggregatorquery.cpp:137
+#: ../src/musicaggregator/musicaggregatorquery.cpp:308
+#, c-format
+msgid "Featured on %s"
+msgstr ""
+
+#: ../src/videoaggregator/videoaggregatorquery.cpp:139
+#: ../src/musicaggregator/musicaggregatorquery.cpp:310
+#, c-format
+msgid "Results from %s"
+msgstr ""
+
+#: ../src/myvideos/video-scope.cpp:191 ../src/mymusic/music-scope.cpp:318
+msgid "Get started!"
+msgstr ""
+
+#: ../src/myvideos/video-scope.cpp:192 ../src/mymusic/music-scope.cpp:319
+msgid ""
+"Drag and drop items from another devices. Alternatively, load your files "
+"onto a SD card."
+msgstr ""
+
+#: ../src/myvideos/video-scope.cpp:201
+msgid ""
+"Nothing here yet...\n"
+"Make a video!"
+msgstr ""
+
+#: ../src/myvideos/video-scope.cpp:208
+msgid "Everything"
+msgstr "Her tişt"
+
+#: ../src/myvideos/video-scope.cpp:210
+msgid "My Roll"
+msgstr ""
+
+#: ../src/myvideos/video-scope.cpp:211
+msgid "Downloaded"
+msgstr "Daxistî"
+
+#: ../src/myvideos/video-scope.cpp:227 ../src/myvideos/video-scope.cpp:232
+#: tmp/mediascanner-video.ini.in.h:1
+msgid "My Videos"
+msgstr "Vîdeoyên min"
+
+#: ../src/myvideos/video-scope.cpp:331
+msgid "Play"
+msgstr "Lê bide"
+
+#: ../src/mymusic/music-scope.cpp:293 ../src/mymusic/music-scope.cpp:302
+#: tmp/mediascanner-music.ini.in.h:1
+msgid "My Music"
+msgstr ""
+
+#: ../src/mymusic/music-scope.cpp:380 ../src/mymusic/music-scope.cpp:443
+msgid "Artists"
+msgstr "Hunermend"
+
+#: ../src/mymusic/music-scope.cpp:381 ../src/mymusic/music-scope.cpp:657
+#: ../src/mymusic/music-scope.cpp:705
+msgid "Albums"
+msgstr "Albûm"
+
+#: ../src/mymusic/music-scope.cpp:382 ../src/mymusic/music-scope.cpp:492
+#: ../src/mymusic/music-scope.cpp:529
+msgid "Tracks"
+msgstr "Parçe"
+
+#: ../src/mymusic/music-scope.cpp:383
+msgid "Genres"
+msgstr "Cûre"
+
+#: ../src/mymusic/music-scope.cpp:784 ../src/mymusic/music-scope.cpp:818
+msgid "Play in music app"
+msgstr ""
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:222
+msgid "New albums from 7digital"
+msgstr ""
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:224
+msgid "7digital"
+msgstr ""
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:225
+msgid "Popular tracks on SoundCloud"
+msgstr ""
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:227
+msgid "SoundCloud"
+msgstr ""
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:228
+msgid "Nearby Events on Songkick"
+msgstr ""
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:230
+msgid "Songkick"
+msgstr ""
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:231
+msgid "Popular tracks on Youtube"
+msgstr ""
+
+#: ../src/musicaggregator/musicaggregatorquery.cpp:233
+msgid "Youtube"
+msgstr "Youtube"
+
+#: tmp/mediascanner-music.ini.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that scans the device for music and allows "
+"it to be searched and displayed in the Dash."
+msgstr ""
+
+#: tmp/mediascanner-music.ini.in.h:3
+msgid "Search local music collection"
+msgstr ""
+
+#: tmp/mediascanner-video.ini.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that scans the device for videos and allows "
+"them to be searched and displayed in the Dash."
+msgstr ""
+
+#: tmp/musicaggregator.ini.in.h:1
+msgid "Music"
+msgstr "Mûzîk"
+
+#: tmp/musicaggregator.ini.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that merges all music sources into one."
+msgstr ""
+
+#: tmp/musicaggregator.ini.in.h:3
+msgid "Search music"
+msgstr "Li muzîkê bigere"
+
+#: tmp/videoaggregator.ini.in.h:1
+msgid "Video"
+msgstr ""
+
+#: tmp/videoaggregator.ini.in.h:2
+msgid ""
+"This is an Ubuntu search plugin that merges all video sources into one."
+msgstr ""
+
+#: tmp/videoaggregator.ini.in.h:3
+msgid "Search video"
+msgstr ""
