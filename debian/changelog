@@ -1,3 +1,9 @@
+unity-scope-mediascanner (0.3+ubports) xenial; urgency=medium
+
+  * Imported to UBports
+
+ -- UBports auto importer <infra@ubports.com>  Sun, 11 Mar 2018 00:19:11 +0100
+
 unity-scope-mediascanner (0.2+16.10.20160620.1-0ubuntu1) yakkety; urgency=medium
 
   * Enable sharing via preview for local videos.
